@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalImpact", "GlobalImpact\GlobalImpact.csproj", "{F3BEC711-1F24-427E-8225-8CE065627743}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3BEC711-1F24-427E-8225-8CE065627743}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3BEC711-1F24-427E-8225-8CE065627743}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3BEC711-1F24-427E-8225-8CE065627743}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3BEC711-1F24-427E-8225-8CE065627743}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5FFA1B5A-B19C-4737-8B3F-E2D76541A1C1}
+	EndGlobalSection
+EndGlobal
