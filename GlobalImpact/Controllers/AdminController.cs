@@ -131,12 +131,15 @@ namespace GlobalImpact.Controllers
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                if (RegisterVerifications.EmailExists(registerViewModel.Email))
+                var isEmailExists = _db.Users.Any(x => x.Email == registerViewModel.Email);
+                var isUserNameExists = _db.Users.Any(x => x.UserName == registerViewModel.UserName);
+                if (isEmailExists)
                 {
+                
                     ModelState.AddModelError("Email", "Email already exists");
                     return View(registerViewModel);
                 }
-                if (RegisterVerifications.UserNameExists(registerViewModel.UserName))
+                if (isUserNameExists)
                 {
                     ModelState.AddModelError("UserName", "UserName already exists");
                     return View(registerViewModel);

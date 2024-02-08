@@ -26,24 +26,10 @@ namespace GlobalImpact.Controllers
             _emailSender = emailSender;
             _db = db;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         [HttpGet]
         public async Task<IActionResult> Register(string username, string? returnUrl)
         {
-
-            if (!await _roleManager.RoleExistsAsync("Admin"))
-            {
-                await _roleManager.CreateAsync(new IdentityRole("Admin"));
-            }
-            if (!await _roleManager.RoleExistsAsync("Client"))
-            {
-                await _roleManager.CreateAsync(new IdentityRole("Client"));
-            }
-
             RegisterViewModel registerViewModel = new RegisterViewModel();
             registerViewModel.ReturnUrl = returnUrl;
             return View(registerViewModel);

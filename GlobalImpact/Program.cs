@@ -1,4 +1,3 @@
-using GlobalImpact.Authorizations;
 using GlobalImpact.Data;
 using GlobalImpact.Interfaces;
 using GlobalImpact.Models;
@@ -45,11 +44,6 @@ builder.Services.AddAuthentication().AddGoogle(options =>
 {
     options.ClientId = "807539068815-7lkdbnf8vbqpmlttjfmvav19no705ap2.apps.googleusercontent.com";
     options.ClientSecret = "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";
-});
-
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("OnlyAdminChecker", policy => policy.Requirements.Add(new OnlyAdminAuthorization()));
 });
 
 var app = builder.Build();
