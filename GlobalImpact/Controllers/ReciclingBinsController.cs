@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GlobalImpact.Data;
 using GlobalImpact.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GlobalImpact.Controllers
 {
@@ -20,12 +21,16 @@ namespace GlobalImpact.Controllers
         }
 
         // GET: ReciclingBins
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View(await _context.ReciclingBins.ToListAsync());
         }
 
         // GET: ReciclingBins/Details/5
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -44,6 +49,8 @@ namespace GlobalImpact.Controllers
         }
 
         // GET: ReciclingBins/Create
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -52,6 +59,7 @@ namespace GlobalImpact.Controllers
         // POST: ReciclingBins/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Type,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status")] ReciclingBin reciclingBin)
@@ -67,6 +75,8 @@ namespace GlobalImpact.Controllers
         }
 
         // GET: ReciclingBins/Edit/5
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -85,6 +95,7 @@ namespace GlobalImpact.Controllers
         // POST: ReciclingBins/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,Type,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status")] ReciclingBin reciclingBin)
@@ -118,6 +129,8 @@ namespace GlobalImpact.Controllers
         }
 
         // GET: ReciclingBins/Delete/5
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -136,6 +149,7 @@ namespace GlobalImpact.Controllers
         }
 
         // POST: ReciclingBins/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
