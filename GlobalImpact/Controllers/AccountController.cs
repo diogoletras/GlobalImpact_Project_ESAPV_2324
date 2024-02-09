@@ -42,16 +42,6 @@ namespace GlobalImpact.Controllers
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                /*if (RegisterVerifications.EmailExists(registerViewModel.Email))
-                {
-                    ModelState.AddModelError("Email", "Email already exists");
-                    return View(registerViewModel);
-                }
-                if (RegisterVerifications.UserNameExists(registerViewModel.UserName))
-                {
-                    ModelState.AddModelError("UserName", "UserName already exists");
-                    return View(registerViewModel);
-                }*/
                 var isEmailExists = _db.Users.Any(x => x.Email == registerViewModel.Email);
                 var isUserNameExists = _db.Users.Any(x => x.UserName == registerViewModel.UserName);
                 if (isEmailExists)
@@ -67,7 +57,16 @@ namespace GlobalImpact.Controllers
                 }
                 else
                 {
-                    var user = new AppUser { UserName = registerViewModel.UserName, Email = registerViewModel.Email };
+                    var user = new AppUser
+                    {
+                        UserName = registerViewModel.UserName,
+                        Email = registerViewModel.Email,
+                        FirstName = registerViewModel.FirstName,
+                        LastName = registerViewModel.LastName,
+                        Age = registerViewModel.Age,
+                        NIF = registerViewModel.NIF,
+                        Points = 0
+                    };
                     var result = await _userManager.CreateAsync(user, registerViewModel.Password);
                     if (result.Succeeded)
                     {
@@ -181,6 +180,7 @@ namespace GlobalImpact.Controllers
                 ModelState.AddModelError(string.Empty, $"Error from external provider: {remoteError}");
                 return View(nameof(Login));
             }
+
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
@@ -234,7 +234,17 @@ namespace GlobalImpact.Controllers
                 }
                 else
                 {
-                    var user = new AppUser { UserName = externalLoginViewModel.Name, Email = externalLoginViewModel.Email };
+                    var user = new AppUser
+                    {
+                        UserName = externalLoginViewModel.Name,
+                        Email = externalLoginViewModel.Email,
+                        FirstName = externalLoginViewModel.FirstName,
+                        LastName = externalLoginViewModel.LastName,
+                        Age = externalLoginViewModel.Age,
+                        NIF = externalLoginViewModel.NIF,
+                        Points = 0
+                    };
+
                     var result = await _userManager.CreateAsync(user);
                     if (result.Succeeded)
                     {

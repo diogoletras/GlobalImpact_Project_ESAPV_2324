@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace GlobalImpact.ViewModels.Account
 {
@@ -11,6 +12,21 @@ namespace GlobalImpact.ViewModels.Account
         [Required]
         [Display(Name = "UserName")]
         public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "FirstName")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "LastName")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Age")]
+        public int Age { get; set; }
+
+        [Display(Name = "NIF")]
+        public int? NIF { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

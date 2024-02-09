@@ -7,7 +7,7 @@ namespace GlobalImpact.Models
 {
     public class AppUser : IdentityUser
     {
-        /*[Required]
+        [Required]
         [ProtectedPersonalData]
         public string FirstName { get; set; }
 
@@ -23,7 +23,7 @@ namespace GlobalImpact.Models
         public int Points { get; set; } = 0;
 
         [ProtectedPersonalData]
-        public int? NIF { get; set; }*/
+        public int? NIF { get; set; }
 
         [NotMapped]
         public string? RoleId { get; set; }
