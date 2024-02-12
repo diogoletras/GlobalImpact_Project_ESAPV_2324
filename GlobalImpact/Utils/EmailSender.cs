@@ -9,8 +9,8 @@ namespace GlobalImpact.Utils
     {
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            var mail = "diogos.game@gmail.com";
-            var pw = "eijt gihk glju gysx";
+            var mail = "globalimpact2324@gmail.com";
+            var pw = "gvkf bptt ulrk cqoh";
 
             var client = new SmtpClient("smtp.gmail.com", 587)
             {
