@@ -27,6 +27,15 @@ namespace GlobalImpact.Controllers
             _db = db;
         }
 
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
+        /// <remarks></remarks>
         [HttpGet]
         public async Task<IActionResult> Register(string username, string? returnUrl)
         {

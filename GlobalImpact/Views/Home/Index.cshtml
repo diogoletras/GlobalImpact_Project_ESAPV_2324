@@ -11,9 +11,11 @@
     @if (User.IsInRole("Client"))
     {
         <h3>Your role is Client</h3>
+        <h3>@User.Identity.Name</h3>
     }
     else
     {
         <h3>Your role is Admin</h3>
+        <h3>@User.Identity.Name</h3>
     }
 }
