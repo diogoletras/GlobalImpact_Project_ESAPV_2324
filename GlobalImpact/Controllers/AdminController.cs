@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GlobalImpact.Controllers
 {
+    /// <summary>
+    /// Classe de Admin Controller.
+    /// </summary>
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -19,7 +22,10 @@ namespace GlobalImpact.Controllers
             _db = db;
             _userManager = userManager;
         }
-
+        /// <summary>
+        /// Função para retornar uma lista de Users.
+        /// </summary>
+        /// <returns> Retorna uma página da lista de Users.</returns>
         [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
@@ -41,7 +47,11 @@ namespace GlobalImpact.Controllers
             }
             return View(userList);
         }
-
+        /// <summary>
+        /// Página para retorno do "Edit User".
+        /// </summary>
+        /// <param name="userId">iD do User.</param>
+        /// <returns>Retorna a página de "Editar User".</returns>
         [Authorize(Roles = "Admin")]
         public IActionResult Edit(string userId)
         {
@@ -65,6 +75,11 @@ namespace GlobalImpact.Controllers
             return View(user);
         }
 
+        /// <summary>
+        /// Função Post para o "Edit User".
+        /// </summary>
+        /// <param name="user">User a ser editado.</param>
+        /// <returns>Página a página de gestão de Users.</returns>
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -99,6 +114,11 @@ namespace GlobalImpact.Controllers
             return View(user);
         }
 
+        /// <summary>
+        /// Função Post de apagar User.
+        /// </summary>
+        /// <param name="userId">O iD do user a ser eliminado.</param>
+        /// <returns>Retorna a página de Gestão dos Users.</returns>
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Delete(string userId)
@@ -114,15 +134,26 @@ namespace GlobalImpact.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Função Get para a página de criação de um User.
+        /// </summary>
+        /// <param name="returnUrl">retorna o url da página de gestão dos Users.</param>
+        /// <returns>Retorna a página de craição de Users.</returns>
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<IActionResult> Create(string username, string? returnUrl)
+        public async Task<IActionResult> Create(string? returnUrl)
         {
             RegisterViewModel registerViewModel = new RegisterViewModel();
             registerViewModel.ReturnUrl = returnUrl;
             return View(registerViewModel);
         }
 
+        /// <summary>
+        /// Função Post para a criação de um User.
+        /// </summary>
+        /// <param name="registerViewModel">Guarda todos os dados necessários para a criação de um User.</param>
+        /// <param name="returnUrl">Retorna o url de página de Gestão de Users.</param>
+        /// <returns>Em caso de sucesso retorna a página de gestão de Users; em caso de insucesso mantém na página de criação de User. </returns>
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(RegisterViewModel registerViewModel, string? returnUrl = null)

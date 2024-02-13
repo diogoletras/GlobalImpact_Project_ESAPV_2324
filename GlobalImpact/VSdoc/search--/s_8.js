@@ -1,0 +1,1 @@
+search_result['8']=["topic_0000000000000003.html","AccountController.Register (String) Method","Função para o retornar (get) da página de registo."];

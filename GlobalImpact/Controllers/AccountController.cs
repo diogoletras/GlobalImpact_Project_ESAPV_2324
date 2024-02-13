@@ -11,6 +11,10 @@ using GlobalImpact.Data;
 
 namespace GlobalImpact.Controllers
 {
+    /// <summary>
+    /// Controller da gestão de contas
+    /// </summary>
+    /// <remarks></remarks>
     public class AccountController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -27,23 +31,26 @@ namespace GlobalImpact.Controllers
             _db = db;
         }
 
-
-
         /// <summary>
-        /// 
+        /// Função para o retornar (get) da página de registo.
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="returnUrl"></param>
-        /// <returns></returns>
-        /// <remarks></remarks>
+        /// <param name="returnUrl"> guarda o Url da página de registo.</param>
+        /// <returns> retorna a página de registo.</returns>
+
         [HttpGet]
-        public async Task<IActionResult> Register(string username, string? returnUrl)
+        public async Task<IActionResult> Register( string? returnUrl)
         {
             RegisterViewModel registerViewModel = new RegisterViewModel();
             registerViewModel.ReturnUrl = returnUrl;
             return View(registerViewModel);
         }
 
+        /// <summary>
+        /// Função HttpPost função para o registo de um user.
+        /// </summary>
+        /// <param name="registerViewModel"> parametro que contém todos os dados necessários para registar um user.</param>
+        /// <param name="returnUrl"> redericiona para a homePage.</param>
+        /// <returns> retorna a página de registo em caso de erro; Caso de sucesso retorna para a página de verificação de email.</returns>
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel, string? returnUrl = null)
         {
@@ -97,13 +104,22 @@ namespace GlobalImpact.Controllers
             }
             return View(registerViewModel);
         }
-
+        /// <summary>
+        /// Página de verificação de Email.
+        /// </summary>
+        /// <returns>página de verificação de email.</returns>
         [HttpGet]
         public IActionResult EmailSending()
         {
             return View();
         }
 
+        /// <summary>
+        /// se o email for verificado com sucesso, redericiona para a página de confirmação.
+        /// </summary>
+        /// <param name="userId">Id do user a ser verificado.</param>
+        /// <param name="code">código de confirmação de email.</param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> ConfirmEmailTask(string userId = null, string code = null)
         {
@@ -128,7 +144,11 @@ namespace GlobalImpact.Controllers
         }
 
 
-
+        /// <summary>
+        /// Get da página de login.
+        /// </summary>
+        /// <param name="returnUrl"> Guarda o url da página de login.</param>
+        /// <returns>Retorna a página de login.</returns>
         [HttpGet]
         public async Task<IActionResult> Login(string? returnUrl)
         {
@@ -137,6 +157,12 @@ namespace GlobalImpact.Controllers
             return View(loginViewModel);
         }
 
+        /// <summary>
+        /// Função Post do login.
+        /// </summary>
+        /// <param name="loginViewModel"> parâmetro que  guarda todos os dados necessários para o login de um user.</param>
+        /// <param name="returnUrl"> retorna o url da página do user.</param>
+        /// <returns>retorna a página de login em caso de erro; Caso de sucesso retorna para a página do user.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel, string? returnUrl = null)
@@ -171,6 +197,13 @@ namespace GlobalImpact.Controllers
             return View(loginViewModel);
         }
 
+        /// <summary>
+        /// Função Post com o auxilio da api de autenticação da Google.
+        /// </summary>
+        /// <param name="provider"> api da Google</param>
+        /// <param name="returnUrl">retorna o url da página do google.</param>
+        /// <returns>Retorna a página de auenticação do google.</returns>
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -181,6 +214,12 @@ namespace GlobalImpact.Controllers
             return new ChallengeResult(provider, properties);
         }
 
+        /// <summary>
+        /// Função Get, se o user já tiver a conta registada vai para o dashBoard; se não faz o registo.
+        /// </summary>
+        /// <param name="returnUrl">retorna o url da DashBoard.</param>
+        /// <param name="remoteError">Se houver algum problema com o provider.</param>
+        /// <returns>Se houver um problema retorna para a página de login; se o user já tiver uma conta vai para o DashBoard, se não vai para o registo.</returns>
         [HttpGet]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
         {
@@ -214,6 +253,12 @@ namespace GlobalImpact.Controllers
             }
         }
 
+        /// <summary>
+        /// Funçao Post que regista o user que fez o login pela API.
+        /// </summary>
+        /// <param name="externalLoginViewModel">Guarda todos os dados necessários de um User para efetuar o login.</param>
+        /// <param name="returnUrl">Retorna o url do DashBoard.</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -275,7 +320,10 @@ namespace GlobalImpact.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View(externalLoginViewModel);
         }
-
+        /// <summary>
+        /// Função Post para o logout de um user.
+        /// </summary>
+        /// <returns>Retorna o url para a página inicial.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
@@ -283,13 +331,21 @@ namespace GlobalImpact.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-
+        /// <summary>
+        /// Função Get para retornar a página de forgot passsword.
+        /// </summary>
+        /// <returns>retorna a página de forgot password.</returns>
         [HttpGet]
         public IActionResult ForgotPassword()
         {
             return View();
         }
 
+        /// <summary>
+        /// Função Post para envio de email para troca de passWord.
+        /// </summary>
+        /// <param name="forgotPasswordViewModel">guarda os dados necessários para a troca de PassWord.</param>
+        /// <returns>Retorna a página para a confirmação de email.</returns>
         [HttpPost]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel forgotPasswordViewModel)
         {
@@ -308,19 +364,32 @@ namespace GlobalImpact.Controllers
             }
             return View(forgotPasswordViewModel);
         }
-
+        /// <summary>
+        /// Função Get para retornar a página de confirmação do email da troca de PassWord.
+        /// </summary>
+        /// <returns> retorna a página de confirmação de email.</returns>
         [HttpGet]
         public IActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
 
+        /// <summary>
+        /// Função Get para retornar a página de Reset PassWord.
+        /// </summary>
+        /// <param name="code">código de user.</param>
+        /// <returns>retorna a página de Reset PassWord, caso o código seja válido.</returns>
         [HttpGet]
         public IActionResult ResetPassword(string code = null)
         {
             return code == null ? View("Error") : View();
         }
 
+        /// <summary>
+        /// Função Post para a trocar de PassWord.
+        /// </summary>
+        /// <param name="resetPasswordViewModel"> Guarda os dados necessários para a troca de PassWord.</param>
+        /// <returns>Retorna a página de confirmação de troca de PassWord.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel resetPasswordViewModel)
@@ -342,6 +411,10 @@ namespace GlobalImpact.Controllers
             return View(resetPasswordViewModel);
         }
 
+        /// <summary>
+        /// Função Get para retornar a página de confirmação de troca de PassWord.
+        /// </summary>
+        /// <returns>Retorna a página de confirmação de troca de PassWord.</returns>
         [HttpGet]
         public IActionResult ResetPasswordConfirmation()
         {

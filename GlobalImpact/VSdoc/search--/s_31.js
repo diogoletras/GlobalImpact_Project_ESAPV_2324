@@ -1,0 +1,1 @@
+search_result['31']=["topic_0000000000000012.html","AccountController.ResetPasswordConfirmation Method","Função Get para retornar a página de confirmação de troca de PassWord."];

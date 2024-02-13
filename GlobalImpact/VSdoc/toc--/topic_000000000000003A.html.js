@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_0000000000000091.html"],['71',"GlobalImpact.Data Namespace","topic_0000000000000034.html"],['72',"ApplicationDbContext Class","topic_0000000000000035.html"],['74',"Properties","topic_0000000000000035_props--.html"],['78',"ReciclingBins Property","topic_000000000000003A.html"]];
