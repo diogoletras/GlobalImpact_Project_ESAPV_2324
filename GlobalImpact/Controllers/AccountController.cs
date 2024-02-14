@@ -12,7 +12,7 @@ using GlobalImpact.Data;
 namespace GlobalImpact.Controllers
 {
     /// <summary>
-    /// Controller da gestão de contas
+    /// Controller da gestão de Acessos
     /// </summary>
     /// <remarks></remarks>
     public class AccountController : Controller
@@ -22,6 +22,15 @@ namespace GlobalImpact.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _db;
         private readonly IEmailSender _emailSender;
+
+        /// <summary>
+        /// Construtor do Controller AccountController
+        /// </summary>
+        /// <param name="userManager">Fornece APIs para gestao de utilizadores</param>
+        /// <param name="signInManager">Fornece APIs para Login de utilizadores</param>
+        /// <param name="roleManager">Fornece APIs para gestao de roles de utilizadores</param>
+        /// <param name="emailSender">Fornece Envio de Emails</param>
+        /// <param name="db">Base de Dados</param>
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IEmailSender emailSender, ApplicationDbContext db)
         {
             _userManager = userManager;
@@ -32,9 +41,9 @@ namespace GlobalImpact.Controllers
         }
 
         /// <summary>
-        /// Função para o retornar (get) da página de registo.
+        /// Função Get para retornar a página de registo.
         /// </summary>
-        /// <param name="returnUrl"> guarda o Url da página de registo.</param>
+        /// <param name="returnUrl"> Url da página de registo.</param>
         /// <returns> retorna a página de registo.</returns>
 
         [HttpGet]
@@ -105,7 +114,7 @@ namespace GlobalImpact.Controllers
             return View(registerViewModel);
         }
         /// <summary>
-        /// Página de verificação de Email.
+        /// Função Get que retorna a pagina de envio de email de confirmaçao
         /// </summary>
         /// <returns>página de verificação de email.</returns>
         [HttpGet]
@@ -115,7 +124,7 @@ namespace GlobalImpact.Controllers
         }
 
         /// <summary>
-        /// se o email for verificado com sucesso, redericiona para a página de confirmação.
+        /// Função Get que confirma a verificaçao do email
         /// </summary>
         /// <param name="userId">Id do user a ser verificado.</param>
         /// <param name="code">código de confirmação de email.</param>
@@ -145,7 +154,7 @@ namespace GlobalImpact.Controllers
 
 
         /// <summary>
-        /// Get da página de login.
+        /// Função Get da página de login.
         /// </summary>
         /// <param name="returnUrl"> Guarda o url da página de login.</param>
         /// <returns>Retorna a página de login.</returns>
@@ -247,8 +256,11 @@ namespace GlobalImpact.Controllers
                 //If the user does not have account, then we will ask the user to create an account.
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewData["ProviderDisplayName"] = info.ProviderDisplayName;
+
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                return View("ExternalLoginConfirmation", new ExternalLoginViewModel { Email = email });
+
+                ViewData["Email"] = email;
+                return View("ExternalLoginConfirmation");
 
             }
         }
@@ -263,9 +275,10 @@ namespace GlobalImpact.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel externalLoginViewModel,
-            string? returnUrl = null)
+            string? returnUrl = null, string? email=null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
+            externalLoginViewModel.Email = email;
             if (ModelState.IsValid)
             {
                 var info = await _signInManager.GetExternalLoginInfoAsync();

@@ -1,1 +1,1 @@
-search_result['254']=["topic_000000000000008C_vars--.html","ResetPasswordViewModel Fields",""];
+search_result['254']=["topic_000000000000008C_methods--.html","ResetPasswordViewModel Methods",""];

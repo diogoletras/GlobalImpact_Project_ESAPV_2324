@@ -1,1 +1,1 @@
-search_result['44']=["topic_0000000000000018.html","AdminController.Delete Method","Função Post de apagar User."];
+search_result['44']=["topic_0000000000000017.html","AdminController.Edit (AppUser) Method","Função Post para o \"Edit User\"."];

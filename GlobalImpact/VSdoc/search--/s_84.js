@@ -1,1 +1,1 @@
-search_result['84']=["topic_000000000000002B.html","ReciclingBinsController Constructor",""];
+search_result['84']=["topic_000000000000002A_props--.html","ReciclingBinsController Properties",""];

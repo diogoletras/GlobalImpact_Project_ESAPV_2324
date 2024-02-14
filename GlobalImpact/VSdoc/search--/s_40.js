@@ -1,1 +1,1 @@
-search_result['40']=["topic_0000000000000016.html","AdminController.Edit (String) Method","Página para retorno do \"Edit User\"."];
+search_result['40']=["topic_0000000000000014.html","AdminController Constructor","Construtor do Controller AdminController"];

@@ -1,1 +1,1 @@
-search_result['67']=["topic_0000000000000023.html","ProductsController.Details Method",""];
+search_result['67']=["topic_0000000000000021.html","ProductsController Constructor",""];

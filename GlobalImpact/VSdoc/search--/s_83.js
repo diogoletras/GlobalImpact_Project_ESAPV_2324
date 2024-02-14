@@ -1,1 +1,1 @@
-search_result['83']=["topic_000000000000002A_vars--.html","ReciclingBinsController Fields",""];
+search_result['83']=["topic_000000000000002A_methods--.html","ReciclingBinsController Methods",""];

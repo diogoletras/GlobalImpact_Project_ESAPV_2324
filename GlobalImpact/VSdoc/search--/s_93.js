@@ -1,1 +1,1 @@
-search_result['93']=["topic_0000000000000031.html","ReciclingBinsController.Edit (Guid, ReciclingBin) Method",""];
+search_result['93']=["topic_0000000000000030.html","ReciclingBinsController.Edit (Nullable\u0026lt;Guid\u0026gt;) Method",""];

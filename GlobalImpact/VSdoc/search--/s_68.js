@@ -1,1 +1,1 @@
-search_result['68']=["topic_0000000000000024.html","ProductsController.Create  Method",""];
+search_result['68']=["topic_0000000000000022.html","ProductsController.Index Method",""];

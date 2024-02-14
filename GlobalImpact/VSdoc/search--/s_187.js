@@ -1,1 +1,1 @@
-search_result['187']=["topic_000000000000006C.html","ReciclingBin.CurrentCapacity Property",""];
+search_result['187']=["topic_000000000000006A.html","ReciclingBin.Description Property",""];

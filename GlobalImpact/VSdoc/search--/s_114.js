@@ -1,1 +1,1 @@
-search_result['114']=["topic_0000000000000044_events--.html","IEmailSender Events",""];
+search_result['114']=["topic_0000000000000044.html","IEmailSender Interface",""];

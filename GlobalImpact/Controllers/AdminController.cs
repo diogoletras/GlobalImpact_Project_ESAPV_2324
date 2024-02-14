@@ -10,22 +10,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace GlobalImpact.Controllers
 {
     /// <summary>
-    /// Classe de Admin Controller.
+    /// Controller da Gestao de Administraçao
     /// </summary>
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _db;
         private readonly UserManager<AppUser> _userManager;
 
+        /// <summary>
+        /// Construtor do Controller AdminController
+        /// </summary>
+        /// <param name="db">Base de Dados</param>
+        /// <param name="userManager">Fornece APIs para gestao de utilizadores</param>
         public AdminController(ApplicationDbContext db, UserManager<AppUser> userManager)
         {
             _db = db;
             _userManager = userManager;
         }
         /// <summary>
-        /// Função para retornar uma lista de Users.
+        /// Função Get para retornar uma lista de Users.
         /// </summary>
         /// <returns> Retorna uma página da lista de Users.</returns>
+        [HttpGet]
         [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
@@ -48,12 +54,13 @@ namespace GlobalImpact.Controllers
             return View(userList);
         }
         /// <summary>
-        /// Página para retorno do "Edit User".
+        /// Funçao Get da Página "Edit User".
         /// </summary>
         /// <param name="userId">iD do User.</param>
         /// <returns>Retorna a página de "Editar User".</returns>
+        [HttpGet]
         [Authorize(Roles = "Admin")]
-        public IActionResult Edit(string userId)
+        public IActionResult Edit (string userId)
         {
             var user = _db.AppUser.FirstOrDefault(u => u.Id == userId);
             if (user == null)
@@ -72,6 +79,10 @@ namespace GlobalImpact.Controllers
                 Text = u.Name,
                 Value = u.Id
             });
+
+            var roleName = roles.FirstOrDefault(r => r.Id == role.RoleId).Name;
+            ViewData["Role"] = roleName;
+
             return View(user);
         }
 
@@ -177,7 +188,15 @@ namespace GlobalImpact.Controllers
                 }
                 else
                 {
-                    var user = new AppUser { UserName = registerViewModel.UserName, Email = registerViewModel.Email };
+                    var user = new AppUser { 
+                        UserName = registerViewModel.UserName,
+                        Email = registerViewModel.Email ,
+                        FirstName = registerViewModel.FirstName,
+                        LastName = registerViewModel.LastName,
+                        Age = registerViewModel.Age,
+                        NIF = registerViewModel.NIF,
+                        Points = 0
+                    };
                     var result = await _userManager.CreateAsync(user, registerViewModel.Password);
                     if (result.Succeeded)
                     {

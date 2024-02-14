@@ -1,1 +1,1 @@
-search_result['226']=["topic_000000000000007D_events--.html","LoginViewModel Events",""];
+search_result['226']=["topic_000000000000007D.html","LoginViewModel Class",""];

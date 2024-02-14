@@ -22,11 +22,14 @@ namespace GlobalImpact.ViewModels.Account
         public string LastName { get; set; }
 
         [Required]
+        [Range(6, int.MaxValue, ErrorMessage = "Idade minima de 6 anos")]
         [Display(Name = "Age")]
         public int Age { get; set; }
 
+        [RegularExpression(@"^\d{9}$", ErrorMessage = "O NIF deve conter exatamente 9 dígitos.")]
         [Display(Name = "NIF")]
         public int? NIF { get; set; }
+
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

@@ -1,1 +1,1 @@
-search_result['51']=["topic_000000000000001B_events--.html","HomeController Events",""];
+search_result['51']=["topic_000000000000001B.html","HomeController Class",""];

@@ -1,1 +1,1 @@
-search_result['122']=["topic_0000000000000047_events--.html","InitialCreate Events",""];
+search_result['122']=["topic_0000000000000047.html","InitialCreate Class",""];

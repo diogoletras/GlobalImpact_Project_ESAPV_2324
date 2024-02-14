@@ -1,1 +1,1 @@
-search_result['177']=["topic_0000000000000065_events--.html","ReciclingBin Events",""];
+search_result['177']=["topic_0000000000000065.html","ReciclingBin Class",""];

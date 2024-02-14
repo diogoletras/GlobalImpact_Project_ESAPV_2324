@@ -1,1 +1,1 @@
-search_result['220']=["topic_000000000000007B_methods--.html","ForgotPasswordViewModel Methods",""];
+search_result['220']=["topic_000000000000007B_attached_props--.html","ForgotPasswordViewModel Attached Properties",""];

@@ -1,1 +1,1 @@
-search_result['37']=["topic_0000000000000013_vars--.html","AdminController Fields",""];
+search_result['37']=["topic_0000000000000013_methods--.html","AdminController Methods",""];
