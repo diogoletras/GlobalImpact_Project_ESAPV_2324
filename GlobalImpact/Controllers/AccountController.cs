@@ -9,6 +9,7 @@ using GlobalImpact.ViewModels;
 using GlobalImpact.ViewModels.Account;
 using GlobalImpact.Data;
 
+
 namespace GlobalImpact.Controllers
 {
     /// <summary>
@@ -38,6 +39,12 @@ namespace GlobalImpact.Controllers
             _roleManager = roleManager;
             _emailSender = emailSender;
             _db = db;
+        }
+
+        public IActionResult UserPage(String userId)
+        {
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
+            return View(user);
         }
 
         /// <summary>
