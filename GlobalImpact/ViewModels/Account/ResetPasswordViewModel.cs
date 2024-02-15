@@ -2,6 +2,9 @@
 
 namespace GlobalImpact.ViewModels.Account
 {
+    /// <summary>
+    /// Classe de visualização da página "Reset PassWord".
+    /// </summary>
     public class ResetPasswordViewModel
     {
         [Required]

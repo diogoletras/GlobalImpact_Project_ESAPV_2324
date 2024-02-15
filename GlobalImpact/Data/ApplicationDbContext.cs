@@ -4,8 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GlobalImpact.Data
 {
+    /// <summary>
+    /// Classe de Auxílio à migração dos dados.
+    /// </summary>
     public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
