@@ -2,6 +2,9 @@
 
 namespace GlobalImpact.ViewModels.Account
 {
+    /// <summary>
+    /// Classe de visualação do login através da API externa.
+    /// </summary>
     public class ExternalLoginViewModel
     {
         [EmailAddress]
