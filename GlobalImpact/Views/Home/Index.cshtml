@@ -1,21 +1,31 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="welcome">
+	<h1 class="display-4">Welcome to Global Impact</h1>
+	<p>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet, ipsum ut vestibulum viverra,
+		augue erat viverra lorem, ac tristique lacus arcu eu arcu. Cras faucibus quam in vestibulum cursus.
+		Nullam suscipit eros ut lectus gravida, non finibus metus porttitor. Aenean semper magna sed nisl ullamcorper,
+		viverra dictum ante molestie. Maecenas vel efficitur leo. Proin tempus felis turpis, ut tristique libero interdum eu.
+		Etiam ornare risus sed eros suscipit, non pulvinar velit tristique.
+	</p>
+	<div class="start-buttons">
+			<a class="start-button"  asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+			<a class="start-button"  asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+	</div>
 </div>
 @if (User.Identity.IsAuthenticated)
 {
-    @if (User.IsInRole("Client"))
-    {
-        <h3>Your role is Client</h3>
-        <h3>@User.Identity.Name</h3>
-    }
-    else
-    {
-        <h3>Your role is Admin</h3>
-        <h3>@User.Identity.Name</h3>
-    }
+	@if (User.IsInRole("Client"))
+	{
+		<h3>Your role is Client</h3>
+		<h3>@User.Identity.Name</h3>
+	}
+	else
+	{
+		<h3>Your role is Admin</h3>
+		<h3>@User.Identity.Name</h3>
+	}
 }
