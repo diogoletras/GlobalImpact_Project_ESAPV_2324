@@ -286,7 +286,6 @@ namespace GlobalImpact.Controllers
             string? returnUrl = null, string? email=null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
-            externalLoginViewModel.Email = email;
             if (ModelState.IsValid)
             {
                 var info = await _signInManager.GetExternalLoginInfoAsync();
@@ -294,7 +293,13 @@ namespace GlobalImpact.Controllers
                 {
                     return View("Error");
                 }
-                var isEmailExists = _db.Users.Any(x => x.Email == externalLoginViewModel.Email);
+                var emailViewValidation = info.Principal.FindFirstValue(ClaimTypes.Email);
+                if (emailViewValidation != externalLoginViewModel.Email)
+                {
+					ModelState.AddModelError("Email", "Email not matching");
+					return View(externalLoginViewModel);
+				}
+				var isEmailExists = _db.Users.Any(x => x.Email == externalLoginViewModel.Email);
                 var isUserNameExists = _db.Users.Any(x => x.UserName == externalLoginViewModel.Name);
                 if (isEmailExists)
                 {
