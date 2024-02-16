@@ -264,10 +264,11 @@ namespace GlobalImpact.Controllers
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewData["ProviderDisplayName"] = info.ProviderDisplayName;
 
-                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-
-                ViewData["Email"] = email;
-                return View("ExternalLoginConfirmation");
+                var model = new ExternalLoginViewModel
+                {
+                    Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                };
+                return View("ExternalLoginConfirmation", model);
 
             }
         }

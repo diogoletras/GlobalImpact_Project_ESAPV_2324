@@ -2,20 +2,23 @@
 	ViewData["Title"] = "Home Page";
 }
 
-<div class="welcome">
-	<h1 class="display-4">Welcome to Global Impact</h1>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet, ipsum ut vestibulum viverra,
-		augue erat viverra lorem, ac tristique lacus arcu eu arcu. Cras faucibus quam in vestibulum cursus.
-		Nullam suscipit eros ut lectus gravida, non finibus metus porttitor. Aenean semper magna sed nisl ullamcorper,
-		viverra dictum ante molestie. Maecenas vel efficitur leo. Proin tempus felis turpis, ut tristique libero interdum eu.
-		Etiam ornare risus sed eros suscipit, non pulvinar velit tristique.
-	</p>
-	<div class="start-buttons">
-			<a class="start-button"  asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-			<a class="start-button"  asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-	</div>
-</div>
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="welcome">
+        <h1 class="display-4">Welcome to Global Impact</h1>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet, ipsum ut vestibulum viverra,
+            augue erat viverra lorem, ac tristique lacus arcu eu arcu. Cras faucibus quam in vestibulum cursus.
+            Nullam suscipit eros ut lectus gravida, non finibus metus porttitor. Aenean semper magna sed nisl ullamcorper,
+            viverra dictum ante molestie. Maecenas vel efficitur leo. Proin tempus felis turpis, ut tristique libero interdum eu.
+            Etiam ornare risus sed eros suscipit, non pulvinar velit tristique.
+        </p>
+        <div class="start-buttons">
+            <a class="start-button" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+            <a class="start-button" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+        </div>
+    </div>
+}
 @if (User.Identity.IsAuthenticated)
 {
 	@if (User.IsInRole("Client"))
