@@ -70,3 +70,12 @@
         display: block;
     }
 }
+
+/* Email Verification */
+
+.email-verification {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
