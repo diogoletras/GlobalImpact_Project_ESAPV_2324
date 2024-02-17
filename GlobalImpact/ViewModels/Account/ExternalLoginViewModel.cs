@@ -21,7 +21,8 @@ namespace GlobalImpact.ViewModels.Account
 
         [Required]
         [Display(Name = "Age")]
-        public int Age { get; set; }
+        [Range(18, int.MaxValue, ErrorMessage = "Idade minima de 18 anos")]
+		public int Age { get; set; }
 
         [Display(Name = "NIF")]
         public int? NIF { get; set; }

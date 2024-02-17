@@ -22,7 +22,7 @@ namespace GlobalImpact.ViewModels.Account
         public string LastName { get; set; }
 
         [Required]
-        [Range(6, int.MaxValue, ErrorMessage = "Idade minima de 6 anos")]
+        [Range(18, int.MaxValue, ErrorMessage = "Idade minima de 18 anos")]
         [Display(Name = "Age")]
         public int Age { get; set; }
 

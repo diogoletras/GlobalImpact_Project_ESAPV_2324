@@ -8,6 +8,7 @@ using GlobalImpact.Utils;
 using GlobalImpact.ViewModels;
 using GlobalImpact.ViewModels.Account;
 using GlobalImpact.Data;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace GlobalImpact.Controllers
@@ -380,10 +381,23 @@ namespace GlobalImpact.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(forgotPasswordViewModel.Email);
+                
                 if (user == null)
                 {
                     return RedirectToAction("ForgotPasswordConfirmation");
                 }
+                
+                var logins = await _userManager.GetLoginsAsync(user);
+                foreach (var login in logins)
+                {
+                    var provider = login.LoginProvider;
+                    if (provider.Contains("Google"))
+                    {
+						ModelState.AddModelError("Email", "Can't Change Password of this email because its associated with a Google Account");
+						return View(forgotPasswordViewModel);
+					}
+                }
+                
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code }, protocol: HttpContext.Request.Scheme);
                 await _emailSender.SendEmailAsync(forgotPasswordViewModel.Email, "Reset Password",

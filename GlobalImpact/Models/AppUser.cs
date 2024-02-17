@@ -20,7 +20,7 @@ namespace GlobalImpact.Models
 
         [Required]
         [ProtectedPersonalData]
-        public int Age { get; set; }
+		public int Age { get; set; }
 
         [PersonalData]
         public int Points { get; set; } = 0;
