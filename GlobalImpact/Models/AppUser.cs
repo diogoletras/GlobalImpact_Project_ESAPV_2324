@@ -8,6 +8,9 @@ namespace GlobalImpact.Models
     public class AppUser : IdentityUser
     {
         [Required]
+        public String UniqueCode { get; set; }
+
+        [Required]
         [ProtectedPersonalData]
         public string FirstName { get; set; }
 
@@ -31,5 +34,7 @@ namespace GlobalImpact.Models
         public string? Role { get; set; }
         [NotMapped]
         public IEnumerable<SelectListItem>? RoleList { get; set; }
+
+
     }
 }

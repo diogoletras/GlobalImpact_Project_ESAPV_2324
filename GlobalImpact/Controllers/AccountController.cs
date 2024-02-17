@@ -97,7 +97,8 @@ namespace GlobalImpact.Controllers
                         LastName = registerViewModel.LastName,
                         Age = registerViewModel.Age,
                         NIF = registerViewModel.NIF,
-                        Points = 0
+                        Points = 0,
+                        UniqueCode = Guid.NewGuid().ToString()
                     };
                     var result = await _userManager.CreateAsync(user, registerViewModel.Password);
                     if (result.Succeeded)
@@ -322,7 +323,8 @@ namespace GlobalImpact.Controllers
                         LastName = externalLoginViewModel.LastName,
                         Age = externalLoginViewModel.Age,
                         NIF = externalLoginViewModel.NIF,
-                        Points = 0
+                        Points = 0,
+                        UniqueCode = Guid.NewGuid().ToString()
                     };
 
                     var result = await _userManager.CreateAsync(user);
