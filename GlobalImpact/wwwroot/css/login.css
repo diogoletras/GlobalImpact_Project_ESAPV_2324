@@ -3,6 +3,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    margin: 0;
 }
 
 .login,
@@ -14,7 +15,8 @@
 }
 
 .form-login {
-    width: 30%;
+    width: 80%;
+    max-width: 400px;
     display: flex;
     align-content: center;
     justify-content: center;
@@ -22,14 +24,14 @@
 }
 
 .form-input {
-    text-align: -webkit-center;
+    text-align: center;
 }
 
 .form-group-login {
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    margin: 20px;
+    margin: 20px 0px;
 }
 
 .form-control {
@@ -39,7 +41,7 @@
 }
 
 .form-group-checkbox {
-    width: 80%;
+    width: 100%;
     text-align: left;
 }
 
@@ -49,26 +51,27 @@
 
 .form-plus {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
 }
 
-.form-plus a {
-    text-decoration: none;
-    color: var(--bs-body-color);
-    display: flex;
-    justify-content: center;
-}
+    .form-plus a {
+        text-decoration: none;
+        color: var(--bs-body-color);
+        margin-bottom: 10px;
+    }
 
-.form-plus a:hover {
-    text-decoration: underline;
-}
+        .form-plus a:hover {
+            text-decoration: underline;
+        }
 
 .btn-grad {
-    width: 200px;
+    width: 100%;
+    max-width: 200px;
     height: 40px;
     padding: 5px;
     background-image: linear-gradient(to right, #16A085 0%, #059742 51%, #16A085 100%);
-    margin: 20px;
+    margin: 20px 0;
     text-align: center;
     text-transform: uppercase;
     transition: 0.5s;
@@ -93,12 +96,12 @@
 .btn {
     background: white;
     border: none;
-    border-radius: 20%
+    border-radius: 20%;
 }
 
-.btn img {
-    width: 40px;
-}
+    .btn img {
+        width: 40px;
+    }
 
 .form-fg {
     display: flex;
@@ -112,4 +115,18 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .form-login {
+        width: 90%;
+    }
+
+    .form-group-login {
+        margin: 10px 0px;
+    }
+
+    .form-plus {
+        flex-direction: column;
+    }
 }

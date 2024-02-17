@@ -40,3 +40,9 @@
         color: #fff;
         text-decoration: none;
     }
+
+@media only screen and (max-width: 768px) {
+    .start-buttons {
+        flex-direction: column;
+    }
+}
