@@ -4,28 +4,69 @@
 }
 
 
+<div class="container">
+    <div class="text-center">
+        <h1 class="display-4">UserPage</h1>
+    </div>
 
-<div class="text-center">
-    <h1 class="display-4">UserPage</h1>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-4">
+                    <div class="card-header">
+                        @if (User.IsInRole("Client"))
+                        {
+                            <h3 class="card-title">Your role is Client</h3>
+                        }
+                        else
+                        {
+                            <h3 class="card-title">Your role is Admin</h3>
+                        }
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-subtitle mb-2 text-muted">@User.Identity.Name</h5>
+                        <hr />
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Id:</h6>
+                                <p>@Model.Id</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Codigo:</h6>
+                                <p>@Model.UniqueCode</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Nome:</h6>
+                                <p>@Model.FirstName</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Idade:</h6>
+                                <p>@Model.Age</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Pontos:</h6>
+                                <p>@Model.Points</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>NIF:</h6>
+                                <p>@Model.NIF</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h6>Email:</h6>
+                                <p>@Model.Email</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
-@if (User.Identity.IsAuthenticated)
-{
-    @if (User.IsInRole("Client"))
-    {
-        <h3>Your role is Client</h3>
-        <h3>@User.Identity.Name</h3>
-    }
-    else
-    {
-        <h3>Your role is Admin</h3>
-        <h3>@User.Identity.Name</h3>
-    }
-
-    <h2>Id : @Model.Id</h2>
-    <h2>Codigo: @Model.UniqueCode</h2>
-    <h2>Nome :@Model.FirstName</h2>
-    <h2>Idade : @Model.Age</h2>
-    <h2>Pontos : @Model.Points</h2>
-    <h2>NIF : @Model.NIF</h2>
-    <h2>Email :@Model.Email</h2>
-}
