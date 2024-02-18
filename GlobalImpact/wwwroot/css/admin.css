@@ -1,0 +1,108 @@
+﻿.button-create {
+    margin: 20px 0px;
+}
+
+.btn-grad-create {
+    width: 100%;
+    max-width: 200px;
+    height: 40px;
+    padding: 10px 15px;
+    background-image: linear-gradient(to right, #16A085 0%, #059742 51%, #16A085 100%);
+    margin: 20px 0;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    font-size: 16px;
+    border-radius: 25px;
+    box-shadow: 0 0 20px #023F3A;
+    border: none;
+    color: var(--bs-body-color);
+    text-decoration: none;
+}
+
+    .btn-grad-create:hover {
+        background-position: right center;
+        color: white;
+        text-decoration: none;
+    }
+
+.admin-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.admin-buttons-btn-grad {
+    display: flex;
+    width: 100%;
+    max-width: 200px;
+    margin: 0px 5px;
+    padding: 5px 10px;
+    background-image: linear-gradient(to right, #16A085 0%, #059742 51%, #16A085 100%);
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    font-size: 15px;
+    border-radius: 25px;
+    box-shadow: 0 0 10px #023F3A;
+    border: none;
+    color: var(--bs-body-color);
+    text-decoration: none;
+}
+
+    .admin-buttons-btn-grad:hover {
+        background-position: right center;
+        color: white;
+        text-decoration: none;
+    }
+
+.admin-form {
+    display: flex;
+}
+
+tr {
+    background-color: white;
+}
+
+/* Table */
+/* Default styles for larger screens */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Styles for smaller screens */
+@media (max-width: 767px) {
+    .table-responsive {
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-y: hidden;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        border: 1px solid #ddd;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        border: 1px solid #ddd;
+    }
+
+    .table {
+        border-collapse: collapse !important;
+    }
+
+    .table-bordered {
+        border: 0;
+    }
+
+    .table td,
+    .table th {
+        background-color: #fff !important;
+    }
+
+    .table-bordered th,
+    .table-bordered td {
+        border: 1px solid #ddd !important;
+    }
+
+    .table-responsive > .table-bordered {
+        border: 0;
+    }
+}

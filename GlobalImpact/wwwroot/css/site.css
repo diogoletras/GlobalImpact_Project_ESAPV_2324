@@ -46,6 +46,31 @@ header {
         font-weight: bold;
     }
 
+.btn-grad-logout {
+    width: 100%;
+    max-width: 200px;
+    height: 40px;
+    padding: 5px 10px;
+    background-image: linear-gradient(to right, #16A085 0%, #059742 51%, #16A085 100%);
+    margin: 20px 0;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    font-size: 16px;
+    border-radius: 25px;
+    box-shadow: 0 0 20px #023F3A;
+    border: none;
+    color: var(--bs-body-color);
+    text-decoration: none;
+}
+
+.btn-grad-logout:hover {
+    background-position: right center;
+    color: white;
+    text-decoration: none;
+}
+
 footer {
     display: flex;
     justify-content: center;

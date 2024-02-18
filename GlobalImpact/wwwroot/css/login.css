@@ -82,6 +82,7 @@
     box-shadow: 0 0 20px #023F3A;
     border: none;
     color: var(--bs-body-color);
+    text-decoration: none;
 }
 
     .btn-grad:hover {

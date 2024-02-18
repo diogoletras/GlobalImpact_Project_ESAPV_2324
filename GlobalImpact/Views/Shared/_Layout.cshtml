@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/GlobalImpact.styles.css" asp-append-version="true" />
     <link rel="icon" href="/SGRR_LOGO.png" type="image/x-icon">
@@ -36,22 +37,22 @@
                         {
                             @if(User.IsInRole("Admin"))
                             {
-                                <li class="nav-item">
+                                /*<li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="ReciclingBins" asp-action="Index">ReciclingBins</a>
-                                </li>
+                                </li>*/
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Users</a>
                                 </li>
                             }
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="UserPage" asp-route-userId="@UserManager.GetUserId(User)" >Hello @User.Identity.Name</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="UserPage" asp-route-userId="@UserManager.GetUserId(User)" >Profile</a>
                             </li>
                             <li class="nav-item">
                                 <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="LogOff">
-                                    <button type="submit" class="btn nav-link">Logout</button>
+                                    <button type="submit" class="btn-grad-logout">Logout</button>
                                 </form>
                             </li>
                         }

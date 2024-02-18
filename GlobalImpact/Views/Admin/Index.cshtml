@@ -3,97 +3,98 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    @if (User.IsInRole("Admin"))
-    {
-        <br />
-        <div class="row">
-            <div class="col-6">
-                <h2 class="text-primary">User List </h2>
-            </div>
-        </div>
-        <div class="col-6 text-right">
-            <a asp-action="Create" asp-controller="Admin" class="btn btn-primary">Create New User</a>
-        </div>
-        <div class="p-4 border rounded">
-            @if (Model.Count() > 0)
-            {
-                <table class="table table-striped border">
-                    <tr class="table-secondary">
-                        <th>
-                            Email
-                        </th>
-                        <th>
-                            Nickname
-                        </th>
-                        <th>
-                            First Name
-                        </th>
-                        <th>
-                            Last Name
-                        </th>
-                        <th>
-                            Age
-                        </th>
-                        <th>
-                            NIF
-                        </th>
-                        <th>
-                            Points
-                        </th>
-                        <th>
-                            Roles
-                        </th>
-                        <th></th>
-                    </tr>
-                    @foreach(var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @item.Email
-                            </td>
-                            <td>
-                                @item.UserName
-                            </td>
-                            <th>
-                                @item.FirstName
-                            </th>
-                            <th>
-                                @item.LastName
-                            </th>
-                            <th>
-                                @item.Age
-                            </th>
-                            <th>
-                                @item.NIF
-                            </th>
-                            <th>
-                                @item.Points
-                            </th>
-                            <td>
-                                @item.Role
-                            </td>
-                            <td>
-                                <div class="text-center">
-                                    
-                                    <form asp-action="Delete" asp-route-userId="@item.Id">
-                                        <a asp-action="Edit" asp-route-userId="@item.Id" class="btn btn-info text-white">
-                                            Edit
-                                        </a>
-                                        @if (!item.UserName.Equals(User.Identity.Name))
-                                        {
-                                            <button type="submit" onclick="return confirm('Are you sure you want to delete this?')"
-                                                    class="btn btn-danger">
-                                                Delete
-                                            </button>
-                                        }
-                                        
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </table>
-            }
-        </div>
-    }
+	@if (User.IsInRole("Admin"))
+	{
+		<br />
+		<div class="row">
+			<h2 class="display-4">User List </h2>
+		</div>
+
+		<div class="p-4 border rounded">
+			@if (Model.Count() > 0)
+			{
+				<div class="p-4 border rounded table-responsive">
+					<table class="table table-striped border">
+						<tr class="table-secondary">
+							<th>
+								Email
+							</th>
+							<th>
+								Nickname
+							</th>
+							<th>
+								First Name
+							</th>
+							<th>
+								Last Name
+							</th>
+							<th>
+								Age
+							</th>
+							<th>
+								NIF
+							</th>
+							<th>
+								Points
+							</th>
+							<th>
+								Roles
+							</th>
+							<th></th>
+						</tr>
+						@foreach (var item in Model)
+						{
+							<tr>
+								<td>
+									@item.Email
+								</td>
+								<td>
+									@item.UserName
+								</td>
+								<th>
+									@item.FirstName
+								</th>
+								<th>
+									@item.LastName
+								</th>
+								<th>
+									@item.Age
+								</th>
+								<th>
+									@item.NIF
+								</th>
+								<th>
+									@item.Points
+								</th>
+								<td>
+									@item.Role
+								</td>
+								<td>
+									<div class="admin-buttons">
+
+										<form asp-action="Delete" asp-route-userId="@item.Id" class="admin-form">
+											<a asp-action="Edit" asp-route-userId="@item.Id" class="admin-buttons-btn-grad">
+												Edit
+											</a>
+											@if (!item.UserName.Equals(User.Identity.Name))
+											{
+												<button type="submit" onclick="return confirm('Are you sure you want to delete this?')"
+														class="admin-buttons-btn-grad">
+													Delete
+												</button>
+											}
+
+										</form>
+									</div>
+								</td>
+							</tr>
+						}
+					</table>
+				</div>
+			}
+		</div>
+		<div class="button-create">
+			<a asp-action="Create" asp-controller="Admin" class="btn-grad-create">Create New User</a>
+		</div>
+	}
 }
