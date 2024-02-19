@@ -4,17 +4,17 @@
     {
         <div class="row justify-content-center">
             <div class="col-md-6"> <div class="card shadow-sm border-0 rounded-3">
-                <div class="card-header bg-primary text-white py-3">
+                    <div class="card-header bg-primary text-white py-3" style="background-color: #21262B !important;">
                     @if (User.IsInRole("Client"))
                     {
-                        <h3 class="card-title">Your role is Client</h3>
+                        <h3 class="card-title text-center">Your role is Client</h3>
                     }
                     else
                     {
-                        <h3 class="card-title">Your role is Admin</h3>
+                            <h3 class="card-title text-center">Your role is Admin</h3>
                     }
                 </div>
-                <div class="card-body p-4">
+                    <div class="card-body p-4" style="background-color: #fffbc9;">
                     <div class="row">
                         <div class="col-md-12 text-center"> <i class="fas fa-user-circle fa-3x"></i> <h6 class="mt-3">Codigo de Transação:</h6>
                             <p>@Model.UniqueCode</p> 

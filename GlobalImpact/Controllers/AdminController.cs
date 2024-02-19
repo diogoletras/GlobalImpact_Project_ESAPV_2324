@@ -113,7 +113,7 @@ namespace GlobalImpact.Controllers
                     return NotFound();
                 }
 
-                if (user.NIF.ToString().Length != 9)
+                if (user.NIF.ToString().Length != 9 && user.NIF != null)
                 {
                     ModelState.AddModelError("NIF", "NIF não contem 9 digitos");
                     return View(user);
