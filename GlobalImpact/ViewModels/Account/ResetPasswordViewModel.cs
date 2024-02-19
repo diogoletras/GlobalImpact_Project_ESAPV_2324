@@ -8,10 +8,6 @@ namespace GlobalImpact.ViewModels.Account
     public class ResetPasswordViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -20,5 +16,6 @@ namespace GlobalImpact.ViewModels.Account
         [Compare("Password", ErrorMessage = "Passwords don't match!")]
         public string ConfirmPassword { get; set; }
         public string Code { get; set; }
+        public string UserId { get; set; }
     }
 }

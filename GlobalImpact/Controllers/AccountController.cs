@@ -422,7 +422,7 @@ namespace GlobalImpact.Controllers
         /// <param name="code">código de user.</param>
         /// <returns>retorna a página de Reset PassWord, caso o código seja válido.</returns>
         [HttpGet]
-        public IActionResult ResetPassword(string code = null)
+        public IActionResult ResetPassword(string code = null, string userId = null)
         {
             return code == null ? View("Error") : View();
         }
@@ -438,7 +438,7 @@ namespace GlobalImpact.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByEmailAsync(resetPasswordViewModel.Email);
+                var user = await _userManager.FindByIdAsync(resetPasswordViewModel.UserId);
                 if (user == null)
                 {
                     ModelState.AddModelError("Email", "User not found");
