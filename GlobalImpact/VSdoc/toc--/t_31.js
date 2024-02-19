@@ -1,1 +1,1 @@
-c['31']=[['32',"Create(string) Method","topic_0000000000000019.html",0],['33',"Create(RegisterViewModel, string) Method","topic_000000000000001A.html",0]];
+c['31']=[['32',"Create Method","topic_000000000000001A_overloads--.html",1],['35',"Delete Method","topic_0000000000000019.html",0],['36',"Edit Method","topic_0000000000000017_overloads--.html",1],['39',"Index Method","topic_0000000000000016.html",0]];

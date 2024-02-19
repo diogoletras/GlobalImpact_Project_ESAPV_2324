@@ -1,1 +1,1 @@
-c['82']=[['83',"Methods","topic_0000000000000044_methods--.html",1]];
+c['82']=[['83',"IEmailSender Interface","topic_0000000000000045.html",1]];

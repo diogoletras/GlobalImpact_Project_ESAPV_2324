@@ -1,1 +1,1 @@
-search_result['14']=["topic_0000000000000005.html","AccountController.EmailSending Method","Função Get que retorna a pagina de envio de email de confirmaçao"];
+search_result['14']=["topic_0000000000000005.html","AccountController.Register (RegisterViewModel, String) Method","Função HttpPost função para o registo de um user."];

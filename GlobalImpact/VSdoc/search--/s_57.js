@@ -1,1 +1,1 @@
-search_result['57']=["topic_000000000000001C.html","HomeController Constructor",""];
+search_result['57']=["topic_0000000000000019.html","AdminController.Delete Method","Função Post de apagar User."];

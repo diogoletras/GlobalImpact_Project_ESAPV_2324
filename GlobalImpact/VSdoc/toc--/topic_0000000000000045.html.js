@@ -1,1 +1,1 @@
-var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_0000000000000091.html"],['81',"GlobalImpact.Interfaces Namespace","topic_0000000000000043.html"],['82',"IEmailSender Interface","topic_0000000000000044.html"],['83',"Methods","topic_0000000000000044_methods--.html"],['84',"SendEmailAsync Method","topic_0000000000000045.html"]];
+var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_0000000000000097.html"],['82',"GlobalImpact.Interfaces Namespace","topic_0000000000000044.html"],['83',"IEmailSender Interface","topic_0000000000000045.html"]];

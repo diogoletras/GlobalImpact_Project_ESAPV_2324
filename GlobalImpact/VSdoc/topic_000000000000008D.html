@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="GENERATOR" content="VSdocman - documentation generator; https://www.helixoft.com" />
 	<link rel="icon" href="favicon.ico">
-	<title>ResetPasswordViewModel.Email Property</title>
+	<title>RegisterViewModel.Age Property</title>
 
 	<link rel="stylesheet" type="text/css" href="msdn2019/toc.css" />
 	<script src="msdn2019/toc.js"></script>
@@ -74,11 +74,11 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
   </div>
 
 <div id="mainBody">
-		<h1 class="title">ResetPasswordViewModel.Email Property</h1>
+		<h1 class="title">RegisterViewModel.Age Property</h1>
         
 		<div class="metadata">
         Namespace:
-<a href="topic_0000000000000071.html">GlobalImpact.ViewModels.Account</a>
+<a href="topic_0000000000000077.html">GlobalImpact.ViewModels.Account</a>
 
 
 
@@ -138,7 +138,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeVB">
-					<pre xml:space="preserve" class="brush: vb">&lt;Required()&gt; _&nbsp;<br />&lt;EmailAddress()&gt; _&nbsp;<br />&lt;Display(Name = &quot;Email&quot;)&gt; _&nbsp;<br />Public Property Email() As <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a></pre>			
+					<pre xml:space="preserve" class="brush: vb">&lt;Required()&gt; _&nbsp;<br />&lt;Range(18, int.MaxValue, ErrorMessage = &quot;Idade minima de 18 anos&quot;)&gt; _&nbsp;<br />&lt;Display(Name = &quot;Age&quot;)&gt; _&nbsp;<br />Public Property Age() As <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.int32">Integer</a></pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -177,7 +177,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeCsharp">
-					<pre xml:space="preserve" class="brush: csharp">[Required()]&nbsp;<br />[EmailAddress()]&nbsp;<br />[Display(Name = &quot;Email&quot;)]&nbsp;<br />public <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">string</a> Email {get; set;}</pre>			
+					<pre xml:space="preserve" class="brush: csharp">[Required()]&nbsp;<br />[Range(18, int.MaxValue, ErrorMessage = &quot;Idade minima de 18 anos&quot;)]&nbsp;<br />[Display(Name = &quot;Age&quot;)]&nbsp;<br />public <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.int32">int</a> Age {get; set;}</pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -217,7 +217,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeCpp">
-					<pre xml:space="preserve" class="brush: cpp">[Required()]&nbsp;<br />[EmailAddress()]&nbsp;<br />[Display(Name = &quot;Email&quot;)]&nbsp;<br />public: &nbsp;<br />property <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>^ Email {&nbsp;<br /> <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>^ get( );&nbsp;<br /> void set(&nbsp;<br />   <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>^ value&nbsp;<br /> );&nbsp;<br />}</pre>			
+					<pre xml:space="preserve" class="brush: cpp">[Required()]&nbsp;<br />[Range(18, int.MaxValue, ErrorMessage = &quot;Idade minima de 18 anos&quot;)]&nbsp;<br />[Display(Name = &quot;Age&quot;)]&nbsp;<br />public: &nbsp;<br />property <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.int32">int</a> Age {&nbsp;<br /> <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.int32">int</a> get( );&nbsp;<br /> void set(&nbsp;<br />   <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.int32">int</a> value&nbsp;<br /> );&nbsp;<br />}</pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -256,7 +256,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeJScript">
-					<pre xml:space="preserve" class="brush: js">public &nbsp;<br />   Required()&nbsp;<br />   EmailAddress()&nbsp;<br />   Display(Name = &quot;Email&quot;)&nbsp;<br />function get Email() : <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>;&nbsp;<br />public &nbsp;<br />   Required()&nbsp;<br />   EmailAddress()&nbsp;<br />   Display(Name = &quot;Email&quot;)&nbsp;<br />function set Email(value : <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>);</pre>			
+					<pre xml:space="preserve" class="brush: js">public &nbsp;<br />   Required()&nbsp;<br />   Range(18, int.MaxValue, ErrorMessage = &quot;Idade minima de 18 anos&quot;)&nbsp;<br />   Display(Name = &quot;Age&quot;)&nbsp;<br />function get Age() : <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.int32">int</a>;&nbsp;<br />public &nbsp;<br />   Required()&nbsp;<br />   Range(18, int.MaxValue, ErrorMessage = &quot;Idade minima de 18 anos&quot;)&nbsp;<br />   Display(Name = &quot;Age&quot;)&nbsp;<br />function set Age(value : <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.int32">int</a>);</pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -270,7 +270,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 	<h4 class="subHeading">
 		Property Value</h4>
-	<a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">string</a> 
+	<a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.int32">int</a> 
 	
 
 
@@ -359,11 +359,11 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 	<div id="seeAlsoSection" class="section">	
 		<div>
-			<a href="topic_000000000000008C.html">ResetPasswordViewModel Class</a><br />
+			<a href="topic_0000000000000088.html">RegisterViewModel Class</a><br />
 
 
 
-<a href="topic_0000000000000071.html">GlobalImpact.ViewModels.Account Namespace</a><br />
+<a href="topic_0000000000000077.html">GlobalImpact.ViewModels.Account Namespace</a><br />
 
 
 			

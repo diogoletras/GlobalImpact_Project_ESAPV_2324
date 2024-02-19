@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="GENERATOR" content="VSdocman - documentation generator; https://www.helixoft.com" />
 	<link rel="icon" href="favicon.ico">
-	<title>RegisterViewModel.ConfirmPassword Property</title>
+	<title>RegisterViewModel.UserName Property</title>
 
 	<link rel="stylesheet" type="text/css" href="msdn2019/toc.css" />
 	<script src="msdn2019/toc.js"></script>
@@ -74,11 +74,11 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
   </div>
 
 <div id="mainBody">
-		<h1 class="title">RegisterViewModel.ConfirmPassword Property</h1>
+		<h1 class="title">RegisterViewModel.UserName Property</h1>
         
 		<div class="metadata">
         Namespace:
-<a href="topic_0000000000000071.html">GlobalImpact.ViewModels.Account</a>
+<a href="topic_0000000000000077.html">GlobalImpact.ViewModels.Account</a>
 
 
 
@@ -138,7 +138,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeVB">
-					<pre xml:space="preserve" class="brush: vb">&lt;DataType(DataType.Password)&gt; _&nbsp;<br />&lt;Display(Name = &quot;Confirm password&quot;)&gt; _&nbsp;<br />&lt;Compare(&quot;Password&quot;, ErrorMessage = &quot;The password and confirmation password do not match.&quot;)&gt; _&nbsp;<br />Public Property ConfirmPassword() As <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a></pre>			
+					<pre xml:space="preserve" class="brush: vb">&lt;Required()&gt; _&nbsp;<br />&lt;Display(Name = &quot;UserName&quot;)&gt; _&nbsp;<br />Public Property UserName() As <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a></pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -177,7 +177,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeCsharp">
-					<pre xml:space="preserve" class="brush: csharp">[DataType(DataType.Password)]&nbsp;<br />[Display(Name = &quot;Confirm password&quot;)]&nbsp;<br />[Compare(&quot;Password&quot;, ErrorMessage = &quot;The password and confirmation password do not match.&quot;)]&nbsp;<br />public <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">string</a> ConfirmPassword {get; set;}</pre>			
+					<pre xml:space="preserve" class="brush: csharp">[Required()]&nbsp;<br />[Display(Name = &quot;UserName&quot;)]&nbsp;<br />public <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">string</a> UserName {get; set;}</pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -217,7 +217,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeCpp">
-					<pre xml:space="preserve" class="brush: cpp">[DataType(DataType.Password)]&nbsp;<br />[Display(Name = &quot;Confirm password&quot;)]&nbsp;<br />[Compare(&quot;Password&quot;, ErrorMessage = &quot;The password and confirmation password do not match.&quot;)]&nbsp;<br />public: &nbsp;<br />property <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>^ ConfirmPassword {&nbsp;<br /> <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>^ get( );&nbsp;<br /> void set(&nbsp;<br />   <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>^ value&nbsp;<br /> );&nbsp;<br />}</pre>			
+					<pre xml:space="preserve" class="brush: cpp">[Required()]&nbsp;<br />[Display(Name = &quot;UserName&quot;)]&nbsp;<br />public: &nbsp;<br />property <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>^ UserName {&nbsp;<br /> <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>^ get( );&nbsp;<br /> void set(&nbsp;<br />   <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>^ value&nbsp;<br /> );&nbsp;<br />}</pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -256,7 +256,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeJScript">
-					<pre xml:space="preserve" class="brush: js">public &nbsp;<br />   DataType(DataType.Password)&nbsp;<br />   Display(Name = &quot;Confirm password&quot;)&nbsp;<br />   Compare(&quot;Password&quot;, ErrorMessage = &quot;The password and confirmation password do not match.&quot;)&nbsp;<br />function get ConfirmPassword() : <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>;&nbsp;<br />public &nbsp;<br />   DataType(DataType.Password)&nbsp;<br />   Display(Name = &quot;Confirm password&quot;)&nbsp;<br />   Compare(&quot;Password&quot;, ErrorMessage = &quot;The password and confirmation password do not match.&quot;)&nbsp;<br />function set ConfirmPassword(value : <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>);</pre>			
+					<pre xml:space="preserve" class="brush: js">public &nbsp;<br />   Required()&nbsp;<br />   Display(Name = &quot;UserName&quot;)&nbsp;<br />function get UserName() : <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>;&nbsp;<br />public &nbsp;<br />   Required()&nbsp;<br />   Display(Name = &quot;UserName&quot;)&nbsp;<br />function set UserName(value : <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>);</pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -359,11 +359,11 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 	<div id="seeAlsoSection" class="section">	
 		<div>
-			<a href="topic_0000000000000082.html">RegisterViewModel Class</a><br />
+			<a href="topic_0000000000000088.html">RegisterViewModel Class</a><br />
 
 
 
-<a href="topic_0000000000000071.html">GlobalImpact.ViewModels.Account Namespace</a><br />
+<a href="topic_0000000000000077.html">GlobalImpact.ViewModels.Account Namespace</a><br />
 
 
 			

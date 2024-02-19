@@ -1,1 +1,1 @@
-search_result['50']=["topic_000000000000001A_overloads--.html","AdminController.Create Method","Função Post para a criação de um User."];
+search_result['50']=["topic_0000000000000015.html","AdminController Constructor","Construtor do Controller AdminController"];

@@ -1,1 +1,1 @@
-search_result['24']=["topic_000000000000000D.html","AccountController.ForgotPassword  Method","Função Get para retornar a página de forgot passsword."];
+search_result['24']=["topic_000000000000000B.html","AccountController.ExternalLoginCallback Method","Função Get, se o user já tiver a conta registada vai para o dashBoard; se não faz o registo."];

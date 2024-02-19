@@ -1,1 +1,1 @@
-search_result['252']=["topic_000000000000008C_attached_props--.html","ResetPasswordViewModel Attached Properties",""];
+search_result['252']=["topic_000000000000006B.html","ReciclingBin Class",""];

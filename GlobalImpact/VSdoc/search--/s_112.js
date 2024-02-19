@@ -1,1 +1,1 @@
-search_result['112']=["topic_000000000000003C.html","ReciclingBinType Enumeration",""];
+search_result['112']=["topic_000000000000002B_props--.html","ReciclingBinsController Properties",""];

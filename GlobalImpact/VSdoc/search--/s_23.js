@@ -1,1 +1,1 @@
-search_result['23']=["topic_000000000000000C.html","AccountController.LogOff Method","Função Post para o logout de um user."];
+search_result['23']=["topic_000000000000000A.html","AccountController.ExternalLogin Method","Função Post com o auxilio da api de autenticação da Google."];

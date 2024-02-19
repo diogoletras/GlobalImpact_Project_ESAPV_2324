@@ -1,1 +1,1 @@
-search_result['120']=["topic_0000000000000045.html","IEmailSender.SendEmailAsync Method",""];
+search_result['120']=["topic_0000000000000030.html","ReciclingBinsController.Create (ReciclingBin) Method",""];

@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="GENERATOR" content="VSdocman - documentation generator; https://www.helixoft.com" />
 	<link rel="icon" href="favicon.ico">
-	<title>AppUser Class</title>
+	<title>update1 Class</title>
 
 	<link rel="stylesheet" type="text/css" href="msdn2019/toc.css" />
 	<script src="msdn2019/toc.js"></script>
@@ -74,11 +74,11 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
   </div>
 
 <div id="mainBody">
-		<h1 class="title">AppUser Class</h1>
+		<h1 class="title">update1 Class</h1>
         
 		<div class="metadata">
         Namespace:
-<a href="topic_000000000000004B.html">GlobalImpact.Models</a>
+<a href="topic_0000000000000047.html">GlobalImpact.Migrations</a>
 
 
 
@@ -138,7 +138,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeVB">
-					<pre xml:space="preserve" class="brush: vb">Public Class AppUser&nbsp;<br />    Inherits <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.identityuser">IdentityUser</a></pre>			
+					<pre xml:space="preserve" class="brush: vb">&lt;DbContext(typeof(ApplicationDbContext))&gt; _&nbsp;<br />&lt;Migration(&quot;20240217160747_update1&quot;)&gt; _&nbsp;<br />Public Class update1&nbsp;<br />    Inherits <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.migrations.migration">Migration</a></pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -177,7 +177,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeCsharp">
-					<pre xml:space="preserve" class="brush: csharp">public class AppUser : <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.identityuser">IdentityUser</a></pre>			
+					<pre xml:space="preserve" class="brush: csharp">[DbContext(typeof(ApplicationDbContext))]&nbsp;<br />[Migration(&quot;20240217160747_update1&quot;)]&nbsp;<br />public class update1 : <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.migrations.migration">Migration</a></pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -217,7 +217,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeCpp">
-					<pre xml:space="preserve" class="brush: cpp">public ref class AppUser : public <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft::aspnetcore::identity::identityuser">IdentityUser</a>^</pre>			
+					<pre xml:space="preserve" class="brush: cpp">[DbContext(typeof(ApplicationDbContext))]&nbsp;<br />[Migration(&quot;20240217160747_update1&quot;)]&nbsp;<br />public ref class update1 : public <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft::entityframeworkcore::migrations::migration">Migration</a>^</pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -256,7 +256,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeJScript">
-					<pre xml:space="preserve" class="brush: js">public class AppUser&nbsp;<br />   extends <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.identityuser">IdentityUser</a></pre>			
+					<pre xml:space="preserve" class="brush: js">public &nbsp;<br />   DbContext(typeof(ApplicationDbContext))&nbsp;<br />   Migration(&quot;20240217160747_update1&quot;)&nbsp;<br />class update1&nbsp;<br />   extends <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.migrations.migration">Migration</a></pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -287,13 +287,19 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 
 
+
+
+
+
+
+
 <div class="section_container">
 	<div class="section_heading">
-		<span><a href="javascript:void(0)" title="Collapse" onclick="toggleSection(this);">Properties</a></span>
+		<span><a href="javascript:void(0)" title="Collapse" onclick="toggleSection(this);">Methods</a></span>
 		<div>&nbsp;</div>
 	</div>
 
-	<div id="PropertiesSection" class="section">	
+	<div id="MethodsSection" class="section">	
   <table class="memberListTable">
     <tr>
       <th></th>
@@ -306,19 +312,23 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
     </tr>
 
 
-	
-		<tr class="
+
+
+	<tr class="
 
 
 ">
 	<td>
-<img alt="Public property" title="Public property" src="msdn2019/pubproperty.png"></img>
+   <img alt="Protected method" title="Protected method" src="msdn2019/protmethod.png"></img>
+
+    
+	  
 
 
     
 	</td>
 	<td>
-	<a href="topic_000000000000004F.html">Age</a>
+	<a href="topic_000000000000004F.html">BuildTargetModel(ModelBuilder)</a>
 
 	</td>
 	<td>
@@ -327,22 +337,29 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 	</td>
 </tr>
-	
 
 
-	
-		<tr class="
+
+
+
+
+
+
+	<tr class="
 
 
 ">
 	<td>
-<img alt="Public property" title="Public property" src="msdn2019/pubproperty.png"></img>
+   <img alt="Protected method" title="Protected method" src="msdn2019/protmethod.png"></img>
+
+    
+	  
 
 
     
 	</td>
 	<td>
-	<a href="topic_000000000000004D.html">FirstName</a>
+	<a href="topic_000000000000004E.html">Down(MigrationBuilder)</a>
 
 	</td>
 	<td>
@@ -351,22 +368,29 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 	</td>
 </tr>
-	
 
 
-	
-		<tr class="
+
+
+
+
+
+
+	<tr class="
 
 
 ">
 	<td>
-<img alt="Public property" title="Public property" src="msdn2019/pubproperty.png"></img>
+   <img alt="Protected method" title="Protected method" src="msdn2019/protmethod.png"></img>
+
+    
+	  
 
 
     
 	</td>
 	<td>
-	<a href="topic_000000000000004E.html">LastName</a>
+	<a href="topic_000000000000004D.html">Up(MigrationBuilder)</a>
 
 	</td>
 	<td>
@@ -375,127 +399,10 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 	</td>
 </tr>
-	
-
-
-	
-		<tr class="
-
-
-">
-	<td>
-<img alt="Public property" title="Public property" src="msdn2019/pubproperty.png"></img>
-
-
-    
-	</td>
-	<td>
-	<a href="topic_0000000000000051.html">NIF</a>
-
-	</td>
-	<td>
 
 
 
-	</td>
-</tr>
-	
 
-
-	
-		<tr class="
-
-
-">
-	<td>
-<img alt="Public property" title="Public property" src="msdn2019/pubproperty.png"></img>
-
-
-    
-	</td>
-	<td>
-	<a href="topic_0000000000000050.html">Points</a>
-
-	</td>
-	<td>
-
-
-
-	</td>
-</tr>
-	
-
-
-	
-		<tr class="
-
-
-">
-	<td>
-<img alt="Public property" title="Public property" src="msdn2019/pubproperty.png"></img>
-
-
-    
-	</td>
-	<td>
-	<a href="topic_0000000000000053.html">Role</a>
-
-	</td>
-	<td>
-
-
-
-	</td>
-</tr>
-	
-
-
-	
-		<tr class="
-
-
-">
-	<td>
-<img alt="Public property" title="Public property" src="msdn2019/pubproperty.png"></img>
-
-
-    
-	</td>
-	<td>
-	<a href="topic_0000000000000052.html">RoleId</a>
-
-	</td>
-	<td>
-
-
-
-	</td>
-</tr>
-	
-
-
-	
-		<tr class="
-
-
-">
-	<td>
-<img alt="Public property" title="Public property" src="msdn2019/pubproperty.png"></img>
-
-
-    
-	</td>
-	<td>
-	<a href="topic_0000000000000054.html">RoleList</a>
-
-	</td>
-	<td>
-
-
-
-	</td>
-</tr>
-	
 
 
   </table>
@@ -506,6 +413,15 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 	</div>					
 </div>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -598,7 +514,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 	<div id="seeAlsoSection" class="section">	
 		<div>
-	<a href="topic_000000000000004B.html">GlobalImpact.Models Namespace</a><br />
+	<a href="topic_0000000000000047.html">GlobalImpact.Migrations Namespace</a><br />
 
 
 	

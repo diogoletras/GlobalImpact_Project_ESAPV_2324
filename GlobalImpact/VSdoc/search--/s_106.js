@@ -1,1 +1,1 @@
-search_result['106']=["topic_0000000000000036.html","ApplicationDbContext Constructor",""];
+search_result['106']=["topic_000000000000002A_props--.html","ReciclingBinsController Properties",""];

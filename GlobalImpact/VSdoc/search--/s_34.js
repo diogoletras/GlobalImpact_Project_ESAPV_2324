@@ -1,1 +1,1 @@
-search_result['34']=["topic_0000000000000013.html","AdminController Class","Controller da Gestao de Administraçao"];
+search_result['34']=["topic_0000000000000011.html","AccountController.ResetPassword (String, String) Method","Função Get para retornar a página de Reset PassWord."];
