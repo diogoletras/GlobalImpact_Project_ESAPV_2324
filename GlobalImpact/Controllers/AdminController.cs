@@ -16,16 +16,19 @@ namespace GlobalImpact.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
         /// <summary>
         /// Construtor do Controller AdminController
         /// </summary>
         /// <param name="db">Base de Dados</param>
         /// <param name="userManager">Fornece APIs para gestao de utilizadores</param>
-        public AdminController(ApplicationDbContext db, UserManager<AppUser> userManager)
+        /// <param name="signInManager">Fornece APIs para Login de utilizadores</param>
+        public AdminController(ApplicationDbContext db, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _db = db;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
         /// <summary>
         /// Função Get para retornar uma lista de Users.
@@ -63,6 +66,7 @@ namespace GlobalImpact.Controllers
         public IActionResult Edit (string userId)
         {
             var user = _db.AppUser.FirstOrDefault(u => u.Id == userId);
+            var currentUserId = _signInManager.UserManager.GetUserId(User);
             if (user == null)
             {
                 return NotFound();
@@ -81,7 +85,7 @@ namespace GlobalImpact.Controllers
             });
 
             var roleName = roles.FirstOrDefault(r => r.Id == role.RoleId).Name;
-            ViewData["Role"] = roleName;
+            user.Role = roleName;
 
             return View(user);
         }
@@ -99,20 +103,53 @@ namespace GlobalImpact.Controllers
             if (ModelState.IsValid)
             {
                 var userDbValue = _db.AppUser.FirstOrDefault(u => u.Id == user.Id);
-                if (userDbValue == null)
+                var userRoleDbValue = _db.UserRoles.FirstOrDefault(u => u.UserId == user.Id);
+                if (!userDbValue.UniqueCode.Equals(user.UniqueCode) || !userDbValue.Id.Equals(user.Id))
                 {
                     return NotFound();
                 }
-                var userRole = _db.UserRoles.FirstOrDefault(u => u.UserId == userDbValue.Id);
-                if (userRole != null)
+                if (userDbValue == null || userRoleDbValue == null)
                 {
-                    var previousRoleName = _db.Roles.Where(u => u.Id == userRole.RoleId).Select(e => e.Name).FirstOrDefault();
-                    await _userManager.RemoveFromRoleAsync(userDbValue, previousRoleName);
-
+                    return NotFound();
                 }
 
-                await _userManager.AddToRoleAsync(userDbValue, _db.Roles.FirstOrDefault(u => u.Id == user.RoleId).Name);
+                if (user.NIF.ToString().Length != 9)
+                {
+                    ModelState.AddModelError("NIF", "NIF não contem 9 digitos");
+                    return View(user);
+                }
+
+                if (!userDbValue.FirstName.Equals(user.FirstName))
+                {
+                    userDbValue.FirstName = user.FirstName;
+                }
+                if (!userDbValue.LastName.Equals(user.LastName))
+                {
+                    userDbValue.LastName = user.LastName;
+                }
+                if (!userDbValue.Age.Equals(user.Age))
+                {
+                    userDbValue.Age = user.Age;
+                }
+                if (!userDbValue.NIF.Equals(user.NIF))
+                {
+                    userDbValue.NIF = user.NIF;
+                }
+
+                if (user.RoleId != null)
+                {
+                    if (!userRoleDbValue.RoleId.Equals(user.RoleId))
+                    {
+                        _db.UserRoles.Remove(userRoleDbValue);
+                        _db.SaveChanges();
+                        userRoleDbValue.RoleId = user.RoleId;
+                        _db.UserRoles.Add(userRoleDbValue);
+                    }
+                }
+                
+                _db.AppUser.Update(userDbValue);
                 _db.SaveChanges();
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -195,7 +232,8 @@ namespace GlobalImpact.Controllers
                         LastName = registerViewModel.LastName,
                         Age = registerViewModel.Age,
                         NIF = registerViewModel.NIF,
-                        Points = 0
+                        Points = 0,
+                        UniqueCode = Guid.NewGuid().ToString()
                     };
                     var result = await _userManager.CreateAsync(user, registerViewModel.Password);
                     if (result.Succeeded)
