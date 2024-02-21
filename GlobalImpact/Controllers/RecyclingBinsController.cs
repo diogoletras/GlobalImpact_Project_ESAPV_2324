@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GlobalImpact.Data;
+using GlobalImpact.Enumerates;
 using GlobalImpact.Models;
 using Microsoft.AspNetCore.Authorization;
 
@@ -21,7 +22,7 @@ namespace GlobalImpact.Controllers
         }
 
         // GET: RecyclingBins
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -29,7 +30,7 @@ namespace GlobalImpact.Controllers
         }
 
         // GET: RecyclingBins/Details/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> Details(Guid? id)
         {
@@ -49,20 +50,32 @@ namespace GlobalImpact.Controllers
         }
 
         // GET: RecyclingBins/Create
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            var res = new RecyclingBin
+            {
+                RBTList = new List<RecyclingBinType>
+                {
+                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.organic.ToString() },
+                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.paper.ToString() },
+                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.plastic.ToString() },
+                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.glass.ToString() },
+                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.metal.ToString() },
+                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.other.ToString() },
+                }
+            };
+            return View(res);
         }
 
         // POST: RecyclingBins/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Type,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status")] RecyclingBin recyclingBin)
+        public async Task<IActionResult> Create([Bind("Id,RecyclingBinType,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status")] RecyclingBin recyclingBin)
         {
             if (ModelState.IsValid)
             {
@@ -71,11 +84,25 @@ namespace GlobalImpact.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            var res = new RecyclingBin
+            {
+                RBTList = new List<RecyclingBinType>
+                {
+                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.organic.ToString() },
+                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.paper.ToString() },
+                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.plastic.ToString() },
+                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.glass.ToString() },
+                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.metal.ToString() },
+                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.other.ToString() },
+                }
+            };
+
+            recyclingBin.RBTList = res.RBTList;
             return View(recyclingBin);
         }
 
         // GET: RecyclingBins/Edit/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(Guid? id)
         {
@@ -95,7 +122,7 @@ namespace GlobalImpact.Controllers
         // POST: RecyclingBins/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,Type,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status")] RecyclingBin recyclingBin)
@@ -129,7 +156,7 @@ namespace GlobalImpact.Controllers
         }
 
         // GET: RecyclingBins/Delete/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> Delete(Guid? id)
         {
@@ -149,7 +176,7 @@ namespace GlobalImpact.Controllers
         }
 
         // POST: RecyclingBins/Delete/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)

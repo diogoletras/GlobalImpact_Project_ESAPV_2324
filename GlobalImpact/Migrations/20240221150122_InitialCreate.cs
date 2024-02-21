@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace GlobalImpact.Migrations
 {
     /// <inheritdoc />
@@ -74,21 +76,15 @@ namespace GlobalImpact.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RecyclingBins",
+                name: "RecyclingBinType",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false),
-                    Latitude = table.Column<double>(type: "float", nullable: false),
-                    Longitude = table.Column<double>(type: "float", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Capacity = table.Column<int>(type: "int", nullable: false),
-                    CurrentCapacity = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false)
+                    RecyclingBinTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecyclingBins", x => x.Id);
+                    table.PrimaryKey("PK_RecyclingBinType", x => x.RecyclingBinTypeId);
                 });
 
             migrationBuilder.CreateTable(
@@ -224,6 +220,30 @@ namespace GlobalImpact.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RecyclingBins",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RecyclingBinTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Latitude = table.Column<double>(type: "float", nullable: false),
+                    Longitude = table.Column<double>(type: "float", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
+                    CurrentCapacity = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RecyclingBins", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RecyclingBins_RecyclingBinType_RecyclingBinTypeId",
+                        column: x => x.RecyclingBinTypeId,
+                        principalTable: "RecyclingBinType",
+                        principalColumn: "RecyclingBinTypeId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RecyclingTransactions",
                 columns: table => new
                 {
@@ -247,6 +267,27 @@ namespace GlobalImpact.Migrations
                         principalTable: "RecyclingBins",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "6ecfe286-c000-409e-b88a-05742fcbe65c", "cc01dfce-7a93-4710-bab0-a89ba074b5ad", "admin", "ADMIN" },
+                    { "d2ad7646-6b77-4074-a470-598c14a18d6d", "5436f0a1-d70a-49be-be9c-43b07f1e11ee", "client", "CLIENT" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RecyclingBinType",
+                columns: new[] { "RecyclingBinTypeId", "Type" },
+                values: new object[,]
+                {
+                    { new Guid("2715642e-824d-4820-a345-0974ac9f4c96"), "paper" },
+                    { new Guid("8256013c-1472-4dbe-8fc8-aa3111ce70cc"), "metal" },
+                    { new Guid("9f87a14c-d55c-49fe-849e-4a5213281343"), "organic" },
+                    { new Guid("b349f7ef-3955-437e-b5db-53b9bac6e396"), "glass" },
+                    { new Guid("c9b964fd-348c-44f5-ad07-d6883e081951"), "plastic" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -299,6 +340,11 @@ namespace GlobalImpact.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RecyclingBins_RecyclingBinTypeId",
+                table: "RecyclingBins",
+                column: "RecyclingBinTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RecyclingTransactions_RecyclingBinId",
                 table: "RecyclingTransactions",
                 column: "RecyclingBinId");
@@ -344,6 +390,9 @@ namespace GlobalImpact.Migrations
 
             migrationBuilder.DropTable(
                 name: "RecyclingBins");
+
+            migrationBuilder.DropTable(
+                name: "RecyclingBinType");
         }
     }
 }

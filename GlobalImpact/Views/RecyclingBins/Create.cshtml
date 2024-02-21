@@ -6,7 +6,7 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    @if (User.IsInRole("Admin"))
+    @if (User.IsInRole("admin"))
     {
 
         <h1>Create</h1>
@@ -18,9 +18,18 @@
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="Type" class="control-label"></label>
-                        <select asp-for="Type" class="form-control"></select>
-                        <span asp-validation-for="Type" class="text-danger"></span>
+                        <label asp-for="RecyclingBinType" class="col-md-2 text-light"></label>
+                        <div class="col-md-10">
+                            <select asp-for="RecyclingBinType" class="form-control">
+                                <option disabled selected>--Select Role--</option>
+
+                                @foreach (var option1 in Model.RBTList)
+                                {
+                                    <option asp-for="RecyclingBinType" asp-item="@option1">@option1.Type</option>
+                                }
+                            </select>
+                            <span asp-validation-for="RecyclingBinType" class="text-danger"></span>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label asp-for="Latitude" class="control-label"></label>

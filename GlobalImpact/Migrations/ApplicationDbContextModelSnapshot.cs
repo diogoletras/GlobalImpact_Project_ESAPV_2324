@@ -187,15 +187,59 @@ namespace GlobalImpact.Migrations
                     b.Property<double>("Longitude")
                         .HasColumnType("float");
 
+                    b.Property<Guid>("RecyclingBinTypeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
+                    b.HasIndex("RecyclingBinTypeId");
+
                     b.ToTable("RecyclingBins");
+                });
+
+            modelBuilder.Entity("GlobalImpact.Models.RecyclingBinType", b =>
+                {
+                    b.Property<Guid>("RecyclingBinTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RecyclingBinTypeId");
+
+                    b.ToTable("RecyclingBinType");
+
+                    b.HasData(
+                        new
+                        {
+                            RecyclingBinTypeId = new Guid("8256013c-1472-4dbe-8fc8-aa3111ce70cc"),
+                            Type = "metal"
+                        },
+                        new
+                        {
+                            RecyclingBinTypeId = new Guid("b349f7ef-3955-437e-b5db-53b9bac6e396"),
+                            Type = "glass"
+                        },
+                        new
+                        {
+                            RecyclingBinTypeId = new Guid("9f87a14c-d55c-49fe-849e-4a5213281343"),
+                            Type = "organic"
+                        },
+                        new
+                        {
+                            RecyclingBinTypeId = new Guid("2715642e-824d-4820-a345-0974ac9f4c96"),
+                            Type = "paper"
+                        },
+                        new
+                        {
+                            RecyclingBinTypeId = new Guid("c9b964fd-348c-44f5-ad07-d6883e081951"),
+                            Type = "plastic"
+                        });
                 });
 
             modelBuilder.Entity("GlobalImpact.Models.RecyclingTransaction", b =>
@@ -248,6 +292,22 @@ namespace GlobalImpact.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "d2ad7646-6b77-4074-a470-598c14a18d6d",
+                            ConcurrencyStamp = "5436f0a1-d70a-49be-be9c-43b07f1e11ee",
+                            Name = "client",
+                            NormalizedName = "CLIENT"
+                        },
+                        new
+                        {
+                            Id = "6ecfe286-c000-409e-b88a-05742fcbe65c",
+                            ConcurrencyStamp = "cc01dfce-7a93-4710-bab0-a89ba074b5ad",
+                            Name = "admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -373,6 +433,17 @@ namespace GlobalImpact.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GlobalImpact.Models.RecyclingBin", b =>
+                {
+                    b.HasOne("GlobalImpact.Models.RecyclingBinType", "RecyclingBinType")
+                        .WithMany()
+                        .HasForeignKey("RecyclingBinTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RecyclingBinType");
                 });
 
             modelBuilder.Entity("GlobalImpact.Models.RecyclingTransaction", b =>

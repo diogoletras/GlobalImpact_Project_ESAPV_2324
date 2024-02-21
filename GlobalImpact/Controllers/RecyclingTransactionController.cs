@@ -1,24 +1,24 @@
 ﻿using GlobalImpact.Data;
 using GlobalImpact.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GlobalImpact.Controllers
 {
-	public class RecyclingTransactionController : Controller
+	public class RecyclingTransactionController(ApplicationDbContext db, SignInManager<AppUser> signInManager)
+		: Controller
 	{
-		private readonly ApplicationDbContext _db;
-		private readonly SignInManager<AppUser> _signInManager;
+		private readonly ApplicationDbContext _db = db;
+		private readonly SignInManager<AppUser> _signInManager = signInManager;
 
-		public RecyclingTransactionController(ApplicationDbContext db, SignInManager<AppUser> signInManager)
+		[HttpGet]
+		[Authorize(Roles = "client")]
+		public async Task<IActionResult> Index()
 		{
-			_db = db;
-			_signInManager = signInManager;
-		}
-
-		public IActionResult Index()
-		{
-			return View();
+			var result = await _db.RecyclingBins.ToListAsync();
+			return View(result);
 		}
 	}
 }

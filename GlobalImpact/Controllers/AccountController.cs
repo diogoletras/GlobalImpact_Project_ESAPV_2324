@@ -336,7 +336,7 @@ namespace GlobalImpact.Controllers
                         {
 
                             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                            await _userManager.AddToRoleAsync(user, "Client");
+                            await _userManager.AddToRoleAsync(user, "client");
                             await _signInManager.SignInAsync(user, isPersistent: false);
                             await _signInManager.UpdateExternalAuthenticationTokensAsync(info);
                             var res = await _userManager.ConfirmEmailAsync(user, code);

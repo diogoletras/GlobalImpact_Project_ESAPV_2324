@@ -35,7 +35,7 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <returns> Retorna uma página da lista de Users.</returns>
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         public IActionResult Index()
         {
             var userList = _db.AppUser.ToList();
@@ -62,7 +62,7 @@ namespace GlobalImpact.Controllers
         /// <param name="userId">iD do User.</param>
         /// <returns>Retorna a página de "Editar User".</returns>
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         public IActionResult Edit (string userId)
         {
             var user = _db.AppUser.FirstOrDefault(u => u.Id == userId);
@@ -95,7 +95,7 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <param name="user">User a ser editado.</param>
         /// <returns>Página a página de gestão de Users.</returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(AppUser user)
@@ -167,7 +167,7 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <param name="userId">O iD do user a ser eliminado.</param>
         /// <returns>Retorna a página de Gestão dos Users.</returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult Delete(string userId)
         {
@@ -187,7 +187,7 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <param name="returnUrl">retorna o url da página de gestão dos Users.</param>
         /// <returns>Retorna a página de craição de Users.</returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> Create(string? returnUrl)
         {
@@ -202,7 +202,7 @@ namespace GlobalImpact.Controllers
         /// <param name="registerViewModel">Guarda todos os dados necessários para a criação de um User.</param>
         /// <param name="returnUrl">Retorna o url de página de Gestão de Users.</param>
         /// <returns>Em caso de sucesso retorna a página de gestão de Users; em caso de insucesso mantém na página de criação de User. </returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Create(RegisterViewModel registerViewModel, string? returnUrl = null)
         {

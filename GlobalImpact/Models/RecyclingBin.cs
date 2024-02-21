@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using GlobalImpact.Data;
-using GlobalImpact.Enumerates;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 
 namespace GlobalImpact.Models
@@ -12,8 +13,8 @@ namespace GlobalImpact.Models
         [Key]
         public Guid Id { get; set; }
 
-        [Required]
-        public RecyclingBinType Type { get; set; }
+        [ForeignKey("RecyclingBinTypeId")]
+        public virtual RecyclingBinType RecyclingBinType { get; set; }
 
         [Required]
         public double Latitude { get; set; }
@@ -31,5 +32,8 @@ namespace GlobalImpact.Models
 
         [Required]
         public bool Status { get; set; }
+
+        [NotMapped]
+        public List<RecyclingBinType>? RBTList { get; set; }
     }
 }

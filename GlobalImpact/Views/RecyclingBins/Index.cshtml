@@ -6,7 +6,7 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    @if (User.IsInRole("Admin"))
+    @if (User.IsInRole("admin"))
     {
 
         <h1>Index</h1>
@@ -18,7 +18,7 @@
             <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Type)
+                    @Html.DisplayNameFor(model => model.RecyclingBinType)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Latitude)
@@ -46,7 +46,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Type)
+                        @Html.DisplayFor(modelItem => item.RecyclingBinType)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Latitude)

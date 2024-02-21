@@ -31,14 +31,6 @@ namespace GlobalImpact.Controllers
         /// <returns>Retorno da página principal.</returns>
         public async Task<IActionResult> Index()
         {
-            if (!await _roleManager.RoleExistsAsync("Admin"))
-            {
-                await _roleManager.CreateAsync(new IdentityRole("Admin"));
-            }
-            if (!await _roleManager.RoleExistsAsync("Client"))
-            {
-                await _roleManager.CreateAsync(new IdentityRole("Client"));
-            }
             return View();
         }
 
