@@ -15,7 +15,7 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.RecyclingBinType)
+                        @Html.DisplayNameFor(model => model.RecyclingBinType.Type)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Latitude)
@@ -43,7 +43,7 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.RecyclingBinType)
+                            @Html.DisplayFor(modelItem => item.RecyclingBinType.Type)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Latitude)
@@ -55,18 +55,33 @@
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Capacity)
+                            @Html.DisplayFor(modelItem => item.Capacity) L
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.CurrentCapacity)
+                            @{
+                                float capPercentage = (item.CurrentCapacity * item.Capacity) / 100;
+                            }
+                            @capPercentage %
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Status)
+                            @{
+                                string statusFalse = "Indisponivel";
+                                string statusTrue = "Disponivel";
+                                @if (item.Status)
+                                {
+                                    @statusTrue
+                                }
+                                else
+                                {
+                                    @statusFalse
+                                }
+                            }
                         </td>
                         <td>
-                            @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                            @if (item.Status)
+                            {
+                                <a asp-action="Reciclar" asp-route-binId="@item.RecyclingBinType.RecyclingBinTypeId" class="admin-buttons-btn-grad">Reciclar</a>
+                            }
                         </td>
                     </tr>
                 }

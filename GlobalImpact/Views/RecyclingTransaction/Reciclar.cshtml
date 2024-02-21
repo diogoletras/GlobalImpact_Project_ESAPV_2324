@@ -1,0 +1,87 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+@if (User.Identity.IsAuthenticated)
+{
+    @if (User.IsInRole("client"))
+    {
+        <form method="post" asp-action="Reciclar">
+            <table class="table">
+                <thead>
+                <th>Item</th>
+                <th>Measurement</th>
+                <th></th>
+                </thead>
+                <tr>
+                    <td>Bottle</td>
+                    <td>1 liter</td>
+                    <td>
+                        <select name="recycleQuantity">
+                            <option disabled selected>--Select Quantity--</option>
+                            @{
+                                for (int i = 1; i < 99; i++)
+                                {
+                                
+                                    double capacity = i;
+                                    <option asp-route-recycleQuantity="@i" asp-route-recycleCapacity="@capacity">@i</option>
+                                }
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Container</td>
+                    <td>1 liter</td>
+                    <td>
+                        <select name="recycleQuantity" name="recycleCapacity">
+                            <option disabled selected>--Select Quantity--</option>
+                            @{
+                                for (int i = 1; i < 99; i++)
+                                {
+                                    double capacity = i;
+                                    <option asp-route-recycleQuantity="@i" asp-route-recycleCapacity="@capacity">@i</option>
+                                }
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Bag</td>
+                    <td>100 grams</td>
+                    <td>
+                        <select name="recycleQuantity" name="recycleCapacity">
+                            <option disabled selected>--Select Quantity--</option>
+                            @{
+                                @for (int i = 1; i < 99; i++)
+                                {
+                                    double capacity = i * 0.1;
+                                    <option asp-route-recycleQuantity="@i" asp-route-recycleCapacity="@capacity">@i</option>
+                                }
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Packaging</td>
+                    <td>100 grams</td>
+                    <td>
+                        <select name="recycleQuantity">
+                            <option disabled selected asp-route-binId="@Model">--Select Quantity--</option>
+                            @{
+                                @for (int i = 1; i < 99; i++)
+                                {
+                                    double capacity = i * 0.1;
+                                    <option asp-route-recycleQuantity="@i" asp-route-recycleCapacity="@capacity">@i</option>
+                                }
+                            }
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <button type="submit" class="btn btn-primary btn-lg" asp-route-binId="@Model" asp-route-userName="@User.Identity.Name">Reciclar</button>
+        </form>
+    }
+}

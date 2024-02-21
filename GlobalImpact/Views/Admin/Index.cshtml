@@ -3,7 +3,7 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-	@if (User.IsInRole("Admin"))
+	@if (User.IsInRole("admin"))
 	{
         <div class="row">
             <div class="col-md-12"> <!-- Use 90% of the width -->
