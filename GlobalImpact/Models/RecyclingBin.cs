@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 
 namespace GlobalImpact.Models
 {
-    public class ReciclingBin
+    public class RecyclingBin
     {
         [PersonalData]
         [Key]
         public Guid Id { get; set; }
 
         [Required]
-        public ReciclingBinType Type { get; set; }
+        public RecyclingBinType Type { get; set; }
 
         [Required]
         public double Latitude { get; set; }

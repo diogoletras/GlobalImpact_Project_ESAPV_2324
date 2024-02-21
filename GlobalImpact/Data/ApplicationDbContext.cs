@@ -16,6 +16,7 @@ namespace GlobalImpact.Data
         public DbSet<AppUser> AppUser { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Cart> Carts { get; set; }
-        public DbSet<ReciclingBin> ReciclingBins { get; set; }
+        public DbSet<RecyclingBin> RecyclingBins { get; set; }
+		public DbSet<RecyclingTransaction> RecyclingTransactions { get; set; }
     }
 }

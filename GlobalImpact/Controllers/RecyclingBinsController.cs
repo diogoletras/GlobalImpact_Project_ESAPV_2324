@@ -11,24 +11,24 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GlobalImpact.Controllers
 {
-    public class ReciclingBinsController : Controller
+    public class RecyclingBinsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ReciclingBinsController(ApplicationDbContext context)
+        public RecyclingBinsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: ReciclingBins
+        // GET: RecyclingBins
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ReciclingBins.ToListAsync());
+            return View(await _context.RecyclingBins.ToListAsync());
         }
 
-        // GET: ReciclingBins/Details/5
+        // GET: RecyclingBins/Details/5
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Details(Guid? id)
@@ -38,17 +38,17 @@ namespace GlobalImpact.Controllers
                 return NotFound();
             }
 
-            var reciclingBin = await _context.ReciclingBins
+            var recyclingBin = await _context.RecyclingBins
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (reciclingBin == null)
+            if (recyclingBin == null)
             {
                 return NotFound();
             }
 
-            return View(reciclingBin);
+            return View(recyclingBin);
         }
 
-        // GET: ReciclingBins/Create
+        // GET: RecyclingBins/Create
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Create()
@@ -56,25 +56,25 @@ namespace GlobalImpact.Controllers
             return View();
         }
 
-        // POST: ReciclingBins/Create
+        // POST: RecyclingBins/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Type,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status")] ReciclingBin reciclingBin)
+        public async Task<IActionResult> Create([Bind("Id,Type,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status")] RecyclingBin recyclingBin)
         {
             if (ModelState.IsValid)
             {
-                reciclingBin.Id = Guid.NewGuid();
-                _context.Add(reciclingBin);
+                recyclingBin.Id = Guid.NewGuid();
+                _context.Add(recyclingBin);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(reciclingBin);
+            return View(recyclingBin);
         }
 
-        // GET: ReciclingBins/Edit/5
+        // GET: RecyclingBins/Edit/5
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(Guid? id)
@@ -84,23 +84,23 @@ namespace GlobalImpact.Controllers
                 return NotFound();
             }
 
-            var reciclingBin = await _context.ReciclingBins.FindAsync(id);
-            if (reciclingBin == null)
+            var recyclingBin = await _context.RecyclingBins.FindAsync(id);
+            if (recyclingBin == null)
             {
                 return NotFound();
             }
-            return View(reciclingBin);
+            return View(recyclingBin);
         }
 
-        // POST: ReciclingBins/Edit/5
+        // POST: RecyclingBins/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Type,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status")] ReciclingBin reciclingBin)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Type,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status")] RecyclingBin recyclingBin)
         {
-            if (id != reciclingBin.Id)
+            if (id != recyclingBin.Id)
             {
                 return NotFound();
             }
@@ -109,12 +109,12 @@ namespace GlobalImpact.Controllers
             {
                 try
                 {
-                    _context.Update(reciclingBin);
+                    _context.Update(recyclingBin);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ReciclingBinExists(reciclingBin.Id))
+                    if (!recyclingBinExists(recyclingBin.Id))
                     {
                         return NotFound();
                     }
@@ -125,10 +125,10 @@ namespace GlobalImpact.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(reciclingBin);
+            return View(recyclingBin);
         }
 
-        // GET: ReciclingBins/Delete/5
+        // GET: RecyclingBins/Delete/5
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Delete(Guid? id)
@@ -138,35 +138,35 @@ namespace GlobalImpact.Controllers
                 return NotFound();
             }
 
-            var reciclingBin = await _context.ReciclingBins
+            var recyclingBin = await _context.RecyclingBins
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (reciclingBin == null)
+            if (recyclingBin == null)
             {
                 return NotFound();
             }
 
-            return View(reciclingBin);
+            return View(recyclingBin);
         }
 
-        // POST: ReciclingBins/Delete/5
+        // POST: RecyclingBins/Delete/5
         [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var reciclingBin = await _context.ReciclingBins.FindAsync(id);
-            if (reciclingBin != null)
+            var recyclingBin = await _context.RecyclingBins.FindAsync(id);
+            if (recyclingBin != null)
             {
-                _context.ReciclingBins.Remove(reciclingBin);
+                _context.RecyclingBins.Remove(recyclingBin);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ReciclingBinExists(Guid id)
+        private bool recyclingBinExists(Guid id)
         {
-            return _context.ReciclingBins.Any(e => e.Id == id);
+            return _context.RecyclingBins.Any(e => e.Id == id);
         }
     }
 }

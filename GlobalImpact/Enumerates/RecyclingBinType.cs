@@ -1,6 +1,6 @@
 ﻿namespace GlobalImpact.Enumerates
 {
-    public enum ReciclingBinType
+    public enum RecyclingBinType
     {
         Paper,
         Glass,
