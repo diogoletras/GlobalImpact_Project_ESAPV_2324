@@ -35,5 +35,6 @@ namespace GlobalImpact.Models
 
         [NotMapped]
         public List<RecyclingBinType>? RBTList { get; set; }
+
     }
 }

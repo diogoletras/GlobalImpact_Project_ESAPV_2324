@@ -2,6 +2,7 @@
 using GlobalImpact.Models;
 using GlobalImpact.Utils;
 using GlobalImpact.ViewModels.Account;
+using GlobalImpact.ViewModels.NewFolder;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -251,6 +252,69 @@ namespace GlobalImpact.Controllers
                 }
             }
             return View(registerViewModel);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public IActionResult RecyclingBinList()
+        {
+            var recyclingList = _db.RecyclingBins.ToList();
+            var recyclingBinTypeList = _db.RecyclingBinType.ToList();
+
+            foreach (var recyclingBin in recyclingList)
+            {
+                var rbType = recyclingBinTypeList.FirstOrDefault(r => r.RecyclingBinTypeId == recyclingBin.RecyclingBinType.RecyclingBinTypeId);
+                if (rbType == null)
+                {
+                    rbType.Type = "None";
+                }
+            }
+
+            return View(recyclingList);
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpGet]
+        public async Task<IActionResult> CreateRecyclingBin()
+        {
+            CreateRecyclingBinViewModel model = new CreateRecyclingBinViewModel();
+
+            var recyclingBinTypeList = _db.RecyclingBinType.ToList();
+
+            IEnumerable<SelectListItem>? RBTList = recyclingBinTypeList.Select(u => new SelectListItem
+            {
+                Text = u.Type,
+                Value = u.RecyclingBinTypeId.ToString()
+            });
+
+            model.RBTList = RBTList;
+
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public async Task<IActionResult> CreateRecyclingBin(CreateRecyclingBinViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var recyclingBin = new RecyclingBin
+                {
+                    Latitude = model.Latitude,
+                    Longitude = model.Longitude,
+                    RecyclingBinType = _db.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId.ToString() == model.Type[0].ToString()),
+                    Description = model.Description,
+                    Capacity = model.Capacity,
+                    CurrentCapacity = model.CurrentCapacity,
+                    Status = model.Status
+                };
+                var result = _db.RecyclingBins.Add(recyclingBin);
+                _db.SaveChanges();
+                return RedirectToAction("RecyclingBinList", "Admin");
+            }
+
+            return View(model);
         }
     }
 }

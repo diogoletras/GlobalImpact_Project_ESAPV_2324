@@ -3,6 +3,7 @@ using GlobalImpact.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using GlobalImpact.ViewModels.NewFolder;
 
 namespace GlobalImpact.Data
 {
@@ -39,5 +40,6 @@ namespace GlobalImpact.Data
                 new IdentityRole {Id = Guid.NewGuid().ToString(), Name = RoleType.admin.ToString() , NormalizedName = RoleType.admin.ToString().ToUpper(), ConcurrencyStamp = Guid.NewGuid().ToString()}
             );
         }
+    public DbSet<GlobalImpact.ViewModels.NewFolder.CreateRecyclingBinViewModel> CreateRecyclingBinViewModel { get; set; } = default!;
     }
 }
