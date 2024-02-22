@@ -28,18 +28,19 @@ namespace GlobalImpact.Controllers
 		}
 
         [HttpGet]
-        [Authorize(Roles = "client")]
-        public IActionResult Reciclar(Guid? binid, string? type)
+        //[Authorize(Roles = "client")]
+        public IActionResult Reciclar(Guid? binid, string? type , string? userName)
         {
             List<object> resList= new List<object>();
             resList.Add(binid);
             resList.Add(type);
+            resList.Add(userName);
 
             return View(resList);
         }
 
         [HttpPost]
-        [Authorize(Roles = "client")]
+        //[Authorize(Roles = "client")]
         public async Task<IActionResult> Reciclar(int?[] recycleQuantity, double?[]recycleCapacity, Guid? binId, string? type, string? userName)
         {
             if (ModelState.IsValid)

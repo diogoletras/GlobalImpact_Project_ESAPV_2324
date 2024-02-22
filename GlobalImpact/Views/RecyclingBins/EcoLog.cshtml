@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "Login Ecoponto";
+}
+
+<h2>EcoLog</h2>
+<h5>Ecoponto Desligado</h5>
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <h2 class="text-center">Insira o ID do Ecoponto</h2>
+            <form method="get" asp-action="EcoLogin">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="idInput" name="idInput" placeholder="Insira o ID">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submeter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
