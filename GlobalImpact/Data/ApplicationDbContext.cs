@@ -29,9 +29,7 @@ namespace GlobalImpact.Data
 
 
             builder.Entity<RecyclingBinType>().HasData(
-                new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.metal.ToString() },
                 new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.glass.ToString() },
-                new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.organic.ToString() },
                 new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.paper.ToString() },
                 new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.plastic.ToString() }
             );

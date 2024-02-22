@@ -4,9 +4,6 @@
     {
         paper,
         glass,
-        plastic,
-        organic,
-        metal,
-        other
+        plastic
     }
 }

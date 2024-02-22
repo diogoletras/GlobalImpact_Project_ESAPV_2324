@@ -8,80 +8,260 @@
 {
     @if (User.IsInRole("client"))
     {
+        
         <form method="post" asp-action="Reciclar">
-            <table class="table">
-                <thead>
-                <th>Item</th>
-                <th>Measurement</th>
-                <th></th>
-                </thead>
-                <tr>
-                    <td>Bottle</td>
-                    <td>1 liter</td>
-                    <td>
-                        <select name="recycleQuantity">
-                            <option disabled selected>--Select Quantity--</option>
-                            @{
-                                for (int i = 1; i < 99; i++)
-                                {
-                                
-                                    double capacity = i;
-                                    <option asp-route-recycleQuantity="@i" asp-route-recycleCapacity="@capacity">@i</option>
+            @if (Model[1].Equals("paper"))
+            {
+                <h1>Paper</h1>
+                <table class="table">
+                    <thead>
+                    <th>Item</th>
+                    <th>Measurement</th>
+                    <th></th>
+                    </thead>
+                    <tr>
+                        <td>Card Box</td>
+                        <td>200 Grams</td>
+                        <td>
+                            <select name="recycleQuantity" onchange="updateRecycleCapacity(this)">
+                                <option disabled selected>--Select Quantity--</option>
+                                @{
+                                    for (int i = 1; i < 99; i++)
+                                    {
+
+                                        double capacity = i*0.2;
+                                        <option asp-route-recycleQuantity="@i" data-recycleCapacity="@capacity">@i </option>
+                                    }
                                 }
-                            }
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Container</td>
-                    <td>1 liter</td>
-                    <td>
-                        <select name="recycleQuantity" name="recycleCapacity">
-                            <option disabled selected>--Select Quantity--</option>
-                            @{
-                                for (int i = 1; i < 99; i++)
-                                {
-                                    double capacity = i;
-                                    <option asp-route-recycleQuantity="@i" asp-route-recycleCapacity="@capacity">@i</option>
+                            </select>
+                            <input id="recycleCapacity" type="hidden" name="recycleCapacity" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Book</td>
+                        <td>700 Grams</td>
+                        <td>
+                            <select name="recycleQuantity" onchange="updateRecycleCapacity(this)">
+                                <option disabled selected>--Select Quantity--</option>
+                                @{
+                                    for (int i = 1; i < 99; i++)
+                                    {
+                                        double capacity = i*0.7;
+                                        <option asp-route-recycleQuantity="@i" data-recycleCapacity="@capacity">@i</option>
+                                    }
                                 }
-                            }
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Bag</td>
-                    <td>100 grams</td>
-                    <td>
-                        <select name="recycleQuantity" name="recycleCapacity">
-                            <option disabled selected>--Select Quantity--</option>
-                            @{
-                                @for (int i = 1; i < 99; i++)
-                                {
-                                    double capacity = i * 0.1;
-                                    <option asp-route-recycleQuantity="@i" asp-route-recycleCapacity="@capacity">@i</option>
+                            </select>
+                            <input id="recycleCapacity" type="hidden" name="recycleCapacity" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Paper Bag</td>
+                        <td>100 grams</td>
+                        <td>
+                            <select name="recycleQuantity" onchange="updateRecycleCapacity(this)">
+                                <option disabled selected>--Select Quantity--</option>
+                                @{
+                                    @for (int i = 1; i < 99; i++)
+                                    {
+                                        double capacity = i * 0.1;
+                                        <option asp-route-recycleQuantity="@i" data-recycleCapacity="@capacity">@i</option>
+                                    }
                                 }
-                            }
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Packaging</td>
-                    <td>100 grams</td>
-                    <td>
-                        <select name="recycleQuantity">
-                            <option disabled selected asp-route-binId="@Model">--Select Quantity--</option>
-                            @{
-                                @for (int i = 1; i < 99; i++)
-                                {
-                                    double capacity = i * 0.1;
-                                    <option asp-route-recycleQuantity="@i" asp-route-recycleCapacity="@capacity">@i</option>
+                            </select>
+                            <input id="recycleCapacity" type="hidden" name="recycleCapacity" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Postcard</td>
+                        <td>100 grams</td>
+                        <td>
+                            <select name="recycleQuantity" onchange="updateRecycleCapacity(this)">
+                                <option disabled selected>--Select Quantity--</option>
+                                @{
+                                    @for (int i = 1; i < 99; i++)
+                                    {
+                                        double capacity = i * 0.1;
+                                        <option asp-route-recycleQuantity="@i" data-recycleCapacity="@capacity">@i</option>
+                                    }
                                 }
-                            }
-                        </select>
-                    </td>
-                </tr>
-            </table>
-            <button type="submit" class="btn btn-primary btn-lg" asp-route-binId="@Model" asp-route-userName="@User.Identity.Name">Reciclar</button>
+                            </select>
+                            <input id="recycleCapacity" type="hidden" name="recycleCapacity" />
+                        </td>
+                    </tr>
+                </table>
+            }
+            @if (Model[1].Equals("glass"))
+            {
+                <h1>Glass</h1>
+                <table class="table">
+                    <thead>
+                    <th>Item</th>
+                    <th>Measurement</th>
+                    <th></th>
+                    </thead>
+                    <tr>
+                        <td>Water Bottle</td>
+                        <td>400 grams </td>
+                        <td>
+                            <select name="recycleQuantity" onchange="updateRecycleCapacity(this)">
+                                <option disabled selected>--Select Quantity--</option>
+                                @{
+                                    for (int i = 1; i < 99; i++)
+                                    {
+
+                                        double capacity = i*0.4;
+                                        <option asp-route-recycleQuantity="@i" data-recycleCapacity="@capacity">@i </option>
+                                    }
+                                }
+                            </select>
+                            <input id="recycleCapacity" type="hidden" name="recycleCapacity" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Beer</td>
+                        <td>200 Centiliters</td>
+                        <td>
+                            <select name="recycleQuantity" onchange="updateRecycleCapacity(this)">
+                                <option disabled selected>--Select Quantity--</option>
+                                @{
+                                    for (int i = 1; i < 99; i++)
+                                    {
+                                        double capacity = i*0.2;
+                                        <option asp-route-recycleQuantity="@i" data-recycleCapacity="@capacity">@i</option>
+                                    }
+                                }
+                            </select>
+                            <input id="recycleCapacity" type="hidden" name="recycleCapacity" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cup</td>
+                        <td>100 grams</td>
+                        <td>
+                            <select name="recycleQuantity" onchange="updateRecycleCapacity(this)">
+                                <option disabled selected>--Select Quantity--</option>
+                                @{
+                                    @for (int i = 1; i < 99; i++)
+                                    {
+                                        double capacity = i * 0.1;
+                                        <option asp-route-recycleQuantity="@i" data-recycleCapacity="@capacity">@i</option>
+                                    }
+                                }
+                            </select>
+                            <input id="recycleCapacity" type="hidden" name="recycleCapacity" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Jug</td>
+                        <td>300 grams</td>
+                        <td>
+                            <select name="recycleQuantity" onchange="updateRecycleCapacity(this)">
+                                <option disabled selected>--Select Quantity--</option>
+                                @{
+                                    @for (int i = 1; i < 99; i++)
+                                    {
+                                        double capacity = i * 0.3;
+                                        <option asp-route-recycleQuantity="@i" data-recycleCapacity="@capacity">@i</option>
+                                    }
+                                }
+                            </select>
+                            <input id="recycleCapacity" type="hidden" name="recycleCapacity" />
+                        </td>
+                    </tr>
+                </table>
+            }
+            
+            @if (Model[1].Equals("plastic"))
+            {
+                <h1>Plastic</h1>
+                <table class="table">
+                    <thead>
+                    <th>Item</th>
+                    <th>Measurement</th>
+                    <th></th>
+                    </thead>
+                    <tr>
+                        <td>Water Bottle</td>
+                        <td>100 grams</td>
+                        <td>
+                            <select name="recycleQuantity" onchange="updateRecycleCapacity(this)">
+                                <option disabled selected>--Select Quantity--</option>
+                                @{
+                                    for (int i = 1; i < 99; i++)
+                                    {
+
+                                        double capacity = i;
+                                        <option asp-route-recycleQuantity="@i" data-recycleCapacity="@capacity">@i </option>
+                                    }
+                                }
+                            </select>
+                            <input id="recycleCapacity" type="hidden" name="recycleCapacity" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bag</td>
+                        <td>50 grams</td>
+                        <td>
+                            <select name="recycleQuantity" onchange="updateRecycleCapacity(this)">
+                                <option disabled selected>--Select Quantity--</option>
+                                @{
+                                    for (int i = 1; i < 99; i++)
+                                    {
+                                        double capacity = i*0.05;
+                                        <option asp-route-recycleQuantity="@i" data-recycleCapacity="@capacity">@i</option>
+                                    }
+                                }
+                            </select>
+                            <input id="recycleCapacity" type="hidden" name="recycleCapacity" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Container</td>
+                        <td>100 grams</td>
+                        <td>
+                            <select name="recycleQuantity" onchange="updateRecycleCapacity(this)">
+                                <option disabled selected>--Select Quantity--</option>
+                                @{
+                                    @for (int i = 1; i < 99; i++)
+                                    {
+                                        double capacity = i * 0.1;
+                                        <option asp-route-recycleQuantity="@i" data-recycleCapacity="@capacity">@i</option>
+                                    }
+                                }
+                            </select>
+                            <input id="recycleCapacity" type="hidden" name="recycleCapacity" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Trash Bag</td>
+                        <td>70 grams</td>
+                        <td>
+                            <select name="recycleQuantity" onchange="updateRecycleCapacity(this)">
+                                <option disabled selected>--Select Quantity--</option>
+                                @{
+                                    @for (int i = 1; i < 99; i++)
+                                    {
+                                        double capacity = i * 0.07;
+                                        <option asp-route-recycleQuantity="@i" data-recycleCapacity="@capacity">@i</option>
+                                    }
+                                }
+                            </select>
+                            <input id="recycleCapacity" type="hidden" name="recycleCapacity" />
+                        </td>
+                    </tr>
+                </table>
+            }
+            <button type="submit" class="btn btn-primary btn-lg" asp-route-binId="@Model[0]" asp-route-type="@Model[1]" asp-route-userName="@User.Identity.Name">Reciclar</button>
         </form>
     }
 }
+
+<script>
+    function updateRecycleCapacity(recycleQuantitySelect) {
+        var selectedOption = recycleQuantitySelect.options[recycleQuantitySelect.selectedIndex];
+        var recycleCapacity = selectedOption.getAttribute('data-recycleCapacity');
+        console.log(recycleCapacity);
+        console.log(selectedOption);
+        recycleQuantitySelect.nextElementSibling.value = recycleCapacity;
+    }
+</script>

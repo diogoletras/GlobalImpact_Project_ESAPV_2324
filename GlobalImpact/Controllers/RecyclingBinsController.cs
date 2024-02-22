@@ -58,12 +58,9 @@ namespace GlobalImpact.Controllers
             {
                 RBTList = new List<RecyclingBinType>
                 {
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.organic.ToString() },
                     new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.paper.ToString() },
                     new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.plastic.ToString() },
                     new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.glass.ToString() },
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.metal.ToString() },
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.other.ToString() },
                 }
             };
             return View(res);
@@ -88,12 +85,9 @@ namespace GlobalImpact.Controllers
             {
                 RBTList = new List<RecyclingBinType>
                 {
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.organic.ToString() },
                     new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.paper.ToString() },
                     new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.plastic.ToString() },
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.glass.ToString() },
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.metal.ToString() },
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.other.ToString() },
+                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.glass.ToString() }
                 }
             };
 
