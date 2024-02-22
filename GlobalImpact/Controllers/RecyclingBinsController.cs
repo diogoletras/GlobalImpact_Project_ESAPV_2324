@@ -9,20 +9,78 @@ using GlobalImpact.Data;
 using GlobalImpact.Enumerates;
 using GlobalImpact.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace GlobalImpact.Controllers
 {
     public class RecyclingBinsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public RecyclingBinsController(ApplicationDbContext context)
+        public RecyclingBinsController(ApplicationDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        // GET: RecyclingBins
-        [Authorize(Roles = "admin")]
+		[HttpGet]
+		public async Task<IActionResult> EcoLog()
+        {
+			return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EcoLogin(string? idInput)
+        {
+
+            if (idInput != null && Guid.TryParse(idInput, out Guid id))
+            {
+                // Recupera o ecoponto com o ID correspondente
+                var ecoponto = await _context.RecyclingBins.FirstOrDefaultAsync(e => e.Id == id);
+
+                // Verifica se o ecoponto foi encontrado
+                if (ecoponto != null)
+                {
+                    // Passa o ecoponto encontrado para a view como modelo
+                    return View(ecoponto);
+                }
+                else
+                {
+                    // Se o ecoponto não foi encontrado, você pode exibir uma mensagem de erro ou redirecionar para uma página de erro
+                    return NotFound(); // Retorna uma página 404
+                }
+            }
+            else
+            {
+                // Se o ID não pôde ser convertido para Guid ou se nenhum ID foi enviado, você pode retornar uma view vazia ou redirecionar para outra página
+                return RedirectToAction("EcoLog"); // Retorna a view EcoLog sem nenhum modelo
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EcoLogin(Guid? binId, string? uniqueCode)
+        {
+            if (uniqueCode != null && binId != null )
+            {
+                var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UniqueCode == uniqueCode);
+                var ecoponto = await _context.RecyclingBins.FirstOrDefaultAsync(e => e.Id == binId);
+
+                if (user != null)
+                {
+                    return RedirectToAction("Reciclar", "RecyclingTransaction", new { binid = binId.ToString(), type = ecoponto.Description, userName = user.UserName} );
+                }
+                else
+                {
+                    return View(ecoponto);
+                }
+            }
+            return RedirectToAction("EcoLogin" , new { idInput = binId.ToString()});
+        }
+
+
+		// GET: RecyclingBins
+	    [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {

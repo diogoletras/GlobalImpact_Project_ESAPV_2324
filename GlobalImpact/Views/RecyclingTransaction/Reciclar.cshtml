@@ -4,11 +4,15 @@
 @{
 
 }
-@if (User.Identity.IsAuthenticated)
+
+@*
+    @if (User.Identity.IsAuthenticated)
 {
     @if (User.IsInRole("client"))
     {
-        
+*@
+
+        <h2>@Model[2]</h2>
         <form method="post" asp-action="Reciclar">
             @if (Model[1].Equals("paper"))
             {
@@ -251,10 +255,12 @@
                     </tr>
                 </table>
             }
-            <button type="submit" class="btn btn-primary btn-lg" asp-route-binId="@Model[0]" asp-route-type="@Model[1]" asp-route-userName="@User.Identity.Name">Reciclar</button>
+            <button type="submit" class="btn btn-primary btn-lg" asp-route-binId="@Model[0]" asp-route-type="@Model[1]" asp-route-userName="@Model[2]">Reciclar</button>
         </form>
+@*
     }
-}
+    }
+*@
 
 <script>
     function updateRecycleCapacity(recycleQuantitySelect) {

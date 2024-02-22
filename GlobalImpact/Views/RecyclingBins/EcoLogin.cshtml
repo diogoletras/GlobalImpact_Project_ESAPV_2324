@@ -1,0 +1,46 @@
+﻿@model GlobalImpact.Models.RecyclingBin
+
+@{
+    ViewData["Title"] = "EcoLogin";
+}
+
+<div class="container">
+    <h1 class="display-4 text-center mb-5">EcoLogin</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0 rounded-3">
+                    <div class="card-header bg-primary text-white py-3" style="background-color: #21262B !important;">
+                    <h3 class="card-title text-center">@Html.DisplayNameFor(model => model.Description)</h3>
+                    <h3 class="card-title text-center">@Html.DisplayFor(model => model.Description)</h3>
+                    </div>
+                    <div class="card-body p-4" style="background-color: #fffbc9;">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <i class="fas fa-birthday-cake fa-3x"></i> <h6 class="mt-3">Capacidade Total</h6>
+                            <p>@Html.DisplayFor(model => model.Capacity)</p>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <i class="fas fa-star fa-3x"></i>
+                            <h6 class="mt-3">Capacidade Atual</h6>
+                            <p>@Html.DisplayFor(model => model.CurrentCapacity)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<h1 class="display-4 text-center mb-5">...</h1>
+<h2 class="text-center">Insira o Codigo de Recicalgem</h2>
+
+<form method="post" asp-action="EcoLogin">
+    <div class="form-group">
+        <input type="text" class="form-control" id="uniqueCode" name="uniqueCode" placeholder="Codigo de Reciclagem">
+    </div>
+    <div class="form-group">
+        <input type="hidden" name="binId" value="@Model.Id" />
+    </div>
+    <div class="text-center">
+        <button type="submit"  class="btn btn-primary">Submeter</button>
+    </div>
+</form>
