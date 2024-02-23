@@ -87,9 +87,11 @@ namespace GlobalImpact.Controllers
                 }
                 else
                 {
+                    ViewData["Invalido"] = "Codigo Inserido não pertencence a nenhum utilizador !!";
                     return View(ecoponto);
                 }
             }
+
             return RedirectToAction("EcoLogin" , new { idInput = binId.ToString()});
         }
 
