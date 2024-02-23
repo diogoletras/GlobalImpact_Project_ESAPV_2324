@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GlobalImpact.Data;
 using GlobalImpact.Enumerates;
 using GlobalImpact.Models;
+using GlobalImpact.ViewModels.NewFolder;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
@@ -31,10 +32,9 @@ namespace GlobalImpact.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EcoLogin(string? idInput)
+        public async Task<IActionResult> EcoLogin(EcoLogViewModel model)
         {
-
-            if (idInput != null && Guid.TryParse(idInput, out Guid id))
+            if (model.IdInput != null && Guid.TryParse(model.IdInput, out Guid id))
             {
                 // Recupera o ecoponto com o ID correspondente
                 var ecoponto = await _context.RecyclingBins.FirstOrDefaultAsync(e => e.Id == id);
@@ -42,8 +42,23 @@ namespace GlobalImpact.Controllers
                 // Verifica se o ecoponto foi encontrado
                 if (ecoponto != null)
                 {
-                    // Passa o ecoponto encontrado para a view como modelo
-                    return View(ecoponto);
+                    if (ecoponto.Status)
+                    {
+                        ecoponto.Status = false;
+                        _context.RecyclingBins.Update(ecoponto);
+                        _context.SaveChanges();
+                        ModelState.AddModelError("IdInput", "Recycling bin is already in use");
+                        return RedirectToAction("EcoLog", "RecyclingBins");
+                        
+                    }
+                    else
+                    {
+                        ecoponto.Status = true;
+                        _context.RecyclingBins.Update(ecoponto);
+                        _context.SaveChanges();
+                        return View(ecoponto);
+                    }
+                        
                 }
                 else
                 {

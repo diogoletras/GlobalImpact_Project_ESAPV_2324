@@ -1,9 +1,10 @@
-﻿
+﻿@model GlobalImpact.ViewModels.NewFolder.EcoLogViewModel
 @{
     ViewData["Title"] = "Login Ecoponto";
 }
 
 <h2>EcoLog</h2>
+
 <h5>Ecoponto Desligado</h5>
 
 <div class="container">
@@ -12,7 +13,8 @@
             <h2 class="text-center">Insira o ID do Ecoponto</h2>
             <form method="get" asp-action="EcoLogin">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="idInput" name="idInput" placeholder="Insira o ID">
+                    <input asp-for="IdInput" class="form-control" />
+                    <span asp-validation-for="IdInput" class="text-danger"></span>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Submeter</button>
