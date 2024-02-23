@@ -25,6 +25,7 @@ namespace GlobalImpact.ViewModels.Account
 		public int Age { get; set; }
 
         [Display(Name = "NIF")]
+        [RegularExpression(@"^\d{9}$", ErrorMessage = "O NIF deve conter exatamente 9 dígitos.")]
         public int? NIF { get; set; }
     }
 }

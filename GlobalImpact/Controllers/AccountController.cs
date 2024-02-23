@@ -117,7 +117,8 @@ namespace GlobalImpact.Controllers
                         return RedirectToAction("EmailSending", "Account");
                     }
 
-                    ModelState.AddModelError("Email", "User could not be created. Password not unique enought");
+                    ModelState.AddModelError("Password", "Password not unique enougth: \n• max length 6 characters  \n• 1 special character \n• minimun 1 lower case and upper case \n• 1 numeric");
+                    ModelState.AddModelError("ConfirmPassword", "User could not be created.");
                 }
             }
             return View(registerViewModel);
@@ -311,7 +312,7 @@ namespace GlobalImpact.Controllers
 
                 if (isUserNameExists)
                 {
-                    ModelState.AddModelError("UserName", "UserName already exists");
+                    ModelState.AddModelError("Name", "UserName already exists");
                     return View(externalLoginViewModel);
                 }
                 else
