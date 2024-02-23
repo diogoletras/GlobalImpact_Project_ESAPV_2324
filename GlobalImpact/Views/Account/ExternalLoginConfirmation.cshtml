@@ -6,7 +6,6 @@
 	<div class="form-register">
 		<form asp-controller="Account" asp-action="ExternalLoginConfirmation" method="post" role="form" asp-route-returnurl="@ViewData["ReturnUrl"]">
 			<hr />
-			<div asp-validation-summary="All" class="text-danger"></div>
 			<p>
 				You've successfully authenticated with <strong>@ViewData["ProviderDisplayName"]</strong>.
 				Please enter a user name for this site below and click the Register button to finish

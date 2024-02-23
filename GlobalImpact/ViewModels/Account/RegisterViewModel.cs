@@ -7,6 +7,7 @@ namespace GlobalImpact.ViewModels.Account
     {
         [EmailAddress]
         [Display(Name = "Email")]
+        [RegularExpression(@"[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$", ErrorMessage = "O Email deve conter ter o seguinte formato: exemplo@globalimpact.com")]
         public string Email { get; set; }
 
         [Required]
