@@ -27,11 +27,11 @@ namespace GlobalImpact.Models
 
         [Display(Name = "Capacidade Total")]
         [Required]
-        public int Capacity { get; set; }
+        public double Capacity { get; set; }
 
         [Display(Name = "Capacidade Atual")]
         [Required]
-        public int CurrentCapacity { get; set; }
+        public double CurrentCapacity { get; set; }
 
         [Display(Name = "Disponivel ?")]
         [Required]
