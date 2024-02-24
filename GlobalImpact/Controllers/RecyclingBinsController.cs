@@ -42,13 +42,13 @@ namespace GlobalImpact.Controllers
                 // Verifica se o ecoponto foi encontrado
                 if (ecoponto != null)
                 {
-                    if (ecoponto.Status)
+                    if (ecoponto.Status || ecoponto.Capacity <= ecoponto.CurrentCapacity)
                     {
                         ecoponto.Status = false;
                         _context.RecyclingBins.Update(ecoponto);
                         _context.SaveChanges();
                         ModelState.AddModelError("IdInput", "Recycling bin is already in use");
-                        return RedirectToAction("EcoLog", "RecyclingBins");
+                        return RedirectToAction("EcoLogin", "RecyclingBins", new {model = model});
                         
                     }
                     else
@@ -80,18 +80,26 @@ namespace GlobalImpact.Controllers
             {
                 var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UniqueCode == uniqueCode);
                 var ecoponto = await _context.RecyclingBins.FirstOrDefaultAsync(e => e.Id == binId);
+                var recyclingList = _context.RecyclingBins.ToList();
+                var recyclingBinTypeList = _context.RecyclingBinType.ToList();
 
                 if (user != null)
                 {
-                    return RedirectToAction("Reciclar", "RecyclingTransaction", new { binid = binId.ToString(), type = ecoponto.Description, userName = user.UserName} );
+                    foreach (var recyclingBin in recyclingList)
+                    {
+                        if (recyclingBin.Id.Equals(binId))
+                        {
+                            var ecoType = recyclingBinTypeList.FirstOrDefault(r => r.RecyclingBinTypeId == recyclingBin.RecyclingBinType.RecyclingBinTypeId);
+                            return RedirectToAction("Reciclar", "RecyclingTransaction", new { binid = binId.ToString(), type = ecoType.Type, userName = user.UserName });
+                        }
+                    }
+                    
                 }
                 else
                 {
-                    ViewData["Invalido"] = "Codigo Inserido não pertencence a nenhum utilizador !!";
                     return View(ecoponto);
                 }
             }
-
             return RedirectToAction("EcoLogin" , new { idInput = binId.ToString()});
         }
 
