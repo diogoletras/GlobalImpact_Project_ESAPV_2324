@@ -80,10 +80,20 @@ namespace GlobalImpact.Controllers
             {
                 var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UniqueCode == uniqueCode);
                 var ecoponto = await _context.RecyclingBins.FirstOrDefaultAsync(e => e.Id == binId);
+                var recyclingList = _context.RecyclingBins.ToList();
+                var recyclingBinTypeList = _context.RecyclingBinType.ToList();
 
                 if (user != null)
                 {
-                    return RedirectToAction("Reciclar", "RecyclingTransaction", new { binid = binId.ToString(), type = ecoponto.Description, userName = user.UserName} );
+                    foreach (var recyclingBin in recyclingList)
+                    {
+                        if (recyclingBin.Id.Equals(binId))
+                        {
+                            var ecoType = recyclingBinTypeList.FirstOrDefault(r => r.RecyclingBinTypeId == recyclingBin.RecyclingBinType.RecyclingBinTypeId);
+                            return RedirectToAction("Reciclar", "RecyclingTransaction", new { binid = binId.ToString(), type = ecoType.Type, userName = user.UserName });
+                        }
+                    }
+                    
                 }
                 else
                 {

@@ -16,6 +16,9 @@ namespace GlobalImpact.Models
         [ForeignKey("RecyclingBinTypeId")]
         public virtual RecyclingBinType RecyclingBinType { get; set; }
 
+        [NotMapped]
+        public int RecyclingBTId { get; set; }
+
         [Required]
         public double Latitude { get; set; }
         [Required]
