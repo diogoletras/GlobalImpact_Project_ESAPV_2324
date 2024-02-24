@@ -188,28 +188,37 @@ namespace GlobalImpact.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByNameAsync(loginViewModel.UserName);
-                if (user.EmailConfirmed)
+                if(user != null)
                 {
-                    var result = await _signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.RememberMe, lockoutOnFailure: true);
-                    if (result.Succeeded)
+                    if (user.EmailConfirmed)
                     {
-                        return RedirectToAction("Index", "Home");
-                    }
-                    if (result.IsLockedOut)
-                    {
-                        return View("Lockout");
+                        var result = await _signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.RememberMe, lockoutOnFailure: true);
+                        if (result.Succeeded)
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                        if (result.IsLockedOut)
+                        {
+                            return View("Lockout");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                            return View(loginViewModel);
+                        }
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        ModelState.AddModelError(string.Empty, "Email is not Confirmed.");
                         return View(loginViewModel);
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Email is not Confirmed.");
+                    ModelState.AddModelError(string.Empty, "Utilizador não existe");
                     return View(loginViewModel);
                 }
+               
 
             }
             return View(loginViewModel);
