@@ -1,1 +1,1 @@
-search_result['147']=["topic_0000000000000043.html","GlobalImpact.Interfaces Namespace",""];
+search_result['147']=["topic_0000000000000034.html","RecyclingBinsController.Details Method","Função HttpGet que retorna o detalhes de um ecoponto."];

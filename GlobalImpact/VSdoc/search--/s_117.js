@@ -1,1 +1,1 @@
-search_result['117']=["topic_000000000000002E_overloads--.html","ReciclingBinsController.Create Method",""];
+search_result['117']=["topic_000000000000002A_events--.html","RecyclingBinsController Events",""];

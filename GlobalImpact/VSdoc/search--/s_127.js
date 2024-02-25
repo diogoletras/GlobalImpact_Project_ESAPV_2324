@@ -1,1 +1,1 @@
-search_result['127']=["topic_0000000000000034.html","ReciclingBinsController.DeleteConfirmed Method",""];
+search_result['127']=["topic_000000000000002B_props--.html","RecyclingBinsController Properties",""];

@@ -1,1 +1,1 @@
-search_result['370']=["topic_0000000000000096.html","ResetPasswordViewModel.UserId Property",""];
+search_result['370']=["topic_000000000000007B_methods--.html","ForgotPasswordViewModel Methods",""];

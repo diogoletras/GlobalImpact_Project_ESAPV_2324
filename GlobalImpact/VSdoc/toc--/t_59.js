@@ -1,1 +1,1 @@
-c['59']=[['60',"ReciclingBinsController Constructor","topic_000000000000002C.html",0],['61',"Methods","topic_000000000000002B_methods--.html",1]];
+c['59']=[['60',"Edit(Nullable\u003cGuid\u003e) Method","topic_000000000000002A.html",0],['61',"Edit(Guid, Product) Method","topic_000000000000002B.html",0]];

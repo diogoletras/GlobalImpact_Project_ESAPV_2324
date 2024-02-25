@@ -1,1 +1,1 @@
-search_result['118']=["topic_000000000000002F.html","ReciclingBinsController.Create  Method",""];
+search_result['118']=["topic_000000000000002A_methods--.html","RecyclingBinsController Methods",""];

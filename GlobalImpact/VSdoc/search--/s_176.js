@@ -1,1 +1,1 @@
-search_result['176']=["topic_000000000000004C.html","update1 Class",""];
+search_result['176']=["topic_000000000000003E.html","RecyclingTransactionController.Reciclar Method","Função HTTPGet retorna a pagina do processo de reciclagem"];

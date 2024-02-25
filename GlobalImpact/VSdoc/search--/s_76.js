@@ -1,1 +1,1 @@
-search_result['76']=["topic_000000000000001F.html","HomeController.Privacy Method",""];
+search_result['76']=["topic_000000000000001E.html","AdminController.CreateRecyclingBin (CreateRecyclingBinViewModel) Method",""];

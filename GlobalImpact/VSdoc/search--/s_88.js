@@ -1,1 +1,1 @@
-search_result['88']=["topic_0000000000000021_vars--.html","ProductsController Fields",""];
+search_result['88']=["topic_0000000000000020_props--.html","ProductsController Properties",""];

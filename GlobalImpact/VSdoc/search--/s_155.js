@@ -1,1 +1,1 @@
-search_result['155']=["topic_0000000000000045_attached_props--.html","IEmailSender Attached Properties",""];
+search_result['155']=["topic_0000000000000036.html","RecyclingBinsController.Create (RecyclingBin) Method","Função HttpPost que retorna a página do ecoponto criado."];

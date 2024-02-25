@@ -1,1 +1,1 @@
-search_result['122']=["topic_0000000000000031.html","ReciclingBinsController.Edit (Nullable\u0026lt;Guid\u0026gt;) Method",""];
+search_result['122']=["topic_000000000000002B.html","ProductsController.Edit (Guid, Product) Method","Função HttpPost para retornar a página da lista de produtos quando o valor ja tiver sido editado."];
