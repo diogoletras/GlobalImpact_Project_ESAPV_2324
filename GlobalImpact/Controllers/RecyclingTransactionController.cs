@@ -46,7 +46,7 @@ namespace GlobalImpact.Controllers
                 },
                 new RecItems
                 {
-                    Tipo = "Organic",
+                    Tipo = "Other",
                     Nome = "Chocolate",
                     Peso = 0.2,
                     Pontos = 0
@@ -71,7 +71,7 @@ namespace GlobalImpact.Controllers
         {
 
             var ecoponto = await _db.RecyclingBins.FirstOrDefaultAsync(e => e.Id == binid);
-
+            items.Clear();
             var model = new ReciclarViewModel
             {
                 EcoPonto = ecoponto,
@@ -89,7 +89,19 @@ namespace GlobalImpact.Controllers
         {
 
             RecItems item = recItems.Find(item => item.Nome == itemName);
-            items.Add(item);
+            if(item.Tipo.ToLower().Equals(type))
+            {
+                items.Add(item);
+            }
+            else if (item.Tipo.ToLower().Equals("other"))
+            {
+                ModelState.AddModelError("Type", "O Residuo introduzido não é reciclavel");
+            }
+            else
+            {
+                ModelState.AddModelError("Type", "O Residuo introduzido não é "+type);
+            }
+            
 
             var model = new ReciclarViewModel
             {

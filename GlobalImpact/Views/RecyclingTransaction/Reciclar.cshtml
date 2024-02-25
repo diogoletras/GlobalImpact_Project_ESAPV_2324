@@ -13,7 +13,7 @@
         <p>@item.Nome - Peso: @item.Peso - Pontos: @item.Pontos</p>
         <form method="post" asp-controller="RecyclingTransaction" asp-action="Rec">
             <input type="hidden" name="idEco" value="@Model.EcoPonto.Id" />
-            <input type="hidden" name="type" value="@Model.Type" />
+            <input type="hidden" name="type" value="@Model.Type" />      
             <input type="hidden" name="nome" value="@Model.UserName" />
             <input type="hidden" name="itemName" value="@item.Nome" />
             <button type="submit">Adicionar</button>
@@ -27,6 +27,7 @@
     int totalPontos = Model.Reciclados.Sum(item => item.Pontos);
 }
 <h3>Reciclados</h3>
+<span asp-validation-for="@Model.Type" class="text-danger"></span>
 <p>Total dos Peso: @totalPeso</p>
 <p>Total dos Pontos: @totalPontos</p>
 <p>Lista de Items</p>
