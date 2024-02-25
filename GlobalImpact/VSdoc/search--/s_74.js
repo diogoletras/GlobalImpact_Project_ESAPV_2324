@@ -1,1 +1,1 @@
-search_result['74']=["topic_000000000000001D.html","HomeController Constructor","Construtor da classe."];
+search_result['74']=["topic_000000000000001D.html","AdminController.CreateRecyclingBin  Method",""];

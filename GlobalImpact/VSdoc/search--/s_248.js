@@ -1,1 +1,1 @@
-search_result['248']=["topic_0000000000000067.html","Product.Price Property",""];
+search_result['248']=["topic_0000000000000055_props--.html","Cart Properties",""];

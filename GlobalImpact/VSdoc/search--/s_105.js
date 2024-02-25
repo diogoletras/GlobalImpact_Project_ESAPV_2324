@@ -1,1 +1,1 @@
-search_result['105']=["topic_000000000000002A_methods--.html","ReciclingBinsController Methods",""];
+search_result['105']=["topic_0000000000000025.html","ProductsController Constructor","Constutor da classe."];

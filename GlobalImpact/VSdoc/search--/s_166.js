@@ -1,1 +1,1 @@
-search_result['166']=["topic_0000000000000047_vars--.html","InitialCreate Fields",""];
+search_result['166']=["topic_0000000000000039.html","RecyclingBinsController.Delete Method","Função HttpGet para a eliminação de um ecoponto."];

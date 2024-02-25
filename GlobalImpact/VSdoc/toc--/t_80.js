@@ -1,1 +1,1 @@
-c['80']=[['81',"ReciclingBinType Enumeration","topic_000000000000003D.html",0]];
+c['80']=[['81',"RecyclingTransactionController Constructor","topic_000000000000003C.html",0],['82',"Methods","topic_000000000000003B_methods--.html",1]];

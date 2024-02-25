@@ -1,1 +1,1 @@
-search_result['167']=["topic_0000000000000048.html","InitialCreate Class",""];
+search_result['167']=["topic_000000000000003A.html","RecyclingBinsController.DeleteConfirmed Method","Função HttpPost que retorna a página de confirmação de delete."];

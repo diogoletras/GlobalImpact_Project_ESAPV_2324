@@ -1,1 +1,1 @@
-search_result['234']=["topic_0000000000000063.html","Product Class",""];
+search_result['234']=["topic_0000000000000050.html","BinType Enumeration",""];

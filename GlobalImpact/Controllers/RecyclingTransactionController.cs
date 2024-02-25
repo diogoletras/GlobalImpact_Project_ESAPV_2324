@@ -37,6 +37,13 @@ namespace GlobalImpact.Controllers
 			return View(result);
 		}
 
+        /// <summary>
+        /// Função HTTPGet retorna a pagina do processo de reciclagem
+        /// </summary>
+        /// <param name="binid">id do ecoponto a ser utilizado</param>
+        /// <param name="type">tipo de residuos que o ecoponto recebe</param>
+        /// <param name="userName">nome do utilizador que esta a usar o ecoponto</param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Reciclar(Guid? binid, string? type , string? userName)
         {
@@ -55,6 +62,15 @@ namespace GlobalImpact.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Função HTTPPost que recebe um item para reciclagem e verifica se é valido para o ecoponto que esta a ser utilizado
+        /// </summary>
+        /// <param name="idEco">id do ecoponto a ser utilizado</param>
+        /// <param name="type">tipo de residuos que o ecoponto recebe</param>
+        /// <param name="nome">nome do utilizador que esta a usar o ecoponto</param>
+        /// <param name="itemName">nome do item a verificar</param>
+        /// <param name="reciclados"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Rec(string idEco, string type, string nome,string itemName, List<RecItems> reciclados)
         {

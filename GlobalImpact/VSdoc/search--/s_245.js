@@ -1,1 +1,1 @@
-search_result['245']=["topic_0000000000000065_props--.html","ReciclingBin Properties",""];
+search_result['245']=["topic_0000000000000055_attached_props--.html","Cart Attached Properties",""];

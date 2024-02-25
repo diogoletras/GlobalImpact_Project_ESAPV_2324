@@ -1,1 +1,1 @@
-c['97']=[['98',"AppUser Class","topic_0000000000000051.html",1],['109',"Cart Class","topic_000000000000005B.html",1],['115',"ErrorViewModel Class","topic_0000000000000060.html",1],['119',"Product Class","topic_0000000000000063.html",1],['128',"ReciclingBin Class","topic_000000000000006B.html",1]];
+c['97']=[['98',"OnModelCreating Method","topic_0000000000000049.html",0]];

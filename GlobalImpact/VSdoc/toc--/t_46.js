@@ -1,1 +1,1 @@
-c['46']=[['47',"ProductsController Constructor","topic_0000000000000022.html",0],['48',"Methods","topic_0000000000000021_methods--.html",1]];
+c['46']=[['47',"Error Method","topic_0000000000000023.html",0],['48',"Index Method","topic_0000000000000021.html",0],['49',"Privacy Method","topic_0000000000000022.html",0]];
