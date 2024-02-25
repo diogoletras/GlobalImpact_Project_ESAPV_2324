@@ -1,91 +1,91 @@
 ﻿@model IEnumerable<GlobalImpact.Models.RecyclingBin>
 
 @{
-    ViewData["Title"] = "Index";
+	ViewData["Title"] = "Index";
 }
 
 @if (User.Identity.IsAuthenticated)
 {
-    @if (User.IsInRole("client"))
-    {
-
-        <h1>Index</h1>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.RecyclingBinType.Type)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Latitude)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Longitude)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Description)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Capacity)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CurrentCapacity)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Status)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.RecyclingBinType.Type)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Latitude)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Longitude)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Capacity) L
-                        </td>
-                        <td>
-                            @{
-                                double capPercentage = (item.CurrentCapacity * item.Capacity) / 100;
-                            }
-                            @capPercentage %
-                        </td>
-                        <td>
-                            @{
-                                string statusFalse = "Indisponivel";
-                                string statusTrue = "Disponivel";
-                                @if (item.Status)
-                                {
-                                    @statusTrue
-                                }
-                                else
-                                {
-                                    @statusFalse
-                                }
-                            }
-                        </td>
-                        <td>
-                            @if (item.Status)
-                            {
-                                <a asp-action="Reciclar" asp-route-binId="@item.Id" asp-route-type="@item.RecyclingBinType.Type" class="admin-buttons-btn-grad">Reciclar</a>
-                            }
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
+	@if (User.IsInRole("client"))
+	{
+		<h1 class="display-4">Recycling Transactions</h1>
+		<div class="text-center">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							@Html.DisplayNameFor(model => model.RecyclingBinType.Type)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Latitude)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Longitude)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Description)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Capacity)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.CurrentCapacity)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Status)
+						</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>
+								@Html.DisplayFor(modelItem => item.RecyclingBinType.Type)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Latitude)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Longitude)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Description)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Capacity) L
+							</td>
+							<td>
+								@{
+									float capPercentage = (item.CurrentCapacity * item.Capacity) / 100;
+								}
+								@capPercentage %
+							</td>
+							<td>
+								@{
+									string statusFalse = "Indisponivel";
+									string statusTrue = "Disponivel";
+									@if (item.Status)
+									{
+										@statusTrue
+									}
+									else
+									{
+										@statusFalse
+									}
+								}
+							</td>
+							<td>
+								@if (item.Status)
+								{
+									<a asp-action="Reciclar" asp-route-binId="@item.Id" asp-route-type="@item.RecyclingBinType.Type" class="admin-buttons-btn-grad">Reciclar</a>
+								}
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	}
 }

@@ -83,6 +83,7 @@
     border: none;
     color: var(--bs-body-color);
     text-decoration: none;
+    align-self: center;
 }
 
     .btn-grad:hover {
