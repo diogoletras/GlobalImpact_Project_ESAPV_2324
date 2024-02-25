@@ -14,23 +14,40 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GlobalImpact.Controllers
 {
+    /// <summary>
+    /// Contralador dos Ecopontos.
+    /// </summary>
     public class RecyclingBinsController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
 
+        /// <summary>
+        /// Construtor da classe.
+        /// </summary>
+        /// <param name="context"> parametro da database</param>
+        /// <param name="userManager">Fornece APIs para gestao de utilizadores</param>
         public RecyclingBinsController(ApplicationDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Funçao HttpGet que retorna a página de interface simulada para introduzir o código do ecoponto.
+        /// </summary>
+        /// <returns>retorna a página de interface simulada para introduzir o código do ecoponto</returns>
 		[HttpGet]
 		public async Task<IActionResult> EcoLog()
         {
 			return View();
         }
 
+        /// <summary>
+        /// Função HttpGet que retorna a página de introduzação do código de reciclagem.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>retorna a página de introduzação do código de reciclagem</returns>
         [HttpGet]
         public async Task<IActionResult> EcoLogin(EcoLogViewModel model)
         {
@@ -72,7 +89,12 @@ namespace GlobalImpact.Controllers
                 return RedirectToAction("EcoLog"); // Retorna a view EcoLog sem nenhum modelo
             }
         }
-
+        /// <summary>
+        /// Função HttpPost que retorna a página de simulação de reciclagem no ecoponto escolhido em caso de sucesso, e em caso de insucesso retorna para a página de introduzição do código único.
+        /// </summary>
+        /// <param name="binId">Id do ecoponto.</param>
+        /// <param name="uniqueCode">Código único de transação.</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> EcoLogin(Guid? binId, string? uniqueCode)
         {
@@ -102,8 +124,10 @@ namespace GlobalImpact.Controllers
             }
             return RedirectToAction("EcoLogin" , new { idInput = binId.ToString()});
         }
-
-
+        /// <summary>
+        /// Função HttpGet que retorna a página da lista de ecopontos.
+        /// </summary>
+        /// <returns></returns>
 		// GET: RecyclingBins
 	    [Authorize(Roles = "admin")]
         [HttpGet]
@@ -112,6 +136,11 @@ namespace GlobalImpact.Controllers
             return View(await _context.RecyclingBins.ToListAsync());
         }
 
+        /// <summary>
+        /// Função HttpGet que retorna o detalhes de um ecoponto.
+        /// </summary>
+        /// <param name="id">parametro que guarda o ID do ecoponto.</param>
+        /// <returns>retorna o detalhes de um ecoponto</returns>
         // GET: RecyclingBins/Details/5
         [Authorize(Roles = "admin")]
         [HttpGet]
@@ -132,6 +161,10 @@ namespace GlobalImpact.Controllers
             return View(recyclingBin);
         }
 
+        /// <summary>
+        /// Função HttpGet para a criação de um ecoponto.
+        /// </summary>
+        /// <returns>retorna a página desse ecoponto criado.</returns>
         // GET: RecyclingBins/Create
         [Authorize(Roles = "admin")]
         [HttpGet]
@@ -149,6 +182,11 @@ namespace GlobalImpact.Controllers
             return View(res);
         }
 
+        /// <summary>
+        /// Função HttpPost que retorna a página do ecoponto criado.
+        /// </summary>
+        /// <param name="recyclingBin">dados do ecoponto a ser criado.</param>
+        /// <returns>retorna a página do ecoponto criado</returns>
         // POST: RecyclingBins/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -178,6 +216,11 @@ namespace GlobalImpact.Controllers
             return View(recyclingBin);
         }
 
+        /// <summary>
+        /// Função HttpGet para a edição de um ecoponto.
+        /// </summary>
+        /// <param name="id">id do ecoponto a ser editado.</param>
+        /// <returns>retorna a ediçao do ecoponto.</returns>
         // GET: RecyclingBins/Edit/5
         [Authorize(Roles = "admin")]
         [HttpGet]
@@ -196,6 +239,12 @@ namespace GlobalImpact.Controllers
             return View(recyclingBin);
         }
 
+        /// <summary>
+        /// Função HttpPost que retorna a lista de ecoponto depois de um ser editado.
+        /// </summary>
+        /// <param name="id">Id do ecoponto a ser editado.</param>
+        /// <param name="recyclingBin">ecoponto a ser editrado.</param>
+        /// <returns>retorna a página da lista de ecopontos.</returns>
         // POST: RecyclingBins/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -232,6 +281,11 @@ namespace GlobalImpact.Controllers
             return View(recyclingBin);
         }
 
+        /// <summary>
+        /// Função HttpGet para a eliminação de um ecoponto.
+        /// </summary>
+        /// <param name="id">id do ecoponto a ser eliminado.</param>
+        /// <returns>retorna a página da lista de ecopontos. </returns>
         // GET: RecyclingBins/Delete/5
         [Authorize(Roles = "admin")]
         [HttpGet]
@@ -251,7 +305,11 @@ namespace GlobalImpact.Controllers
 
             return View(recyclingBin);
         }
-
+        /// <summary>
+        /// Função HttpPost que retorna a página de confirmação de delete.
+        /// </summary>
+        /// <param name="id">id do ecoponto a ser eliminado.</param>
+        /// <returns>retorna a página da lista de ecopontos.</returns>
         // POST: RecyclingBins/Delete/5
         [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Delete")]

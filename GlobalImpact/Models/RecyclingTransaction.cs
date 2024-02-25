@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GlobalImpact.Models
 {
+	/// <summary>
+	/// Classe de modelo das transações.
+	/// </summary>
 	public class RecyclingTransaction
 	{
 		[Key]

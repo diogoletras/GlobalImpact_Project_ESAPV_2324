@@ -13,8 +13,15 @@ namespace GlobalImpact.Controllers
 {
     public class ProductsController : Controller
     {
+        /// <summary>
+        /// Classe de controlador de produtos.
+        /// </summary>
         private readonly ApplicationDbContext _context;
 
+        /// <summary>
+        /// Constutor da classe.
+        /// </summary>
+        /// <param name="context"> parametro para a database</param>
         public ProductsController(ApplicationDbContext context)
         {
             _context = context;
@@ -23,6 +30,10 @@ namespace GlobalImpact.Controllers
         [Authorize(Roles = "Admin")]
         [HttpGet]
         // GET: Products
+        /// <summary>
+        /// Função HttpPost retorna a página da lista de produtos.
+        /// </summary>
+        /// <returns>retorna a página da lista de produtos.</returns>
         public async Task<IActionResult> Index()
         {
             return View(await _context.Products.ToListAsync());
@@ -31,6 +42,11 @@ namespace GlobalImpact.Controllers
         [Authorize(Roles = "Admin")]
         [HttpGet]
         // GET: Products/Details/5
+        /// <summary>
+        /// Função HttpGet retorna os detalhes do produto.
+        /// </summary>
+        /// <returns>retorna os detalhes do produto.</returns>
+
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -51,6 +67,11 @@ namespace GlobalImpact.Controllers
         [Authorize(Roles = "Admin")]
         [HttpGet]
         // GET: Products/Create
+        /// <summary>
+        /// Função HttpGet para a criação de um produto.
+        /// </summary>
+        /// <returns>retorna a criação do produto.</returns>
+
         public IActionResult Create()
         {
             return View();
@@ -59,6 +80,11 @@ namespace GlobalImpact.Controllers
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Funçãp HttpPost para criação de um produto.
+        /// </summary>
+        /// <param name="product">parametro para guardar os dados acerca do produto.</param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -77,6 +103,10 @@ namespace GlobalImpact.Controllers
         [Authorize(Roles = "Admin")]
         [HttpGet]
         // GET: Products/Edit/5
+        /// <summary>
+        /// Função HttpGet retorna a página da ediçao de produto.
+        /// </summary>
+        /// <returns>retorna a página da edição de produto.</returns>
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -95,6 +125,12 @@ namespace GlobalImpact.Controllers
         // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Função HttpPost para retornar a página da lista de produtos quando o valor ja tiver sido editado.
+        /// </summary>
+        /// <param name="id">parametro que guarda o id do produto.</param>
+        /// <param name="product">paramentro que guarda os valores do produto.</param>
+        /// <returns>retorna a página da lista de produtos quando o valor ja tiver sido editado</returns>
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -129,6 +165,11 @@ namespace GlobalImpact.Controllers
         }
 
         // GET: Products/Delete/5
+        /// <summary>
+        /// Função HttpGet retorna a página de confirmação de delete.
+        /// </summary>
+        /// <param name="id">parametro que guarda o id do produto a ser eliminado.</param>
+        /// <returns>retorna a página de confirmação de delete</returns>
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Delete(Guid? id)
@@ -149,6 +190,11 @@ namespace GlobalImpact.Controllers
         }
 
         // POST: Products/Delete/5
+        /// <summary>
+        /// Função HttpPost que retorna a página da lista de produtos.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>retorna a página da lista de produtos</returns>
         [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
