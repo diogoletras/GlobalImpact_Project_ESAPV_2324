@@ -11,13 +11,50 @@ using GlobalImpact.ViewModels.NewFolder;
 
 namespace GlobalImpact.Controllers
 {
-	public class RecyclingTransactionController(ApplicationDbContext db, SignInManager<AppUser> signInManager)
-		: Controller
+	public class RecyclingTransactionController: Controller
 	{
-		private readonly ApplicationDbContext _db = db;
-		private readonly SignInManager<AppUser> _signInManager = signInManager;
+		private readonly ApplicationDbContext _db;
+		private readonly SignInManager<AppUser> _signInManager;
+        private List<RecItems> recItems;
+        private List<RecItems> items = StationeryDb.Items;
 
-		[HttpGet]
+        public RecyclingTransactionController(ApplicationDbContext db, SignInManager<AppUser> userManager)
+        {
+            _db = db;
+            _signInManager = userManager;
+            recItems = new List<RecItems> {
+                new RecItems
+                {
+                    Tipo = "Glass",
+                    Nome = "Garrafa",
+                    Peso = 0.5,
+                    Pontos = 3
+                },
+                new RecItems
+                {
+                    Tipo = "Paper",
+                    Nome = "Caixa",
+                    Peso = 0.3,
+                    Pontos = 2
+                },
+                new RecItems
+                {
+                    Tipo = "Plastic",
+                    Nome = "Lata",
+                    Peso = 0.2,
+                    Pontos = 1
+                },
+                new RecItems
+                {
+                    Tipo = "Organic",
+                    Nome = "Chocolate",
+                    Peso = 0.2,
+                    Pontos = 0
+                },
+            };
+        }
+
+        [HttpGet]
 		[Authorize(Roles = "client")]
 		public async Task<IActionResult> Index()
 		{
@@ -30,149 +67,50 @@ namespace GlobalImpact.Controllers
 		}
 
         [HttpGet]
-        //[Authorize(Roles = "client")]
-        public IActionResult Reciclar(Guid? binid, string? type , string? userName)
+        public async Task<IActionResult> Reciclar(Guid? binid, string? type , string? userName)
         {
-            List<object> resList= new List<object>();
-            resList.Add(binid);
-            resList.Add(type);
-            resList.Add(userName);
 
-            return View(resList);
+            var ecoponto = await _db.RecyclingBins.FirstOrDefaultAsync(e => e.Id == binid);
+
+            var model = new ReciclarViewModel
+            {
+                EcoPonto = ecoponto,
+                Type = type,
+                UserName = userName,
+                RecItems = recItems,
+                Reciclados = items
+            };
+
+            return View(model);
         }
 
         [HttpPost]
-        //[Authorize(Roles = "client")]
-        public async Task<IActionResult> Reciclar(int?[] recycleQuantity, double?[]recycleCapacity, Guid? binId, string? type, string? userName)
+        public async Task<IActionResult> Rec(string idEco, string type, string nome,string itemName, List<RecItems> reciclados)
         {
-            if (ModelState.IsValid)
+
+            RecItems item = recItems.Find(item => item.Nome == itemName);
+            items.Add(item);
+
+            var model = new ReciclarViewModel
             {
-                recycleCapacity = recycleCapacity.Where(x => x != null).ToArray();
-                if (!recycleQuantity.IsNullOrEmpty() && !recycleCapacity.IsNullOrEmpty())
-                {
-                    AppUser user = await _db.AppUser.FirstOrDefaultAsync(u => u.UserName == userName);
-                    user.Points += (int)Math.Round((double)recycleCapacity.Sum() + 1);
+                Type = type,
+                UserName = nome,
+                RecItems = recItems,
+                Reciclados = items
+            };
 
-                    var recyclingBin = await _db.RecyclingBins.FirstOrDefaultAsync(r => r.Id == binId);
-                    EcoLogViewModel model = new EcoLogViewModel();
-                    model.IdInput = binId.ToString();
-                    if (user != null)
-                    {
-                        if (recyclingBin.CurrentCapacity + (double)recycleCapacity.Sum() < recyclingBin.Capacity)
-                        {
-                            recyclingBin.CurrentCapacity += (double)recycleCapacity.Sum();
-                            recyclingBin.Status = false;
-                            if (user.NIF != null && Regex.IsMatch(user.NIF.ToString(), @"^\d{9}$"))
-                            {
-                                var recyclingTransaction = new RecyclingTransaction
-                                {
-                                    Id = Guid.NewGuid(),
-                                    RecyclingBin = recyclingBin,
-                                    User = user,
-                                    Weight = (double)recycleCapacity.Sum(),
-                                    Date = DateTime.Now,
-                                    isNIFRequired = true
-                                };
-                                _db.RecyclingTransactions.Add(recyclingTransaction);
-                            }
-                            else
-                            {
-                                var recyclingTransaction = new RecyclingTransaction
-                                {
-                                    Id = Guid.NewGuid(),
-                                    RecyclingBin = recyclingBin,
-                                    User = user,
-                                    Weight = (double)recycleCapacity.Sum(),
-                                    Date = DateTime.Now,
-                                    isNIFRequired = false
-                                };
-                                _db.RecyclingTransactions.Add(recyclingTransaction);
-                            }
 
-                            recyclingBin.Status = false;
-                            _db.RecyclingBins.Update(recyclingBin);
-                            _db.Users.Update(user);
-                            _db.SaveChanges();
-                            return RedirectToAction("EcoLogin", "RecyclingBins", model);
-                        }
-
-                        if (recyclingBin.CurrentCapacity + (double)recycleCapacity.Sum() == recyclingBin.Capacity)
-                        {
-                            recyclingBin.CurrentCapacity += (double)recycleCapacity.Sum();
-                            recyclingBin.Status = false;
-                            if (user.NIF != null && Regex.IsMatch(user.NIF.ToString(), @"^\d{9}$"))
-                            {
-                                var recyclingTransaction = new RecyclingTransaction
-                                {
-                                    Id = Guid.NewGuid(),
-                                    RecyclingBin = recyclingBin,
-                                    User = user,
-                                    Weight = (double)recycleCapacity.Sum(),
-                                    Date = DateTime.Now,
-                                    isNIFRequired = true
-                                };
-                                _db.RecyclingTransactions.Add(recyclingTransaction);
-                            }
-                            else
-                            {
-                                var recyclingTransaction = new RecyclingTransaction
-                                {
-                                    Id = Guid.NewGuid(),
-                                    RecyclingBin = recyclingBin,
-                                    User = user,
-                                    Weight = (double)recycleCapacity.Sum(),
-                                    Date = DateTime.Now,
-                                    isNIFRequired = false
-                                };
-                                _db.RecyclingTransactions.Add(recyclingTransaction);
-                            }
-                            _db.RecyclingBins.Update(recyclingBin);
-                            _db.Users.Update(user);
-                            _db.SaveChanges();
-                            return RedirectToAction("EcoLog", "RecyclingBins", model);
-                        }
-                        else
-                        {
-                            recyclingBin.CurrentCapacity = recyclingBin.Capacity;
-                            recyclingBin.Status = false;
-                            if (user.NIF != null && Regex.IsMatch(user.NIF.ToString(), @"^\d{9}$"))
-                            {
-                                var recyclingTransaction = new RecyclingTransaction
-                                {
-                                    Id = Guid.NewGuid(),
-                                    RecyclingBin = recyclingBin,
-                                    User = user,
-                                    Weight = (double)recycleCapacity.Sum(),
-                                    Date = DateTime.Now,
-                                    isNIFRequired = true
-                                };
-                                _db.RecyclingTransactions.Add(recyclingTransaction);
-                            }
-                            else
-                            {
-                                var recyclingTransaction = new RecyclingTransaction
-                                {
-                                    Id = Guid.NewGuid(),
-                                    RecyclingBin = recyclingBin,
-                                    User = user,
-                                    Weight = (double)recycleCapacity.Sum(),
-                                    Date = DateTime.Now,
-                                    isNIFRequired = false
-                                };
-                                _db.RecyclingTransactions.Add(recyclingTransaction);
-                            }
-                            _db.RecyclingBins.Update(recyclingBin);
-                            _db.Users.Update(user);
-                            _db.SaveChanges();
-                            return RedirectToAction("EcoLog", "RecyclingBins", model);
-                        }
-                    }
-                }
+            if (Guid.TryParse(idEco, out Guid idGuid))
+            {
+                // Agora idGuid contém o valor GUID convertido
+                // Você pode usá-lo da maneira que precisar
+                var ecoponto = await _db.RecyclingBins.FirstOrDefaultAsync(e => e.Id == idGuid);
+                model.EcoPonto = ecoponto;
             }
-            List<object> resList = new List<object>();
-            resList.Add(binId);
-            resList.Add(type);
-            return View(binId);
+           
+            // Atualiza o modelo para incluir a lista de itens reciclados atualizada
+
+            return View("Reciclar", model);
         }
     }
 }
