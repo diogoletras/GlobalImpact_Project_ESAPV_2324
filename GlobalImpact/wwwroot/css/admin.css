@@ -108,6 +108,12 @@ tr {
 }
 
 /* Recycling Bins */
+.container-background {
+    background-color: rgba(33, 38, 43, 0.5);
+    color: white;
+    border-radius: 20px;
+}
+
 .row-center {
     display: flex;
     flex-direction: row;
@@ -140,6 +146,41 @@ tr {
     align-items: center;
 }
 
+.text-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 30%;
+}
+
+.items-available {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 30%;
+    margin: 10px;
+}
+
+.items-available p {
+    margin: 0;
+}
+
+.items-available-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+}
+
+.items-available-details- {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .flex-container {
     display: flex;
     flex-direction: row;
@@ -149,12 +190,42 @@ tr {
     flex-wrap: nowrap;
 }
 
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .col-md-6 {
     width: 70%;
 }
 
 .row-center {
     width: 100%;
+}
+
+.btn-grad-small {
+    width: 100%;
+    max-width: 200px;
+    padding: 5px;
+    background-image: linear-gradient(to right, #16A085 0%, #059742 51%, #16A085 100%);
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    font-size: 13px;
+    border-radius: 25px;
+    box-shadow: 0 0 10px #023F3A;
+    border: none;
+    color: var(--bs-body-color);
+    text-decoration: none;
+}
+
+.btn-grad-small:hover {
+    background-position: right center;
+    color: white;
+    text-decoration: none;
 }
 
 @media only screen and (max-width: 768px) {
