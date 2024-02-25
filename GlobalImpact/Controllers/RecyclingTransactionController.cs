@@ -15,43 +15,14 @@ namespace GlobalImpact.Controllers
 	{
 		private readonly ApplicationDbContext _db;
 		private readonly SignInManager<AppUser> _signInManager;
-        private List<RecItems> recItems;
+        private List<RecItems> recItems = StationeryItems.Items;
         private List<RecItems> items = StationeryDb.Items;
 
         public RecyclingTransactionController(ApplicationDbContext db, SignInManager<AppUser> userManager)
         {
             _db = db;
             _signInManager = userManager;
-            recItems = new List<RecItems> {
-                new RecItems
-                {
-                    Tipo = "Glass",
-                    Nome = "Garrafa",
-                    Peso = 0.5,
-                    Pontos = 3
-                },
-                new RecItems
-                {
-                    Tipo = "Paper",
-                    Nome = "Caixa",
-                    Peso = 0.3,
-                    Pontos = 2
-                },
-                new RecItems
-                {
-                    Tipo = "Plastic",
-                    Nome = "Lata",
-                    Peso = 0.2,
-                    Pontos = 1
-                },
-                new RecItems
-                {
-                    Tipo = "Other",
-                    Nome = "Chocolate",
-                    Peso = 0.2,
-                    Pontos = 0
-                },
-            };
+           
         }
 
         [HttpGet]
