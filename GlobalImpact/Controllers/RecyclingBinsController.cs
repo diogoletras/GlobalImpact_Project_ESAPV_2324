@@ -119,6 +119,7 @@ namespace GlobalImpact.Controllers
                 }
                 else
                 {
+                    ViewData["Invalido"] = "Codigo inserido Invalido !!";
                     return View(ecoponto);
                 }
             }

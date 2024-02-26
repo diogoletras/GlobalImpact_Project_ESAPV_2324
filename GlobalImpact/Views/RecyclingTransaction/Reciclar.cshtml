@@ -1,13 +1,40 @@
 ﻿@model GlobalImpact.ViewModels.NewFolder.ReciclarViewModel
 
+@{
+	// Calcula a soma dos pesos e a soma dos pontos
+	string eco = "";
+	if(Model.Type.Equals("glass"))
+	{
+		eco = "Ecoponto Verde (Vidro)";
+	}
+	else if (Model.Type.Equals("paper"))
+	{
+		eco = "Ecoponto Azul (Papel)";
+	}
+	else
+	{
+		eco = "Ecoponto Amarelo (Plastico)";
+	}
+}
+
 <div class="container-background">
 	<div class="text-center">
 		<h1 class="display-4">Detalhes do Ecoponto</h1>
 		<div class="text-left">
-			<p>ID do Ecoponto: @Model.EcoPonto.Id</p>
-			<div class="flex-row">
-				<p>Tipo do Ecoponto: @Model.Type</p>
-				<p>Nome do Utilizador: @Model.UserName</p>
+			<div class="row">
+				<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+					Tipo do Ecoponto: @eco
+				</div>
+				<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+					Nome do Utilizador: @Model.UserName
+				</div>
+			</div>
+			<p></p>
+			<div class="row">
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+					<p class="text-center">Capacidade Total: @Model.EcoPonto.Capacity Kg</p>
+					<p class="text-center">Capacidade Atual: @Model.EcoPonto.CurrentCapacity Kg</p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -24,7 +51,7 @@
 		<div class="text-left">
 			<span asp-validation-for="@Model.Type" class="text-danger"></span>
 			<div class="flex-row">
-				<p>Total dos Peso: @totalPeso</p>
+				<p>Peso Total: @totalPeso Kg</p>
 				<p>Total dos Pontos: @totalPontos</p>
 			</div>
 			<p>Lista de Items:</p>

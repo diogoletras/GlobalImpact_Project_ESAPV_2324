@@ -86,7 +86,7 @@ namespace GlobalImpact.Controllers
             }
             else
             {
-                ModelState.AddModelError("Type", "O Residuo introduzido não é "+type);
+                ModelState.AddModelError("Type", "O Residuo introduzido não corresponde com o tipo do Ecoponto ");
             }
             
 
