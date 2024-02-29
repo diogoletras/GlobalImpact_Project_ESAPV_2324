@@ -217,17 +217,17 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            RecyclingBinTypeId = new Guid("8c47cb3d-bc54-46c6-846e-febca18e92d5"),
+                            RecyclingBinTypeId = new Guid("c792b987-c30c-4221-8ebe-0bc236da6da1"),
                             Type = "glass"
                         },
                         new
                         {
-                            RecyclingBinTypeId = new Guid("a6574a35-26ec-4978-8ac8-86b2b72dc397"),
+                            RecyclingBinTypeId = new Guid("450296da-e4d0-41d6-8786-ddea5bfcde70"),
                             Type = "paper"
                         },
                         new
                         {
-                            RecyclingBinTypeId = new Guid("715098c3-939f-4b93-9696-8a0bdb95d6e8"),
+                            RecyclingBinTypeId = new Guid("70be7158-ab46-47d8-80e8-ccc94efccb03"),
                             Type = "plastic"
                         });
                 });
@@ -326,15 +326,15 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d5a5b851-f3cf-416f-a969-6d34d6b1c521",
-                            ConcurrencyStamp = "9b52c9bc-c6da-4d4b-81b5-92b0b94b4e36",
+                            Id = "8470d9b1-f8fb-47ee-90a8-fff27577bead",
+                            ConcurrencyStamp = "47c73c6c-8425-4121-b20d-e05c9fe98c35",
                             Name = "client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
-                            Id = "8d053eba-7dfd-4568-bb96-dd9670161803",
-                            ConcurrencyStamp = "e31342ca-ae95-41e7-ac5f-ddd05cbf5591",
+                            Id = "f03e1aa3-3624-42f1-8fe1-ce226baee89b",
+                            ConcurrencyStamp = "f2497c85-7829-4928-bbf1-34f4ad21c69d",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });

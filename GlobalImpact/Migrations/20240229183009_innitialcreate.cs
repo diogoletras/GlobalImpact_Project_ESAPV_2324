@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GlobalImpact.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class innitialcreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -270,7 +270,7 @@ namespace GlobalImpact.Migrations
                     RecyclingBinId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Weight = table.Column<double>(type: "float", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    isNIFRequired = table.Column<bool>(type: "bit", nullable: false)
+                    Points = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -294,8 +294,8 @@ namespace GlobalImpact.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "63bb5b27-7035-4218-abae-979aa5ca40f6", "b5a3fb8d-a9e4-4144-84a1-c65fa1d96f9c", "client", "CLIENT" },
-                    { "eeaae30a-f87a-48de-b2ac-28561edcb577", "9a70698a-6c85-4425-8078-d380dd4941b5", "admin", "ADMIN" }
+                    { "8470d9b1-f8fb-47ee-90a8-fff27577bead", "47c73c6c-8425-4121-b20d-e05c9fe98c35", "client", "CLIENT" },
+                    { "f03e1aa3-3624-42f1-8fe1-ce226baee89b", "f2497c85-7829-4928-bbf1-34f4ad21c69d", "admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -303,9 +303,9 @@ namespace GlobalImpact.Migrations
                 columns: new[] { "RecyclingBinTypeId", "Type" },
                 values: new object[,]
                 {
-                    { new Guid("af2375b2-4d78-4bf9-8e6d-c225faf00b57"), "paper" },
-                    { new Guid("bfd99aad-fc45-4ce7-8cb8-ad21e3edc31a"), "glass" },
-                    { new Guid("d5b2b941-2f2a-4312-a634-dc8db345d503"), "plastic" }
+                    { new Guid("450296da-e4d0-41d6-8786-ddea5bfcde70"), "paper" },
+                    { new Guid("70be7158-ab46-47d8-80e8-ccc94efccb03"), "plastic" },
+                    { new Guid("c792b987-c30c-4221-8ebe-0bc236da6da1"), "glass" }
                 });
 
             migrationBuilder.CreateIndex(
