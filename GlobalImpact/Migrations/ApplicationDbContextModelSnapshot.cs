@@ -106,6 +106,31 @@ namespace GlobalImpact.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "d8704e5d-d502-4340-bfe5-cf9efdfa1857",
+                            AccessFailedCount = 0,
+                            Age = 0,
+                            ConcurrencyStamp = "fc2ea48d-a0ac-48dc-b8fc-cd8ee48149c5",
+                            Email = "",
+                            EmailConfirmed = true,
+                            FirstName = "Admin",
+                            LastName = "Admin",
+                            LockoutEnabled = true,
+                            NIF = 0,
+                            NormalizedEmail = "",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEO0ES3pc8Rs2B5KBYgBkRDwcrR2LKMWqA+9qnOggrjvVVZjpmvpw9cShgWswI2xHIg==",
+                            PhoneNumber = "123456789",
+                            PhoneNumberConfirmed = true,
+                            Points = 0,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UniqueCode = "95822c3f-a5b9-479b-948e-b0f23f86d2b4",
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("GlobalImpact.Models.Cart", b =>
@@ -187,17 +212,51 @@ namespace GlobalImpact.Migrations
                     b.Property<double>("Longitude")
                         .HasColumnType("float");
 
-                    b.Property<Guid>("RecyclingBinTypeId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("RecyclingBinTypeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RecyclingBinTypeId");
-
                     b.ToTable("RecyclingBins");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("11da8b33-f5d4-4589-a201-50c534b8e414"),
+                            Capacity = 0.0,
+                            CurrentCapacity = 0.0,
+                            Description = "Ecoponto 1",
+                            Latitude = 0.0,
+                            Longitude = 0.0,
+                            RecyclingBinTypeId = "ccc04c3e-90a2-4a2a-9d6e-5be7d85eda98",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = new Guid("b13bfa44-ef23-4494-b97b-2c0433e403ad"),
+                            Capacity = 0.0,
+                            CurrentCapacity = 0.0,
+                            Description = "Ecoponto 2",
+                            Latitude = 0.0,
+                            Longitude = 0.0,
+                            RecyclingBinTypeId = "470215c5-7ed9-4ff1-b8bf-6baca50e8c58",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = new Guid("2c8095e7-6342-4985-b146-80891beda49c"),
+                            Capacity = 0.0,
+                            CurrentCapacity = 0.0,
+                            Description = "Ecoponto 3",
+                            Latitude = 0.0,
+                            Longitude = 0.0,
+                            RecyclingBinTypeId = "8e256739-ed8b-423a-a386-6e23382c29cd",
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("GlobalImpact.Models.RecyclingBinType", b =>
@@ -217,18 +276,18 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            RecyclingBinTypeId = new Guid("c792b987-c30c-4221-8ebe-0bc236da6da1"),
+                            RecyclingBinTypeId = new Guid("ccc04c3e-90a2-4a2a-9d6e-5be7d85eda98"),
                             Type = "glass"
                         },
                         new
                         {
-                            RecyclingBinTypeId = new Guid("450296da-e4d0-41d6-8786-ddea5bfcde70"),
-                            Type = "paper"
+                            RecyclingBinTypeId = new Guid("470215c5-7ed9-4ff1-b8bf-6baca50e8c58"),
+                            Type = "plastic"
                         },
                         new
                         {
-                            RecyclingBinTypeId = new Guid("70be7158-ab46-47d8-80e8-ccc94efccb03"),
-                            Type = "plastic"
+                            RecyclingBinTypeId = new Guid("8e256739-ed8b-423a-a386-6e23382c29cd"),
+                            Type = "paper"
                         });
                 });
 
@@ -326,15 +385,15 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8470d9b1-f8fb-47ee-90a8-fff27577bead",
-                            ConcurrencyStamp = "47c73c6c-8425-4121-b20d-e05c9fe98c35",
+                            Id = "1575deaf-63fd-44c8-847e-966b726dcc30",
+                            ConcurrencyStamp = "b362ceb1-efae-410d-9604-b6ef02e948b0",
                             Name = "client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
-                            Id = "f03e1aa3-3624-42f1-8fe1-ce226baee89b",
-                            ConcurrencyStamp = "f2497c85-7829-4928-bbf1-34f4ad21c69d",
+                            Id = "b53dc58d-6bf9-46f1-b620-0b8aefa08eab",
+                            ConcurrencyStamp = "c39477f9-6a2e-42c6-82a6-80939d5aaba0",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -425,6 +484,13 @@ namespace GlobalImpact.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "d8704e5d-d502-4340-bfe5-cf9efdfa1857",
+                            RoleId = "b53dc58d-6bf9-46f1-b620-0b8aefa08eab"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -463,17 +529,6 @@ namespace GlobalImpact.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("GlobalImpact.Models.RecyclingBin", b =>
-                {
-                    b.HasOne("GlobalImpact.Models.RecyclingBinType", "RecyclingBinType")
-                        .WithMany()
-                        .HasForeignKey("RecyclingBinTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RecyclingBinType");
                 });
 
             modelBuilder.Entity("GlobalImpact.Models.RecyclingTransaction", b =>

@@ -14,11 +14,9 @@ namespace GlobalImpact.Models
         public Guid Id { get; set; }
 
         [ForeignKey("RecyclingBinTypeId")]
-        public virtual RecyclingBinType RecyclingBinType { get; set; }
-
+        public string RecyclingBinTypeId { get; set; }
         [NotMapped]
-        public int RecyclingBTId { get; set; }
-
+        public virtual RecyclingBinType RecyclingBinType { get; set; }
         [Required]
         public double Latitude { get; set; }
         [Required]

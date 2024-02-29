@@ -263,11 +263,20 @@ namespace GlobalImpact.Controllers
 
             foreach (var recyclingBin in recyclingList)
             {
-                var rbType = recyclingBinTypeList.FirstOrDefault(r => r.RecyclingBinTypeId == recyclingBin.RecyclingBinType.RecyclingBinTypeId);
+                var rbType = recyclingBinTypeList.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(recyclingBin.RecyclingBinTypeId));
                 if (rbType == null)
                 {
                     rbType.Type = "None";
                 }
+                else
+                {
+                    var temp = recyclingBinTypeList.FirstOrDefault(r => r.Type == rbType.Type);
+                    if (temp.RecyclingBinTypeId.Equals(rbType.RecyclingBinTypeId))
+                    {
+                        rbType.Type = temp.Type;
+                    }
+                }
+                recyclingBin.RecyclingBinType = rbType;
             }
 
             return View(recyclingList);
