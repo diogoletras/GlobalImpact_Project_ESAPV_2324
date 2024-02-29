@@ -65,15 +65,23 @@ namespace GlobalImpact.Controllers
                         _context.RecyclingBins.Update(ecoponto);
                         _context.SaveChanges();
                         ModelState.AddModelError("IdInput", "Recycling bin is already in use");
-                        return RedirectToAction("EcoLogin", "RecyclingBins", new {model = model});
+                        return RedirectToAction("EcoLogin", "RecyclingBins",model);
                         
                     }
                     else
                     {
-                        ecoponto.Status = true;
-                        _context.RecyclingBins.Update(ecoponto);
-                        _context.SaveChanges();
-                        return View(ecoponto);
+                        if(ecoponto.Capacity <= ecoponto.CurrentCapacity)
+                        {
+                            ecoponto.Status = true;
+                            _context.RecyclingBins.Update(ecoponto);
+                            _context.SaveChanges();
+                            return View(ecoponto);
+                        }
+                        else
+                        {
+                            return View(ecoponto);
+                        }
+                        
                     }
                         
                 }

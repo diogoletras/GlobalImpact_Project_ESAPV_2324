@@ -8,6 +8,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualBasic;
 using System.Text.RegularExpressions;
 using GlobalImpact.ViewModels.NewFolder;
+using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace GlobalImpact.Controllers
 {
@@ -37,6 +39,11 @@ namespace GlobalImpact.Controllers
 			return View(result);
 		}
 
+        public async Task<IActionResult> TransacionList(string userId)
+        {
+            var trans = await _db.RecyclingTransactions.Where(r => r.User.Id == userId).ToArrayAsync();
+            return View(trans);
+        }
         /// <summary>
         /// Função HTTPGet retorna a pagina do processo de reciclagem
         /// </summary>
@@ -110,6 +117,53 @@ namespace GlobalImpact.Controllers
             // Atualiza o modelo para incluir a lista de itens reciclados atualizada
 
             return View("Reciclar", model);
+        }
+
+        public async Task<IActionResult> FinishRecycling(string idEco, string nome, double peso, int pontos)
+        {
+            var ecoId = new Guid(idEco);
+            var ecoponto = await _db.RecyclingBins.FirstOrDefaultAsync(e => e.Id == ecoId);
+            var user =  _db.Users.FirstOrDefault(u => u.UserName == nome);
+            if(user != null && ecoponto != null)
+            {
+                var ecoTransacion = new RecyclingTransaction
+                {
+                    Id = new Guid(),
+                    User = user,
+                    RecyclingBin = ecoponto,
+                    Weight = peso,
+                    Points = pontos,
+                    Date = DateTime.Now
+                };
+
+                _db.RecyclingTransactions.Add(ecoTransacion);
+                user.Points += pontos;
+                _db.Users.Update(user);
+
+                if((ecoponto.CurrentCapacity + peso) >= ecoponto.Capacity)
+                {
+                    ecoponto.Status = false;
+                    ecoponto.CurrentCapacity = ecoponto.Capacity;
+                }
+                else
+                {
+                    ecoponto.CurrentCapacity += peso;
+                }
+                _db.RecyclingBins.Update(ecoponto);
+
+                await _db.SaveChangesAsync();
+
+                var model = new EcoLogViewModel
+                {
+                    IdInput = idEco
+                };
+
+                return RedirectToAction("EcoLogin", "RecyclingBins", model);
+            }
+
+            
+
+            return View();
         }
     }
 }

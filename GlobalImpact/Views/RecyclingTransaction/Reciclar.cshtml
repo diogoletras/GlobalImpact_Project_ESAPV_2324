@@ -67,6 +67,14 @@
 			}
 		</div>
 	</div>
+	<p></p>
+	<form method="post" asp-controller="RecyclingTransaction" asp-action="FinishRecycling">
+		<input type="hidden" name="idEco" value="@Model.EcoPonto.Id" />
+		<input type="hidden" name="nome" value="@Model.UserName" />
+		<input type="hidden" name="peso" value="@totalPeso" />
+		<input type="hidden" name="pontos" value="@totalPontos" />
+		<button type="submit" class="btn-grad-small">Terminar</button>
+	</form>
 
 	<div class="text-center">
 		<h2 class="display-4">Itens Disponiveis</h2>

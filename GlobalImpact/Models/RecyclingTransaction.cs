@@ -21,7 +21,7 @@ namespace GlobalImpact.Models
         [Required]
 		public DateTime Date { get; set; }
         [Required]
-        public bool isNIFRequired { get; set; }
+        public int Points { get; set; }
 
     }
 }
