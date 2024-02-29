@@ -119,7 +119,7 @@ namespace GlobalImpact.Controllers
                     {
                         if (recyclingBin.Id.Equals(binId))
                         {
-                            var ecoType = recyclingBinTypeList.FirstOrDefault(r => r.RecyclingBinTypeId == recyclingBin.RecyclingBinType.RecyclingBinTypeId);
+                            var ecoType = recyclingBinTypeList.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(recyclingBin.RecyclingBinTypeId));
                             return RedirectToAction("Reciclar", "RecyclingTransaction", new { binid = binId.ToString(), type = ecoType.Type, userName = user.UserName });
                         }
                     }
