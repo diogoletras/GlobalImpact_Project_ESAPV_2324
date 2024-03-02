@@ -1,1 +1,1 @@
-search_result['516']=["topic_00000000000000B6.html","ResetPasswordViewModel.UserId Property",""];
+search_result['516']=["topic_000000000000009C.html","ExternalLoginViewModel Class","Classe de visualação do login através da API externa."];

@@ -1,1 +1,1 @@
-var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_00000000000000CA.html"],['117',"GlobalImpact.Models Namespace","topic_0000000000000054.html"],['135',"ErrorViewModel Class","topic_000000000000006F.html"]];
+var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_00000000000000D6.html"],['117',"GlobalImpact.Models Namespace","topic_0000000000000055.html"],['129',"Cart Class","topic_000000000000006B.html"],['130',"Properties","topic_000000000000006B_props--.html"],['133',"Quantity Property","topic_000000000000006F.html"]];

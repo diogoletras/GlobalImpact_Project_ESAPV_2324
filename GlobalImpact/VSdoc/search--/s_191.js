@@ -1,1 +1,1 @@
-search_result['191']=["topic_0000000000000044_props--.html","IEmailSender Properties",""];
+search_result['191']=["topic_0000000000000042.html","ApplicationDbContext Class","Classe de Auxílio à migração dos dados."];

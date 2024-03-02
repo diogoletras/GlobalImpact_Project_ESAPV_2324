@@ -1,1 +1,1 @@
-search_result['177']=["topic_000000000000003F.html","RecyclingTransactionController.Rec Method","Função HTTPPost que recebe um item para reciclagem e verifica se é valido para o ecoponto que esta a ser utilizado"];
+search_result['177']=["topic_000000000000003B_methods--.html","RecyclingTransactionController Methods",""];

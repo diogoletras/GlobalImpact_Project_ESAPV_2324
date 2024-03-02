@@ -1,1 +1,1 @@
-search_result['282']=["topic_000000000000005D_vars--.html","Product Fields",""];
+search_result['282']=["topic_000000000000005B_attached_props--.html","Cart Attached Properties",""];

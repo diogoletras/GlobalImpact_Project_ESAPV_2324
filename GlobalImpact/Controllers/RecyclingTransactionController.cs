@@ -14,6 +14,9 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace GlobalImpact.Controllers
 {
+    /// <summary>
+    /// Controller da gestão de Transaçoes de reciclagem
+    /// </summary>
 	public class RecyclingTransactionController: Controller
 	{
 		private readonly ApplicationDbContext _db;
@@ -21,6 +24,11 @@ namespace GlobalImpact.Controllers
         private List<RecItems> recItems = StationeryItems.Items;
         private List<RecItems> items = StationeryDb.Items;
 
+        /// <summary>
+        /// Construtor do Controller RecyclingTransactionController
+        /// </summary>
+        /// <param name="db">Base de Dados</param>
+        /// <param name="userManager">Fornece APIs para gestao de utilizadores</param>
         public RecyclingTransactionController(ApplicationDbContext db, SignInManager<AppUser> userManager)
         {
             _db = db;
@@ -28,6 +36,10 @@ namespace GlobalImpact.Controllers
            
         }
 
+        /// <summary>
+        /// Funçao HTTPGet que retorna uma view com a lista dos ecopontos
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
 		[Authorize(Roles = "client")]
 		public async Task<IActionResult> Index()
@@ -40,6 +52,11 @@ namespace GlobalImpact.Controllers
 			return View(result);
 		}
 
+        /// <summary>
+        ///Funçao HTTPpost que recebe o id do utilizador e retorna uma view com as transaçoes de reciclagem do respetivo utilizador
+        /// </summary>
+        /// <param name="userId"> id do utilizador</param>
+        /// <returns></returns>
         public async Task<IActionResult> TransacionList(string userId)
         {
             var trans = await _db.RecyclingTransactions.Where(r => r.User.Id == userId).ToArrayAsync();
@@ -120,6 +137,15 @@ namespace GlobalImpact.Controllers
             return View("Reciclar", model);
         }
 
+
+        /// <summary>
+        /// Função HTTPPost que finaliza o processo de reciclagem e guarda na base de dados
+        /// </summary>
+        /// <param name="idEco">id do ecoponto utilizado</param>
+        /// <param name="nome">user name do utilizador</param>
+        /// <param name="peso">peso do processo de reciclagem</param>
+        /// <param name="pontos">pontos do processo de reciclagem</param>
+        /// <returns></returns>
         public async Task<IActionResult> FinishRecycling(string idEco, string nome, double peso, int pontos)
         {
             var ecoId = new Guid(idEco);
@@ -161,9 +187,6 @@ namespace GlobalImpact.Controllers
 
                 return RedirectToAction("EcoLogin", "RecyclingBins", model);
             }
-
-            
-
             return View();
         }
     }

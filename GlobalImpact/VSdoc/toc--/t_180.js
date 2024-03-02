@@ -1,1 +1,1 @@
-c['180']=[['181',"Methods","topic_0000000000000095_methods--.html",1]];
+c['180']=[['181',"EmailSender Class","topic_0000000000000097.html",1]];

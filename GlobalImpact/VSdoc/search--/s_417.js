@@ -1,1 +1,1 @@
-search_result['417']=["topic_000000000000008A.html","RecyclingBinType Class",""];
+search_result['417']=["topic_000000000000007F_vars--.html","RecyclingBin Fields",""];

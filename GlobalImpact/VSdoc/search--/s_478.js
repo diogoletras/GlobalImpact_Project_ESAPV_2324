@@ -1,1 +1,1 @@
-search_result['478']=["topic_00000000000000A1_methods--.html","ForgotPasswordViewModel Methods",""];
+search_result['478']=["topic_000000000000008F_vars--.html","RecyclingTransaction Fields",""];
