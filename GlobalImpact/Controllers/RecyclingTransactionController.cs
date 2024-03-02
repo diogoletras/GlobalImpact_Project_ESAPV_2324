@@ -43,6 +43,14 @@ namespace GlobalImpact.Controllers
         public async Task<IActionResult> TransacionList(string userId)
         {
             var trans = await _db.RecyclingTransactions.Where(r => r.User.Id == userId).ToArrayAsync();
+            var binId = await _db.RecyclingTransactions.Where(r => r.User.Id == userId).Select(t => t.RecyclingBin.Id).ToArrayAsync();
+            for (int i=0; i<binId.Length; i++)
+            {
+                AppUser user = await _db.Users.FirstOrDefaultAsync(u => u.Id == userId);
+                trans[i].User = user;
+                trans[i].RecyclingBin = await _db.RecyclingBins.FirstOrDefaultAsync(b => b.Id == binId[i]);
+                trans[i].RecyclingBin.RecyclingBinType = await _db.RecyclingBinType.FirstOrDefaultAsync(t => t.RecyclingBinTypeId == new Guid(trans[i].RecyclingBin.RecyclingBinTypeId));
+            }
             return View(trans);
         }
         /// <summary>
