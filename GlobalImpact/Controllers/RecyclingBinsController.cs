@@ -9,6 +9,7 @@ using GlobalImpact.Data;
 using GlobalImpact.Enumerates;
 using GlobalImpact.Models;
 using GlobalImpact.ViewModels.NewFolder;
+using GlobalImpact.ViewModels.RecyclingBin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
@@ -142,7 +143,23 @@ namespace GlobalImpact.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.RecyclingBins.ToListAsync());
+            FilterViewModel model = new FilterViewModel();
+            model.RecyclingBins = await _context.RecyclingBins.ToListAsync();
+
+
+            foreach (var recyclingBin in model.RecyclingBins)
+            {
+                recyclingBin.Type = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(recyclingBin.RecyclingBinTypeId)).Type;
+            }
+
+            model.Capacity = null;
+            model.CurrentCapacity = null;
+            model.Latitude = null;
+            model.Longitude = null;
+            model.Status = "none";
+            model.Type = "none";
+
+            return View(model);
         }
 
         /// <summary>
@@ -177,18 +194,60 @@ namespace GlobalImpact.Controllers
         // GET: RecyclingBins/Create
         [Authorize(Roles = "admin")]
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(string? selectedOption)
         {
-            var res = new RecyclingBin
+            RecyclingBin res = null;
+            if (selectedOption != null)
             {
-                RBTList = new List<RecyclingBinType>
+                var type = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(selectedOption.ToLower()));
+                res = new RecyclingBin
                 {
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.paper.ToString() },
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.plastic.ToString() },
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.glass.ToString() },
-                }
-            };
+                    RBTList = new List<SelectListItem>(
+                        _context.RecyclingBinType.Select(r => new SelectListItem
+                        {
+                            Value = r.RecyclingBinTypeId.ToString(),
+                            Text = r.Type
+                        })
+                    ),
+                    RecyclingBinType = type,
+                    RecyclingBinTypeId = type.RecyclingBinTypeId.ToString()
+                };
+            }
+            else
+            {
+                res = new RecyclingBin
+                {
+                    RBTList = new List<SelectListItem>(
+                        _context.RecyclingBinType.Select(r => new SelectListItem
+                        {
+                            Value = r.RecyclingBinTypeId.ToString(),
+                            Text = r.Type
+                        })
+                    )
+                };
+                RecyclingBinType temp = new RecyclingBinType { RecyclingBinTypeId = new Guid(), Type = "None" };
+
+                res.RecyclingBinTypeId = temp.RecyclingBinTypeId.ToString();
+                res.RecyclingBinType = temp;
+            }
+
             return View(res);
+        }
+
+        public RecyclingBin UpdateTypeChoise(string? selectedOption)
+        {
+            RecyclingBin res = null;
+            if (selectedOption != null)
+            {
+                var type = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(selectedOption.ToLower()));
+                res = new RecyclingBin
+                {
+                    RecyclingBinType = type,
+                    RecyclingBinTypeId = type.RecyclingBinTypeId.ToString()
+                };
+            }
+
+            return res;
         }
 
         /// <summary>
@@ -202,8 +261,9 @@ namespace GlobalImpact.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,RecyclingBinType,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status")] RecyclingBin recyclingBin)
+        public async Task<IActionResult> Create([Bind("Id,Type,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status,RecyclingBinTypeId")] RecyclingBin recyclingBin)
         {
+            ModelState.Remove("RecyclingBinType");
             if (ModelState.IsValid)
             {
                 recyclingBin.Id = Guid.NewGuid();
@@ -213,12 +273,13 @@ namespace GlobalImpact.Controllers
             }
             var res = new RecyclingBin
             {
-                RBTList = new List<RecyclingBinType>
-                {
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.paper.ToString() },
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.plastic.ToString() },
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.glass.ToString() }
-                }
+                RBTList = new List<SelectListItem>(
+                    _context.RecyclingBinType.Select(r => new SelectListItem
+                    {
+                        Value = r.RecyclingBinTypeId.ToString(),
+                        Text = r.Type
+                    })
+                  )
             };
 
             recyclingBin.RBTList = res.RBTList;
@@ -334,6 +395,58 @@ namespace GlobalImpact.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        [Authorize(Roles = "admin")]
+        [HttpGet]
+        public async Task<IActionResult> Filter(FilterViewModel model)
+        {
+            var query = _context.RecyclingBins.AsQueryable();
+
+            if (model.Latitude != null)
+            {
+                query = query.Where(r => r.Latitude == model.Latitude);
+            }
+
+            if (model.Longitude != null)
+            {
+                query = query.Where(r => r.Longitude == model.Longitude);
+            }
+
+            if (model.Capacity != null)
+            {
+                query = query.Where(r => r.Capacity == model.Capacity);
+            }
+
+            if (model.CurrentCapacity != null)
+            {
+                query = query.Where(r => r.CurrentCapacity == model.CurrentCapacity);
+            }
+
+            if (!model.Status.Equals("none"))
+            {
+                if(model.Status.Equals("full"))
+                    query = query.Where(r => r.Status == true);
+                else
+                    query = query.Where(r => r.Status == false);
+            }
+
+            if (!model.Type.Equals("none"))
+            {
+                var type = _context.RecyclingBinType.FirstOrDefault(r => r.Type == model.Type);
+                if (type != null)
+                {
+                    query = query.Where(r => r.RecyclingBinTypeId == type.RecyclingBinTypeId.ToString());
+                }
+            }
+
+            model.RecyclingBins = await query.ToListAsync();
+            foreach (var recyclingBin in model.RecyclingBins)
+            {
+                recyclingBin.Type = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(recyclingBin.RecyclingBinTypeId)).Type;
+            }
+            return View("Index", model);
+        }
+
 
         private bool recyclingBinExists(Guid id)
         {

@@ -1,7 +1,10 @@
-﻿@model IEnumerable<GlobalImpact.Models.RecyclingBin>
+﻿@using GlobalImpact.ViewModels.RecyclingBin
+@model FilterViewModel
 
 @{
     ViewData["Title"] = "Index";
+
+
 }
 
 @if (User.Identity.IsAuthenticated)
@@ -11,6 +14,41 @@
 
         <h1>Index</h1>
 
+
+        @using (Html.BeginForm("Filter", "RecyclingBins", FormMethod.Get, new { @class = "row", id = "recyclingBinFilterForm" }))
+        {
+            <div class="col-2">
+                <label for="longitude">Longitude</label>
+                @Html.TextBoxFor(m => m.Longitude, null, new { @class = "form-control" })
+            </div>
+            <div class="col-2">
+                <label for="latitude">Latitude</label>
+                @Html.TextBoxFor(m => m.Latitude, null, new { @class = "form-control" })
+            </div>
+            <div class="col-2">
+                <label for="type">Type</label>
+                @Html.DropDownListFor(m => m.Type, new SelectList(new[] { "none", "paper", "plastic", "glass" }), new { @class = "form-control" })
+            </div>
+            <div class="col-2">
+                <label for="status">Status</label>
+                @Html.DropDownListFor(m => m.Status, new SelectList(new[] { "none", "full", "not full"}), new { @class = "form-control" })
+            </div>
+            <div class="col-1">
+                <label for="capacity">Capacity</label>
+                @Html.TextBoxFor(m => m.Capacity, null, new { @class = "form-control" })
+            </div>
+            <div class="col-1">
+                <label for="currentCapacity">Current Capacity</label>
+                @Html.TextBoxFor(m => m.CurrentCapacity, null, new { @class = "form-control" })
+            </div>
+            <div class="col-2">
+                <button type="submit" class="btn btn-primary">Filter</button>
+
+                
+            </div>
+        }
+        <button class="btn btn-secondary" onclick="resetRecyclingBinFilterForm()">Clear</button>
+
         <p>
             <a asp-action="Create">Create New</a>
         </p>
@@ -18,41 +56,41 @@
             <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Id)
+                    @Html.DisplayNameFor(model => model.RecyclingBin.Id)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.RecyclingBinType)
+                        @Html.DisplayNameFor(model => model.RecyclingBin.Type)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Latitude)
+                        @Html.DisplayNameFor(model => model.RecyclingBin.Latitude)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Longitude)
+                        @Html.DisplayNameFor(model => model.RecyclingBin.Longitude)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                        @Html.DisplayNameFor(model => model.RecyclingBin.Description)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Capacity)
+                        @Html.DisplayNameFor(model => model.RecyclingBin.Capacity)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CurrentCapacity)
+                        @Html.DisplayNameFor(model => model.RecyclingBin.CurrentCapacity)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Status)
+                        @Html.DisplayNameFor(model => model.RecyclingBin.Status)
                 </th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.RecyclingBins)
             {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Id)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.RecyclingBinType)
+                        @Html.DisplayFor(modelItem => item.Type)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Latitude)
@@ -83,3 +121,9 @@
         </table>
     }
 }
+<script>
+    function resetRecyclingBinFilterForm() {
+        const form = document.getElementById("recyclingBinFilterForm");
+        form.reset();
+    }
+</script>

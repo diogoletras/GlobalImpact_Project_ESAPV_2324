@@ -39,7 +39,11 @@ namespace GlobalImpact.Models
         public bool Status { get; set; }
 
         [NotMapped]
-        public List<RecyclingBinType>? RBTList { get; set; }
+        [Display(Name = "Type")]
+        public string Type { get; set; }
+
+        [NotMapped]
+        public IEnumerable<SelectListItem>? RBTList { get; set; }
 
     }
 }

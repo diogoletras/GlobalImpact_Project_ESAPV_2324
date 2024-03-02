@@ -12,24 +12,25 @@
         <h1>Create</h1>
 
         <h4>RecyclingBin</h4>
+
         <hr/>
         <div class="row">
             <div class="col-md-4">
                 <form asp-action="Create">
+
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="RecyclingBinType" class="col-md-2 text-light"></label>
-                        <div class="col-md-10">
-                            <select asp-for="RecyclingBinType" class="form-control">
-                                <option disabled selected>--Select Role--</option>
-
-                                @foreach (var option1 in Model.RBTList)
-                                {
-                                    <option asp-for="RecyclingBinType" asp-item="@option1">@option1.Type</option>
-                                }
-                            </select>
-                            <span asp-validation-for="RecyclingBinType" class="text-danger"></span>
+                        <div class="form-group">
+                            <div class="row mb-4 align-items-center">
+                                <label asp-for="Type" class="col-md-2 text-light"></label>
+                                <div class="col-md-10">
+                                    <select id="mySelect" asp-for="Type" asp-items="@Model.RBTList" class="form-control">
+                                        <option disabled selected>--Select Role--</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
+                        <span asp-validation-for="Type" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Latitude" class="control-label"></label>
@@ -62,6 +63,7 @@
                         </label>
                     </div>
                     <div class="form-group">
+                        <input id="RecyclingBinTypeId" type="hidden" asp-for="RecyclingBinTypeId" class="form-control"/>
                         <input type="submit" value="Create" class="btn btn-primary"/>
                     </div>
                 </form>
@@ -73,6 +75,20 @@
         </div>
     }
 }
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#mySelect').change(function () {
+            var selectedOption = $(this).val();
+            var url = '@Url.Action("UpdateTypeChoise")' + '?selectedOption=' + selectedOption;
+            $.get(url, function (data) {
+                // Handle the response from the controller action
+                $('#RecyclingBinTypeId').val(data.recyclingBinTypeId);
+            });
+        });
+    });
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -1,10 +1,10 @@
 ﻿using GlobalImpact.Models;
 
-namespace GlobalImpact.ViewModels.NewFolder
+namespace GlobalImpact.ViewModels.RecyclingBin
 {
     public class ReciclarViewModel
     {
-        public RecyclingBin EcoPonto { get; set; }
+        public Models.RecyclingBin EcoPonto { get; set; }
         public string Type { get; set; }
         public string UserName { get; set; }
         public List<RecItems> RecItems { get; set; }

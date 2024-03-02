@@ -1,6 +1,6 @@
 ﻿using Microsoft.Build.Framework;
 
-namespace GlobalImpact.ViewModels.NewFolder
+namespace GlobalImpact.ViewModels.RecyclingBin
 {
     public class EcoLogViewModel
     {

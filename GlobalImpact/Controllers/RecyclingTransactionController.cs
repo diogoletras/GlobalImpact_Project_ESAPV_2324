@@ -9,6 +9,7 @@ using Microsoft.VisualBasic;
 using System.Text.RegularExpressions;
 using GlobalImpact.ViewModels.NewFolder;
 using System;
+using GlobalImpact.ViewModels.RecyclingBin;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace GlobalImpact.Controllers
