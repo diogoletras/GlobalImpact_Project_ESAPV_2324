@@ -1,1 +1,1 @@
-search_result['163']=["topic_0000000000000037_overloads--.html","RecyclingBinsController.Edit Method","Função HttpGet para a edição de um ecoponto."];
+search_result['163']=["topic_0000000000000037.html","RecyclingBinsController.Delete Method","Função HttpGet para a eliminação de um ecoponto."];

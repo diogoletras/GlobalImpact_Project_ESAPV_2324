@@ -1,1 +1,1 @@
-search_result['129']=["topic_000000000000002C.html","ProductsController.Delete Method","Função HttpGet retorna a página de confirmação de delete."];
+search_result['129']=["topic_000000000000002C.html","RecyclingBinsController Constructor","Construtor da classe."];

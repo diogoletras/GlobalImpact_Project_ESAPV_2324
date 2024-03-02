@@ -1,1 +1,1 @@
-search_result['135']=["topic_000000000000002E_overloads--.html","RecyclingBinsController.Create Method",""];
+search_result['135']=["topic_000000000000002E_overloads--.html","RecyclingBinsController.EcoLogin Method","Função HttpGet que retorna a página de introduzação do código de reciclagem."];

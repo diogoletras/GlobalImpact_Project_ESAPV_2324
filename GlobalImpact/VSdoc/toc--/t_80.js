@@ -1,1 +1,1 @@
-c['80']=[['81',"RecyclingTransactionController Constructor","topic_000000000000003C.html",0],['82',"Methods","topic_000000000000003B_methods--.html",1]];
+c['80']=[['81',"FinishRecycling Method","topic_0000000000000040.html",0],['82',"Index Method","topic_000000000000003C.html",0],['83',"Rec Method","topic_000000000000003F.html",0],['84',"Reciclar Method","topic_000000000000003E.html",0],['85',"TransacionList Method","topic_000000000000003D.html",0]];

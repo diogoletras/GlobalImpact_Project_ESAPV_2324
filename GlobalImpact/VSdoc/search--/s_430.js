@@ -1,1 +1,1 @@
-search_result['430']=["topic_000000000000008D.html","RecyclingTransaction Class","Classe de modelo das transações."];
+search_result['430']=["topic_0000000000000082.html","RecyclingBin.RecyclingBinTypeId Property",""];

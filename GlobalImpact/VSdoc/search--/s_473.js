@@ -1,1 +1,1 @@
-search_result['473']=["topic_000000000000009F.html","ExternalLoginViewModel.Age Property",""];
+search_result['473']=["topic_000000000000008F.html","RecyclingTransaction Class","Classe de modelo das transações."];

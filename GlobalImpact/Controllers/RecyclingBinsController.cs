@@ -234,6 +234,11 @@ namespace GlobalImpact.Controllers
             return View(res);
         }
 
+        /// <summary>
+        /// Funçao que devolve o id do tipo de ecoponto
+        /// </summary>
+        /// <param name="selectedOption">opçao escolhida</param>
+        /// <returns></returns>
         public RecyclingBin UpdateTypeChoise(string? selectedOption)
         {
             RecyclingBin res = null;
@@ -396,6 +401,12 @@ namespace GlobalImpact.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        /// <summary>
+        /// Funçao HTTPGet que devolve uma view com os ecopontos filtrados 
+        /// </summary>
+        /// <param name="model">modelo utilizado no formulario</param>
+        /// <returns></returns>
         [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> Filter(FilterViewModel model)
@@ -447,7 +458,11 @@ namespace GlobalImpact.Controllers
             return View("Index", model);
         }
 
-
+        /// <summary>
+        /// Funçao que recebe um id e verifica se o ecoponto exite
+        /// </summary>
+        /// <param name="id">id a veririfcar</param>
+        /// <returns></returns>
         private bool recyclingBinExists(Guid id)
         {
             return _context.RecyclingBins.Any(e => e.Id == id);

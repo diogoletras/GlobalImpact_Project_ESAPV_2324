@@ -1,1 +1,1 @@
-search_result['160']=["topic_0000000000000036_props--.html","ApplicationDbContext Properties",""];
+search_result['160']=["topic_0000000000000036_overloads--.html","RecyclingBinsController.Edit Method","Função HttpPost que retorna a lista de ecoponto depois de um ser editado."];

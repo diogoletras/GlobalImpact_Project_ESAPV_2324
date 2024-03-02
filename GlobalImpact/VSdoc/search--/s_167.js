@@ -1,1 +1,1 @@
-search_result['167']=["topic_000000000000003A.html","RecyclingBinsController.DeleteConfirmed Method","Função HttpPost que retorna a página de confirmação de delete."];
+search_result['167']=["topic_0000000000000039.html","RecyclingBinsController.Filter Method","Funçao HTTPGet que devolve uma view com os ecopontos filtrados"];

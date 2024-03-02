@@ -1,1 +1,1 @@
-search_result['76']=["topic_000000000000001E.html","AdminController.CreateRecyclingBin (CreateRecyclingBinViewModel) Method",""];
+search_result['76']=["topic_000000000000001E.html","HomeController.Index Method","Função de criação de Role, caso não exista."];

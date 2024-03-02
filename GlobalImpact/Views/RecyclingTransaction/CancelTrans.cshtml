@@ -1,0 +1,54 @@
+﻿@model GlobalImpact.ViewModels.RecyclingBin.ReciclarViewModel
+
+@{
+	string eco = "";
+	if (Model.Type.Equals("glass"))
+	{
+		eco = "Ecoponto Verde (Vidro)";
+	}
+	else if (Model.Type.Equals("paper"))
+	{
+		eco = "Ecoponto Azul (Papel)";
+	}
+	else
+	{
+		eco = "Ecoponto Amarelo (Plastico)";
+	}
+}
+
+<div class="container-background">
+	<div class="text-center">
+		<h1 class="display-4">Detalhes do Ecoponto</h1>
+		<div class="text-left">
+			<div class="row">
+				<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+					Tipo do Ecoponto: @eco
+				</div>
+				<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+					Nome do Utilizador: @Model.UserName
+				</div>
+			</div>
+		</div>
+	</div>
+
+<h1>Operação Cancelada</h1>
+<p>Os items introduzidos seram repostos no conteiner lateral </p>
+<div class="text-center">
+	<h2 class="display-4">Lista de items devolvidos</h2>
+	@foreach (var item in Model.Reciclados)
+	{
+		<div class="items-available text-left">
+			<div class="items-available-details">
+				<div class="items-available-details-">
+					<h6>@item.Nome</h6>
+					<p>@item.Peso KG</p>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+	<form method="post" asp-controller="RecyclingTransaction" asp-action="CancelConfirm">
+		<input type="hidden" name="idEco" value="@Model.EcoPonto.Id" />
+		<button type="submit" class="btn-grad-small">Confirmar</button>
+	</form>
+</div>

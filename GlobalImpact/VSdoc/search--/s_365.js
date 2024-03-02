@@ -1,1 +1,1 @@
-search_result['365']=["topic_000000000000007A_props--.html","RecItems Properties",""];
+search_result['365']=["topic_0000000000000073.html","Product Class",""];

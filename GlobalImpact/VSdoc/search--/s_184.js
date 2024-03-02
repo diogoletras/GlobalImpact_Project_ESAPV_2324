@@ -1,1 +1,1 @@
-search_result['184']=["topic_0000000000000041_vars--.html","ApplicationDbContext Fields",""];
+search_result['184']=["topic_0000000000000040.html","RecyclingTransactionController.FinishRecycling Method","Função HTTPPost que finaliza o processo de reciclagem e guarda na base de dados"];

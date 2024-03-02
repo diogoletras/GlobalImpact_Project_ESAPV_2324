@@ -1,1 +1,1 @@
-search_result['475']=["topic_00000000000000A1.html","ForgotPasswordViewModel Class","Classe de visualização da página \"Forgot PassWord\"."];
+search_result['475']=["topic_000000000000008F_events--.html","RecyclingTransaction Events",""];

@@ -1,7 +1,6 @@
 ﻿@model GlobalImpact.ViewModels.RecyclingBin.ReciclarViewModel
 
 @{
-	// Calcula a soma dos pesos e a soma dos pontos
 	string eco = "";
 	if(Model.Type.Equals("glass"))
 	{
@@ -70,6 +69,13 @@
 			<input type="hidden" name="peso" value="@totalPeso" />
 			<input type="hidden" name="pontos" value="@totalPontos" />
 			<button type="submit" class="btn-grad-small">Terminar</button>
+		</form>
+		<p></p>
+		<form method="post" asp-controller="RecyclingTransaction" asp-action="CancelTrans">
+			<input type="hidden" name="idEco" value="@Model.EcoPonto.Id" />
+			<input type="hidden" name="nome" value="@Model.UserName" />
+			<input type="hidden" name="type" value="@Model.Type" />
+			<button type="submit" class="btn-grad-small">Cancelar</button>
 		</form>
 	</div>
 	<p></p>
