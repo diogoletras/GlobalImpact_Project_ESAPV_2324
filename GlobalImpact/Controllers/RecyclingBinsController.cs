@@ -154,8 +154,6 @@ namespace GlobalImpact.Controllers
 
             model.Capacity = null;
             model.CurrentCapacity = null;
-            model.Latitude = null;
-            model.Longitude = null;
             model.Status = "none";
             model.Type = "none";
 
@@ -413,16 +411,6 @@ namespace GlobalImpact.Controllers
         {
             var query = _context.RecyclingBins.AsQueryable();
 
-            if (model.Latitude != null)
-            {
-                query = query.Where(r => r.Latitude == model.Latitude);
-            }
-
-            if (model.Longitude != null)
-            {
-                query = query.Where(r => r.Longitude == model.Longitude);
-            }
-
             if (model.Capacity != null)
             {
                 query = query.Where(r => r.Capacity == model.Capacity);
@@ -433,7 +421,7 @@ namespace GlobalImpact.Controllers
                 query = query.Where(r => r.CurrentCapacity == model.CurrentCapacity);
             }
 
-            if (!model.Status.Equals("none"))
+            if (!model.Status.Equals("none") || model.Status != null)
             {
                 if(model.Status.Equals("full"))
                     query = query.Where(r => r.Status == true);
@@ -441,7 +429,7 @@ namespace GlobalImpact.Controllers
                     query = query.Where(r => r.Status == false);
             }
 
-            if (!model.Type.Equals("none"))
+            if (!model.Type.Equals("none") || model.Type != null)
             {
                 var type = _context.RecyclingBinType.FirstOrDefault(r => r.Type == model.Type);
                 if (type != null)

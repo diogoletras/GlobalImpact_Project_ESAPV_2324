@@ -12,118 +12,108 @@
     @if (User.IsInRole("admin"))
     {
 
-        <h1>Index</h1>
-
-
-        @using (Html.BeginForm("Filter", "RecyclingBins", FormMethod.Get, new { @class = "row", id = "recyclingBinFilterForm" }))
-        {
-            <div class="col-2">
-                <label for="longitude">Longitude</label>
-                @Html.TextBoxFor(m => m.Longitude, null, new { @class = "form-control" })
-            </div>
-            <div class="col-2">
-                <label for="latitude">Latitude</label>
-                @Html.TextBoxFor(m => m.Latitude, null, new { @class = "form-control" })
-            </div>
-            <div class="col-2">
-                <label for="type">Type</label>
-                @Html.DropDownListFor(m => m.Type, new SelectList(new[] { "none", "paper", "plastic", "glass" }), new { @class = "form-control" })
-            </div>
-            <div class="col-2">
-                <label for="status">Status</label>
-                @Html.DropDownListFor(m => m.Status, new SelectList(new[] { "none", "full", "not full"}), new { @class = "form-control" })
-            </div>
-            <div class="col-1">
-                <label for="capacity">Capacity</label>
-                @Html.TextBoxFor(m => m.Capacity, null, new { @class = "form-control" })
-            </div>
-            <div class="col-1">
-                <label for="currentCapacity">Current Capacity</label>
-                @Html.TextBoxFor(m => m.CurrentCapacity, null, new { @class = "form-control" })
-            </div>
-            <div class="col-2">
-                <button type="submit" class="btn btn-primary">Filter</button>
-
-                
-            </div>
-        }
-        <button class="btn btn-secondary" onclick="resetRecyclingBinFilterForm()">Clear</button>
-
-        <p>
-            <a asp-action="Create">Create New</a>
-        </p>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.RecyclingBin.Id)
-                </th>
-                <th>
-                        @Html.DisplayNameFor(model => model.RecyclingBin.Type)
-                </th>
-                <th>
-                        @Html.DisplayNameFor(model => model.RecyclingBin.Latitude)
-                </th>
-                <th>
-                        @Html.DisplayNameFor(model => model.RecyclingBin.Longitude)
-                </th>
-                <th>
-                        @Html.DisplayNameFor(model => model.RecyclingBin.Description)
-                </th>
-                <th>
-                        @Html.DisplayNameFor(model => model.RecyclingBin.Capacity)
-                </th>
-                <th>
-                        @Html.DisplayNameFor(model => model.RecyclingBin.CurrentCapacity)
-                </th>
-                <th>
-                        @Html.DisplayNameFor(model => model.RecyclingBin.Status)
-                </th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var item in Model.RecyclingBins)
+        
+        <div class="row text-white">
+            <h1 class="text-white text-center col-2">Filters</h1>
+            <h1 class="text-white text-center col-10">Recycling Bins</h1>
+        </div>
+        <div class="row text-white">
+            @using (Html.BeginForm("Filter", "RecyclingBins", FormMethod.Get, new { @class = "col-2", id = "recyclingBinFilterForm" }))
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Type)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Latitude)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Longitude)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Capacity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CurrentCapacity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
+                <div class="row mt-1">
+                    <label for="type">Type</label>
+                    @Html.DropDownListFor(m => m.Type, new SelectList(new[] { "none", "paper", "plastic", "glass" }), new { @class = "form-control" })
+                </div>
+                <div class="row mt-1">
+                    <label for="status">Status</label>
+                    @Html.DropDownListFor(m => m.Status, new SelectList(new[] { "none", "full", "not full"}), new { @class = "form-control" })
+                </div>
+                <div class="row mt-1">
+                    <label for="capacity">Capacity</label>
+                    @Html.TextBoxFor(m => m.Capacity, null, new { @class = "form-control" })
+                </div>
+                <div class="row mt-1">
+                    <label for="currentCapacity">Current Capacity</label>
+                    @Html.TextBoxFor(m => m.CurrentCapacity, null, new { @class = "form-control" })
+                </div>
+                <div class="row justify-content-center mt-1">
+                    <button type="submit" class="btn btn-primary col-3 ">Filter</button>
+                </div>
             }
-            </tbody>
-        </table>
+
+            <div class="col-10 text-center">
+
+                <table class="table" style="width: 90%">
+                    <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RecyclingBin.Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RecyclingBin.Type)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RecyclingBin.Latitude)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RecyclingBin.Longitude)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RecyclingBin.Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RecyclingBin.Capacity)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RecyclingBin.CurrentCapacity)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RecyclingBin.Status)
+                        </th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.RecyclingBins)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Latitude)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Longitude)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Capacity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CurrentCapacity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+                <p>
+                    <a asp-action="Create">Create New</a>
+                </p>
+            </div>
+        </div>
     }
 }
-<script>
-    function resetRecyclingBinFilterForm() {
-        const form = document.getElementById("recyclingBinFilterForm");
-        form.reset();
-    }
-</script>

@@ -31,24 +31,30 @@
 		</div>
 	</div>
 
-<h1>Operação Cancelada</h1>
-<p>Os items introduzidos seram repostos no conteiner lateral </p>
-<div class="text-center">
-	<h2 class="display-4">Lista de items devolvidos</h2>
-	@foreach (var item in Model.Reciclados)
-	{
-		<div class="items-available text-left">
-			<div class="items-available-details">
-				<div class="items-available-details-">
-					<h6>@item.Nome</h6>
-					<p>@item.Peso KG</p>
-				</div>
-			</div>
-		</div>
-	}
-</div>
-	<form method="post" asp-controller="RecyclingTransaction" asp-action="CancelConfirm">
-		<input type="hidden" name="idEco" value="@Model.EcoPonto.Id" />
-		<button type="submit" class="btn-grad-small">Confirmar</button>
-	</form>
+    <div class="text-center">
+        <h1>Operação Cancelada</h1>
+        <p>Os items introduzidos seram repostos no contentor lateral </p>
+    </div>
+
+    <div class="text-center">
+        <h2 class="display-4">Lista de items devolvidos</h2>
+        @foreach (var item in Model.Reciclados)
+        {
+            <div class="items-available text-left">
+                <div class="items-available-details">
+                    <div class="items-available-details-">
+                        <h6>@item.Nome</h6>
+                        <p>@item.Peso KG</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+	
+    <div class="text-center">
+        <form method="post" asp-controller="RecyclingTransaction" asp-action="CancelConfirm">
+            <input type="hidden" name="idEco" value="@Model.EcoPonto.Id" />
+            <button type="submit" class="btn-grad-small mb-1">Confirmar</button>
+        </form>
+    </div>
 </div>

@@ -9,70 +9,88 @@
     @if (User.IsInRole("admin"))
     {
 
-        <h1>Create</h1>
+        
 
-        <h4>RecyclingBin</h4>
+        
+        <div class="row text-center">
+            <h1 class="text-white">Create</h1>
 
-        <hr/>
-        <div class="row">
+            <h4 class="text-white">RecyclingBin</h4>
+            <hr />
             <div class="col-md-4">
                 <form asp-action="Create">
-
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <div class="form-group">
-                            <div class="row mb-4 align-items-center">
-                                <label asp-for="Type" class="col-md-2 text-light"></label>
-                                <div class="col-md-10">
-                                    <select id="mySelect" asp-for="Type" asp-items="@Model.RBTList" class="form-control">
-                                        <option disabled selected>--Select Role--</option>
-                                    </select>
-                                </div>
-                            </div>
+                    <div class="row mt-1">
+                        <div class="col-2 text-center text-white"><label asp-for="Type" class="col-md-2 text-light"></label></div>
+                        <div class="col-md-10">
+                            <select id="mySelect" asp-for="Type" asp-items="@Model.RBTList" class="form-control">
+                                <option disabled selected>--Select Role--</option>
+                            </select>
+                            <span asp-validation-for="Type" class="text-danger"></span>
                         </div>
-                        <span asp-validation-for="Type" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Latitude" class="control-label"></label>
-                        <input asp-for="Latitude" class="form-control"/>
-                        <span asp-validation-for="Latitude" class="text-danger"></span>
+                    <div class="row mt-1">
+                        <div class="col-2 text-center text-white"><label asp-for="Latitude" class="control-label"></label></div>
+                        <div class="col-md-10">
+                            <input asp-for="Latitude" class="form-control"/>
+                            <span asp-validation-for="Latitude" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Longitude" class="control-label"></label>
-                        <input asp-for="Longitude" class="form-control"/>
-                        <span asp-validation-for="Longitude" class="text-danger"></span>
+                    <div class="row mt-1">
+                        <div class="col-2 text-center text-white"><label asp-for="Longitude" class="control-label"></label></div>
+                        <div class="col-md-10">
+                            
+                            <input asp-for="Longitude" class="form-control"/>
+                            <span asp-validation-for="Longitude" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Description" class="control-label"></label>
-                        <input asp-for="Description" class="form-control"/>
-                        <span asp-validation-for="Description" class="text-danger"></span>
+                    <div class="row mt-1">
+                        <div class="col-2 text-center text-white"><label asp-for="Description" class="control-label"></label></div>
+                        <div class="col-md-10">
+                            
+                            <input asp-for="Description" class="form-control"/>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Capacity" class="control-label"></label>
-                        <input asp-for="Capacity" class="form-control"/>
-                        <span asp-validation-for="Capacity" class="text-danger"></span>
+                    <div class="row mt-1">
+                        <div class="col-2 text-center text-white"><label asp-for="Capacity" class="control-label"></label></div>
+                        <div class="col-md-10">
+                            
+                            <input asp-for="Capacity" class="form-control"/>
+                            <span asp-validation-for="Capacity" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="CurrentCapacity" class="control-label"></label>
-                        <input asp-for="CurrentCapacity" class="form-control"/>
-                        <span asp-validation-for="CurrentCapacity" class="text-danger"></span>
+                    <div class="row mt-1">
+                        <div class="col-2 text-center text-white"><label asp-for="CurrentCapacity" class="control-label"></label></div>
+                        <div class="col-md-10">
+                            
+                            <input asp-for="CurrentCapacity" class="form-control"/>
+                            <span asp-validation-for="CurrentCapacity" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="Status"/> @Html.DisplayNameFor(model => model.Status)
-                        </label>
+                    <div class="form-group form-check mt-2">
+                        <div class="col-12 text-center text-white">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Status"/> @Html.DisplayNameFor(model => model.Status)
+                            </label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input id="RecyclingBinTypeId" type="hidden" asp-for="RecyclingBinTypeId" class="form-control"/>
-                        <input type="submit" value="Create" class="btn btn-primary"/>
+                    <div class="row mt-4">
+                        <div class="col-3 text-white">
+                        </div>
+                        <div class="col-3 text-white">
+                            <input id="RecyclingBinTypeId" type="hidden" asp-for="RecyclingBinTypeId" class="form-control"/>
+                            <input type="submit" value="Create" class="btn btn-primary"/>
+                        </div>
+                        <div class="col-3 text-white">
+                            <a asp-action="Index" class="btn btn-primary">Back to List</a>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
 
-        <div>
-            <a asp-action="Index">Back to List</a>
-        </div>
+        
     }
 }
 

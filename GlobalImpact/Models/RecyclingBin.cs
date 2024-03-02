@@ -22,7 +22,7 @@ namespace GlobalImpact.Models
         [Required]
         public double Longitude { get; set; }
 
-        [Display(Name = "Tipo Ecoponto")]
+        [Display(Name = "Descrição")]
         [Required]
         public string Description { get; set; }
 
@@ -34,7 +34,7 @@ namespace GlobalImpact.Models
         [Required]
         public double CurrentCapacity { get; set; }
 
-        [Display(Name = "Disponivel ?")]
+        [Display(Name = "Disponibilidade")]
         [Required]
         public bool Status { get; set; }
 
