@@ -11,6 +11,7 @@ using GlobalImpact.ViewModels.NewFolder;
 using System;
 using GlobalImpact.ViewModels.RecyclingBin;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Drawing;
 
 namespace GlobalImpact.Controllers
 {
@@ -189,5 +190,35 @@ namespace GlobalImpact.Controllers
             }
             return View();
         }
-    }
+
+        [HttpPost]
+        public async Task<IActionResult> CancelTrans(string idEco, string nome, string type)
+        {
+			var ecoId = new Guid(idEco);
+			var ecoponto = await _db.RecyclingBins.FirstOrDefaultAsync(e => e.Id == ecoId);
+
+			var model = new ReciclarViewModel
+			{
+				EcoPonto = ecoponto,
+				Type = type,
+				UserName = nome,
+				RecItems = recItems,
+				Reciclados = items
+			};
+
+			return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CancelConfirm(string idEco)
+        {
+			var model = new EcoLogViewModel
+			{
+				IdInput = idEco
+			};
+
+			return RedirectToAction("EcoLogin", "RecyclingBins", model);
+		}
+
+	}
 }
