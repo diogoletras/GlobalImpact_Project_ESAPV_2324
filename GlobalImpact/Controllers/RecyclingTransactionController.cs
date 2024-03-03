@@ -155,6 +155,7 @@ namespace GlobalImpact.Controllers
         /// <param name="peso">peso do processo de reciclagem</param>
         /// <param name="pontos">pontos do processo de reciclagem</param>
         /// <returns></returns>
+        [HttpPost]
         public async Task<IActionResult> FinishRecycling(string idEco, string nome, double peso, int pontos)
         {
             var ecoId = new Guid(idEco);
@@ -178,14 +179,16 @@ namespace GlobalImpact.Controllers
 
                 if((ecoponto.CurrentCapacity + peso) >= ecoponto.Capacity)
                 {
-                    ecoponto.Status = false;
-                    ecoponto.CurrentCapacity = ecoponto.Capacity;
+	                ecoponto.Status = true;
+					ecoponto.CurrentCapacity = ecoponto.Capacity;
                 }
                 else
                 {
-                    ecoponto.CurrentCapacity += peso;
+	                ecoponto.Status = false;
+					ecoponto.CurrentCapacity += peso;
                 }
-                _db.RecyclingBins.Update(ecoponto);
+                
+				_db.RecyclingBins.Update(ecoponto);
 
                 await _db.SaveChangesAsync();
 
@@ -222,8 +225,14 @@ namespace GlobalImpact.Controllers
         {
 			var model = new EcoLogViewModel
 			{
-				IdInput = idEco
+				IdInput = idEco,
 			};
+
+            var ecoponto = await _db.RecyclingBins.FirstOrDefaultAsync(e => e.Id == new Guid(idEco));
+
+            ecoponto.Status = false;
+            _db.RecyclingBins.Update(ecoponto);
+            await _db.SaveChangesAsync();
 
 			return RedirectToAction("EcoLogin", "RecyclingBins", model);
 		}

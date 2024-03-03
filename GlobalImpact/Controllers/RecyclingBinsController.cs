@@ -58,9 +58,12 @@ namespace GlobalImpact.Controllers
 				if (splitString[1].Equals("enable"))
 				{
 					var ecoponto = await _context.RecyclingBins.FirstOrDefaultAsync(e => e.Id == new Guid(splitString[0]));
-					ecoponto.Status = false;
-					_context.RecyclingBins.Update(ecoponto);
-					_context.SaveChanges();
+					if (ecoponto.Capacity > ecoponto.CurrentCapacity)
+					{
+						ecoponto.Status = false;
+						_context.RecyclingBins.Update(ecoponto);
+						_context.SaveChanges();
+					}
 					return RedirectToAction("EcoLog");
 				}
 			}
