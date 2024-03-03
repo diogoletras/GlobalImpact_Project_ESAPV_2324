@@ -22,24 +22,24 @@ namespace GlobalImpact.Models
         [Required]
         public double Longitude { get; set; }
 
-        [Display(Name = "Descrição")]
+        [Display(Name = "Description")]
         [Required]
         public string Description { get; set; }
 
-        [Display(Name = "Capacidade Total")]
+        [Display(Name = "Total Capacity")]
         [Required]
         public double Capacity { get; set; }
 
-        [Display(Name = "Capacidade Atual")]
+        [Display(Name = "Current Capacity")]
         [Required]
         public double CurrentCapacity { get; set; }
 
-        [Display(Name = "Disponibilidade")]
+        [Display(Name = "Available")]
         [Required]
         public bool Status { get; set; }
 
         [NotMapped]
-        [Display(Name = "Type")]
+        [Display(Name = "Recycling Bin Type")]
         public string Type { get; set; }
 
         [NotMapped]

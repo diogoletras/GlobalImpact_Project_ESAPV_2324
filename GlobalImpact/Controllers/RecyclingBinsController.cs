@@ -52,6 +52,18 @@ namespace GlobalImpact.Controllers
         [HttpGet]
         public async Task<IActionResult> EcoLogin(EcoLogViewModel model)
         {
+	        if (model.IdInput.Contains(","))
+	        {
+				var splitString = model.IdInput.Split(",");
+				if (splitString[1].Equals("enable"))
+				{
+					var ecoponto = await _context.RecyclingBins.FirstOrDefaultAsync(e => e.Id == new Guid(splitString[0]));
+					ecoponto.Status = false;
+					_context.RecyclingBins.Update(ecoponto);
+					_context.SaveChanges();
+					return RedirectToAction("EcoLog");
+				}
+			}
             if (model.IdInput != null && Guid.TryParse(model.IdInput, out Guid id))
             {
                 // Recupera o ecoponto com o ID correspondente
@@ -60,32 +72,48 @@ namespace GlobalImpact.Controllers
                 // Verifica se o ecoponto foi encontrado
                 if (ecoponto != null)
                 {
-                    if (ecoponto.Status || ecoponto.Capacity <= ecoponto.CurrentCapacity)
-                    {
-                        ecoponto.Status = false;
-                        _context.RecyclingBins.Update(ecoponto);
-                        _context.SaveChanges();
-                        ModelState.AddModelError("IdInput", "Recycling bin is already in use");
-                        return RedirectToAction("EcoLogin", "RecyclingBins",model);
-                        
+	                var typeId = _context.RecyclingBins.FirstOrDefault(e => e.Id == id).RecyclingBinTypeId;
+	                var binType = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(typeId));
+					if (!ecoponto.Status)
+					{
+	                    ecoponto.Type = binType.Type;
+	                    ecoponto.Status = true;
+	                    _context.RecyclingBins.Update(ecoponto);
+	                    _context.SaveChanges();
+						if (ecoponto.Status && ecoponto.Capacity <= ecoponto.CurrentCapacity)
+	                    {
+	                        _context.RecyclingBins.Update(ecoponto);
+	                        _context.SaveChanges();
+	                        ModelState.AddModelError("IdInput", "Recycling bin is Full");
+	                        return RedirectToAction("EcoLogin", "RecyclingBins",model);
+	                        
+	                    }
+	                    else
+	                    {
+	                        if(ecoponto.Capacity <= ecoponto.CurrentCapacity)
+	                        {
+	                            ecoponto.Status = true;
+	                            _context.RecyclingBins.Update(ecoponto);
+	                            _context.SaveChanges();
+	                            return View(ecoponto);
+	                        }
+	                        else
+	                        {
+	                            return View(ecoponto);
+	                        }
+	                        
+	                    }
                     }
                     else
                     {
-                        if(ecoponto.Capacity <= ecoponto.CurrentCapacity)
-                        {
-                            ecoponto.Status = true;
-                            _context.RecyclingBins.Update(ecoponto);
-                            _context.SaveChanges();
-                            return View(ecoponto);
-                        }
-                        else
-                        {
-                            return View(ecoponto);
-                        }
-                        
-                    }
-                        
-                }
+	                    ecoponto.Type = binType.Type;
+	                    ecoponto.Status = true;
+	                    _context.RecyclingBins.Update(ecoponto);
+	                    _context.SaveChanges();
+	                    ModelState.AddModelError("IdInput", "Recycling is in Use");
+						return RedirectToAction("EcoLog");
+					}
+				}
                 else
                 {
                     // Se o ecoponto não foi encontrado, você pode exibir uma mensagem de erro ou redirecionar para uma página de erro
@@ -109,12 +137,21 @@ namespace GlobalImpact.Controllers
         {
             if (uniqueCode != null && binId != null )
             {
-                var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UniqueCode == uniqueCode);
+	            
+                
                 var ecoponto = await _context.RecyclingBins.FirstOrDefaultAsync(e => e.Id == binId);
                 var recyclingList = _context.RecyclingBins.ToList();
                 var recyclingBinTypeList = _context.RecyclingBinType.ToList();
 
-                if (user != null)
+                if (uniqueCode.Equals("disable"))
+                {
+	                ecoponto.Status = false;
+                    _context.RecyclingBins.Update(ecoponto);
+                    _context.SaveChanges();
+	                return RedirectToAction("EcoLog");
+				}
+                var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UniqueCode == uniqueCode);
+				if (user != null)
                 {
                     foreach (var recyclingBin in recyclingList)
                     {
