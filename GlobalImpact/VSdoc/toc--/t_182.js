@@ -1,1 +1,1 @@
-c['182']=[['183',"SendEmailAsync Method","topic_0000000000000098.html",0]];
+c['182']=[['183',"EmailSender Class","topic_0000000000000099.html",1]];

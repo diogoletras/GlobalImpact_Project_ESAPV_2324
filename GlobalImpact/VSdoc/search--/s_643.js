@@ -1,1 +1,1 @@
-search_result['643']=["topic_00000000000000D0_vars--.html","ReciclarViewModel Fields",""];
+search_result['643']=["topic_00000000000000BA_events--.html","CreateRecyclingBinViewModel Events",""];

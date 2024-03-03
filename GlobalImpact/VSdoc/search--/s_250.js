@@ -1,1 +1,1 @@
-search_result['250']=["topic_0000000000000050.html","GlobalImpact.Enumerates Namespace",""];
+search_result['250']=["topic_0000000000000050.html","StationeryItems Class",""];

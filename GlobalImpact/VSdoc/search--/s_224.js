@@ -1,1 +1,1 @@
-search_result['224']=["topic_000000000000004A.html","ApplicationDbContext.CreateRecyclingBinViewModel Property",""];
+search_result['224']=["topic_000000000000004A.html","ApplicationDbContext.RecyclingTransactions Property",""];

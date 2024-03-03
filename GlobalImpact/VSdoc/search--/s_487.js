@@ -1,1 +1,1 @@
-search_result['487']=["topic_0000000000000093.html","RecyclingTransaction.Weight Property",""];
+search_result['487']=["topic_000000000000008E.html","RecyclingBinType Class",""];

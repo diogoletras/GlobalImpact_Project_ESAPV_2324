@@ -1,1 +1,1 @@
-search_result['500']=["topic_0000000000000097_props--.html","EmailSender Properties",""];
+search_result['500']=["topic_0000000000000091.html","RecyclingTransaction Class","Classe de modelo das transações."];

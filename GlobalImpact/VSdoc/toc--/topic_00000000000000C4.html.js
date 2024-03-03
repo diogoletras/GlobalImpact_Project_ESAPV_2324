@@ -1,1 +1,1 @@
-var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_00000000000000D6.html"],['234',"GlobalImpact.ViewModels.RecyclingBin Namespace","topic_00000000000000C4.html"]];
+var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_00000000000000D6.html"],['224',"GlobalImpact.ViewModels.NewFolder Namespace","topic_00000000000000BB.html"],['225',"CreateRecyclingBinViewModel Class","topic_00000000000000BC.html"],['226',"Properties","topic_00000000000000BC_props--.html"],['234',"Status Property","topic_00000000000000C4.html"]];

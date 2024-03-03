@@ -202,6 +202,13 @@ namespace GlobalImpact.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Funçao HTTPPost de cancelamento do pocesso de reciclagem
+        /// </summary>
+        /// <param name="idEco">id do ecoponto utilizado</param>
+        /// <param name="nome">user name do utilizador</param>
+        /// <param name="type">tipo de ecoponto</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CancelTrans(string idEco, string nome, string type)
         {
@@ -220,6 +227,11 @@ namespace GlobalImpact.Controllers
 			return View(model);
         }
 
+        /// <summary>
+        /// Função HTTPPost que confirma o cancelarmento da transação de reciclagem
+        /// </summary>
+        /// <param name="idEco">id do ecoponto que esta a ser utilizado</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CancelConfirm(string idEco)
         {

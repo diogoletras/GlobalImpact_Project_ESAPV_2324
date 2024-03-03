@@ -1,1 +1,1 @@
-search_result['553']=["topic_00000000000000A8_vars--.html","RegisterViewModel Fields",""];
+search_result['553']=["topic_000000000000009E.html","ExternalLoginViewModel Class","Classe de visualação do login através da API externa."];

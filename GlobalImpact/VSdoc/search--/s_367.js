@@ -1,1 +1,1 @@
-search_result['367']=["topic_0000000000000073_events--.html","Product Events",""];
+search_result['367']=["topic_0000000000000070.html","Cart.Product Property",""];

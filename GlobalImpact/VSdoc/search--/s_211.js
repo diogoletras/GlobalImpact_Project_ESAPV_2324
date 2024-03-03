@@ -1,1 +1,1 @@
-search_result['211']=["topic_0000000000000047.html","ApplicationDbContext.RecyclingBins Property",""];
+search_result['211']=["topic_0000000000000047.html","ApplicationDbContext.Products Property",""];

@@ -1,1 +1,1 @@
-search_result['197']=["topic_0000000000000043.html","ApplicationDbContext Constructor",""];
+search_result['197']=["topic_0000000000000043.html","GlobalImpact.Data Namespace",""];

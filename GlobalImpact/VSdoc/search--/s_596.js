@@ -1,1 +1,1 @@
-search_result['596']=["topic_00000000000000BA_vars--.html","CreateRecyclingBinViewModel Fields",""];
+search_result['596']=["topic_00000000000000AA_attached_props--.html","RegisterViewModel Attached Properties",""];

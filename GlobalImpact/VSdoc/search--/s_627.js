@@ -1,1 +1,1 @@
-search_result['627']=["topic_00000000000000C7_methods--.html","FilterViewModel Methods",""];
+search_result['627']=["topic_00000000000000B6.html","ResetPasswordViewModel Class","Classe de visualização da página \"Reset PassWord\"."];

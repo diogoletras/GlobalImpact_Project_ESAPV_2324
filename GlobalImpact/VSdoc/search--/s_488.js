@@ -1,1 +1,1 @@
-search_result['488']=["topic_0000000000000094.html","RecyclingTransaction.Date Property",""];
+search_result['488']=["topic_000000000000008E_attached_props--.html","RecyclingBinType Attached Properties",""];

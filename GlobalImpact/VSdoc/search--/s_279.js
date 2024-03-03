@@ -1,1 +1,1 @@
-search_result['279']=["topic_000000000000005A_props--.html","IEmailSender Properties",""];
+search_result['279']=["topic_0000000000000059_vars--.html","IEmailSender Fields",""];

@@ -1,1 +1,1 @@
-search_result['274']=["topic_0000000000000059_vars--.html","IEmailSender Fields",""];
+search_result['274']=["topic_0000000000000059.html","GlobalImpact.Interfaces Namespace",""];

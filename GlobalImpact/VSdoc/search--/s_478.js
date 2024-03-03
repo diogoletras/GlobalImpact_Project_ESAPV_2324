@@ -1,1 +1,1 @@
-search_result['478']=["topic_000000000000008F_vars--.html","RecyclingTransaction Fields",""];
+search_result['478']=["topic_000000000000008C_methods--.html","RecyclingBinType Methods",""];

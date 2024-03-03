@@ -1,1 +1,1 @@
-c['105']=[['106',"BinType Enumeration","topic_0000000000000051.html",0]];
+c['105']=[['106',"Items Property","topic_0000000000000051.html",0]];

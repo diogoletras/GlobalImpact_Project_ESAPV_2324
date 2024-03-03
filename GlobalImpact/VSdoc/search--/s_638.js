@@ -1,1 +1,1 @@
-search_result['638']=["topic_00000000000000D0.html","ReciclarViewModel Class",""];
+search_result['638']=["topic_00000000000000B8_props--.html","CreateRecyclingBinViewModel Properties",""];

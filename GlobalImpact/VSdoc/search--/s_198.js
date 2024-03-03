@@ -1,1 +1,1 @@
-search_result['198']=["topic_0000000000000044.html","ApplicationDbContext.AppUser Property",""];
+search_result['198']=["topic_0000000000000044.html","ApplicationDbContext Class","Classe de Auxílio à migração dos dados."];

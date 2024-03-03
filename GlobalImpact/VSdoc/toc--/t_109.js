@@ -1,1 +1,1 @@
-c['109']=[['110',"SendEmailAsync Method","topic_000000000000005B.html",0]];
+c['109']=[['110',"IEmailSender Interface","topic_000000000000005C.html",1]];

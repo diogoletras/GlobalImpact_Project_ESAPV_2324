@@ -1,1 +1,1 @@
-search_result['477']=["topic_000000000000008F_props--.html","RecyclingTransaction Properties",""];
+search_result['477']=["topic_000000000000008C_events--.html","RecyclingBinType Events",""];
