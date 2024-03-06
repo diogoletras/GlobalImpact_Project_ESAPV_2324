@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GlobalImpact.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240229193651_initialcreate")]
-    partial class initialcreate
+    [Migration("20240306173227_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -113,25 +113,25 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d8704e5d-d502-4340-bfe5-cf9efdfa1857",
+                            Id = "e12bd2a8-9ef3-45c7-b33b-3d04363b823b",
                             AccessFailedCount = 0,
                             Age = 0,
-                            ConcurrencyStamp = "fc2ea48d-a0ac-48dc-b8fc-cd8ee48149c5",
-                            Email = "",
+                            ConcurrencyStamp = "3dd10375-22e8-4f49-b4cc-d103e0368f5e",
+                            Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
                             LastName = "Admin",
                             LockoutEnabled = true,
                             NIF = 0,
-                            NormalizedEmail = "",
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEO0ES3pc8Rs2B5KBYgBkRDwcrR2LKMWqA+9qnOggrjvVVZjpmvpw9cShgWswI2xHIg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIX4pGa9XNe/KiknhaxWtPWVRO4hw/Kyq6zpYxcawFpyIDtK6FBdDxcvuBMdMalnFA==",
                             PhoneNumber = "123456789",
                             PhoneNumberConfirmed = true,
                             Points = 0,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
-                            UniqueCode = "95822c3f-a5b9-479b-948e-b0f23f86d2b4",
+                            UniqueCode = "50aa1b46-92d8-4917-b6eb-cca654ed7507",
                             UserName = "admin"
                         });
                 });
@@ -229,35 +229,68 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("11da8b33-f5d4-4589-a201-50c534b8e414"),
-                            Capacity = 0.0,
+                            Id = new Guid("33b4e680-3309-4813-bdf2-af802dd163aa"),
+                            Capacity = 100.0,
                             CurrentCapacity = 0.0,
-                            Description = "Ecoponto 1",
-                            Latitude = 0.0,
-                            Longitude = 0.0,
-                            RecyclingBinTypeId = "ccc04c3e-90a2-4a2a-9d6e-5be7d85eda98",
+                            Description = "Recycling Bin Glass",
+                            Latitude = 38.52164063224788,
+                            Longitude = -8.83690959321879,
+                            RecyclingBinTypeId = "0626b393-4ceb-4cd2-a09f-f0511c1c1ace",
                             Status = true
                         },
                         new
                         {
-                            Id = new Guid("b13bfa44-ef23-4494-b97b-2c0433e403ad"),
-                            Capacity = 0.0,
+                            Id = new Guid("c5fdd86e-773a-445a-b772-0655fbf4c923"),
+                            Capacity = 100.0,
                             CurrentCapacity = 0.0,
-                            Description = "Ecoponto 2",
-                            Latitude = 0.0,
-                            Longitude = 0.0,
-                            RecyclingBinTypeId = "470215c5-7ed9-4ff1-b8bf-6baca50e8c58",
+                            Description = "Recycling Bin Plastic",
+                            Latitude = 38.52164063224788,
+                            Longitude = -8.83690959321879,
+                            RecyclingBinTypeId = "3dd37e15-e235-49fb-b624-f2c633a968b1",
                             Status = true
                         },
                         new
                         {
-                            Id = new Guid("2c8095e7-6342-4985-b146-80891beda49c"),
-                            Capacity = 0.0,
+                            Id = new Guid("318fe76a-9de1-498e-9ae2-603579703e01"),
+                            Capacity = 100.0,
                             CurrentCapacity = 0.0,
-                            Description = "Ecoponto 3",
-                            Latitude = 0.0,
-                            Longitude = 0.0,
-                            RecyclingBinTypeId = "8e256739-ed8b-423a-a386-6e23382c29cd",
+                            Description = "Recycling Bin Paper",
+                            Latitude = 38.52164063224788,
+                            Longitude = -8.83690959321879,
+                            RecyclingBinTypeId = "7ef11605-602b-4fb5-ad38-d750ffbd8a91",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = new Guid("66de00ad-266b-479a-8b1e-fd37b3ec9b23"),
+                            Capacity = 100.0,
+                            CurrentCapacity = 0.0,
+                            Description = "Recycling Bin Glass",
+                            Latitude = 38.519799793743871,
+                            Longitude = -8.8360971667515606,
+                            RecyclingBinTypeId = "0626b393-4ceb-4cd2-a09f-f0511c1c1ace",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = new Guid("c4a76921-e3bf-482e-b585-527acbd08283"),
+                            Capacity = 100.0,
+                            CurrentCapacity = 0.0,
+                            Description = "Recycling Bin Plastic",
+                            Latitude = 38.519799793743871,
+                            Longitude = -8.8360971667515606,
+                            RecyclingBinTypeId = "3dd37e15-e235-49fb-b624-f2c633a968b1",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = new Guid("abdbc5c5-ea42-4d99-8d0d-568825e38565"),
+                            Capacity = 100.0,
+                            CurrentCapacity = 0.0,
+                            Description = "Recycling Bin Paper",
+                            Latitude = 38.519799793743871,
+                            Longitude = -8.8360971667515606,
+                            RecyclingBinTypeId = "7ef11605-602b-4fb5-ad38-d750ffbd8a91",
                             Status = true
                         });
                 });
@@ -279,17 +312,17 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            RecyclingBinTypeId = new Guid("ccc04c3e-90a2-4a2a-9d6e-5be7d85eda98"),
+                            RecyclingBinTypeId = new Guid("0626b393-4ceb-4cd2-a09f-f0511c1c1ace"),
                             Type = "glass"
                         },
                         new
                         {
-                            RecyclingBinTypeId = new Guid("470215c5-7ed9-4ff1-b8bf-6baca50e8c58"),
+                            RecyclingBinTypeId = new Guid("3dd37e15-e235-49fb-b624-f2c633a968b1"),
                             Type = "plastic"
                         },
                         new
                         {
-                            RecyclingBinTypeId = new Guid("8e256739-ed8b-423a-a386-6e23382c29cd"),
+                            RecyclingBinTypeId = new Guid("7ef11605-602b-4fb5-ad38-d750ffbd8a91"),
                             Type = "paper"
                         });
                 });
@@ -388,15 +421,15 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1575deaf-63fd-44c8-847e-966b726dcc30",
-                            ConcurrencyStamp = "b362ceb1-efae-410d-9604-b6ef02e948b0",
+                            Id = "6299129b-9c48-4cb3-90d6-45eb27982219",
+                            ConcurrencyStamp = "9e57dad3-f507-4f83-a80c-aaea65503dce",
                             Name = "client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
-                            Id = "b53dc58d-6bf9-46f1-b620-0b8aefa08eab",
-                            ConcurrencyStamp = "c39477f9-6a2e-42c6-82a6-80939d5aaba0",
+                            Id = "e3b78b7b-19ae-4001-be26-ba9ad9231b5a",
+                            ConcurrencyStamp = "bc6200b8-bb4d-42ab-bbe5-522fd4667002",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -491,8 +524,8 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "d8704e5d-d502-4340-bfe5-cf9efdfa1857",
-                            RoleId = "b53dc58d-6bf9-46f1-b620-0b8aefa08eab"
+                            UserId = "e12bd2a8-9ef3-45c7-b33b-3d04363b823b",
+                            RoleId = "e3b78b7b-19ae-4001-be26-ba9ad9231b5a"
                         });
                 });
 

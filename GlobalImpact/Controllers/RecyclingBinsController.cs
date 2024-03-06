@@ -486,6 +486,20 @@ namespace GlobalImpact.Controllers
             return View("Index", model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GoogleMaps()
+        {
+            List<RecyclingBin> recyclingBins = _context.RecyclingBins.ToList();
+
+            foreach (var recyclingBin in recyclingBins)
+            {
+                RecyclingBinType recyclingBinType = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(recyclingBin.RecyclingBinTypeId));
+                recyclingBin.Type = recyclingBinType.Type;
+            }
+
+            return View(recyclingBins);
+        }
+
         /// <summary>
         /// Funçao que recebe um id e verifica se o ecoponto exite
         /// </summary>

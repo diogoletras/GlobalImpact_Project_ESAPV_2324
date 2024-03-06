@@ -117,9 +117,9 @@ namespace GlobalImpact.Data
                 {
                     Id = Guid.NewGuid(),
                     RecyclingBinTypeId = rb1ID.ToString(),
-                    Latitude = 0,
-                    Longitude = 0,
-                    Description = "Ecoponto 1",
+                    Latitude = 38.52164063224788,
+                    Longitude = -8.83690959321879,
+                    Description = "Recycling Bin Glass",
                     Capacity = 100,
                     CurrentCapacity = 0,
                     Status = true
@@ -128,9 +128,9 @@ namespace GlobalImpact.Data
                 {
                     Id = Guid.NewGuid(),
                     RecyclingBinTypeId = rb2ID.ToString(),
-                    Latitude = 0,
-                    Longitude = 0,
-                    Description = "Ecoponto 2",
+                    Latitude = 38.52164063224788,
+                    Longitude = -8.83690959321879,
+                    Description = "Recycling Bin Plastic",
                     Capacity = 100,
                     CurrentCapacity = 0,
                     Status = true
@@ -139,9 +139,42 @@ namespace GlobalImpact.Data
                 {
                     Id = Guid.NewGuid(),
                     RecyclingBinTypeId = rb3ID.ToString(),
-                    Latitude = 0,
-                    Longitude = 0,
-                    Description = "Ecoponto 3",
+                    Latitude = 38.52164063224788,
+                    Longitude = -8.83690959321879,
+                    Description = "Recycling Bin Paper",
+                    Capacity = 100,
+                    CurrentCapacity = 0,
+                    Status = true
+                },
+                new RecyclingBin
+                {
+                    Id = Guid.NewGuid(),
+                    RecyclingBinTypeId = rb1ID.ToString(),
+                    Latitude = 38.51979979374387,
+                    Longitude = -8.83609716675156,
+                    Description = "Recycling Bin Glass",
+                    Capacity = 100,
+                    CurrentCapacity = 0,
+                    Status = true
+                },
+                new RecyclingBin
+                {
+                    Id = Guid.NewGuid(),
+                    RecyclingBinTypeId = rb2ID.ToString(),
+                    Latitude = 38.51979979374387,
+                    Longitude = -8.83609716675156,
+                    Description = "Recycling Bin Plastic",
+                    Capacity = 100,
+                    CurrentCapacity = 0,
+                    Status = true
+                },
+                new RecyclingBin
+                {
+                    Id = Guid.NewGuid(),
+                    RecyclingBinTypeId = rb3ID.ToString(),
+                    Latitude = 38.51979979374387,
+                    Longitude = -8.83609716675156,
+                    Description = "Recycling Bin Paper",
                     Capacity = 100,
                     CurrentCapacity = 0,
                     Status = true

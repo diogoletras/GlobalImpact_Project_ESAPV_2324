@@ -1,8 +1,8 @@
+using System.Configuration;
 using GlobalImpact.Data;
 using GlobalImpact.Interfaces;
 using GlobalImpact.Models;
 using GlobalImpact.Utils;
-using Humanizer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +19,8 @@ builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+builder.Services.AddGoogleMapsAPI("AIzaSyAnaT4ITxYnVC69ETzeLpuOAvAOh6nNfTA");
 
 builder.Services.Configure<IdentityOptions>(options =>
 {

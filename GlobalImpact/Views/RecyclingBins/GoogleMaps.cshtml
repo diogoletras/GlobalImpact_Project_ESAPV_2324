@@ -1,0 +1,60 @@
+﻿@model IEnumerable<GlobalImpact.Models.RecyclingBin>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnaT4ITxYnVC69ETzeLpuOAvAOh6nNfTA&callback=initMap" sensor="false"></script>
+@{
+    Dictionary<Guid, double> listLatitude = new Dictionary<Guid, double>();
+    Dictionary<Guid, double> listLongitude = new Dictionary<Guid, double>();
+    Dictionary<Guid, string> listType = new Dictionary<Guid, string>();
+    foreach (var item in Model)
+    {
+        listLatitude.Add(item.Id, item.Latitude);
+        listLongitude.Add(item.Id, item.Latitude);
+        listType.Add(item.Id, item.Type);
+    }
+}
+
+<script type="text/javascript">
+
+    function initialize() {
+        var model = @Html.Raw(Json.Serialize(Model));
+
+        const latitudes = model.map(item => item.latitude);
+        const longitudes = model.map(item => item.longitude);
+        const types = model.map(item => item.type);
+
+        var canvas = $("#map_canvas");
+
+        // Create the map instance before the loop
+        var options = {
+            zoom: 17,
+            center: new google.maps.LatLng(latitudes[0], longitudes[0]),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(canvas[0], options);
+
+        latitudes.forEach((latitude, index) => {
+            const longitude = longitudes[index];
+            const type = types[index];
+
+            console.log("Latitude: ", latitude);
+            console.log("Longitude: ", longitude);
+            console.log("Type: ", type);
+
+            var latlng = new google.maps.LatLng(latitude, longitude);
+
+            const marker = new google.maps.Marker({
+                position: new google.maps.LatLng(latitude, longitude),
+                map: map
+            });
+        });
+    }
+
+    $(function () {
+        initialize();
+    });
+
+</script>
+<div style="width: 100%; height: 100%">
+    <div id="map_canvas" style="width:90%; height:650px; margin-left: 100px"></div>
+</div>

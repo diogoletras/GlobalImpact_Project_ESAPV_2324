@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GlobalImpact.Migrations
 {
     /// <inheritdoc />
-    public partial class initialcreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -288,23 +288,23 @@ namespace GlobalImpact.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1575deaf-63fd-44c8-847e-966b726dcc30", "b362ceb1-efae-410d-9604-b6ef02e948b0", "client", "CLIENT" },
-                    { "b53dc58d-6bf9-46f1-b620-0b8aefa08eab", "c39477f9-6a2e-42c6-82a6-80939d5aaba0", "admin", "ADMIN" }
+                    { "6299129b-9c48-4cb3-90d6-45eb27982219", "9e57dad3-f507-4f83-a80c-aaea65503dce", "client", "CLIENT" },
+                    { "e3b78b7b-19ae-4001-be26-ba9ad9231b5a", "bc6200b8-bb4d-42ab-bbe5-522fd4667002", "admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Age", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NIF", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Points", "SecurityStamp", "TwoFactorEnabled", "UniqueCode", "UserName" },
-                values: new object[] { "d8704e5d-d502-4340-bfe5-cf9efdfa1857", 0, 0, "fc2ea48d-a0ac-48dc-b8fc-cd8ee48149c5", "", true, "Admin", "Admin", true, null, 0, "", "ADMIN", "AQAAAAIAAYagAAAAEO0ES3pc8Rs2B5KBYgBkRDwcrR2LKMWqA+9qnOggrjvVVZjpmvpw9cShgWswI2xHIg==", "123456789", true, 0, "", false, "95822c3f-a5b9-479b-948e-b0f23f86d2b4", "admin" });
+                values: new object[] { "e12bd2a8-9ef3-45c7-b33b-3d04363b823b", 0, 0, "3dd10375-22e8-4f49-b4cc-d103e0368f5e", "admin@gmail.com", true, "Admin", "Admin", true, null, 0, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEIX4pGa9XNe/KiknhaxWtPWVRO4hw/Kyq6zpYxcawFpyIDtK6FBdDxcvuBMdMalnFA==", "123456789", true, 0, "", false, "50aa1b46-92d8-4917-b6eb-cca654ed7507", "admin" });
 
             migrationBuilder.InsertData(
                 table: "RecyclingBinType",
                 columns: new[] { "RecyclingBinTypeId", "Type" },
                 values: new object[,]
                 {
-                    { new Guid("470215c5-7ed9-4ff1-b8bf-6baca50e8c58"), "plastic" },
-                    { new Guid("8e256739-ed8b-423a-a386-6e23382c29cd"), "paper" },
-                    { new Guid("ccc04c3e-90a2-4a2a-9d6e-5be7d85eda98"), "glass" }
+                    { new Guid("0626b393-4ceb-4cd2-a09f-f0511c1c1ace"), "glass" },
+                    { new Guid("3dd37e15-e235-49fb-b624-f2c633a968b1"), "plastic" },
+                    { new Guid("7ef11605-602b-4fb5-ad38-d750ffbd8a91"), "paper" }
                 });
 
             migrationBuilder.InsertData(
@@ -312,15 +312,18 @@ namespace GlobalImpact.Migrations
                 columns: new[] { "Id", "Capacity", "CurrentCapacity", "Description", "Latitude", "Longitude", "RecyclingBinTypeId", "Status" },
                 values: new object[,]
                 {
-                    { new Guid("11da8b33-f5d4-4589-a201-50c534b8e414"), 0.0, 0.0, "Ecoponto 1", 0.0, 0.0, "ccc04c3e-90a2-4a2a-9d6e-5be7d85eda98", true },
-                    { new Guid("2c8095e7-6342-4985-b146-80891beda49c"), 0.0, 0.0, "Ecoponto 3", 0.0, 0.0, "8e256739-ed8b-423a-a386-6e23382c29cd", true },
-                    { new Guid("b13bfa44-ef23-4494-b97b-2c0433e403ad"), 0.0, 0.0, "Ecoponto 2", 0.0, 0.0, "470215c5-7ed9-4ff1-b8bf-6baca50e8c58", true }
+                    { new Guid("318fe76a-9de1-498e-9ae2-603579703e01"), 100.0, 0.0, "Recycling Bin Paper", 38.52164063224788, -8.83690959321879, "7ef11605-602b-4fb5-ad38-d750ffbd8a91", true },
+                    { new Guid("33b4e680-3309-4813-bdf2-af802dd163aa"), 100.0, 0.0, "Recycling Bin Glass", 38.52164063224788, -8.83690959321879, "0626b393-4ceb-4cd2-a09f-f0511c1c1ace", true },
+                    { new Guid("66de00ad-266b-479a-8b1e-fd37b3ec9b23"), 100.0, 0.0, "Recycling Bin Glass", 38.519799793743871, -8.8360971667515606, "0626b393-4ceb-4cd2-a09f-f0511c1c1ace", true },
+                    { new Guid("abdbc5c5-ea42-4d99-8d0d-568825e38565"), 100.0, 0.0, "Recycling Bin Paper", 38.519799793743871, -8.8360971667515606, "7ef11605-602b-4fb5-ad38-d750ffbd8a91", true },
+                    { new Guid("c4a76921-e3bf-482e-b585-527acbd08283"), 100.0, 0.0, "Recycling Bin Plastic", 38.519799793743871, -8.8360971667515606, "3dd37e15-e235-49fb-b624-f2c633a968b1", true },
+                    { new Guid("c5fdd86e-773a-445a-b772-0655fbf4c923"), 100.0, 0.0, "Recycling Bin Plastic", 38.52164063224788, -8.83690959321879, "3dd37e15-e235-49fb-b624-f2c633a968b1", true }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "b53dc58d-6bf9-46f1-b620-0b8aefa08eab", "d8704e5d-d502-4340-bfe5-cf9efdfa1857" });
+                values: new object[] { "e3b78b7b-19ae-4001-be26-ba9ad9231b5a", "e12bd2a8-9ef3-45c7-b33b-3d04363b823b" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -22,6 +22,11 @@
 }
 @if (User.Identity.IsAuthenticated)
 {
+	<div class="welcome">
+        <div class="start-buttons">>
+            <a class="start-button" asp-area="" asp-controller="RecyclingBins" asp-action="GoogleMaps">Map</a>
+        </div>
+	</div>
 	@if (User.IsInRole("client"))
 	{
 		<div class="centered">
