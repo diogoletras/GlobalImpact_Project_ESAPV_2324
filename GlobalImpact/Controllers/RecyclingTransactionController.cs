@@ -47,6 +47,13 @@ namespace GlobalImpact.Controllers
 		{
 			var result = await _db.RecyclingBins.ToListAsync();
 
+            foreach (var rBin in result)
+            {
+                RecyclingBinType rType = await _db.RecyclingBinType.FirstOrDefaultAsync(t => t.RecyclingBinTypeId == new Guid(rBin.RecyclingBinTypeId));
+                rBin.RecyclingBinType = rType;
+                rBin.Type = rType.Type;
+            }
+
 			var recyclingBins = await _db.RecyclingBins.ToListAsync();
 			var recyclingBinTypes = await _db.RecyclingBinType.ToListAsync();
 
