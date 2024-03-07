@@ -15,8 +15,27 @@
 }
 
 <script type="text/javascript">
+    let map;
+    let userLocationMarker;
 
     function initialize() {
+        const directionsService = new google.maps.DirectionsService();
+        const directionsRenderer = new google.maps.DirectionsRenderer();
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                let userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                userLocationMarker = new google.maps.Marker({
+                    position: userLocation,
+                    map: map,
+                    title: 'Your location'
+                });
+                map.setCenter(userLocation);
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+
         var model = @Html.Raw(Json.Serialize(Model));
 
         const latitudes = model.map(item => item.latitude);
@@ -26,28 +45,64 @@
         var canvas = $("#map_canvas");
 
         // Create the map instance before the loop
-        var options = {
+        const options = {
             zoom: 17,
             center: new google.maps.LatLng(latitudes[0], longitudes[0]),
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        var map = new google.maps.Map(canvas[0], options);
+        map = new google.maps.Map(canvas[0], options);
+
+        const infoWindow = new google.maps.InfoWindow();
+
+        directionsRenderer.setMap(map);
 
         latitudes.forEach((latitude, index) => {
             const longitude = longitudes[index];
             const type = types[index];
 
-            console.log("Latitude: ", latitude);
-            console.log("Longitude: ", longitude);
-            console.log("Type: ", type);
-
             var latlng = new google.maps.LatLng(latitude, longitude);
 
-            const marker = new google.maps.Marker({
+            let marker = new google.maps.Marker({
                 position: new google.maps.LatLng(latitude, longitude),
+                title: type,
                 map: map
             });
+
+            if (type === 'plastic') {
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
+            } else if (type === 'paper') {
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+            } else if (type === 'glass') {
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+            }
+
+            marker.addListener('click', function () {
+                selectedMarker = marker;
+
+                calculateAndDisplayRoute(marker);
+                infoWindow.setContent(`<strong>Type:</strong> ${type}`);
+                infoWindow.open(map, marker);
+
+            });
         });
+    }
+
+    function calculateAndDisplayRoute(marker) {
+        const directionsService = new google.maps.DirectionsService();
+        const directionsRenderer = new google.maps.DirectionsRenderer();
+
+        directionsRenderer.setMap(map);
+
+        directionsService
+            .route({
+                origin: userLocationMarker.getPosition(),
+                destination: marker.getPosition(), // Use the existing marker's position
+                travelMode: google.maps.TravelMode.WALKING,
+            })
+            .then((response) => {
+                directionsRenderer.setDirections(response);
+            })
+            .catch((e) => window.alert("Directions request failed due to " + status));
     }
 
     $(function () {
