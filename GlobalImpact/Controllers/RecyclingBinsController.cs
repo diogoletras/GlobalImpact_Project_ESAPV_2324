@@ -461,9 +461,9 @@ namespace GlobalImpact.Controllers
                 query = query.Where(r => r.CurrentCapacity == model.CurrentCapacity);
             }
 
-            if (!model.Status.Equals("none") || model.Status != null)
+            if (!model.Status.Equals("none"))
             {
-                if(model.Status.Equals("full"))
+                if(model.Status.Equals("available"))
                     query = query.Where(r => r.Status == true);
                 else
                     query = query.Where(r => r.Status == false);

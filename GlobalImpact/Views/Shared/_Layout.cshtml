@@ -40,23 +40,19 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="RecyclingBins" asp-action="Index">ReciclingBins</a>
-                                </li>
+                                
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Users</a>
                                 </li>
                             }
-                            @if (User.IsInRole("client")){
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="RecyclingTransaction" asp-action="Index">Recycling Transaction</a>
-                                </li>
-                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RecyclingBins" asp-action="Index">ReciclingBins</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="UserPage" asp-route-userId="@UserManager.GetUserId(User)" >Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="RecyclingTransaction" asp-action="TransacionList" asp-route-userId="@UserManager.GetUserId(User)">Reciclagens</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RecyclingTransaction" asp-action="TransacionList" asp-route-userId="@UserManager.GetUserId(User)">TransacoesReciclagens</a>
                             </li>
                             <li class="nav-item">
                                 <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="LogOff">

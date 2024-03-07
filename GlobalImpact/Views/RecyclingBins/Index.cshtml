@@ -26,7 +26,7 @@
                 </div>
                 <div class="row mt-1">
                     <label for="status">Status</label>
-                    @Html.DropDownListFor(m => m.Status, new SelectList(new[] { "none", "full", "not full"}), new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.Status, new SelectList(new[] { "none", "available", "not available"}), new { @class = "form-control" })
                 </div>
                 <div class="row mt-1">
                     <label for="capacity">Capacity</label>
