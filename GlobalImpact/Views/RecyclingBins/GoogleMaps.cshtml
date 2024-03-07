@@ -17,6 +17,7 @@
 <script type="text/javascript">
     let map;
     let userLocationMarker;
+    let markers = [];
 
     function initialize() {
         const directionsService = new google.maps.DirectionsService();
@@ -30,6 +31,7 @@
                     map: map,
                     title: 'Your location'
                 });
+                markers.push(userLocationMarker);
                 map.setCenter(userLocation);
             });
         } else {
@@ -67,6 +69,7 @@
                 title: type,
                 map: map
             });
+            markers.push(marker);
 
             if (type === 'plastic') {
                 marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
@@ -78,6 +81,14 @@
 
             marker.addListener('click', function () {
                 selectedMarker = marker;
+
+                markers.forEach(marker => {
+                    if (marker.getMap() === null) {
+                        marker.setMap(map);
+                    } else {
+                        marker.setMap(null);
+                    }
+                });
 
                 calculateAndDisplayRoute(marker);
                 infoWindow.setContent(`<strong>Type:</strong> ${type}`);
