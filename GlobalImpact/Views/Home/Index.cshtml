@@ -23,15 +23,16 @@
 @if (User.Identity.IsAuthenticated)
 {
 	<div class="welcome">
-        <div class="start-buttons">>
-            <a class="start-button" asp-area="" asp-controller="RecyclingBins" asp-action="GoogleMaps">Map</a>
-        </div>
+        
 	</div>
 	@if (User.IsInRole("client"))
 	{
 		<div class="centered">
 			<h3 class="display-4">Your role is Client</h3>
 			<h3>@User.Identity.Name</h3>
+		</div>
+		<div class="text-center">
+			<a class="start-button" asp-area="" asp-controller="RecyclingBins" asp-action="GoogleMaps">Map</a>
 		</div>
 	}
 	else
