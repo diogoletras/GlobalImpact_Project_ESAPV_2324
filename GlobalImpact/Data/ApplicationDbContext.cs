@@ -24,9 +24,8 @@ namespace GlobalImpact.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<RecyclingBin> RecyclingBins { get; set; }
-		public DbSet<RecyclingTransaction> RecyclingTransactions { get; set; }
+        public DbSet<RecyclingTransaction> RecyclingTransactions { get; set; }
         public DbSet<RecyclingBinType> RecyclingBinType { get; set; }
-        public DbSet<CreateRecyclingBinViewModel> CreateRecyclingBinViewModel { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -71,7 +70,7 @@ namespace GlobalImpact.Data
                 new IdentityRole
                 {
                     Id = adminRoleId.ToString(),
-                    Name = RoleType.admin.ToString() ,
+                    Name = RoleType.admin.ToString(),
                     NormalizedName = RoleType.admin.ToString().ToUpper(),
                     ConcurrencyStamp = Guid.NewGuid().ToString()
                 }
@@ -117,8 +116,8 @@ namespace GlobalImpact.Data
                 {
                     Id = Guid.NewGuid(),
                     RecyclingBinTypeId = rb1ID.ToString(),
-                    Latitude = 38.52164063224788,
-                    Longitude = -8.83690959321879,
+                    Latitude = 38.52160781735982,
+                    Longitude = -8.836815960367199,
                     Description = "Recycling Bin Glass",
                     Capacity = 100,
                     CurrentCapacity = 0,
@@ -128,8 +127,8 @@ namespace GlobalImpact.Data
                 {
                     Id = Guid.NewGuid(),
                     RecyclingBinTypeId = rb2ID.ToString(),
-                    Latitude = 38.52164063224788,
-                    Longitude = -8.83690959321879,
+                    Latitude = 38.52171490188254,
+                    Longitude = -8.83694281687076,
                     Description = "Recycling Bin Plastic",
                     Capacity = 100,
                     CurrentCapacity = 0,
@@ -139,8 +138,8 @@ namespace GlobalImpact.Data
                 {
                     Id = Guid.NewGuid(),
                     RecyclingBinTypeId = rb3ID.ToString(),
-                    Latitude = 38.52164063224788,
-                    Longitude = -8.83690959321879,
+                    Latitude = 38.52147461443848,
+                    Longitude = -8.83665572057323,
                     Description = "Recycling Bin Paper",
                     Capacity = 100,
                     CurrentCapacity = 0,
@@ -161,8 +160,8 @@ namespace GlobalImpact.Data
                 {
                     Id = Guid.NewGuid(),
                     RecyclingBinTypeId = rb2ID.ToString(),
-                    Latitude = 38.51979979374387,
-                    Longitude = -8.83609716675156,
+                    Latitude = 38.52255071395786,
+                    Longitude = -8.839560573242139,
                     Description = "Recycling Bin Plastic",
                     Capacity = 100,
                     CurrentCapacity = 0,
@@ -172,8 +171,8 @@ namespace GlobalImpact.Data
                 {
                     Id = Guid.NewGuid(),
                     RecyclingBinTypeId = rb3ID.ToString(),
-                    Latitude = 38.51979979374387,
-                    Longitude = -8.83609716675156,
+                    Latitude = 38.52268201637835,
+                    Longitude = -8.839758018115054,
                     Description = "Recycling Bin Paper",
                     Capacity = 100,
                     CurrentCapacity = 0,
