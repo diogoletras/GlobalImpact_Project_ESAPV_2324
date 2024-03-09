@@ -23,6 +23,10 @@
                         <select asp-for="Type" class="form-control"></select>
                 <span asp-validation-for="Type" class="text-danger"></span>*@
                     </div>
+
+                    <input type="hidden" asp-for="Type" />
+                    <input  asp-for="RecyclingBinType" />
+                    <input  asp-for="RecyclingBinTypeId" />
                     <div class="form-group">
                         <label asp-for="Latitude" class="control-label"></label>
                         <input asp-for="Latitude" class="form-control"/>

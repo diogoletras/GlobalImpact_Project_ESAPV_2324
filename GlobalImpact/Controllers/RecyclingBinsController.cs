@@ -349,6 +349,11 @@ namespace GlobalImpact.Controllers
             {
                 return NotFound();
             }
+            var typeId = _context.RecyclingBins.FirstOrDefault(e => e.Id == id).RecyclingBinTypeId;
+            var binType = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(typeId));
+            recyclingBin.RecyclingBinType = binType;
+            recyclingBin.Type = binType.Type;
+            recyclingBin.RecyclingBinTypeId = typeId;
             return View(recyclingBin);
         }
 
@@ -364,13 +369,13 @@ namespace GlobalImpact.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Type,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status")] RecyclingBin recyclingBin)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Type,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status, RecyclingBinType, RecyclingBinTypeId")] RecyclingBin recyclingBin)
         {
             if (id != recyclingBin.Id)
             {
                 return NotFound();
             }
-
+            
             if (ModelState.IsValid)
             {
                 try
