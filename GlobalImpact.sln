@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlobalImpact", "GlobalImpact\GlobalImpact.csproj", "{F3BEC711-1F24-427E-8225-8CE065627743}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalImpactTest", "GlobalImpactTest\GlobalImpactTest.csproj", "{DA4D1F2A-DFFD-4266-ACEA-7078E3858A78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalImpactTest", "GlobalImpactTest\GlobalImpactTest.csproj", "{732A54B7-1BC9-4273-9C9A-2EE750F28CFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{F3BEC711-1F24-427E-8225-8CE065627743}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3BEC711-1F24-427E-8225-8CE065627743}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3BEC711-1F24-427E-8225-8CE065627743}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA4D1F2A-DFFD-4266-ACEA-7078E3858A78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA4D1F2A-DFFD-4266-ACEA-7078E3858A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA4D1F2A-DFFD-4266-ACEA-7078E3858A78}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA4D1F2A-DFFD-4266-ACEA-7078E3858A78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{732A54B7-1BC9-4273-9C9A-2EE750F28CFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{732A54B7-1BC9-4273-9C9A-2EE750F28CFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{732A54B7-1BC9-4273-9C9A-2EE750F28CFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{732A54B7-1BC9-4273-9C9A-2EE750F28CFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GlobalImpact.Models;
 
-namespace GlobalImpactTest
+namespace GlobalImpactTestProject
 {
     public class FakeSignInManager : SignInManager<AppUser>
     {

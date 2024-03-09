@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 
-namespace GlobalImpactTest
+namespace GlobalImpactTestProject
 {
     public class FakeUserManager : UserManager<AppUser>
     {

@@ -148,7 +148,7 @@ namespace GlobalImpact.Controllers
             }
             else
             {
-                var user = await _userManager.FindByIdAsync(userId);
+                var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
                 if (user == null)
                 {
                     return View("Error");
@@ -156,9 +156,13 @@ namespace GlobalImpact.Controllers
                 else
                 {
                     var result = await _userManager.ConfirmEmailAsync(user, code);
-                    return View("EmailConfirmation");
+                    return RedirectToAction("EmailConfirmation");
                 }
             }
+        }
+        public IActionResult EmailConfirmation()
+        {
+            return View();
         }
 
 
