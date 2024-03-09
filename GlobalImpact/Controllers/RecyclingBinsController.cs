@@ -369,13 +369,14 @@ namespace GlobalImpact.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Type,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status, RecyclingBinType, RecyclingBinTypeId")] RecyclingBin recyclingBin)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Type,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status, RecyclingBinTypeId")] RecyclingBin recyclingBin)
         {
             if (id != recyclingBin.Id)
             {
                 return NotFound();
             }
-            
+
+            ModelState.Remove("RecyclingBinType");
             if (ModelState.IsValid)
             {
                 try
