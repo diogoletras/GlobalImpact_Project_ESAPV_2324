@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -34,6 +35,9 @@ namespace GlobalImpact.Models
         public string? Role { get; set; }
         [NotMapped]
         public IEnumerable<SelectListItem>? RoleList { get; set; }
+        [NotMapped]
+        // Add this roperty
+        public ClaimsIdentity? Identity { get; set; }
 
 
     }

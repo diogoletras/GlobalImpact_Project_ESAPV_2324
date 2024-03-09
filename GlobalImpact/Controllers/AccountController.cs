@@ -55,7 +55,7 @@ namespace GlobalImpact.Controllers
         /// <returns> retorna a página de registo.</returns>
 
         [HttpGet]
-        public async Task<IActionResult> Register( string? returnUrl)
+        public async Task<IActionResult> Register(string? returnUrl)
         {
             RegisterViewModel registerViewModel = new RegisterViewModel();
             registerViewModel.ReturnUrl = returnUrl;
