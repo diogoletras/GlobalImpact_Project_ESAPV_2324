@@ -354,7 +354,44 @@ namespace GlobalImpact.Controllers
             recyclingBin.RecyclingBinType = binType;
             recyclingBin.Type = binType.Type;
             recyclingBin.RecyclingBinTypeId = typeId;
-            return View(recyclingBin);
+
+            RecyclingBin res = null;
+
+
+			if (recyclingBin != null)
+            {
+	            res = new RecyclingBin
+	            {
+		            RBTList = new List<SelectListItem>(
+			            _context.RecyclingBinType.Select(r => new SelectListItem
+			            {
+				            Value = r.RecyclingBinTypeId.ToString(),
+				            Text = r.Type
+			            })
+		            ),
+		            RecyclingBinType = binType,
+		            RecyclingBinTypeId = binType.RecyclingBinTypeId.ToString()
+	            };
+            }
+            else
+            {
+	            res = new RecyclingBin
+	            {
+		            RBTList = new List<SelectListItem>(
+			            _context.RecyclingBinType.Select(r => new SelectListItem
+			            {
+				            Value = r.RecyclingBinTypeId.ToString(),
+				            Text = r.Type
+			            })
+		            )
+	            };
+
+	            
+            }
+
+            recyclingBin.RBTList = res.RBTList;
+
+			return View(recyclingBin);
         }
 
         /// <summary>
