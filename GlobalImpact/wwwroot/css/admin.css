@@ -228,6 +228,14 @@ tr {
     text-decoration: none;
 }
 
+.buttons-edd {
+    display: flex;
+}
+
+#filterRow {
+    flex-direction: column;
+}
+
 @media only screen and (max-width: 768px) {
     .flex-container {
         display: flex;

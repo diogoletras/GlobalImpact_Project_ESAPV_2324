@@ -2,118 +2,129 @@
 @model FilterViewModel
 
 @{
-    ViewData["Title"] = "Index";
+	ViewData["Title"] = "Index";
 
 
 }
 
 @if (User.Identity.IsAuthenticated)
 {
-    @if (User.IsInRole("admin"))
-    {
+	@if (User.IsInRole("admin"))
+	{
+		<div class="row text-white text-center" style="display: none;" id="filterRow">
+			<h1 class="text-white text-center col-2">Filters</h1>
+			@using (Html.BeginForm("Filter", "RecyclingBins", FormMethod.Get, new { @class = "col-2", id = "recyclingBinFilterForm" }))
+			{
+				<div class="row mt-1">
+					<label for="type">Type</label>
+					@Html.DropDownListFor(m => m.Type, new SelectList(new[] { "none", "paper", "plastic", "glass" }), new { @class = "form-control" })
+				</div>
+				<div class="row mt-1">
+					<label for="status">Status</label>
+					@Html.DropDownListFor(m => m.Status, new SelectList(new[] { "none", "available", "not available" }), new { @class = "form-control" })
+				</div>
+				<div class="row mt-1">
+					<label for="capacity">Capacity</label>
+					@Html.TextBoxFor(m => m.Capacity, null, new { @class = "form-control" })
+				</div>
+				<div class="row mt-1">
+					<label for="currentCapacity">Current Capacity</label>
+					@Html.TextBoxFor(m => m.CurrentCapacity, null, new { @class = "form-control" })
+				</div>
+				<div class="row justify-content-center mt-1">
+					<button type="submit" class="btn-grad">Filter</button>
+				</div>
+			}
+		</div>
 
-        
-        <div class="row text-white">
-            <h1 class="text-white text-center col-2">Filters</h1>
-            <h1 class="text-white text-center col-10">Recycling Bins</h1>
-        </div>
-        <div class="row text-white">
-            @using (Html.BeginForm("Filter", "RecyclingBins", FormMethod.Get, new { @class = "col-2", id = "recyclingBinFilterForm" }))
-            {
-                <div class="row mt-1">
-                    <label for="type">Type</label>
-                    @Html.DropDownListFor(m => m.Type, new SelectList(new[] { "none", "paper", "plastic", "glass" }), new { @class = "form-control" })
-                </div>
-                <div class="row mt-1">
-                    <label for="status">Status</label>
-                    @Html.DropDownListFor(m => m.Status, new SelectList(new[] { "none", "available", "not available"}), new { @class = "form-control" })
-                </div>
-                <div class="row mt-1">
-                    <label for="capacity">Capacity</label>
-                    @Html.TextBoxFor(m => m.Capacity, null, new { @class = "form-control" })
-                </div>
-                <div class="row mt-1">
-                    <label for="currentCapacity">Current Capacity</label>
-                    @Html.TextBoxFor(m => m.CurrentCapacity, null, new { @class = "form-control" })
-                </div>
-                <div class="row justify-content-center mt-1">
-                    <button type="submit" class="btn btn-primary col-3 ">Filter</button>
-                </div>
-            }
+		<div class="text-center" id="binsRow">
+			<div style="display:flex;">
+				<h1 class="text-white text-center col-10">Recycling Bins</h1>
+				<a class="btn-grad" onclick="toggleFilterRow()">Filter</a>
+			</div>
 
-            <div class="col-10 text-center">
+			<div class="col-10 text-center">
 
-                <table class="table" style="width: 90%">
-                    <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.RecyclingBin.Id)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.RecyclingBin.Type)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.RecyclingBin.Latitude)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.RecyclingBin.Longitude)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.RecyclingBin.Description)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.RecyclingBin.Capacity)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.RecyclingBin.CurrentCapacity)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.RecyclingBin.Status)
-                        </th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach (var item in Model.RecyclingBins)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Id)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Type)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Latitude)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Longitude)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Capacity)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CurrentCapacity)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Status)
-                            </td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                            </td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
-                <p>
-                    <a asp-action="Create">Create New</a>
-                </p>
-            </div>
-        </div>
-    }
+				<table class="table" style="width: 100%">
+					<thead>
+						<tr>
+							<th>
+								@Html.DisplayNameFor(model => model.RecyclingBin.Id)
+							</th>
+							<th>
+								@Html.DisplayNameFor(model => model.RecyclingBin.Type)
+							</th>
+							<th>
+								@Html.DisplayNameFor(model => model.RecyclingBin.Latitude)
+							</th>
+							<th>
+								@Html.DisplayNameFor(model => model.RecyclingBin.Longitude)
+							</th>
+							<th>
+								@Html.DisplayNameFor(model => model.RecyclingBin.Description)
+							</th>
+							<th>
+								@Html.DisplayNameFor(model => model.RecyclingBin.Capacity)
+							</th>
+							<th>
+								@Html.DisplayNameFor(model => model.RecyclingBin.CurrentCapacity)
+							</th>
+							<th>
+								@Html.DisplayNameFor(model => model.RecyclingBin.Status)
+							</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model.RecyclingBins)
+						{
+							<tr>
+								<td>
+									@Html.DisplayFor(modelItem => item.Id)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Type)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Latitude)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Longitude)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Description)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Capacity)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.CurrentCapacity)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Status)
+								</td>
+								<td class="buttons-edd">
+									<a asp-action="Edit" asp-route-id="@item.Id" class="btn-grad-small">Edit</a> |
+									<a asp-action="Details" asp-route-id="@item.Id" class="btn-grad-small">Details</a> |
+									<a asp-action="Delete" asp-route-id="@item.Id" class="btn-grad-small">Delete</a>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+				<p>
+					<a asp-action="Create" class="btn-grad">Create New</a>
+				</p>
+			</div>
+		</div>
+	}
 }
+
+<script>
+	function toggleFilterRow() {
+		var filterRow = document.getElementById('filterRow');
+		var binsRow = document.getElementById('binsRow');
+		filterRow.style.display = (filterRow.style.display === 'none' || filterRow.style.display === '') ? 'flex' : 'none';
+		binsRow.style.display = binsRow.style.display = 'none';
+	}
+</script>
