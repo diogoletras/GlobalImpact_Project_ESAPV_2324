@@ -1,1 +1,1 @@
-search_result['139']=["topic_000000000000002F_overloads--.html","RecyclingBinsController.EcoLogin Method","Função HttpPost que retorna a página de simulação de reciclagem no ecoponto escolhido em caso de sucesso, e em caso de insucesso retorna para a página de introduzição do código único."];
+search_result['139']=["topic_000000000000002A_vars--.html","RecyclingBinsController Fields",""];

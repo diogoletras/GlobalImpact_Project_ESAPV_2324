@@ -1,1 +1,1 @@
-search_result['163']=["topic_0000000000000037.html","RecyclingBinsController.Delete Method","Função HttpGet para a eliminação de um ecoponto."];
+search_result['163']=["topic_0000000000000030.html","RecyclingBinsController.EcoLogin (Nullable\u0026lt;Guid\u0026gt;, String) Method","Função HttpPost que retorna a página de simulação de reciclagem no ecoponto escolhido em caso de sucesso, e em caso de insucesso retorna para a página de introduzição do código único."];

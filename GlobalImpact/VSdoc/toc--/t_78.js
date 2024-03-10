@@ -1,1 +1,0 @@
-c['78']=[['79',"RecyclingTransactionController Constructor","topic_000000000000003B.html",0],['80',"Methods","topic_000000000000003A_methods--.html",1]];

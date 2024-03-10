@@ -1,1 +1,1 @@
-search_result['101']=["topic_0000000000000024_methods--.html","ProductsController Methods",""];
+search_result['101']=["topic_0000000000000020_props--.html","ProductsController Properties",""];

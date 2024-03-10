@@ -2,6 +2,9 @@
 
 namespace GlobalImpact.ViewModels.RecyclingBin
 {
+    /// <summary>
+    /// Classe ViewModel de simulação do ato de reciclagem.
+    /// </summary>
     public class ReciclarViewModel
     {
         public Models.RecyclingBin EcoPonto { get; set; }

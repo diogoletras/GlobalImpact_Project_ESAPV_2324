@@ -5,6 +5,9 @@ using System.Net.Mail;
 
 namespace GlobalImpact.Utils
 {
+    /// <summary>
+    /// Classe para envio de email de confirmação de conta.
+    /// </summary>
     public class EmailSender : IEmailSender
     {
         public async Task SendEmailAsync(string email, string subject, string message)

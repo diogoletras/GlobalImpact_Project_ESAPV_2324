@@ -1,1 +1,1 @@
-search_result['472']=["topic_000000000000008A_props--.html","RecyclingBinType Properties",""];
+search_result['472']=["topic_0000000000000080.html","RecItems Class","Classe modelo RecItems.\r\nDados sobre os items reciclaveis."];

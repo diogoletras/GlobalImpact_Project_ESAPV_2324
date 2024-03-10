@@ -1,1 +1,1 @@
-search_result['678']=["topic_00000000000000C6.html","GlobalImpact.ViewModels.RecyclingBin Namespace",""];
+search_result['678']=["topic_00000000000000B3.html","RegisterViewModel Class","Classe de visualização da página de registo."];

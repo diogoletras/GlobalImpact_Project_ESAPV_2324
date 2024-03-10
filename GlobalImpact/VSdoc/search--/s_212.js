@@ -1,1 +1,1 @@
-search_result['212']=["topic_0000000000000047_attached_props--.html","InitialCreate Attached Properties",""];
+search_result['212']=["topic_000000000000003F.html","RecyclingTransactionController.TransacionList Method","Funçao HTTPpost que recebe o id do utilizador e retorna uma view com as transaçoes de reciclagem do respetivo utilizador"];

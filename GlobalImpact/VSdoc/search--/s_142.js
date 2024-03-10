@@ -1,1 +1,1 @@
-search_result['142']=["topic_0000000000000031.html","RecyclingBinsController.Details Method","Função HttpGet que retorna o detalhes de um ecoponto."];
+search_result['142']=["topic_000000000000002B_events--.html","RecyclingBinsController Events",""];

@@ -1,1 +1,1 @@
-c['173']=[['174',"Properties","topic_0000000000000091_props--.html",1]];
+c['173']=[['174',"RecyclingBinTypeId Property","topic_0000000000000092.html",0],['175',"Type Property","topic_0000000000000093.html",0]];

@@ -1,1 +1,1 @@
-search_result['60']=["topic_000000000000001A_overloads--.html","AdminController.Create Method","Função Get para a página de criação de um User."];
+search_result['60']=["topic_0000000000000017.html","AdminController.Index Method","Função Get para retornar uma lista de Users."];

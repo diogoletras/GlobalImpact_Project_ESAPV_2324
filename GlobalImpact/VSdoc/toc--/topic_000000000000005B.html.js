@@ -1,1 +1,0 @@
-var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_00000000000000D6.html"],['109',"GlobalImpact.Interfaces Namespace","topic_000000000000005B.html"]];

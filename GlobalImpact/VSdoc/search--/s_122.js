@@ -1,1 +1,1 @@
-search_result['122']=["topic_000000000000002B.html","RecyclingBinsController Class","Contralador dos Ecopontos."];
+search_result['122']=["topic_0000000000000024_vars--.html","ProductsController Fields",""];

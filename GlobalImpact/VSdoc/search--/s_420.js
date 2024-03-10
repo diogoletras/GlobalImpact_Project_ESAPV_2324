@@ -1,1 +1,1 @@
-search_result['420']=["topic_000000000000007D.html","RecItems Class",""];
+search_result['420']=["topic_0000000000000073_attached_props--.html","Product Attached Properties",""];

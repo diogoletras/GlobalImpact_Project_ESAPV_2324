@@ -3,7 +3,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GlobalImpact.Utils
 {
-	public static class GoogleMapsServiceExtensions
+    /// <summary>
+    /// Classe de implementação da API do Google Maps.
+    /// </summary>
+    public static class GoogleMapsServiceExtensions
 	{
 		public static IServiceCollection AddGoogleMapsAPI(this IServiceCollection services, string apiKey)
 		{

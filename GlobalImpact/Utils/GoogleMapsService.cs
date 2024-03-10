@@ -2,7 +2,10 @@
 
 namespace GlobalImpact.Utils
 {
-	public class GoogleMapsService : IGoogleMapsService
+    /// <summary>
+    /// Classe de implemetação do Google Maps.
+    /// </summary>
+    public class GoogleMapsService : IGoogleMapsService
 	{
 		private readonly string _apiKey;
 

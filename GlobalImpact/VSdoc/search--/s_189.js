@@ -1,1 +1,1 @@
-search_result['189']=["topic_0000000000000041_props--.html","ApplicationDbContext Properties",""];
+search_result['189']=["topic_0000000000000038.html","RecyclingBinsController.Delete Method","Função HttpGet para a eliminação de um ecoponto."];

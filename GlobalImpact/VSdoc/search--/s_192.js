@@ -1,1 +1,1 @@
-search_result['192']=["topic_0000000000000042_attached_props--.html","ApplicationDbContext Attached Properties",""];
+search_result['192']=["topic_000000000000003A.html","RecyclingBinsController.Filter Method","Funçao HTTPGet que devolve uma view com os ecopontos filtrados"];

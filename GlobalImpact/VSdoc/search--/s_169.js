@@ -1,1 +1,1 @@
-search_result['169']=["topic_000000000000003A_attached_props--.html","RecyclingTransactionController Attached Properties",""];
+search_result['169']=["topic_0000000000000033.html","RecyclingBinsController.Create (String) Method","Função HttpGet para a criação de um ecoponto."];

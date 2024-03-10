@@ -1,1 +1,1 @@
-search_result['141']=["topic_0000000000000030_overloads--.html","RecyclingBinsController.Create Method",""];
+search_result['141']=["topic_000000000000002B_attached_props--.html","RecyclingBinsController Attached Properties",""];

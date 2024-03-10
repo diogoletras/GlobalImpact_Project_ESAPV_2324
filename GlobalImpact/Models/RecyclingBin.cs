@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 
 namespace GlobalImpact.Models
 {
+    /// <summary>
+    /// Classe modelo RecyclingBin.
+    /// </summary>
     public class RecyclingBin
     {
         [PersonalData]

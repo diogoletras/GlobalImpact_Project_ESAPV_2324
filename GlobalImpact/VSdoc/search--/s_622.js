@@ -1,1 +1,1 @@
-search_result['622']=["topic_00000000000000B4_events--.html","ResetPasswordViewModel Events",""];
+search_result['622']=["topic_00000000000000A3.html","ConfirmEmailViewModel Class","Class de visualização da página de confirmação de email."];

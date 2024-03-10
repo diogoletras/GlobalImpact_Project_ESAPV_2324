@@ -1,1 +1,1 @@
-search_result['144']=["topic_0000000000000032.html","RecyclingBinsController.Create (String) Method","Função HttpGet para a criação de um ecoponto."];
+search_result['144']=["topic_000000000000002B_overloads--.html","ProductsController.Edit Method","Função HttpPost para retornar a página da lista de produtos quando o valor ja tiver sido editado."];

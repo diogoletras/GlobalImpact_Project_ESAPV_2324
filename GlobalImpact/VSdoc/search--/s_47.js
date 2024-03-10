@@ -1,1 +1,1 @@
-search_result['47']=["topic_0000000000000014_methods--.html","AdminController Methods",""];
+search_result['47']=["topic_0000000000000014_attached_props--.html","AdminController Attached Properties",""];

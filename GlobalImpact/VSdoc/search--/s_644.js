@@ -1,1 +1,1 @@
-search_result['644']=["topic_00000000000000BA_methods--.html","CreateRecyclingBinViewModel Methods",""];
+search_result['644']=["topic_00000000000000A8_events--.html","RegisterViewModel Events",""];

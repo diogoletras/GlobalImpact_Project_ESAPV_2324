@@ -1,1 +1,1 @@
-search_result['156']=["topic_0000000000000036.html","RecyclingBinsController.Edit (Guid, RecyclingBin) Method","Função HttpPost que retorna a lista de ecoponto depois de um ser editado."];
+search_result['156']=["topic_000000000000002E_events--.html","RecyclingBinsController Events",""];

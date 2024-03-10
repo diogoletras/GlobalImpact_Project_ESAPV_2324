@@ -5,6 +5,7 @@ namespace GlobalImpact.Models
 {
     public class Cart
     {
+
         [Key]
         public Guid Id { get; set; }
         [ForeignKey("UserId")]

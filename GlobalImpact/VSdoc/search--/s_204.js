@@ -1,1 +1,1 @@
-search_result['204']=["topic_0000000000000045.html","ApplicationDbContext Constructor",""];
+search_result['204']=["topic_000000000000003C.html","RecyclingTransactionController Class","Controller da gestão de Transaçoes de reciclagem"];

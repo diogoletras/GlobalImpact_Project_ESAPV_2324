@@ -1,1 +1,1 @@
-search_result['158']=["topic_0000000000000036_events--.html","ApplicationDbContext Events",""];
+search_result['158']=["topic_000000000000002E_overloads--.html","RecyclingBinsController.EcoLogin Method","Função HttpGet que retorna a página de introduzação do código de reciclagem."];

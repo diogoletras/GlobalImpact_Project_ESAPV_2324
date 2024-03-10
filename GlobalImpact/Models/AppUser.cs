@@ -6,8 +6,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GlobalImpact.Models
 {
+    /// <summary>
+    /// Classe modelo AppUser.
+    /// </summary>
     public class AppUser : IdentityUser
     {
+        
         [Required]
         public String UniqueCode { get; set; }
 

@@ -14,6 +14,9 @@ using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace GlobalImpactTest
 {
+    /// <summary>
+    /// Classe testes unitários do accountController.
+    /// </summary>
     public class UnitTest1
     {
         private ApplicationDbContext dbContext;

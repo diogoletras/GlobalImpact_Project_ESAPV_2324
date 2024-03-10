@@ -1,1 +1,1 @@
-search_result['656']=["topic_00000000000000BF.html","CreateRecyclingBinViewModel.Latitude Property",""];
+search_result['656']=["topic_00000000000000AC.html","ForgotPasswordViewModel Class","Classe de visualização da página \"Forgot PassWord\"."];

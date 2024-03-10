@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GlobalImpact.ViewModels.NewFolder
 {
+    /// <summary>
+    /// Classe de visualição da página de criar ecoponto.
+    /// </summary>
     public class CreateRecyclingBinViewModel
     {
         [Key]

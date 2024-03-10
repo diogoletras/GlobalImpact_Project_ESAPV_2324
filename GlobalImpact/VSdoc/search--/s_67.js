@@ -1,1 +1,1 @@
-search_result['67']=["topic_000000000000001B_vars--.html","HomeController Fields",""];
+search_result['67']=["topic_000000000000001A_overloads--.html","AdminController.Create Method","Função Get para a página de criação de um User."];

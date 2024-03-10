@@ -1,1 +1,1 @@
-search_result['134']=["topic_000000000000002E_methods--.html","RecyclingBinsController Methods",""];
+search_result['134']=["topic_000000000000002A_attached_props--.html","RecyclingBinsController Attached Properties",""];

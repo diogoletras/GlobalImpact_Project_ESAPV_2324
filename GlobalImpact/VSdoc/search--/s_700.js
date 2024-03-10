@@ -1,1 +1,1 @@
-search_result['700']=["topic_00000000000000D0_events--.html","ReciclarViewModel Events",""];
+search_result['700']=["topic_00000000000000B8_events--.html","CreateRecyclingBinViewModel Events",""];
