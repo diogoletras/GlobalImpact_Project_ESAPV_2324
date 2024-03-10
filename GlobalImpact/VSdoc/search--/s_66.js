@@ -1,1 +1,1 @@
-search_result['66']=["topic_000000000000001B_props--.html","HomeController Properties",""];
+search_result['66']=["topic_000000000000001A.html","AdminController.Delete Method","Função Post de apagar User."];

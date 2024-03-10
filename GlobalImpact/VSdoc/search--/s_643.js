@@ -1,1 +1,1 @@
-search_result['643']=["topic_00000000000000BA_events--.html","CreateRecyclingBinViewModel Events",""];
+search_result['643']=["topic_00000000000000A8_attached_props--.html","RegisterViewModel Attached Properties",""];

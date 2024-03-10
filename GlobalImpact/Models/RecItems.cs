@@ -1,5 +1,9 @@
 ﻿namespace GlobalImpact.Models
 {
+    /// <summary>
+    /// Classe modelo RecItems.
+    /// Dados sobre os items reciclaveis.
+    /// </summary>
     public class RecItems
     {
         public string Tipo { get; set; }

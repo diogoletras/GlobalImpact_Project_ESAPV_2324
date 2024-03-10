@@ -1,1 +1,1 @@
-search_result['46']=["topic_0000000000000014_events--.html","AdminController Events",""];
+search_result['46']=["topic_0000000000000014.html","AccountController.ResetPasswordConfirmation Method","Função Get para retornar a página de confirmação de troca de PassWord."];

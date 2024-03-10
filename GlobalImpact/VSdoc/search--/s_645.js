@@ -1,1 +1,1 @@
-search_result['645']=["topic_00000000000000BA_props--.html","CreateRecyclingBinViewModel Properties",""];
+search_result['645']=["topic_00000000000000A8_methods--.html","RegisterViewModel Methods",""];

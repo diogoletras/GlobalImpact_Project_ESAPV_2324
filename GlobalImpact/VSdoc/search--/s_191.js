@@ -1,1 +1,1 @@
-search_result['191']=["topic_0000000000000042.html","RecyclingTransactionController.CancelConfirm Method","Função HTTPPost que confirma o cancelarmento da transação de reciclagem"];
+search_result['191']=["topic_0000000000000039.html","RecyclingBinsController.DeleteConfirmed Method","Função HttpPost que retorna a página de confirmação de delete."];

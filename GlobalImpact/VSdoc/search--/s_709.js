@@ -1,1 +1,1 @@
-search_result['709']=["topic_00000000000000D6.html","GlobalImpact Reference ",""];
+search_result['709']=["topic_00000000000000BA_props--.html","CreateRecyclingBinViewModel Properties",""];

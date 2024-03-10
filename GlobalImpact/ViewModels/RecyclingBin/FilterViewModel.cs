@@ -2,6 +2,9 @@
 
 namespace GlobalImpact.ViewModels.RecyclingBin
 {
+    /// <summary>
+    /// Classe ViewModel da filtragem de ecopontos.
+    /// </summary>
     public class FilterViewModel
     {
         public IEnumerable<GlobalImpact.Models.RecyclingBin> RecyclingBins { get; set; }

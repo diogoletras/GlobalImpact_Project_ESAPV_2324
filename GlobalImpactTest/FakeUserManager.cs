@@ -11,6 +11,9 @@ using Moq;
 
 namespace GlobalImpactTestProject
 {
+    /// <summary>
+    /// Classe teste de simulação de user manager.
+    /// </summary>
     public class FakeUserManager : UserManager<AppUser>
     {
         public FakeUserManager()

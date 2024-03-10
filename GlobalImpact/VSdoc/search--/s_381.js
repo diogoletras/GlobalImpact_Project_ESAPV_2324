@@ -1,1 +1,1 @@
-search_result['381']=["topic_0000000000000073_attached_props--.html","Product Attached Properties",""];
+search_result['381']=["topic_000000000000006A_attached_props--.html","Cart Attached Properties",""];

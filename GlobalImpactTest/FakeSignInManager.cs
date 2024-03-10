@@ -13,6 +13,9 @@ using GlobalImpact.Models;
 
 namespace GlobalImpactTestProject
 {
+    /// <summary>
+    /// Classe teste de simulação de signin manager.
+    /// </summary>
     public class FakeSignInManager : SignInManager<AppUser>
     {
         public FakeSignInManager()

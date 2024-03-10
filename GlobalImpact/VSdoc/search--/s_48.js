@@ -1,1 +1,1 @@
-search_result['48']=["topic_0000000000000014_props--.html","AdminController Properties",""];
+search_result['48']=["topic_0000000000000014_events--.html","AdminController Events",""];

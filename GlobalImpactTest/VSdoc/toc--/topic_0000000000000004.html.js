@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"GlobalImpactTest Reference","topic_000000000000000C.html"],['12',"GlobalImpactTestProject Namespace","topic_0000000000000000.html"],['15',"FakeUserManager Class","topic_0000000000000003.html"],['16',"FakeUserManager Constructor","topic_0000000000000004.html"]];

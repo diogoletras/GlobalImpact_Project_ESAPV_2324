@@ -1,1 +1,1 @@
-search_result['42']=["topic_0000000000000013_props--.html","AdminController Properties",""];
+search_result['42']=["topic_0000000000000013_methods--.html","AdminController Methods",""];

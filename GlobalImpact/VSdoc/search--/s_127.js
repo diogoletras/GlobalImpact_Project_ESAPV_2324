@@ -1,1 +1,1 @@
-search_result['127']=["topic_000000000000002B_props--.html","RecyclingBinsController Properties",""];
+search_result['127']=["topic_0000000000000027.html","ProductsController.Create (Product) Method","Funçãp HttpPost para criação de um produto."];

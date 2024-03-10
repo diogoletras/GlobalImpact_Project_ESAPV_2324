@@ -1,0 +1,1 @@
+c['232']=[['233',"CreateRecyclingBinViewModel Class","topic_00000000000000C3.html",1]];

@@ -1,1 +1,1 @@
-c['49']=[['50',"Create() Method","topic_0000000000000025.html",0],['51',"Create(Product) Method","topic_0000000000000026.html",0]];
+c['49']=[['50',"Create Method","topic_0000000000000026_overloads--.html",1],['53',"Delete Method","topic_000000000000002A.html",0],['54',"DeleteConfirmed Method","topic_000000000000002B.html",0],['55',"Details Method","topic_0000000000000025.html",0],['56',"Edit Method","topic_0000000000000028_overloads--.html",1],['59',"Index Method","topic_0000000000000024.html",0]];

@@ -1,1 +1,1 @@
-search_result['138']=["topic_000000000000002F.html","RecyclingBinsController.EcoLogin (Nullable\u0026lt;Guid\u0026gt;, String) Method","Função HttpPost que retorna a página de simulação de reciclagem no ecoponto escolhido em caso de sucesso, e em caso de insucesso retorna para a página de introduzição do código único."];
+search_result['138']=["topic_000000000000002A_props--.html","RecyclingBinsController Properties",""];

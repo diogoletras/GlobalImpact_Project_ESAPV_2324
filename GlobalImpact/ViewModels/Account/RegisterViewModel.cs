@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GlobalImpact.ViewModels.Account
 {
+    /// <summary>
+    /// Classe de visualização da página de registo.
+    /// </summary>
     public class RegisterViewModel
     {
         [EmailAddress]

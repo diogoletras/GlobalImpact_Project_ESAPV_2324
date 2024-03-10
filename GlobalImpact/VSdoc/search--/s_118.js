@@ -1,1 +1,1 @@
-search_result['118']=["topic_000000000000002A_methods--.html","RecyclingBinsController Methods",""];
+search_result['118']=["topic_0000000000000024_events--.html","ProductsController Events",""];

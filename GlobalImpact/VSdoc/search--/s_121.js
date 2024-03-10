@@ -1,1 +1,1 @@
-search_result['121']=["topic_000000000000002A_vars--.html","RecyclingBinsController Fields",""];
+search_result['121']=["topic_0000000000000024_props--.html","ProductsController Properties",""];
