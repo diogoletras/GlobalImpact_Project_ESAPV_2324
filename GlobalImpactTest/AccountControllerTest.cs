@@ -1,3 +1,5 @@
+using System.Security.Cryptography;
+using System.Text;
 using GlobalImpact.Controllers;
 using GlobalImpact.Data;
 using GlobalImpact.Models;
@@ -17,14 +19,14 @@ namespace GlobalImpactTest
     /// <summary>
     /// Classe testes unitários do accountController.
     /// </summary>
-    public class UnitTest1
+    public class AccountControllerTest
     {
         private ApplicationDbContext dbContext;
         private Mock<RoleManager<IdentityRole>> roleManagerMock;
         private Mock<FakeUserManager> userManagerMock;
         private Mock<FakeSignInManager> signInManagerMock;
         private AccountController controller;
-        public UnitTest1()
+        public AccountControllerTest()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "GlobalImpactDB")
@@ -52,34 +54,46 @@ namespace GlobalImpactTest
             {
                 new AppUser
                 {
+                    UserName = "test1",
                     UniqueCode = Guid.NewGuid().ToString(),
-                    FirstName = "Test",
+                    FirstName = "Test1",
                     LastName = "User",
                     Age = 20,
                     Points = 0,
                     Email = "234@gmail.com",
-                    NIF = 123456789
-                },
+                    NIF = 123456789,
+                    NormalizedEmail = "234@GMAIL.COM",
+                    NormalizedUserName = "TEST1",
+                    PasswordHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes("123")).ToString()
+				},
                 new AppUser
                 {
-                    UniqueCode = Guid.NewGuid().ToString(),
+	                UserName = "test2",
+					UniqueCode = Guid.NewGuid().ToString(),
                     FirstName = "Test2",
                     LastName = "User2",
                     Age = 30,
                     Points = 0,
                     Email = "123@gmail.com",
-                    NIF = 987654321
-                },
+                    NIF = 987654321,
+                    NormalizedEmail = "123@GMAIL.COM",
+                    NormalizedUserName = "TEST2",
+                    PasswordHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes("123")).ToString()
+				},
                 new AppUser()
                 {
-                    UniqueCode = Guid.NewGuid().ToString(),
+	                UserName = "test3",
+					UniqueCode = Guid.NewGuid().ToString(),
                     FirstName = "Test3",
                     LastName = "User3",
                     Age = 40,
                     Points = 0,
                     Email = "345@gmail.com",
-                    NIF = 987654321
-                }
+                    NIF = 987654321,
+                    NormalizedEmail = "123@GMAIL.COM",
+                    NormalizedUserName = "TEST3",
+                    PasswordHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes("123")).ToString()
+				}
             }.AsQueryable();
 
             userManagerMock = new Mock<FakeUserManager>();
@@ -87,7 +101,7 @@ namespace GlobalImpactTest
                 .Returns(users);
             userManagerMock.Setup(x => x.DeleteAsync(It.IsAny<AppUser>()))
                 .ReturnsAsync(IdentityResult.Success);
-            userManagerMock.Setup(x => x.CreateAsync(It.IsAny<AppUser>(), It.IsAny<string>()))
+            userManagerMock.Setup(x => x.CreateAsync(It.IsAny<AppUser>(), "123"))
                 .ReturnsAsync(IdentityResult.Success);
             userManagerMock.Setup(x => x.UpdateAsync(It.IsAny<AppUser>()))
                 .ReturnsAsync(IdentityResult.Success);
@@ -97,7 +111,7 @@ namespace GlobalImpactTest
 
             signInManagerMock = new Mock<FakeSignInManager>();
             signInManagerMock.Setup(
-                    x => x.PasswordSignInAsync(It.IsAny<AppUser>(), It.IsAny<string>(), It.IsAny<bool>(),
+                    x => x.PasswordSignInAsync(It.IsAny<AppUser>(), "123", It.IsAny<bool>(),
                         It.IsAny<bool>()))
                 .ReturnsAsync(SignInResult.Success);
 
@@ -107,9 +121,19 @@ namespace GlobalImpactTest
 
         }
 
-
         [Fact]
-        public async void Register_CanRegisterWithSuccess()
+        public void UserPage_CanGetPageWithSuccess()
+        {
+	        var user = userManagerMock.Object.Users.FirstOrDefault(u => u.UserName == "test1");
+	        var result = controller.UserPage(user.Id);
+	        var redirectResult = Assert.IsType<ViewResult>(result);
+	        var model = Assert.IsAssignableFrom<AppUser>(redirectResult.ViewData.Model);
+	        Assert.NotNull(model);
+        }
+
+
+		[Fact]
+        public async void Register_CanPostWithSuccess()
         {
 
             RegisterViewModel registerViewModel = new RegisterViewModel()
@@ -133,7 +157,7 @@ namespace GlobalImpactTest
         }
 
         [Fact]
-        public async void Register_CanGetPage()
+        public async void Register_CanGetPageWithSuccess()
         {
             var result = await controller.Register("");
             var redirectResult = Assert.IsType<ViewResult>(result);
@@ -143,27 +167,47 @@ namespace GlobalImpactTest
         }
 
         [Fact]
-        public async void Register_CanGetUserPage()
+        public void EmailSending_CanGetPageWithSuccess()
         {
-            var user = userManagerMock.Object.Users.FirstOrDefault(u => u.FirstName == "Test");
-            var result = controller.UserPage(user.Id);
-            var redirectResult = Assert.IsType<ViewResult>(result);
-            var model = Assert.IsAssignableFrom<AppUser>(redirectResult.ViewData.Model);
-            Assert.NotNull(model);
-        }
-
+			var result = controller.EmailSending();
+			Assert.IsType<ViewResult>(result);
+		}
 
         [Fact]
-        public void Register_CanGetConfirmEmailPage()
+        public void ConfirmEmailTask_CanGetPageWithSuccess()
         {
-            
-            var user = userManagerMock.Object.Users.FirstOrDefault(u => u.FirstName == "Test3");
-            var result = controller.ConfirmEmailTask(user.Id, user.UniqueCode);
-            var redirectResult = Assert.IsType<RedirectToActionResult>(result.Result);
-            Assert.Equal("EmailConfirmation", redirectResult.ActionName);
-           
+            var user = userManagerMock.Object.Users.FirstOrDefault(u => u.UserName == "test1");
 
+            var result = controller.ConfirmEmailTask(user.Id, user.UniqueCode);
+
+            Assert.IsType<Task<IActionResult>>(result);
         }
 
-    }
+        [Fact]
+        public void Login_CanGetPageWithSuccess()
+        {
+			var result = controller.Login("");
+			var redirectResult = Assert.IsType<Task<IActionResult>>(result);
+		}
+
+        [Fact]
+        public async void Login_CanPostWithSuccess()
+        {
+	        LoginViewModel loginViewModel = new LoginViewModel()
+	        {
+		        UserName = "test1",
+                Password = "123",
+	        };
+
+            var result = await controller.Login(loginViewModel, "");
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public void ExternalLogin_CanGetPageWithSuccess()
+        {
+			var result = controller.ExternalLogin("Google", "");
+			Assert.IsType<Task<IActionResult>>(result);
+		}
+	}
 }

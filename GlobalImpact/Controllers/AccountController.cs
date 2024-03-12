@@ -90,7 +90,7 @@ namespace GlobalImpact.Controllers
                 }
                 else
                 {
-                    var user = new AppUser
+	                AppUser user = new AppUser
                     {
                         UserName = registerViewModel.UserName,
                         Email = registerViewModel.Email,
