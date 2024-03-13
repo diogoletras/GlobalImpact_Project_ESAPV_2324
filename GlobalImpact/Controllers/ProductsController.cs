@@ -27,7 +27,7 @@ namespace GlobalImpact.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         // GET: Products
         /// <summary>
@@ -39,7 +39,7 @@ namespace GlobalImpact.Controllers
             return View(await _context.Products.ToListAsync());
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         // GET: Products/Details/5
         /// <summary>
@@ -64,7 +64,7 @@ namespace GlobalImpact.Controllers
             return View(product);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         // GET: Products/Create
         /// <summary>
@@ -74,7 +74,13 @@ namespace GlobalImpact.Controllers
 
         public IActionResult Create()
         {
-            return View();
+			List<SelectListItem> category = new List<SelectListItem>();
+			category.Add(new SelectListItem { Text = "Talho", Value = "Talho" });
+			category.Add(new SelectListItem { Text = "Peixaria", Value = "Peixaria" });
+			category.Add(new SelectListItem { Text = "Legumes", Value = "Legumes" });
+			category.Add(new SelectListItem { Text = "Frutas", Value = "Frutas" });
+			ViewBag.Categorias = category;
+			return View();
         }
 
         // POST: Products/Create
@@ -85,7 +91,7 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <param name="product">parametro para guardar os dados acerca do produto.</param>
         /// <returns></returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,Tax,Stock,Category")] Product product)
@@ -97,10 +103,20 @@ namespace GlobalImpact.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            else
+            {
+                List<SelectListItem> category = new List<SelectListItem>();
+                category.Add(new SelectListItem { Text = "Talho", Value = "Talho" });
+                category.Add(new SelectListItem { Text = "Peixaria", Value = "Peixaria" });
+                category.Add(new SelectListItem { Text = "Legumes", Value = "Legumes" });
+                category.Add(new SelectListItem { Text = "Frutas", Value = "Frutas" });
+                ViewBag.Categorias = category;
+                return View(product);
+            }
+           
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         // GET: Products/Edit/5
         /// <summary>
@@ -131,7 +147,7 @@ namespace GlobalImpact.Controllers
         /// <param name="id">parametro que guarda o id do produto.</param>
         /// <param name="product">paramentro que guarda os valores do produto.</param>
         /// <returns>retorna a página da lista de produtos quando o valor ja tiver sido editado</returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description,Price,Tax,Stock,Category")] Product product)
@@ -170,7 +186,7 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <param name="id">parametro que guarda o id do produto a ser eliminado.</param>
         /// <returns>retorna a página de confirmação de delete</returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> Delete(Guid? id)
         {
@@ -195,7 +211,7 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>retorna a página da lista de produtos</returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
