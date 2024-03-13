@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<GlobalImpact.Models.Product>
 
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -13,6 +14,7 @@
         <p>
             <a asp-action="Create">Create New</a>
         </p>
+        <div class="text-center">
         <table class="table">
             <thead>
             <tr>
@@ -68,5 +70,25 @@
             }
             </tbody>
         </table>
+
+            <form method="post" asp-controller="Products" asp-action="Filtrar">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do Produto">
+                </div>
+                <div class="form-group">
+                    <input type="number" step="0.01" class="form-control" id="maxp" name="maxp" placeholder="Preço Maximo">
+                </div>
+                <div class="form-group">
+                    <input type="number" step="0.01" class="form-control" id="minp" name="minp" placeholder="Preço Minimo">
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="categoria" name="categoria" asp-items="@ViewBag.Categorias"></select>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn-grad">Filtrar</button>
+                </div>
+            </form>
+
+        </div>
     }
 }

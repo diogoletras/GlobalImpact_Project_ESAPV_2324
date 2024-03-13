@@ -36,7 +36,47 @@ namespace GlobalImpact.Controllers
         /// <returns>retorna a página da lista de produtos.</returns>
         public async Task<IActionResult> Index()
         {
+            List<SelectListItem> category = new List<SelectListItem>();
+            category.Add(new SelectListItem { Text = "", Value = "" });
+            category.Add(new SelectListItem { Text = "Talho", Value = "Talho" });
+            category.Add(new SelectListItem { Text = "Peixaria", Value = "Peixaria" });
+            category.Add(new SelectListItem { Text = "Legumes", Value = "Legumes" });
+            category.Add(new SelectListItem { Text = "Frutas", Value = "Frutas" });
+            ViewBag.Categorias = category;
             return View(await _context.Products.ToListAsync());
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public async Task<IActionResult> Filtrar(string nome , double maxp, double minp, string categoria)
+        {
+            var products = await _context.Products.ToListAsync();
+
+            if (nome!= null)
+            {
+                products = products.Where(p => p.Name.Contains(nome, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+            if (maxp>0 && maxp!=null)
+            {
+                products = products.Where(p => p.Price <= maxp).ToList();
+            }
+            if (minp>0 && minp!=null)
+            {
+                products = products.Where(p => p.Price >= minp).ToList();
+            }
+            if (categoria != null)
+            {
+                products = products.Where(p => p.Category.Equals(categoria)).ToList();
+            }
+
+            List<SelectListItem> category = new List<SelectListItem>();
+            category.Add(new SelectListItem { Text = "", Value = "" });
+            category.Add(new SelectListItem { Text = "Talho", Value = "Talho" });
+            category.Add(new SelectListItem { Text = "Peixaria", Value = "Peixaria" });
+            category.Add(new SelectListItem { Text = "Legumes", Value = "Legumes" });
+            category.Add(new SelectListItem { Text = "Frutas", Value = "Frutas" });
+            ViewBag.Categorias = category;
+            return View("Index", products);
         }
 
         [Authorize(Roles = "admin")]
