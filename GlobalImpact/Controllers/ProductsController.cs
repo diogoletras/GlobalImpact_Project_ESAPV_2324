@@ -27,7 +27,7 @@ namespace GlobalImpact.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         // GET: Products
         /// <summary>
@@ -36,10 +36,68 @@ namespace GlobalImpact.Controllers
         /// <returns>retorna a página da lista de produtos.</returns>
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.ToListAsync());
+            var products = await _context.Products.ToListAsync();
+
+
+			List<SelectListItem> category = new List<SelectListItem>();
+            category.Add(new SelectListItem { Text = "", Value = "" });
+            var productsCat = await _context.ProductsCategory.ToListAsync();
+            foreach(var cat in productsCat)
+            {
+                category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+			}
+            foreach(var prod in products)
+            {
+                foreach(var cat in productsCat)
+                {
+                    if (prod.ProductCategoryId.Equals(cat.ProductCategoryId.ToString()))
+                    {
+                        prod.Category = new ProductCategory
+                        {
+                            Category = cat.Category
+                        };
+                    }
+                }
+            }
+			ViewBag.Categorias = category;
+            return View(products);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public async Task<IActionResult> Filtra(string nome , float maxp, float minp, string categoria)
+        {
+            var products = await _context.Products.ToListAsync();
+
+            if (nome!= null)
+            {
+                products = products.Where(p => p.Name.Contains(nome, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+            if (maxp>0 && maxp!=null)
+            {
+                products = products.Where(p => p.Price <= maxp).ToList();
+            }
+            if (minp>0 && minp!=null)
+            {
+                products = products.Where(p => p.Price >= minp).ToList();
+            }
+            if (categoria != null)
+            {
+                products = products.Where(p => p.ProductCategoryId.Equals(categoria)).ToList();
+            }
+
+			List<SelectListItem> category = new List<SelectListItem>();
+			category.Add(new SelectListItem { Text = "", Value = "" });
+			var productsCat = await _context.ProductsCategory.ToListAsync();
+			foreach (var cat in productsCat)
+			{
+				category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+			}
+			ViewBag.Categorias = category;
+			return View("Index", products);
+        }
+
+        [Authorize(Roles = "admin")]
         [HttpGet]
         // GET: Products/Details/5
         /// <summary>
@@ -64,7 +122,7 @@ namespace GlobalImpact.Controllers
             return View(product);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         // GET: Products/Create
         /// <summary>
@@ -72,8 +130,15 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <returns>retorna a criação do produto.</returns>
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            List<SelectListItem> category = new List<SelectListItem>();
+            var productsCat = await _context.ProductsCategory.ToListAsync();
+            foreach (var cat in productsCat)
+            {
+                category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+            }
+            ViewBag.Categorias = category;
             return View();
         }
 
@@ -85,11 +150,12 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <param name="product">parametro para guardar os dados acerca do produto.</param>
         /// <returns></returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,Tax,Stock,Category")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,Tax,Stock,ProductCategoryId")] Product product)
         {
+            ModelState.Remove("Category");
             if (ModelState.IsValid)
             {
                 product.Id = Guid.NewGuid();
@@ -97,10 +163,21 @@ namespace GlobalImpact.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            else
+            {
+                List<SelectListItem> category = new List<SelectListItem>();
+                var productsCat = await _context.ProductsCategory.ToListAsync();
+                foreach (var cat in productsCat)
+                {
+                    category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+                }
+                ViewBag.Categorias = category;
+                return View(product);
+            }
+           
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         // GET: Products/Edit/5
         /// <summary>
@@ -131,7 +208,7 @@ namespace GlobalImpact.Controllers
         /// <param name="id">parametro que guarda o id do produto.</param>
         /// <param name="product">paramentro que guarda os valores do produto.</param>
         /// <returns>retorna a página da lista de produtos quando o valor ja tiver sido editado</returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description,Price,Tax,Stock,Category")] Product product)
@@ -170,7 +247,7 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <param name="id">parametro que guarda o id do produto a ser eliminado.</param>
         /// <returns>retorna a página de confirmação de delete</returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> Delete(Guid? id)
         {
@@ -195,7 +272,7 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>retorna a página da lista de produtos</returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)

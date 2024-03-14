@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<GlobalImpact.Models.Product>
 
+
 @{
     ViewData["Title"] = "Index";
 }
 @if (User.Identity.IsAuthenticated)
 {
-    @if (User.IsInRole("Admin"))
+    @if (User.IsInRole("admin"))
     {
 
         <h1>Index</h1>
@@ -13,6 +14,7 @@
         <p>
             <a asp-action="Create">Create New</a>
         </p>
+        <div class="text-center">
         <table class="table">
             <thead>
             <tr>
@@ -57,7 +59,7 @@
                         @Html.DisplayFor(modelItem => item.Stock)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Category)
+                        @Html.DisplayFor(modelItem => item.Category.Category)
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -68,5 +70,25 @@
             }
             </tbody>
         </table>
+
+            <form method="post" asp-controller="Products" asp-action="Filtra">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do Produto">
+                </div>
+                <div class="form-group">
+                    <input type="number" step="0.001" class="form-control" id="maxp" name="maxp" placeholder="Preço Maximo">
+                </div>
+                <div class="form-group">
+                    <input type="number" step="0.001" class="form-control" id="minp" name="minp" placeholder="Preço Minimo">
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="categoria" name="categoria" asp-items="@ViewBag.Categorias"></select>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn-grad">Filtrar</button>
+                </div>
+            </form>
+
+        </div>
     }
 }

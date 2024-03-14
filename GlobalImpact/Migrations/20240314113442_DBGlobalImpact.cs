@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GlobalImpact.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCommit : Migration
+    public partial class DBGlobalImpact : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -68,11 +68,23 @@ namespace GlobalImpact.Migrations
                     Price = table.Column<double>(type: "float", nullable: false),
                     Tax = table.Column<double>(type: "float", nullable: false),
                     Stock = table.Column<int>(type: "int", nullable: false),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ProductCategoryId = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductsCategory",
+                columns: table => new
+                {
+                    ProductCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductsCategory", x => x.ProductCategoryId);
                 });
 
             migrationBuilder.CreateTable(
@@ -270,23 +282,47 @@ namespace GlobalImpact.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "5d3d7ddc-96f1-4e8e-98a2-ac2c7fd12ac1", "bd85dc24-beb0-4e06-aa6a-a3e9a10d5fcf", "admin", "ADMIN" },
-                    { "c3077164-8f66-49fd-8f32-e647914e2eef", "50485adb-1d9b-4217-b008-0c320ee6ee7e", "client", "CLIENT" }
+                    { "0349cbaa-0b52-4169-a7c7-392d4dd269c8", "675cd7f9-67ca-49d9-a546-8d700aa28398", "admin", "ADMIN" },
+                    { "db98dbcc-8b7e-41e1-8200-2bc6eeb0a6d2", "a9c97537-cad2-4b33-9803-bde9d43cfeb6", "client", "CLIENT" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Age", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NIF", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Points", "SecurityStamp", "TwoFactorEnabled", "UniqueCode", "UserName" },
-                values: new object[] { "646cf1b7-3f4e-48a4-bb26-7563dc80490b", 0, 0, "c38ebad8-42ef-426e-b52d-62315ea52a54", "admin@gmail.com", true, "Admin", "Admin", true, null, 0, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEHuyWaQFwk4bz7TbrrCw2U9OKU8L5rjxiq1GHZIqacLDIdjgBK1iMoxawt8rjUPg9Q==", "123456789", true, 0, "", false, "cc27a914-e99f-454b-a7b2-a3480bfeeaae", "admin" });
+                values: new object[] { "6ff07a90-9892-4172-a1a1-bffd0ffe2761", 0, 0, "3df02139-4692-4039-b35e-a7ec468ceafa", "admin@gmail.com", true, "Admin", "Admin", true, null, 0, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAECzhoIzKygj5RDmu5aifLEoyRj/rLYOYQK1kQ/6uD5qYSCouJOHvk2Xig/JGO2Jgeg==", "123456789", true, 0, "", false, "d1f0b7cc-8db0-48a5-b185-edfc0e66f7c5", "admin" });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "Description", "Name", "Price", "ProductCategoryId", "Stock", "Tax" },
+                values: new object[,]
+                {
+                    { new Guid("4c8316c2-aa79-4238-b6c0-6feceaabd510"), "Broculos Verde", "Broculos", 1.5, "0e2aa289-b368-46f4-b376-decb8e18e7d0", 50, 0.059999999999999998 },
+                    { new Guid("889a9739-b0a6-459a-ac1e-9affdefd1532"), "Bacalhau da Noruega", "Bacalhau", 8.0, "77d73e82-d9c9-4ed1-825f-52c167d97767", 25, 0.059999999999999998 },
+                    { new Guid("bde1eea7-4ae6-4dd4-8833-740a0649bd5a"), "Licor Beirao versao Especial 100 anos", "Licor Beirao", 11.199999999999999, "77830269-7341-49fc-9e7f-e96ff9f45117", 5, 0.23000000000000001 },
+                    { new Guid("e291f06d-5ef9-4cc6-aa6d-694662d99afb"), "Costoletas de Vaca", "Costoletas", 5.0, "ca34bec2-01b9-44f7-9502-dee2248a1ae0", 20, 0.059999999999999998 },
+                    { new Guid("f647ce91-a7e7-40cb-98c0-b21b5808bb26"), "Pessego da Colombia", "Pessego", 2.2999999999999998, "e5b02325-1365-4e2d-8ce0-a57759ef1164", 30, 0.059999999999999998 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductsCategory",
+                columns: new[] { "ProductCategoryId", "Category" },
+                values: new object[,]
+                {
+                    { new Guid("0e2aa289-b368-46f4-b376-decb8e18e7d0"), "legumes" },
+                    { new Guid("77830269-7341-49fc-9e7f-e96ff9f45117"), "bebidas" },
+                    { new Guid("77d73e82-d9c9-4ed1-825f-52c167d97767"), "peixaria" },
+                    { new Guid("ca34bec2-01b9-44f7-9502-dee2248a1ae0"), "talho" },
+                    { new Guid("e5b02325-1365-4e2d-8ce0-a57759ef1164"), "frutas" }
+                });
 
             migrationBuilder.InsertData(
                 table: "RecyclingBinType",
                 columns: new[] { "RecyclingBinTypeId", "Type" },
                 values: new object[,]
                 {
-                    { new Guid("7c09a9ac-39ba-42ae-a25e-f5b4057c38b9"), "plastic" },
-                    { new Guid("979011c0-a185-4c85-bafd-ff465d9990aa"), "paper" },
-                    { new Guid("c152c64e-9798-4c83-9a82-d92303de99ff"), "glass" }
+                    { new Guid("5cf99d04-0d70-4902-bc53-59940a38a716"), "plastic" },
+                    { new Guid("63b362f3-b244-4591-a939-d4788851cd22"), "paper" },
+                    { new Guid("bab57348-c74f-4144-ace9-8e0518af60f7"), "glass" }
                 });
 
             migrationBuilder.InsertData(
@@ -294,18 +330,18 @@ namespace GlobalImpact.Migrations
                 columns: new[] { "Id", "Capacity", "CurrentCapacity", "Description", "Latitude", "Longitude", "RecyclingBinTypeId", "Status" },
                 values: new object[,]
                 {
-                    { new Guid("105f35a4-2c7a-4716-ae85-e66c1025613c"), 100.0, 0.0, "Recycling Bin Paper", 38.521474614438482, -8.8366557205732299, "979011c0-a185-4c85-bafd-ff465d9990aa", true },
-                    { new Guid("16588bdd-c6c4-4d03-9f89-78e2f0854b29"), 100.0, 0.0, "Recycling Bin Paper", 38.52268201637833, -8.8397580181150541, "979011c0-a185-4c85-bafd-ff465d9990aa", true },
-                    { new Guid("1f20d5d2-94a2-4043-a8cc-113fa74a7418"), 100.0, 0.0, "Recycling Bin Plastic", 38.522550713957862, -8.8395605732421387, "7c09a9ac-39ba-42ae-a25e-f5b4057c38b9", true },
-                    { new Guid("c604cb6b-63e4-4236-a392-343577bd5855"), 100.0, 0.0, "Recycling Bin Glass", 38.521607817359822, -8.8368159603671987, "c152c64e-9798-4c83-9a82-d92303de99ff", true },
-                    { new Guid("c8feba78-9230-488e-8b4c-500506170e3b"), 100.0, 0.0, "Recycling Bin Glass", 38.519799793743871, -8.8360971667515606, "c152c64e-9798-4c83-9a82-d92303de99ff", true },
-                    { new Guid("d06be5c6-bcb4-4730-a898-f45184a54033"), 100.0, 0.0, "Recycling Bin Plastic", 38.52171490188254, -8.83694281687076, "7c09a9ac-39ba-42ae-a25e-f5b4057c38b9", true }
+                    { new Guid("0076cdfd-28bb-4015-8a5b-0d3fe384f1c8"), 100.0, 0.0, "Recycling Bin Glass", 38.519799793743871, -8.8360971667515606, "bab57348-c74f-4144-ace9-8e0518af60f7", true },
+                    { new Guid("4b416cc5-6557-427a-8ae1-8f83cf856d0d"), 100.0, 0.0, "Recycling Bin Glass", 38.521607817359822, -8.8368159603671987, "bab57348-c74f-4144-ace9-8e0518af60f7", true },
+                    { new Guid("6899b3da-1bb3-4c09-badc-b40f0331d492"), 100.0, 0.0, "Recycling Bin Paper", 38.521474614438482, -8.8366557205732299, "63b362f3-b244-4591-a939-d4788851cd22", true },
+                    { new Guid("76053444-9535-4682-9cae-b37ae43f6639"), 100.0, 0.0, "Recycling Bin Plastic", 38.52171490188254, -8.83694281687076, "5cf99d04-0d70-4902-bc53-59940a38a716", true },
+                    { new Guid("8efd4fcc-e265-4faf-9b9e-5a498c4ebcbf"), 100.0, 0.0, "Recycling Bin Plastic", 38.522550713957862, -8.8395605732421387, "5cf99d04-0d70-4902-bc53-59940a38a716", true },
+                    { new Guid("9857871a-035d-4edb-8e2a-a4ec5b8f60c5"), 100.0, 0.0, "Recycling Bin Paper", 38.522682016378347, -8.8397580181150541, "63b362f3-b244-4591-a939-d4788851cd22", true }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "5d3d7ddc-96f1-4e8e-98a2-ac2c7fd12ac1", "646cf1b7-3f4e-48a4-bb26-7563dc80490b" });
+                values: new object[] { "0349cbaa-0b52-4169-a7c7-392d4dd269c8", "6ff07a90-9892-4172-a1a1-bffd0ffe2761" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -387,6 +423,9 @@ namespace GlobalImpact.Migrations
 
             migrationBuilder.DropTable(
                 name: "Carts");
+
+            migrationBuilder.DropTable(
+                name: "ProductsCategory");
 
             migrationBuilder.DropTable(
                 name: "RecyclingBinType");
