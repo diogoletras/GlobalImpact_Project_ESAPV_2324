@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GlobalImpact.Models
 {
@@ -11,6 +12,11 @@ namespace GlobalImpact.Models
         public double Price { get; set; }
         public double Tax { get; set; }
         public int Stock { get; set; }
-        public string Category { get; set; }
-    }
+
+
+		[ForeignKey("ProductCategoryId")]
+		public string ProductCategoryId { get; set; }
+		[NotMapped]
+		public virtual ProductCategory Category { get; set; }
+	}
 }

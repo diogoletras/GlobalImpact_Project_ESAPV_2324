@@ -36,19 +36,36 @@ namespace GlobalImpact.Controllers
         /// <returns>retorna a página da lista de produtos.</returns>
         public async Task<IActionResult> Index()
         {
-            List<SelectListItem> category = new List<SelectListItem>();
+            var products = await _context.Products.ToListAsync();
+
+
+			List<SelectListItem> category = new List<SelectListItem>();
             category.Add(new SelectListItem { Text = "", Value = "" });
-            category.Add(new SelectListItem { Text = "Talho", Value = "Talho" });
-            category.Add(new SelectListItem { Text = "Peixaria", Value = "Peixaria" });
-            category.Add(new SelectListItem { Text = "Legumes", Value = "Legumes" });
-            category.Add(new SelectListItem { Text = "Frutas", Value = "Frutas" });
-            ViewBag.Categorias = category;
-            return View(await _context.Products.ToListAsync());
+            var productsCat = await _context.ProductsCategory.ToListAsync();
+            foreach(var cat in productsCat)
+            {
+                category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+			}
+            foreach(var prod in products)
+            {
+                foreach(var cat in productsCat)
+                {
+                    if (prod.ProductCategoryId.Equals(cat.ProductCategoryId.ToString()))
+                    {
+                        prod.Category = new ProductCategory
+                        {
+                            Category = cat.Category
+                        };
+                    }
+                }
+            }
+			ViewBag.Categorias = category;
+            return View(products);
         }
 
         [Authorize(Roles = "admin")]
         [HttpPost]
-        public async Task<IActionResult> Filtrar(string nome , double maxp, double minp, string categoria)
+        public async Task<IActionResult> Filtra(string nome , float maxp, float minp, string categoria)
         {
             var products = await _context.Products.ToListAsync();
 
@@ -66,17 +83,18 @@ namespace GlobalImpact.Controllers
             }
             if (categoria != null)
             {
-                products = products.Where(p => p.Category.Equals(categoria)).ToList();
+                products = products.Where(p => p.ProductCategoryId.Equals(categoria)).ToList();
             }
 
-            List<SelectListItem> category = new List<SelectListItem>();
-            category.Add(new SelectListItem { Text = "", Value = "" });
-            category.Add(new SelectListItem { Text = "Talho", Value = "Talho" });
-            category.Add(new SelectListItem { Text = "Peixaria", Value = "Peixaria" });
-            category.Add(new SelectListItem { Text = "Legumes", Value = "Legumes" });
-            category.Add(new SelectListItem { Text = "Frutas", Value = "Frutas" });
-            ViewBag.Categorias = category;
-            return View("Index", products);
+			List<SelectListItem> category = new List<SelectListItem>();
+			category.Add(new SelectListItem { Text = "", Value = "" });
+			var productsCat = await _context.ProductsCategory.ToListAsync();
+			foreach (var cat in productsCat)
+			{
+				category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+			}
+			ViewBag.Categorias = category;
+			return View("Index", products);
         }
 
         [Authorize(Roles = "admin")]
@@ -112,15 +130,16 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <returns>retorna a criação do produto.</returns>
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-			List<SelectListItem> category = new List<SelectListItem>();
-			category.Add(new SelectListItem { Text = "Talho", Value = "Talho" });
-			category.Add(new SelectListItem { Text = "Peixaria", Value = "Peixaria" });
-			category.Add(new SelectListItem { Text = "Legumes", Value = "Legumes" });
-			category.Add(new SelectListItem { Text = "Frutas", Value = "Frutas" });
-			ViewBag.Categorias = category;
-			return View();
+            List<SelectListItem> category = new List<SelectListItem>();
+            var productsCat = await _context.ProductsCategory.ToListAsync();
+            foreach (var cat in productsCat)
+            {
+                category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+            }
+            ViewBag.Categorias = category;
+            return View();
         }
 
         // POST: Products/Create
@@ -134,8 +153,9 @@ namespace GlobalImpact.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,Tax,Stock,Category")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,Tax,Stock,ProductCategoryId")] Product product)
         {
+            ModelState.Remove("Category");
             if (ModelState.IsValid)
             {
                 product.Id = Guid.NewGuid();
@@ -146,10 +166,11 @@ namespace GlobalImpact.Controllers
             else
             {
                 List<SelectListItem> category = new List<SelectListItem>();
-                category.Add(new SelectListItem { Text = "Talho", Value = "Talho" });
-                category.Add(new SelectListItem { Text = "Peixaria", Value = "Peixaria" });
-                category.Add(new SelectListItem { Text = "Legumes", Value = "Legumes" });
-                category.Add(new SelectListItem { Text = "Frutas", Value = "Frutas" });
+                var productsCat = await _context.ProductsCategory.ToListAsync();
+                foreach (var cat in productsCat)
+                {
+                    category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+                }
                 ViewBag.Categorias = category;
                 return View(product);
             }
