@@ -238,9 +238,9 @@ namespace GlobalImpact.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public IActionResult ExternalLogin(string provider, string returnUrl = null)
+        public IActionResult ExternalLogin(string provider)
         {
-            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Account");
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return new ChallengeResult(provider, properties);
         }
@@ -252,7 +252,7 @@ namespace GlobalImpact.Controllers
         /// <param name="remoteError">Se houver algum problema com o provider.</param>
         /// <returns>Se houver um problema retorna para a página de login; se o user já tiver uma conta vai para o DashBoard, se não vai para o registo.</returns>
         [HttpGet]
-        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
+        public async Task<IActionResult> ExternalLoginCallback(string remoteError = null)
         {
             if (remoteError != null)
             {
@@ -276,7 +276,6 @@ namespace GlobalImpact.Controllers
             else
             {
                 //If the user does not have account, then we will ask the user to create an account.
-                ViewData["ReturnUrl"] = returnUrl;
                 ViewData["ProviderDisplayName"] = info.ProviderDisplayName;
 
                 var model = new ExternalLoginViewModel
