@@ -1,3 +1,4 @@
+using System.Configuration;
 using System.Security.Cryptography;
 using System.Text;
 using GlobalImpact.Controllers;
@@ -5,11 +6,13 @@ using GlobalImpact.Data;
 using GlobalImpact.Models;
 using GlobalImpact.Utils;
 using GlobalImpact.ViewModels.Account;
-using GlobalImpactTestProject;
+using GlobalImpactTest.FakeManagers;
+using GlobalImpactTest.IClassFixture;
 using Humanizer.Localisation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
@@ -19,22 +22,16 @@ namespace GlobalImpactTest
     /// <summary>
     /// Classe testes unitários do accountController.
     /// </summary>
-    public class AccountControllerTest
+    public class AccountControllerTest : IClassFixture<ApplicationDbContextFixture>
     {
         private ApplicationDbContext dbContext;
         private Mock<RoleManager<IdentityRole>> roleManagerMock;
         private Mock<FakeUserManager> userManagerMock;
         private Mock<FakeSignInManager> signInManagerMock;
         private AccountController controller;
-        public AccountControllerTest()
+        public AccountControllerTest(ApplicationDbContextFixture context)
         {
-			var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-				.UseSqlite("DataSource=:memory:")
-				.Options;
-
-			dbContext = new ApplicationDbContext(options);
-
-            var user = dbContext.AppUser.ToListAsync();
+            dbContext = context.DbContext;
 
             var listRoles = new List<IdentityRole>()
             {
@@ -137,6 +134,8 @@ namespace GlobalImpactTest
         [Fact]
         public async void Register_CanPostWithSuccess()
         {
+
+            var users = await dbContext.AppUser.ToListAsync();
 
             RegisterViewModel registerViewModel = new RegisterViewModel()
             {

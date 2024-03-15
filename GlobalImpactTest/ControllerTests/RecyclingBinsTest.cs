@@ -9,7 +9,8 @@ using GlobalImpact.Models;
 using GlobalImpact.Utils;
 using GlobalImpact.ViewModels.Account;
 using GlobalImpact.ViewModels.RecyclingBin;
-using GlobalImpactTestProject;
+using GlobalImpactTest.FakeManagers;
+using GlobalImpactTest.IClassFixture;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,19 +18,15 @@ using Moq;
 
 namespace GlobalImpactTest
 {
-    public class RecyclingBinsTest
+    public class RecyclingBinsTest : IClassFixture<ApplicationDbContextFixture>
     {
         private Mock<FakeUserManager> userManagerMock;
         private ApplicationDbContext dbContext;
         private RecyclingBinsController controller;
 
-        public RecyclingBinsTest()
+        public RecyclingBinsTest(ApplicationDbContextFixture context)
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "GlobalIMPBD2")
-                .Options;
-
-            dbContext = new ApplicationDbContext(options);
+            dbContext = context.DbContext;
 
             var users = new List<AppUser>
             {

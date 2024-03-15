@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GlobalImpact.Models;
 
-namespace GlobalImpactTestProject
+namespace GlobalImpactTest.FakeManagers
 {
     /// <summary>
     /// Classe teste de simulação de signin manager.

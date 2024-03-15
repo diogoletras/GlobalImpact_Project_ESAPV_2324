@@ -9,12 +9,12 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 
-namespace GlobalImpactTestProject
+namespace GlobalImpactTest.FakeManagers
 {
     /// <summary>
     /// Classe teste de simulação de user manager.
     /// </summary>
-    public class FakeUserManager : UserManager<AppUser>
+    public class FakeUserManager : UserManager<AppUser>, IDisposable
     {
         public FakeUserManager()
             : base(new Mock<IUserStore<AppUser>>().Object,
@@ -27,6 +27,11 @@ namespace GlobalImpactTestProject
                 new Mock<IServiceProvider>().Object,
                 new Mock<ILogger<UserManager<AppUser>>>().Object)
         {
+        }
+
+        public void Dispose()
+        {
+            base.Dispose();
         }
     }
 }
