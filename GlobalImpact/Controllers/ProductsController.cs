@@ -93,7 +93,23 @@ namespace GlobalImpact.Controllers
 			{
 				category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
 			}
+
+			foreach (var prod in products)
+			{
+				foreach (var cat in productsCat)
+				{
+					if (prod.ProductCategoryId.Equals(cat.ProductCategoryId.ToString()))
+					{
+						prod.Category = new ProductCategory
+						{
+							Category = cat.Category
+						};
+					}
+				}
+			}
+
 			ViewBag.Categorias = category;
+
 			return View("Index", products);
         }
 

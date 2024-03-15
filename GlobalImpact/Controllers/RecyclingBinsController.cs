@@ -540,7 +540,88 @@ namespace GlobalImpact.Controllers
                 recyclingBin.Type = recyclingBinType.Type;
             }
 
+            var recyclingBinTypes = await _context.RecyclingBinType.ToListAsync();
+
+            List<SelectListItem> types = new List<SelectListItem>();
+
+            types.Add(new SelectListItem { Value = "", Text = "" });
+            foreach (var type in recyclingBinTypes)
+            {
+                types.Add(new SelectListItem { Value = type.RecyclingBinTypeId.ToString(), Text = type.Type });
+            }
+
+            ViewBag.Types = types;
+
+            List<SelectListItem> statuss = new List<SelectListItem>();
+
+            statuss.Add(new SelectListItem { Value = null, Text = "" });
+            statuss.Add(new SelectListItem { Value = true.ToString(), Text = "Disponivel" });
+            statuss.Add(new SelectListItem { Value = false.ToString(), Text = "Indisponivel" });
+
+            ViewBag.Status = statuss;
+
             return View(recyclingBins);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FiltrarMapa(string status, double tolcap, double curcap, string type)
+        {
+            var recyclingBins = await _context.RecyclingBins.ToListAsync();
+
+            if (status == null && tolcap == 0 && curcap == 0 && type == null)
+            {
+                return RedirectToAction("GoogleMaps");
+            }
+
+            foreach (var recyclingBin in recyclingBins)
+            {
+                RecyclingBinType recyclingBinType = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(recyclingBin.RecyclingBinTypeId));
+                recyclingBin.Type = recyclingBinType.Type;
+            }
+
+            if (status != null)
+            {
+                if (status.ToLower().Equals("true"))
+                    recyclingBins = recyclingBins.Where(r => r.Status == true).ToList();
+                else
+                    recyclingBins = recyclingBins.Where(r => r.Status == false).ToList();
+            }
+            
+            if (tolcap != null && tolcap > 0)
+            {
+                recyclingBins = recyclingBins.Where(r => r.Capacity <= tolcap).ToList();
+            }
+            if (curcap != null && curcap > 0)
+            {
+                recyclingBins = recyclingBins.Where(r => r.CurrentCapacity <= curcap).ToList();
+            }
+            if (type != null)
+            {
+                recyclingBins = recyclingBins.Where(r => r.RecyclingBinTypeId.Equals(type)).ToList();
+            }
+
+            var recyclingBinTypes = await _context.RecyclingBinType.ToListAsync();
+
+            List<SelectListItem> types = new List<SelectListItem>();
+
+            types.Add(new SelectListItem { Value = "", Text = "" });
+            foreach (var t in recyclingBinTypes)
+            {
+                types.Add(new SelectListItem { Value = t.RecyclingBinTypeId.ToString(), Text = t.Type });
+            }
+
+            ViewBag.Types = types;
+
+            List<SelectListItem> statuss = new List<SelectListItem>();
+
+            statuss.Add(new SelectListItem { Value = null, Text = "" });
+            statuss.Add(new SelectListItem { Value = true.ToString(), Text = "Disponivel" });
+            statuss.Add(new SelectListItem { Value = false.ToString(), Text = "Indisponivel" });
+
+            ViewBag.Status = statuss;
+
+
+            return View("GoogleMaps", recyclingBins);
         }
 
         /// <summary>

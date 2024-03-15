@@ -1,17 +1,47 @@
 ﻿@model IEnumerable<GlobalImpact.Models.RecyclingBin>
 
+<div class="row text-white text-center">
+    <h1 class="text-white text-center col-2">Filters</h1>
+    <form method="post" asp-controller="RecyclingBins" asp-action="FiltrarMapa" class="col-2">
+        <div class="form-group">
+            <input type="number" step="0.001" class="form-control" id="tolcap" name="tolcap" placeholder="Capacidade Total">
+        </div>
+        <div class="form-group">
+            <input type="number" step="0.001" class="form-control" id="curcap" name="curcap" placeholder="Capacidade Atual">
+        </div>
+        <div class="form-group">
+            <select class="form-control" id="status" name="status" asp-items="@ViewBag.Status"></select>
+        </div>
+        <div class="form-group">
+            <select class="form-control" id="type" name="type" asp-items="@ViewBag.Types"></select>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn-grad">Filtrar</button>
+        </div>
+    </form>
+</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnaT4ITxYnVC69ETzeLpuOAvAOh6nNfTA&callback=initMap" sensor="false"></script>
 @{
     Dictionary<Guid, double> listLatitude = new Dictionary<Guid, double>();
     Dictionary<Guid, double> listLongitude = new Dictionary<Guid, double>();
     Dictionary<Guid, string> listType = new Dictionary<Guid, string>();
+    Dictionary<Guid, bool> listStatus = new Dictionary<Guid, bool>();
+    Dictionary<Guid, double> listTotalCapacity = new Dictionary<Guid, double>();
+    Dictionary<Guid, double> listCurrentCapacity = new Dictionary<Guid, double>();
+
     foreach (var item in Model)
     {
         listLatitude.Add(item.Id, item.Latitude);
         listLongitude.Add(item.Id, item.Latitude);
         listType.Add(item.Id, item.Type);
+        listStatus.Add(item.Id, item.Status);
+        listTotalCapacity.Add(item.Id, item.Capacity);
+        listCurrentCapacity.Add(item.Id, item.CurrentCapacity);
     }
+
+    
 }
 
 <script type="text/javascript">
@@ -32,7 +62,7 @@
                     title: 'Your location'
                 });
                 markers.push(userLocationMarker);
-                map.setCenter(userLocation);
+                //map.setCenter(userLocation);
             });
         } else {
             alert("Geolocation is not supported by this browser.");
@@ -43,6 +73,9 @@
         const latitudes = model.map(item => item.latitude);
         const longitudes = model.map(item => item.longitude);
         const types = model.map(item => item.type);
+        const statuss = model.map(item => item.status);
+        const tolcaps = model.map(item => item.capacity);
+        const curcaps = model.map(item => item.currentCapacity);
 
         var canvas = $("#map_canvas");
 
@@ -61,6 +94,9 @@
         latitudes.forEach((latitude, index) => {
             const longitude = longitudes[index];
             const type = types[index];
+            const status = statuss[index];
+            const tolcap = tolcaps[index];
+            const curcap = curcaps[index];
 
             var latlng = new google.maps.LatLng(latitude, longitude);
 
@@ -79,6 +115,16 @@
                 marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
             }
 
+            marker.addListener('mouseover', function () {
+                infoWindow.setContent(`
+                    <strong>Type: </strong> ${type}<br />
+                    <strong> Total Capacity: </strong> ${tolcap}<br />
+                    <strong> Current Capacity: </strong> ${curcap}<br />
+                    <strong> Available: </strong> ${status}
+                `);
+                infoWindow.open(map, marker);
+            });
+
             marker.addListener('click', function () {
                 selectedMarker = marker;
 
@@ -91,9 +137,6 @@
                 });
 
                 calculateAndDisplayRoute(marker);
-                infoWindow.setContent(`<strong>Type:</strong> ${type}`);
-                infoWindow.open(map, marker);
-
             });
         });
     }
