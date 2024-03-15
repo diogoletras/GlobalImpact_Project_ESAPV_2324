@@ -28,11 +28,13 @@ namespace GlobalImpactTest
         private AccountController controller;
         public AccountControllerTest()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "GlobalImpactDB")
-                .Options;
+			var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+				.UseSqlite("DataSource=:memory:")
+				.Options;
 
-            dbContext = new ApplicationDbContext(options);
+			dbContext = new ApplicationDbContext(options);
+
+            var user = dbContext.AppUser.ToListAsync();
 
             var listRoles = new List<IdentityRole>()
             {

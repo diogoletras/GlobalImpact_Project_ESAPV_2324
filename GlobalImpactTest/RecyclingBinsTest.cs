@@ -8,6 +8,7 @@ using GlobalImpact.Data;
 using GlobalImpact.Models;
 using GlobalImpact.Utils;
 using GlobalImpact.ViewModels.Account;
+using GlobalImpact.ViewModels.RecyclingBin;
 using GlobalImpactTestProject;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +36,8 @@ namespace GlobalImpactTest
                 new AppUser
                 {
                     UniqueCode = Guid.NewGuid().ToString(),
-                    FirstName = "Test",
+                    UserName = "test1",
+					FirstName = "Test",
                     LastName = "User",
                     Age = 20,
                     Points = 0,
@@ -45,7 +47,8 @@ namespace GlobalImpactTest
                 new AppUser
                 {
                     UniqueCode = Guid.NewGuid().ToString(),
-                    FirstName = "Test2",
+                    UserName = "test2",
+					FirstName = "Test2",
                     LastName = "User2",
                     Age = 30,
                     Points = 0,
@@ -55,7 +58,8 @@ namespace GlobalImpactTest
                 new AppUser()
                 {
                     UniqueCode = Guid.NewGuid().ToString(),
-                    FirstName = "Test3",
+                    UserName = "test3",
+					FirstName = "Test3",
                     LastName = "User3",
                     Age = 40,
                     Points = 0,
@@ -82,6 +86,27 @@ namespace GlobalImpactTest
         }
 
         [Fact]
+        public void EcoLog_CanGetPageWithSuccess()
+        {
+	        var result = controller.EcoLog();
+	        Assert.IsType<Task<IActionResult>>(result);
+		}
+
+        [Fact]
+        public void EcoLogin_CanGetPageWithSuccess()
+        {
+            var user = userManagerMock.Object.Users.FirstOrDefault(u => u.UserName == "test1");
+	        EcoLogViewModel model = new EcoLogViewModel
+	        {
+                IdInput = user.UniqueCode
+	        };
+
+            var result = controller.EcoLogin(model);
+
+            Assert.IsType<Task<IActionResult>>(result);
+        }
+
+		[Fact]
         public async void RecyclingBins_CanGetCreatePage()
         {
             string option = null;
