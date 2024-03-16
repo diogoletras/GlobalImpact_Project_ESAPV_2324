@@ -1,4 +1,5 @@
-﻿using GlobalImpact.Data;
+﻿using System.Net.Mail;
+using GlobalImpact.Data;
 using GlobalImpact.Models;
 using GlobalImpact.Utils;
 using GlobalImpact.ViewModels.Account;
@@ -57,6 +58,93 @@ namespace GlobalImpact.Controllers
             }
             return View(userList);
         }
+
+        /// <summary>
+        /// Função Get para a página de criação de um User.
+        /// </summary>
+        /// <param name="returnUrl">retorna o url da página de gestão dos Users.</param>
+        /// <returns>Retorna a página de craição de Users.</returns>
+        [Authorize(Roles = "admin")]
+        [HttpGet]
+        public async Task<IActionResult> Create(string? returnUrl)
+        {
+            RegisterViewModel registerViewModel = new RegisterViewModel();
+            registerViewModel.ReturnUrl = returnUrl;
+            return View(registerViewModel);
+        }
+
+        /// <summary>
+        /// Função Post para a criação de um User.
+        /// </summary>
+        /// <param name="registerViewModel">Guarda todos os dados necessários para a criação de um User.</param>
+        /// <param name="returnUrl">Retorna o url de página de Gestão de Users.</param>
+        /// <returns>Em caso de sucesso retorna a página de gestão de Users; em caso de insucesso mantém na página de criação de User. </returns>
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public async Task<IActionResult> Create(RegisterViewModel registerViewModel, string? returnUrl = null)
+        {
+            registerViewModel.ReturnUrl = returnUrl;
+            returnUrl = returnUrl ?? Url.Content("~/");
+            if (ModelState.IsValid)
+            {
+                var isEmailExists = _db.Users.Any(x => x.Email == registerViewModel.Email);
+                var isUserNameExists = _db.Users.Any(x => x.UserName == registerViewModel.UserName);
+                if (isEmailExists)
+                {
+                    ModelState.AddModelError("Email", "Email already exists");
+                    return View(registerViewModel);
+                }
+                if (isUserNameExists)
+                {
+                    ModelState.AddModelError("UserName", "UserName already exists");
+                    return View(registerViewModel);
+                }
+                else
+                {
+                    var valid = true;
+                    try
+                    {
+                        var email = new MailAddress(registerViewModel.Email);
+                    }
+                    catch
+                    {
+                        valid = false;
+                    }
+                    
+                    if (!valid)
+                    {
+                        ModelState.AddModelError("Email", "Password Format Incorrect");
+                        return View(registerViewModel);
+                    }
+                    var user = new AppUser
+                    {
+                        UserName = registerViewModel.UserName,
+                        Email = registerViewModel.Email,
+                        FirstName = registerViewModel.FirstName,
+                        LastName = registerViewModel.LastName,
+                        Age = registerViewModel.Age,
+                        NIF = registerViewModel.NIF,
+                        Points = 0,
+                        UniqueCode = Guid.NewGuid().ToString()
+                    };
+                    var result = await _userManager.CreateAsync(user, registerViewModel.Password);
+                    if (result.Succeeded)
+                    {
+
+                        await _userManager.AddToRoleAsync(user, "Client");
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        if (!string.IsNullOrEmpty(code))
+                        {
+                            await _userManager.ConfirmEmailAsync(user, code);
+                        }
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    ModelState.AddModelError("Email", "User could not be created. Password not unique enought");
+                }
+            }
+            return View(registerViewModel);
+        }
+
         /// <summary>
         /// Funçao Get da Página "Edit User".
         /// </summary>
@@ -105,6 +193,10 @@ namespace GlobalImpact.Controllers
             {
                 var userDbValue = _db.AppUser.FirstOrDefault(u => u.Id == user.Id);
                 var userRoleDbValue = _db.UserRoles.FirstOrDefault(u => u.UserId == user.Id);
+                if (userDbValue == null || userRoleDbValue == null)
+                {
+                    return NotFound();
+                }
                 if (!userDbValue.UniqueCode.Equals(user.UniqueCode) || !userDbValue.Id.Equals(user.Id))
                 {
                     return NotFound();
@@ -181,77 +273,6 @@ namespace GlobalImpact.Controllers
             _db.SaveChanges();
 
             return RedirectToAction(nameof(Index));
-        }
-
-        /// <summary>
-        /// Função Get para a página de criação de um User.
-        /// </summary>
-        /// <param name="returnUrl">retorna o url da página de gestão dos Users.</param>
-        /// <returns>Retorna a página de craição de Users.</returns>
-        [Authorize(Roles = "admin")]
-        [HttpGet]
-        public async Task<IActionResult> Create(string? returnUrl)
-        {
-            RegisterViewModel registerViewModel = new RegisterViewModel();
-            registerViewModel.ReturnUrl = returnUrl;
-            return View(registerViewModel);
-        }
-
-        /// <summary>
-        /// Função Post para a criação de um User.
-        /// </summary>
-        /// <param name="registerViewModel">Guarda todos os dados necessários para a criação de um User.</param>
-        /// <param name="returnUrl">Retorna o url de página de Gestão de Users.</param>
-        /// <returns>Em caso de sucesso retorna a página de gestão de Users; em caso de insucesso mantém na página de criação de User. </returns>
-        [Authorize(Roles = "admin")]
-        [HttpPost]
-        public async Task<IActionResult> Create(RegisterViewModel registerViewModel, string? returnUrl = null)
-        {
-            registerViewModel.ReturnUrl = returnUrl;
-            returnUrl = returnUrl ?? Url.Content("~/");
-            if (ModelState.IsValid)
-            {
-                var isEmailExists = _db.Users.Any(x => x.Email == registerViewModel.Email);
-                var isUserNameExists = _db.Users.Any(x => x.UserName == registerViewModel.UserName);
-                if (isEmailExists)
-                {
-                
-                    ModelState.AddModelError("Email", "Email already exists");
-                    return View(registerViewModel);
-                }
-                if (isUserNameExists)
-                {
-                    ModelState.AddModelError("UserName", "UserName already exists");
-                    return View(registerViewModel);
-                }
-                else
-                {
-                    var user = new AppUser { 
-                        UserName = registerViewModel.UserName,
-                        Email = registerViewModel.Email ,
-                        FirstName = registerViewModel.FirstName,
-                        LastName = registerViewModel.LastName,
-                        Age = registerViewModel.Age,
-                        NIF = registerViewModel.NIF,
-                        Points = 0,
-                        UniqueCode = Guid.NewGuid().ToString()
-                    };
-                    var result = await _userManager.CreateAsync(user, registerViewModel.Password);
-                    if (result.Succeeded)
-                    {
-
-                        await _userManager.AddToRoleAsync(user, "Client");
-                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                        if (!string.IsNullOrEmpty(code))
-                        {
-                            await _userManager.ConfirmEmailAsync(user, code);
-                        }
-                        return RedirectToAction("Index", "Admin");
-                    }
-                    ModelState.AddModelError("Email", "User could not be created. Password not unique enought");
-                }
-            }
-            return View(registerViewModel);
         }
     }
 }
