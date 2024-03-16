@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using GlobalImpact.Controllers;
@@ -11,9 +12,11 @@ using GlobalImpact.ViewModels.Account;
 using GlobalImpact.ViewModels.RecyclingBin;
 using GlobalImpactTest.FakeManagers;
 using GlobalImpactTest.IClassFixture;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using Moq;
 
 namespace GlobalImpactTest.ControllerTests
@@ -136,7 +139,239 @@ namespace GlobalImpactTest.ControllerTests
             Assert.Equal("Index", redirectResult.ActionName);
             //Assert.Equal("RecyclingBins", );
         }
+
+        [Fact]
+        public async void RecyclingBin_CanCreateEco_GetPage()
+        {
+            string option = null;
+            var result = controller.Create(option);
+            var resultView = Assert.IsType<ViewResult>(result);
+
+        }
+
+        [Fact]
+        public async void RecyclingBin_CanGetDetails_WithSuccess()
+        {
+            var id = dbContext.RecyclingBins.First().Id;
+            var result = controller.Details(id);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+
+        }
+
+        [Fact]
+        public async void RecyclingBin_CanGetDetails_WithNoID()
+        {
+
+            var result = controller.Details(null);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<NotFoundResult>(resultView.Result);
+        }
+
+
+        [Fact]
+        public async void RecyclingBin_CanGetDetails_WithNoEco()
+        {
+            var result = controller.Details(new Guid());
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<NotFoundResult>(resultView.Result);
+        }
+        [Fact]
+        public async void RecyclingBin_CanUpdateType_WithSuccess()
+        {
+            var typeid = dbContext.RecyclingBinType.First().RecyclingBinTypeId;
+            var result = controller.UpdateTypeChoise(typeid.ToString());
+            var resultView = Assert.IsType<RecyclingBin>(result);
+        }
+
+        [Fact]
+        public async void RecyclingBin_CanUpdateType_WithNoSuccess()
+        {
+            var result = controller.UpdateTypeChoise(null);
+            var resultView = Assert.IsType<RecyclingBin>(result);
+
+        }
+
+        [Fact]
+        public async void RecyclingBin_Can_Edit_WithSuccess()
+        {
+            var id = dbContext.RecyclingBins.First().Id;
+            var result = controller.Edit(id);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+        }
+
+        [Fact]
+        public async void RecyclingBin_Can_Edit_WithNoID()
+        {
+            
+            var result = controller.Edit(null);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<NotFoundResult>(resultView.Result);
+        }
+
+        [Fact]
+        public async void RecyclingBin_Can_Edit_WithID_DoesntExist()
+        {
+
+            var result = controller.Edit(new Guid());
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<NotFoundResult>(resultView.Result);
+        }
+
+        [Fact]
+        public async void RecyclingBin_Can_PostEdit_WithSuccess()
+        {
+            var recyclingBin = dbContext.RecyclingBins.First();
+            var result = controller.Edit(recyclingBin.Id, recyclingBin);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<RedirectToActionResult>(resultView.Result);
+
+            Assert.Equal("Index", mod.ActionName);
+
+        }
+
+        [Fact]
+        public async void RecyclingBin_Can_PostEdit_WithDifferentID()
+        {
+            var recyclingBin = dbContext.RecyclingBins.First();
+            var result = controller.Edit(new Guid(), recyclingBin);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<NotFoundResult>(resultView.Result);
+        }
+
+        [Fact]
+        public async void RecyclingBin_Can_PostEdit_NoExistsRecyclingBin()
+        { 
+            var type = dbContext.RecyclingBinType.First();
+            var recyclingBinNew = new RecyclingBin
+            {
+                Id = Guid.NewGuid(),
+                Latitude = 0,
+                Longitude = 0,
+                Description = string.Empty,
+                Capacity = 0,
+                CurrentCapacity = 0,
+                RecyclingBinTypeId = type.RecyclingBinTypeId.ToString(),
+                Type = type.Type,
+                Status = true
+
+            };
+            var result = controller.Edit(recyclingBinNew.Id, recyclingBinNew);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<NotFoundResult>(resultView.Result);
+        }
+
+
+        [Fact]
+        public async void RecyclingBin_Can_PostEdit_ModelStateInvalid()
+        {
+            var type = dbContext.RecyclingBinType.First();
+            var recyclingBinNew = new RecyclingBin
+            {
+                Id = Guid.NewGuid()
+            };
+            var result = controller.Edit(recyclingBinNew.Id, recyclingBinNew);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<NotFoundResult>(resultView.Result);
+        }
+
+
+        [Fact]
+        public async void RecyclingBin_Can_Delete_WithSuccess()
+        {
+            var id = dbContext.RecyclingBins.First().Id;
+            var result = controller.Delete(id);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+        }
+
+        [Fact]
+        public async void RecyclingBin_Can_Delete_WithIDNull()
+        {
+            
+            var result = controller.Delete(null);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<NotFoundResult>(resultView.Result);
+        }
+
+        [Fact]
+        public async void RecyclingBin_Can_Delete_WithnoRecyclingBin()
+        {
+
+            var result = controller.Delete(new Guid());
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<NotFoundResult>(resultView.Result);
+        }
+
+
+        [Fact]
+        public async void RecyclingBin_Can_PostDelete_WithNoRecyclingBin()
+        {
+
+            var result = controller.DeleteConfirmed(new Guid());
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<NotFoundResult>(resultView.Result);
+        }
+
+        [Fact]
+        public async void RecyclingBin_Can_PostDelete_WithNoId()
+        {
+            var result = controller.DeleteConfirmed(null);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<NotFoundResult>(resultView.Result);
+        }
+
+        [Fact]
+        public async void RecyclingBin_Can_PostDelete_WithSuccess()
+        {
+            var id = dbContext.RecyclingBins.First().Id;
+            var result = controller.DeleteConfirmed(id);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<RedirectToActionResult>(resultView.Result);
+
+            Assert.Equal("Index", mod.ActionName);
+        }
+
+        [Fact]
+        public async void RecyclingBin_Can_Filter_WithSuccess()
+        {
+            var type = dbContext.RecyclingBinType.First();
+            FilterViewModel filter = new FilterViewModel
+            {
+                RecyclingBins = dbContext.RecyclingBins,
+                RecyclingBin = dbContext.RecyclingBins.First(),
+                Capacity = 100,
+                CurrentCapacity = 100,
+                Status = "false",
+                Type = type.Type
+            };
+            var result = controller.Filter(filter);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+        }
+
+
+        [Fact]
+        public async void GoogleMaps_WithSuccess()
+        {
+
+            var result = controller.GoogleMaps();
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+        }
+
+        [Fact]
+        public async void Filtrar_GoogleMaps_WithSuccess()
+        {
+            var type = dbContext.RecyclingBinType.First();
+            var result = controller.FiltrarMapa("false", 100, 50, type.Type);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+        }
+
+
+
+
     }
-
-
 }

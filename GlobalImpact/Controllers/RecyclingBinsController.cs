@@ -289,6 +289,10 @@ namespace GlobalImpact.Controllers
                     RecyclingBinTypeId = type.RecyclingBinTypeId.ToString()
                 };
             }
+            else
+            {
+                return new RecyclingBin();
+            }
 
             return res;
         }
@@ -470,14 +474,20 @@ namespace GlobalImpact.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(Guid? id)
         {
-            var recyclingBin = await _context.RecyclingBins.FindAsync(id);
-            if (recyclingBin != null)
+
+            if (id == null)
             {
-                _context.RecyclingBins.Remove(recyclingBin);
+                return NotFound();
             }
 
+            var recyclingBin = await _context.RecyclingBins.FindAsync(id);
+            if (recyclingBin == null)
+            {
+                return NotFound();
+            }
+            _context.RecyclingBins.Remove(recyclingBin);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
