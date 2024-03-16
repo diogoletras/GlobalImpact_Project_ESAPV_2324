@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 
-namespace GlobalImpactTest
+namespace GlobalImpactTest.ControllerTests
 {
     public class RecyclingBinsTest : IClassFixture<ApplicationDbContextFixture>
     {
@@ -34,7 +34,7 @@ namespace GlobalImpactTest
                 {
                     UniqueCode = Guid.NewGuid().ToString(),
                     UserName = "test1",
-					FirstName = "Test",
+                    FirstName = "Test",
                     LastName = "User",
                     Age = 20,
                     Points = 0,
@@ -45,7 +45,7 @@ namespace GlobalImpactTest
                 {
                     UniqueCode = Guid.NewGuid().ToString(),
                     UserName = "test2",
-					FirstName = "Test2",
+                    FirstName = "Test2",
                     LastName = "User2",
                     Age = 30,
                     Points = 0,
@@ -56,7 +56,7 @@ namespace GlobalImpactTest
                 {
                     UniqueCode = Guid.NewGuid().ToString(),
                     UserName = "test3",
-					FirstName = "Test3",
+                    FirstName = "Test3",
                     LastName = "User3",
                     Age = 40,
                     Points = 0,
@@ -85,25 +85,25 @@ namespace GlobalImpactTest
         [Fact]
         public void EcoLog_CanGetPageWithSuccess()
         {
-	        var result = controller.EcoLog();
-	        Assert.IsType<Task<IActionResult>>(result);
-		}
+            var result = controller.EcoLog();
+            Assert.IsType<Task<IActionResult>>(result);
+        }
 
         [Fact]
         public void EcoLogin_CanGetPageWithSuccess()
         {
             var user = userManagerMock.Object.Users.FirstOrDefault(u => u.UserName == "test1");
-	        EcoLogViewModel model = new EcoLogViewModel
-	        {
+            EcoLogViewModel model = new EcoLogViewModel
+            {
                 IdInput = user.UniqueCode
-	        };
+            };
 
             var result = controller.EcoLogin(model);
 
             Assert.IsType<Task<IActionResult>>(result);
         }
 
-		[Fact]
+        [Fact]
         public async void RecyclingBins_CanGetCreatePage()
         {
             string option = null;

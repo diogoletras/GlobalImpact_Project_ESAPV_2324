@@ -17,7 +17,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
-namespace GlobalImpactTest
+namespace GlobalImpactTest.ControllerTests
 {
     /// <summary>
     /// Classe testes unitários do accountController.
