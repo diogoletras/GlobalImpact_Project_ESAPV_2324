@@ -172,7 +172,7 @@ namespace GlobalImpact.Controllers
         public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,Tax,Stock,ProductCategoryId")] Product product)
         {
             ModelState.Remove("Category");
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && product != null)
             {
                 product.Id = Guid.NewGuid();
                 _context.Add(product);

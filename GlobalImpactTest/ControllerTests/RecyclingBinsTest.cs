@@ -226,9 +226,7 @@ namespace GlobalImpactTest.ControllerTests
             var result = controller.Edit(recyclingBin.Id, recyclingBin);
             var resultView = Assert.IsType<Task<IActionResult>>(result);
             var mod = Assert.IsAssignableFrom<RedirectToActionResult>(resultView.Result);
-
             Assert.Equal("Index", mod.ActionName);
-
         }
 
         [Fact]
@@ -329,7 +327,6 @@ namespace GlobalImpactTest.ControllerTests
             var result = controller.DeleteConfirmed(id);
             var resultView = Assert.IsType<Task<IActionResult>>(result);
             var mod = Assert.IsAssignableFrom<RedirectToActionResult>(resultView.Result);
-
             Assert.Equal("Index", mod.ActionName);
         }
 
@@ -355,19 +352,30 @@ namespace GlobalImpactTest.ControllerTests
         [Fact]
         public async void GoogleMaps_WithSuccess()
         {
-
             var result = controller.GoogleMaps();
             var resultView = Assert.IsType<Task<IActionResult>>(result);
             var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+            Assert.NotNull(mod);
         }
 
         [Fact]
         public async void Filtrar_GoogleMaps_WithSuccess()
         {
             var type = dbContext.RecyclingBinType.First();
-            var result = controller.FiltrarMapa("false", 100, 50, type.Type);
+            var result = controller.FiltrarMapa(null, -1, -1, type.Type);
             var resultView = Assert.IsType<Task<IActionResult>>(result);
             var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+            var model = Assert.IsType<List<RecyclingBin>>(mod.Model);
+            Assert.NotNull(mod);
+        }
+
+        [Fact]
+        public async void Filtrar_GoogleMaps_WithNoFilter()
+        {
+            var result = controller.FiltrarMapa(null, 0, 0, null);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<RedirectToActionResult>(resultView.Result);
+            Assert.Equal("GoogleMaps", mod.ActionName);
         }
 
 
