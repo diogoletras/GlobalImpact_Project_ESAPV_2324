@@ -33,42 +33,7 @@ namespace GlobalImpactTest.ControllerTests
         {
             dbContext = context.DbContext;
 
-            var users = new List<AppUser>
-            {
-                new AppUser
-                {
-                    UniqueCode = Guid.NewGuid().ToString(),
-                    UserName = "test1",
-                    FirstName = "Test",
-                    LastName = "User",
-                    Age = 20,
-                    Points = 0,
-                    Email = "234@gmail.com",
-                    NIF = 123456789
-                },
-                new AppUser
-                {
-                    UniqueCode = Guid.NewGuid().ToString(),
-                    UserName = "test2",
-                    FirstName = "Test2",
-                    LastName = "User2",
-                    Age = 30,
-                    Points = 0,
-                    Email = "123@gmail.com",
-                    NIF = 987654321
-                },
-                new AppUser()
-                {
-                    UniqueCode = Guid.NewGuid().ToString(),
-                    UserName = "test3",
-                    FirstName = "Test3",
-                    LastName = "User3",
-                    Age = 40,
-                    Points = 0,
-                    Email = "345@gmail.com",
-                    NIF = 987654321
-                }
-            }.AsQueryable();
+            var users = dbContext.Users.AsQueryable();
 
             signInManagerMock = new Mock<FakeSignInManager>();
             signInManagerMock.Setup(

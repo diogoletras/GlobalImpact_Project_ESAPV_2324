@@ -33,11 +33,7 @@ namespace GlobalImpactTest.ControllerTests
         {
             dbContext = context.DbContext;
 
-            var listRoles = new List<IdentityRole>()
-            {
-                new IdentityRole("admin"),
-                new IdentityRole("client")
-            }.AsQueryable();
+            var listRoles = dbContext.Roles.AsQueryable();
 
             roleManagerMock = new Mock<RoleManager<IdentityRole>>(
                new Mock<IRoleStore<IdentityRole>>().Object,
@@ -49,51 +45,7 @@ namespace GlobalImpactTest.ControllerTests
             roleManagerMock
                 .Setup(r => r.Roles).Returns(listRoles);
 
-            var users = new List<AppUser>
-            {
-                new AppUser
-                {
-                    UserName = "test1",
-                    UniqueCode = Guid.NewGuid().ToString(),
-                    FirstName = "Test1",
-                    LastName = "User",
-                    Age = 20,
-                    Points = 0,
-                    Email = "234@gmail.com",
-                    NIF = 123456789,
-                    NormalizedEmail = "234@GMAIL.COM",
-                    NormalizedUserName = "TEST1",
-                    PasswordHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes("123")).ToString()
-                },
-                new AppUser
-                {
-                    UserName = "test2",
-                    UniqueCode = Guid.NewGuid().ToString(),
-                    FirstName = "Test2",
-                    LastName = "User2",
-                    Age = 30,
-                    Points = 0,
-                    Email = "123@gmail.com",
-                    NIF = 987654321,
-                    NormalizedEmail = "123@GMAIL.COM",
-                    NormalizedUserName = "TEST2",
-                    PasswordHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes("123")).ToString()
-                },
-                new AppUser()
-                {
-                    UserName = "test3",
-                    UniqueCode = Guid.NewGuid().ToString(),
-                    FirstName = "Test3",
-                    LastName = "User3",
-                    Age = 40,
-                    Points = 0,
-                    Email = "345@gmail.com",
-                    NIF = 987654321,
-                    NormalizedEmail = "123@GMAIL.COM",
-                    NormalizedUserName = "TEST3",
-                    PasswordHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes("123")).ToString()
-                }
-            }.AsQueryable();
+            var users = dbContext.Users.AsQueryable();
 
             userManagerMock = new Mock<FakeUserManager>();
             userManagerMock.Setup(x => x.Users)
