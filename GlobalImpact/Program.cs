@@ -2,8 +2,13 @@ using System.Configuration;
 using GlobalImpact.Data;
 using GlobalImpact.Interfaces;
 using GlobalImpact.Models;
+using GlobalImpact.Services;
 using GlobalImpact.Utils;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +25,19 @@ builder.Services.AddIdentity<AppUser, IdentityRole>()
 
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
-builder.Services.AddGoogleMapsAPI("AIzaSyAnaT4ITxYnVC69ETzeLpuOAvAOh6nNfTA");
+builder.Services.AddSingleton<IHttpContextAccessor>((provider) => new HttpContextAccessor());
+
+// Add the Google Maps API key to the ViewData dictionary
+builder.Services.AddScoped<GoogleMapsApiKeyService>((provider) =>
+{
+    var httpContextAccessor = provider.GetService<IHttpContextAccessor>();
+    var actionContext = new ActionContext(httpContextAccessor.HttpContext, new RouteData(), new ActionDescriptor());
+    var viewDataDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), actionContext.ModelState);
+
+    viewDataDictionary["GoogleMapsApiKey"] = "AIzaSyAnaT4ITxYnVC69ETzeLpuOAvAOh6nNfTA";
+
+    return new GoogleMapsApiKeyService(viewDataDictionary);
+});
 
 builder.Services.Configure<IdentityOptions>(options =>
 {

@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<GlobalImpact.Models.RecyclingBin>
+@using GlobalImpact.Services
+@inject GoogleMapsApiKeyService GoogleMapsApiKeyService
 
 <div class="row text-white text-center">
     <h1 class="text-white text-center col-2">Filters</h1>
@@ -22,8 +24,10 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnaT4ITxYnVC69ETzeLpuOAvAOh6nNfTA&callback=initMap" sensor="false"></script>
+
 @{
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=@GoogleMapsApiKeyService.GetApiKey()&callback=initMap" sensor="false"></script>
+
     Dictionary<Guid, double> listLatitude = new Dictionary<Guid, double>();
     Dictionary<Guid, double> listLongitude = new Dictionary<Guid, double>();
     Dictionary<Guid, string> listType = new Dictionary<Guid, string>();
