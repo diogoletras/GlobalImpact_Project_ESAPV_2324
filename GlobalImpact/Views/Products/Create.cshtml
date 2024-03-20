@@ -14,7 +14,7 @@
         <hr/>
         <div class="row text-center">
             <div class="col-md-4">
-                <form asp-action="Create">
+                <form asp-action="Create" enctype="multipart/form-data" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="Name" class="control-label"></label>
@@ -45,6 +45,12 @@
                         <label asp-for="ProductCategoryId" class="control-label"></label>
                         <select asp-for="ProductCategoryId" class="form-control" asp-items="@ViewBag.Categorias"></select>
                     </div>
+
+                    <div class="form-group">
+                        <input asp-for="Image" type="file" class="custom-file-input fileUpload" />
+                        <label class="custom-file-label fileLabel">Choose file</label>
+                    </div>
+
                     <div class="form-group">
                         <input type="submit" value="Create" class="btn btn-primary"/>
                     </div>

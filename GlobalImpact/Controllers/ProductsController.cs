@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GlobalImpact.Data;
 using GlobalImpact.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 
 namespace GlobalImpact.Controllers
 {
@@ -130,11 +131,14 @@ namespace GlobalImpact.Controllers
 
             var product = await _context.Products
                 .FirstOrDefaultAsync(m => m.Id == id);
+            var productsCat =
+                await _context.ProductsCategory.FirstOrDefaultAsync(c =>
+                    c.ProductCategoryId == new Guid(product.ProductCategoryId));
             if (product == null)
             {
                 return NotFound();
             }
-
+            product.Category = productsCat;
             return View(product);
         }
 
@@ -169,12 +173,27 @@ namespace GlobalImpact.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,Tax,Stock,ProductCategoryId")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,Tax,Stock,ProductCategoryId,Image")] Product product)
         {
+            if (product.Image == null)
+                return View(product);
+
+            IWebHostEnvironment webHostEnvironment = Request.HttpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
+
+            string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "img/products");
+            string ImagePath = Guid.NewGuid().ToString() + "_" + product.Image.FileName;
+            string filePath = Path.Combine(uploadsFolder, ImagePath);
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            {
+                await product.Image.CopyToAsync(fs);
+            }
+
             ModelState.Remove("Category");
+            ModelState.Remove("ImageUrl");
             if (ModelState.IsValid && product != null)
             {
                 product.Id = Guid.NewGuid();
+                product.ImageUrl = ImagePath;
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -212,6 +231,13 @@ namespace GlobalImpact.Controllers
             {
                 return NotFound();
             }
+            List<SelectListItem> category = new List<SelectListItem>();
+            var productsCat = await _context.ProductsCategory.ToListAsync();
+            foreach (var cat in productsCat)
+            {
+                category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+            }
+            ViewBag.Categorias = category;
             return View(product);
         }
 
@@ -227,17 +253,41 @@ namespace GlobalImpact.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description,Price,Tax,Stock,Category")] Product product)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description,Price,Tax,Stock,ProductCategoryId,Image")] Product product)
         {
             if (id != product.Id)
             {
                 return NotFound();
             }
 
+            if (product.Image == null)
+            {
+                List<SelectListItem> category = new List<SelectListItem>();
+                var productsCat = await _context.ProductsCategory.ToListAsync();
+                foreach (var cat in productsCat)
+                {
+                    category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+                }
+                ViewBag.Categorias = category;
+                return View(product);
+            }
+
+            IWebHostEnvironment webHostEnvironment = Request.HttpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
+
+            string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "img/products");
+            string ImagePath = Guid.NewGuid().ToString() + "_" + product.Image.FileName;
+            string filePath = Path.Combine(uploadsFolder, ImagePath);
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            {
+                await product.Image.CopyToAsync(fs);
+            }
+            ModelState.Remove("Category");
+            ModelState.Remove("ImageUrl");
             if (ModelState.IsValid)
             {
                 try
                 {
+                    product.ImageUrl = ImagePath;
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
@@ -253,6 +303,17 @@ namespace GlobalImpact.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                List<SelectListItem> category = new List<SelectListItem>();
+                var productsCat = await _context.ProductsCategory.ToListAsync();
+                foreach (var cat in productsCat)
+                {
+                    category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+                }
+                ViewBag.Categorias = category;
+                return View(product);
             }
             return View(product);
         }

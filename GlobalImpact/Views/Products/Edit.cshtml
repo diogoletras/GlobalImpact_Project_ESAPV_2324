@@ -5,16 +5,15 @@
 }
 @if (User.Identity.IsAuthenticated)
 {
-    @if (User.IsInRole("Admin"))
+    @if (User.IsInRole("admin"))
     {
-
         <h1>Edit</h1>
 
         <h4>Product</h4>
         <hr/>
         <div class="row">
             <div class="col-md-4">
-                <form asp-action="Edit">
+                <form asp-action="Edit" enctype="multipart/form-data" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Id"/>
                     <div class="form-group">
@@ -43,9 +42,12 @@
                         <span asp-validation-for="Stock" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Category" class="control-label"></label>
-                        <input asp-for="Category" class="form-control"/>
-                        <span asp-validation-for="Category" class="text-danger"></span>
+                        <label asp-for="ProductCategoryId" class="control-label"></label>
+                        <select asp-for="ProductCategoryId" class="form-control" asp-items="@ViewBag.Categorias"></select>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Image" type="file" class="custom-file-input fileUpload" />
+                        <label class="custom-file-label fileLabel">Choose file</label>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Save" class="btn btn-primary"/>

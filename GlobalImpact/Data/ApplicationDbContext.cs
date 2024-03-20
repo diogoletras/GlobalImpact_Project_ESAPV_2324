@@ -231,8 +231,9 @@ namespace GlobalImpact.Data
 					Price = 5,
 					Tax = 0.06,
 					Stock = 20,
-					ProductCategoryId = pc1ID.ToString()
-				},
+					ProductCategoryId = pc1ID.ToString(),
+                    ImageUrl = "Talho-Castro-Costeleta-Porco.jpg"
+                },
 				new Product
 				{
 					Id = Guid.NewGuid(),
@@ -241,8 +242,9 @@ namespace GlobalImpact.Data
 					Price = 8,
 					Tax = 0.06,
 					Stock = 25,
-					ProductCategoryId = pc2ID.ToString()
-				},
+					ProductCategoryId = pc2ID.ToString(),
+                    ImageUrl = "bacalhau.jpg"
+                },
 				new Product
 				{
 					Id = Guid.NewGuid(),
@@ -251,8 +253,9 @@ namespace GlobalImpact.Data
 					Price = 1.5,
 					Tax = 0.06,
 					Stock = 50,
-					ProductCategoryId = pc3ID.ToString()
-				},
+					ProductCategoryId = pc3ID.ToString(),
+                    ImageUrl = "broculos.jpg"
+                },
 				new Product
 				{
 					Id = Guid.NewGuid(),
@@ -261,8 +264,9 @@ namespace GlobalImpact.Data
 					Price = 2.3,
 					Tax = 0.06,
 					Stock = 30,
-					ProductCategoryId = pc4ID.ToString()
-				},
+					ProductCategoryId = pc4ID.ToString(),
+                    ImageUrl = "pessego.jpg"
+                },
 				new Product
 				{
 					Id = Guid.NewGuid(),
@@ -271,8 +275,9 @@ namespace GlobalImpact.Data
 					Price = 11.2,
 					Tax = 0.23,
 					Stock = 5,
-					ProductCategoryId = pc5ID.ToString()
-				}
+					ProductCategoryId = pc5ID.ToString(),
+                    ImageUrl = "licro-beirao.jpg"
+                }
 			);
 		}
     }
