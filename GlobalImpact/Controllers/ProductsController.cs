@@ -9,6 +9,7 @@ using GlobalImpact.Data;
 using GlobalImpact.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace GlobalImpact.Controllers
 {
@@ -358,6 +359,23 @@ namespace GlobalImpact.Controllers
             if (product != null)
             {
                 _context.Products.Remove(product);
+                try
+                {
+                    IWebHostEnvironment webHostEnvironment = Request.HttpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
+
+                    string folder = Path.Combine(webHostEnvironment.WebRootPath, "img\\products");
+                    FileInfo file = new FileInfo(folder+"\\"+product.ImageUrl);
+                    // Check if file exists with its full path
+                    if (file.Exists)
+                    {
+                        // If file found, delete it
+                        file.Delete();
+                    }
+                }
+                catch (IOException ioExp)
+                {
+                    Console.WriteLine(ioExp.Message);
+                }
             }
 
             await _context.SaveChangesAsync();
