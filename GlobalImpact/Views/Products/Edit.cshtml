@@ -28,12 +28,12 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Price" class="control-label"></label>
-                        <input asp-for="Price" class="form-control"/>
+                        <input asp-for="Price" class="form-control" type="number" step="0.01" />
                         <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Tax" class="control-label"></label>
-                        <input asp-for="Tax" class="form-control"/>
+                        <input asp-for="Tax" class="form-control" type="number" step="0.01" />
                         <span asp-validation-for="Tax" class="text-danger"></span>
                     </div>
                     <div class="form-group">

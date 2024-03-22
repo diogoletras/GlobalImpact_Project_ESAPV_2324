@@ -42,9 +42,7 @@ namespace GlobalImpact.Controllers
             _db = db;
         }
 
-        [Authorize(Roles = "admin")]
-        [Authorize(Roles = "client")]
-        public IActionResult UserPage(String userId)
+        public IActionResult UserPage(string userId)
         {
             var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
             return View(user);
