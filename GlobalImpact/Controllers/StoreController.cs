@@ -26,6 +26,11 @@ namespace GlobalImpact.Controllers
             var products = await _context.Products.ToListAsync();
             var productsCat = await _context.ProductsCategory.ToListAsync();
 
+            foreach (var product in products)
+            {
+                product.Tax = product.Tax * 100;
+            }
+
             List<SelectListItem> category = new List<SelectListItem>();
             category.Add(new SelectListItem { Text = "", Value = "" });
             foreach (var cat in productsCat)
@@ -102,7 +107,7 @@ namespace GlobalImpact.Controllers
                     }
                 }
             }
-            else 
+            else
             {
                 cartItems.Add(product);
             }
@@ -256,6 +261,11 @@ namespace GlobalImpact.Controllers
             ViewBag.Categorias = category;
             ViewBag.Items = cartItems;
             return View("Index", products);
+        }
+
+        public IActionResult Test()
+        {
+            return View();
         }
 
     }
