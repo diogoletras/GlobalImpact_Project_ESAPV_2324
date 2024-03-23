@@ -115,7 +115,7 @@ namespace GlobalImpact.Controllers
 			return View("Index", products);
         }
 
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         [HttpGet]
         // GET: Products/Details/5
         /// <summary>

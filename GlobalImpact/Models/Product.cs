@@ -15,6 +15,9 @@ namespace GlobalImpact.Models
         public int Stock { get; set; }
         public string ImageUrl { get; set; }
 
+        [NotMapped]
+        public int Quantity { get; set; } = 1;
+
 
 		[ForeignKey("ProductCategoryId")]
 		public string ProductCategoryId { get; set; }
