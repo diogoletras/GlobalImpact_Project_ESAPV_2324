@@ -1,8 +1,11 @@
-﻿@model IEnumerable<GlobalImpact.Models.Product>
+﻿@using System.Runtime.InteropServices.JavaScript
+@using Microsoft.AspNetCore.Razor.Language.Extensions
+@model IEnumerable<GlobalImpact.Models.Product>
 
 
 @{
     ViewData["Title"] = "Index";
+    Dictionary<Guid, int> cart = new Dictionary<Guid, int>();
 }
 @if (User.Identity.IsAuthenticated)
 {
@@ -58,10 +61,10 @@
                                                 <p>@item.Price €</p>
                                             </div>
                                             <div class="col-3" style="padding-right:0!important; padding-left:0!important">
-                                                <input type="number" value="@item.Quantity" min="1" class="rounded-3 w-100">
+                                                <input id="@item.Id" type="number" value="@item.Quantity" min="1" class="rounded-3 w-100">
                                             </div>
                                             <div class="col-1">
-                                                <button class="btn btn-danger btn-sm remove-btn">X</button>
+                                                <a class="btn btn-danger btn-sm remove-btn" asp-controller="Store" asp-action="DeleteFromCart" asp-route-id="@item.Id">X</a>
                                             </div>
                                         </div>
                                     }
@@ -69,8 +72,8 @@
                             </li>
                         </ul>
                         <div class="button-container d-flex justify-content-center">
-                            <button class="btn btn-primary btn-lg">Checkout</button>
-                            <button class="btn btn-danger btn-lg">Clear Cart</button>
+                            <a class="btn btn-primary">Checkout</a>
+                            <a class="btn btn-secondary" asp-action="DeleteAllFromCart">Clear Cart</a>
                         </div>
                     }
                 </nav>
@@ -78,22 +81,25 @@
             <div class="col-9">
                 <div class="container">
                     <div class="row">
-                        @foreach (var item in Model)
+                        @if (Model != null)
                         {
-                            <div class="col-md-3">
-                                <div class="card" style="min-height:550px">
-                                    <img src="/img/products/@item.ImageUrl" class="card-img-top" alt="Product" style="max-width: 500px; max-height: 250px;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
-                                        <p class="card-text">@Html.DisplayNameFor(model => model.Description) - @Html.DisplayFor(modelItem => item.Description)</p>
-                                        <p class="card-text">@Html.DisplayNameFor(model => model.Price) - @Html.DisplayFor(modelItem => item.Price) €</p>
-                                        <p class="card-text">@Html.DisplayNameFor(model => model.Tax) - @Html.DisplayFor(modelItem => item.Tax) %</p>
-                                        <p class="card-text">@Html.DisplayNameFor(model => model.Category.Category) - @Html.DisplayFor(modelItem => item.Category.Category)</p>
-                                        <a class="btn btn-primary" asp-action="Add" asp-route-id="@item.Id">Buy Now</a>
-                                        <a class="btn btn-secondary" asp-action="Details" asp-controller="Products" asp-route-id="@item.Id">Details</a>
+                            @foreach (var item in Model)
+                            {
+                                <div class="col-md-3">
+                                    <div class="card" style="min-height:550px">
+                                        <img src="/img/products/@item.ImageUrl" class="card-img-top" alt="Product" style="max-width: 500px; max-height: 250px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                                            <p class="card-text">@Html.DisplayNameFor(model => model.Description) - @Html.DisplayFor(modelItem => item.Description)</p>
+                                            <p class="card-text">@Html.DisplayNameFor(model => model.Price) - @Html.DisplayFor(modelItem => item.Price) €</p>
+                                            <p class="card-text">@Html.DisplayNameFor(model => model.Tax) - @Html.DisplayFor(modelItem => item.Tax) %</p>
+                                            <p class="card-text">@Html.DisplayNameFor(model => model.Category.Category) - @Html.DisplayFor(modelItem => item.Category.Category)</p>
+                                            <a class="btn btn-primary" asp-action="Add" asp-route-id="@item.Id">Buy Now</a>
+                                            <a class="btn btn-secondary" asp-action="Details" asp-controller="Products" asp-route-id="@item.Id">Details</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
                         }
                     </div>
                 </div>
@@ -101,3 +107,41 @@
         </div>
     }
 }
+
+@foreach (var item in ViewBag.Items)
+{
+    cart.Add(item.Id, item.Quantity);
+}
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    let model = @Html.Raw(Json.Serialize(cart));
+
+    console.log(model);
+
+    for (let key in model) {
+        document.getElementById(key).addEventListener("input", function () {
+            let quantity = document.getElementById(key).value;
+            updateQuantity(key, quantity);
+        });
+    }
+
+    function updateQuantity(id, quantity) {
+        $.ajax(
+            {
+                type: 'POST',
+                dataType: 'JSON',
+                url: '/Store/UpdateQuantity',
+                data: { id: id, quantity: quantity },
+                success:
+                    function (response) {
+                        // Generate HTML table.
+                        console.log("success");
+                    },
+                error:
+                    function (response) {
+                        alert("Error: " + response);
+                    }
+            });
+    }
+</script>

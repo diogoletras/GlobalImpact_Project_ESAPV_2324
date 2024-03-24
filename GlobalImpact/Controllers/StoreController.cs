@@ -263,10 +263,148 @@ namespace GlobalImpact.Controllers
             return View("Index", products);
         }
 
-        public IActionResult Test()
+        public async Task<IActionResult> DeleteFromCart(string Id)
         {
-            return View();
+            cartItems.RemoveAll(p => p.Id == new Guid(Id));
+
+            var products = await _context.Products.ToListAsync();
+
+            var productsCat = await _context.ProductsCategory.ToListAsync();
+
+            List<SelectListItem> category = new List<SelectListItem>();
+            category.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (var cat in productsCat)
+            {
+                category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+            }
+
+            foreach (var prod in products)
+            {
+                foreach (var cat in productsCat)
+                {
+                    if (prod.ProductCategoryId.Equals(cat.ProductCategoryId.ToString()))
+                    {
+                        prod.Category = new ProductCategory
+                        {
+                            Category = cat.Category
+                        };
+                    }
+                }
+            }
+
+            List<SelectListItem> order = new List<SelectListItem>();
+            order.Add(new SelectListItem { Text = "", Value = "" });
+            order.Add(new SelectListItem { Text = "Nome A-Z", Value = "NomeA-Z" });
+            order.Add(new SelectListItem { Text = "Price Baixo a Alto", Value = "PriceBaixoaAlto" });
+            order.Add(new SelectListItem { Text = "Stock Baixo a Alto", Value = "StockBaixoaAlto" });
+            order.Add(new SelectListItem { Text = "Nome Z-A", Value = "NomeZ-A" });
+            order.Add(new SelectListItem { Text = "Price Alto a Baixo", Value = "PriceAltoaBaixo" });
+            order.Add(new SelectListItem { Text = "Stock Alto a Baixo", Value = "StockAltoaBaixo" });
+
+            ViewBag.Order = order;
+            ViewBag.Categorias = category;
+            ViewBag.Items = cartItems;
+
+            return View("Index", products);
         }
 
+        public async Task<IActionResult> DeleteAllFromCart()
+        {
+            cartItems.Clear();
+
+            var products = await _context.Products.ToListAsync();
+
+            var productsCat = await _context.ProductsCategory.ToListAsync();
+
+            List<SelectListItem> category = new List<SelectListItem>();
+            category.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (var cat in productsCat)
+            {
+                category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+            }
+
+            foreach (var prod in products)
+            {
+                foreach (var cat in productsCat)
+                {
+                    if (prod.ProductCategoryId.Equals(cat.ProductCategoryId.ToString()))
+                    {
+                        prod.Category = new ProductCategory
+                        {
+                            Category = cat.Category
+                        };
+                    }
+                }
+            }
+
+            List<SelectListItem> order = new List<SelectListItem>();
+            order.Add(new SelectListItem { Text = "", Value = "" });
+            order.Add(new SelectListItem { Text = "Nome A-Z", Value = "NomeA-Z" });
+            order.Add(new SelectListItem { Text = "Price Baixo a Alto", Value = "PriceBaixoaAlto" });
+            order.Add(new SelectListItem { Text = "Stock Baixo a Alto", Value = "StockBaixoaAlto" });
+            order.Add(new SelectListItem { Text = "Nome Z-A", Value = "NomeZ-A" });
+            order.Add(new SelectListItem { Text = "Price Alto a Baixo", Value = "PriceAltoaBaixo" });
+            order.Add(new SelectListItem { Text = "Stock Alto a Baixo", Value = "StockAltoaBaixo" });
+
+            ViewBag.Order = order;
+            ViewBag.Categorias = category;
+            ViewBag.Items = cartItems;
+
+            return View("Index", products);
+        }
+
+        public async Task<IActionResult> UpdateQuantity(string id, int quantity)
+        {
+            var products = await _context.Products.ToListAsync();
+
+            foreach (var prod in cartItems)
+            {
+                if (prod.Id == new Guid(id))
+                {
+                    prod.Quantity = quantity;
+                }
+            }
+
+            var productsCat = await _context.ProductsCategory.ToListAsync();
+
+            List<SelectListItem> category = new List<SelectListItem>();
+            category.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (var cat in productsCat)
+            {
+                category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+            }
+
+            foreach (var prod in products)
+            {
+                foreach (var cat in productsCat)
+                {
+                    if (prod.ProductCategoryId.Equals(cat.ProductCategoryId.ToString()))
+                    {
+                        prod.Category = new ProductCategory
+                        {
+                            Category = cat.Category
+                        };
+                    }
+                }
+            }
+
+            List<SelectListItem> order = new List<SelectListItem>();
+            order.Add(new SelectListItem { Text = "", Value = "" });
+            order.Add(new SelectListItem { Text = "Nome A-Z", Value = "NomeA-Z" });
+            order.Add(new SelectListItem { Text = "Price Baixo a Alto", Value = "PriceBaixoaAlto" });
+            order.Add(new SelectListItem { Text = "Stock Baixo a Alto", Value = "StockBaixoaAlto" });
+            order.Add(new SelectListItem { Text = "Nome Z-A", Value = "NomeZ-A" });
+            order.Add(new SelectListItem { Text = "Price Alto a Baixo", Value = "PriceAltoaBaixo" });
+            order.Add(new SelectListItem { Text = "Stock Alto a Baixo", Value = "StockAltoaBaixo" });
+
+            ViewBag.Order = order;
+            ViewBag.Categorias = category;
+            ViewBag.Items = cartItems;
+
+            return Json(new { success = true });
+        }
     }
 }
