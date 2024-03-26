@@ -21,6 +21,11 @@ namespace GlobalImpact.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Funçao HTTPGet que retorna uma view com a lista dos produtos.
+        /// </summary>
+        /// <returns>retorna uma view que contém a lista de produtos.</returns>
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var products = await _context.Products.ToListAsync();
@@ -68,7 +73,12 @@ namespace GlobalImpact.Controllers
             ViewBag.Items = cartItems;
             return View(products);
         }
-
+        /// <summary>
+        /// Funçao HTTPGet que retorna uma view com a lista atualizada de produtos, depois de adicionar um.
+        /// </summary>
+        /// <param name="id">id do produto a ser adicionado.</param>
+        /// <returns>retorna uma lista de produtos atualizada.</returns
+        [HttpGet]
         public async Task<IActionResult> Add(string id)
         {
             var products = await _context.Products.ToListAsync();
@@ -129,7 +139,14 @@ namespace GlobalImpact.Controllers
             ViewBag.Items = cartItems;
             return View("Index",products);
         }
-
+        /// <summary>
+        /// Funçao HTTPGet que retorna uma view com a lista atualizada de produtos, depois de filtrar pelos dados pretendidos pelo user.
+        /// </summary>
+        /// <param name="nome">parametro nome para filtragem dos produtos.</param>
+        /// <param name="maxp">parametro máximo de preço, maxp, para filtragem dos produtos.</param>
+        /// <param name="minp">parametro mínimo de preço, minp, para filtragem dos produtos.</param>
+        /// <param name="categoria">parametro categoria, categoria, para filtragem dos produtos.</param>
+        /// <returns>retorna uma view com a lista atualizada de produtos, depois de «filtrar pelos dados pretendidos pelo user.</returns>
         public async Task<IActionResult> Filtra(string nome, float maxp, float minp, string categoria)
         {
             var products = await _context.Products.ToListAsync();
@@ -192,6 +209,11 @@ namespace GlobalImpact.Controllers
             return View("Index", products);
         }
 
+        /// <summary>
+        /// Funçao que retorna uma view com a lista atualizada de produtos, depois de ordenar pela forma pretendida.
+        /// </summary>
+        /// <param name="orderList">lista de produtos a ser ordenada.</param>
+        /// <returns>retorna uma view com a lista atualizada de produtos, depois de ordenar pela forma pretendida.</returns>
         public async Task<IActionResult> Order(string orderList)
         {
             var products = await _context.Products.ToListAsync();
@@ -263,6 +285,11 @@ namespace GlobalImpact.Controllers
             return View("Index", products);
         }
 
+        /// <summary>
+        /// Funçao que retorna uma view com a lista atualizada de produtos, depois de um ser eliminado.
+        /// </summary>
+        /// <param name="Id">id do produto a ser eliminado.</param>
+        /// <returns>retorna uma view com a lista atualizada de produtos, depois de um ser eliminado.</returns>
         public async Task<IActionResult> DeleteFromCart(string Id)
         {
             cartItems.RemoveAll(p => p.Id == new Guid(Id));
@@ -308,7 +335,10 @@ namespace GlobalImpact.Controllers
 
             return View("Index", products);
         }
-
+        /// <summary>
+        /// Função que retorna uma view com a lista atualizada de produtos, depois desses serem eliminados.
+        /// </summary>
+        /// <returns>retorna uma view com a lista atualizada de produtos, depois desses serem eliminados.</returns>
         public async Task<IActionResult> DeleteAllFromCart()
         {
             cartItems.Clear();
@@ -355,6 +385,12 @@ namespace GlobalImpact.Controllers
             return View("Index", products);
         }
 
+        /// <summary>
+        /// Função HTTPGet que retorna uma view com a lista atualizada de produtos, depois desses serem eliminados.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="quantity"></param>
+        /// <returns></returns>
         public async Task<IActionResult> UpdateQuantity(string id, int quantity)
         {
             var products = await _context.Products.ToListAsync();
