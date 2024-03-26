@@ -77,11 +77,11 @@ namespace GlobalImpact.Controllers
             }
             if (maxp>0 && maxp!=null)
             {
-                products = products.Where(p => p.Price <= maxp).ToList();
+                products = products.Where(p => p.Points <= maxp).ToList();
             }
             if (minp>0 && minp!=null)
             {
-                products = products.Where(p => p.Price >= minp).ToList();
+                products = products.Where(p => p.Points >= minp).ToList();
             }
             if (categoria != null)
             {

@@ -110,10 +110,10 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8d6ecba0-d2d5-4297-9890-ecafb0df7e13",
+                            Id = "99c65b6c-9c4b-4e19-a1a2-c36c0cabe9e4",
                             AccessFailedCount = 0,
                             Age = 0,
-                            ConcurrencyStamp = "fbaeff0e-8c9c-4be7-a132-1a60361eabf0",
+                            ConcurrencyStamp = "a3bd81e3-d147-404c-a4ff-ee8eddcd6db9",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -122,40 +122,15 @@ namespace GlobalImpact.Migrations
                             NIF = 0,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL9uJqhMXteRVq4M19Bqdh371LHa9StrhqsP8OceJfe5ZBZfxxyW1vPPYYd+jWVQsw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE1TKpAXJ0jh0DxGXPi+R6cAc7mNjwvu6OTkxmCxIgAj63I0ncFGZaOmjApUMDJNuA==",
                             PhoneNumber = "123456789",
                             PhoneNumberConfirmed = true,
-                            Points = 0,
+                            Points = 2147483647,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
-                            UniqueCode = "0621c082-0913-4c02-b4df-17fcc6f0bde3",
+                            UniqueCode = "4fa967c3-7352-4e58-9c9c-e1c6d2c74ad6",
                             UserName = "admin"
                         });
-                });
-
-            modelBuilder.Entity("GlobalImpact.Models.Cart", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("GlobalImpact.Models.Product", b =>
@@ -176,8 +151,8 @@ namespace GlobalImpact.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
 
                     b.Property<string>("ProductCategoryId")
                         .IsRequired()
@@ -186,9 +161,6 @@ namespace GlobalImpact.Migrations
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
-                    b.Property<double>("Tax")
-                        .HasColumnType("float");
-
                     b.HasKey("Id");
 
                     b.ToTable("Products");
@@ -196,58 +168,53 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5a036186-6e67-4ff2-bbb5-aaf8ce51a45e"),
+                            Id = new Guid("c0ce259e-31d9-471b-be82-26d3a0ac9a2e"),
                             Description = "Costoletas de Vaca",
                             ImageUrl = "Talho-Castro-Costeleta-Porco.jpg",
                             Name = "Costoletas",
-                            Price = 5.0,
-                            ProductCategoryId = "3d0619b3-0a16-4851-a3f7-9ef275bc9b3c",
-                            Stock = 20,
-                            Tax = 0.059999999999999998
+                            Points = 5,
+                            ProductCategoryId = "869b6dc2-3e2a-43b5-bf0e-f2fa9a6e4793",
+                            Stock = 20
                         },
                         new
                         {
-                            Id = new Guid("82dd8214-e5e8-497a-a0c6-64284575c3e7"),
+                            Id = new Guid("177986dd-5a83-4099-b873-3331318fb151"),
                             Description = "Bacalhau da Noruega",
                             ImageUrl = "bacalhau.jpg",
                             Name = "Bacalhau",
-                            Price = 8.0,
-                            ProductCategoryId = "67356dd8-f21b-4355-a46c-d0146639d7c8",
-                            Stock = 25,
-                            Tax = 0.059999999999999998
+                            Points = 8,
+                            ProductCategoryId = "7a19feff-dc18-495a-8ef7-008b93deb42e",
+                            Stock = 25
                         },
                         new
                         {
-                            Id = new Guid("7b3b71a1-efdb-4af2-bb38-7d640d6c978d"),
+                            Id = new Guid("20fdb71f-d23b-449d-a80a-844fc5e1dcd8"),
                             Description = "Broculos Verde",
                             ImageUrl = "broculos.jpg",
                             Name = "Broculos",
-                            Price = 1.5,
-                            ProductCategoryId = "81405c5b-0516-4a20-8295-d28eac75538c",
-                            Stock = 50,
-                            Tax = 0.059999999999999998
+                            Points = 1,
+                            ProductCategoryId = "6a52e52d-c4a7-49e6-b65d-7ed1f1f22702",
+                            Stock = 50
                         },
                         new
                         {
-                            Id = new Guid("48349756-f436-4375-b6c0-a8bfc3c0461f"),
+                            Id = new Guid("771e22b2-0b75-42d2-a6ba-82e37a2bf8d1"),
                             Description = "Pessego da Colombia",
                             ImageUrl = "pessego.jpg",
                             Name = "Pessego",
-                            Price = 2.2999999999999998,
-                            ProductCategoryId = "1b542ef8-9d4c-4134-b25f-e0124a9c61c3",
-                            Stock = 30,
-                            Tax = 0.059999999999999998
+                            Points = 2,
+                            ProductCategoryId = "e1003399-d90d-42b3-8292-4a30d59e4d2e",
+                            Stock = 30
                         },
                         new
                         {
-                            Id = new Guid("025f10b0-8e27-44ce-afc7-a445e63e90d3"),
+                            Id = new Guid("3aa7b75a-ffc8-4f6d-968f-8f14ed0d6be7"),
                             Description = "Licor Beirao versao Especial 100 anos",
                             ImageUrl = "licro-beirao.jpg",
                             Name = "Licor Beirao",
-                            Price = 11.199999999999999,
-                            ProductCategoryId = "84c92ac9-18f7-4f09-a21f-bf59c6596341",
-                            Stock = 5,
-                            Tax = 0.23000000000000001
+                            Points = 11,
+                            ProductCategoryId = "ca5d2d90-6ef6-4292-8f6a-541cc9785856",
+                            Stock = 5
                         });
                 });
 
@@ -268,29 +235,58 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            ProductCategoryId = new Guid("3d0619b3-0a16-4851-a3f7-9ef275bc9b3c"),
+                            ProductCategoryId = new Guid("869b6dc2-3e2a-43b5-bf0e-f2fa9a6e4793"),
                             Category = "talho"
                         },
                         new
                         {
-                            ProductCategoryId = new Guid("67356dd8-f21b-4355-a46c-d0146639d7c8"),
+                            ProductCategoryId = new Guid("7a19feff-dc18-495a-8ef7-008b93deb42e"),
                             Category = "peixaria"
                         },
                         new
                         {
-                            ProductCategoryId = new Guid("81405c5b-0516-4a20-8295-d28eac75538c"),
+                            ProductCategoryId = new Guid("6a52e52d-c4a7-49e6-b65d-7ed1f1f22702"),
                             Category = "legumes"
                         },
                         new
                         {
-                            ProductCategoryId = new Guid("1b542ef8-9d4c-4134-b25f-e0124a9c61c3"),
+                            ProductCategoryId = new Guid("e1003399-d90d-42b3-8292-4a30d59e4d2e"),
                             Category = "frutas"
                         },
                         new
                         {
-                            ProductCategoryId = new Guid("84c92ac9-18f7-4f09-a21f-bf59c6596341"),
+                            ProductCategoryId = new Guid("ca5d2d90-6ef6-4292-8f6a-541cc9785856"),
                             Category = "bebidas"
                         });
+                });
+
+            modelBuilder.Entity("GlobalImpact.Models.ProductTransactions", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("TransactionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductTransactions");
                 });
 
             modelBuilder.Entity("GlobalImpact.Models.RecyclingBin", b =>
@@ -329,68 +325,68 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("11e9555e-bd81-4bfd-acc9-26eb934060f2"),
+                            Id = new Guid("84696df6-c4c5-407b-870b-2802dc3fab23"),
                             Capacity = 100.0,
                             CurrentCapacity = 0.0,
                             Description = "Recycling Bin Glass",
                             Latitude = 38.521607817359822,
                             Longitude = -8.8368159603671987,
-                            RecyclingBinTypeId = "2e972a57-56b3-45ad-b806-b9ed9860241d",
+                            RecyclingBinTypeId = "b546efd5-5398-4c17-aaa3-186ac0e585ca",
                             Status = true
                         },
                         new
                         {
-                            Id = new Guid("622cd407-a6d9-4f94-ae3b-8efaf44c51d1"),
+                            Id = new Guid("f57c3a22-3183-4477-aabe-35815a187ec4"),
                             Capacity = 100.0,
                             CurrentCapacity = 0.0,
                             Description = "Recycling Bin Plastic",
                             Latitude = 38.52171490188254,
                             Longitude = -8.83694281687076,
-                            RecyclingBinTypeId = "f0ea7879-d9dd-4e09-b90c-80aca921d747",
+                            RecyclingBinTypeId = "719e2ac6-8931-427d-a473-80ffb96a153a",
                             Status = true
                         },
                         new
                         {
-                            Id = new Guid("df32cc7c-101a-4b1c-801d-1574fcca43f5"),
+                            Id = new Guid("18e5f1a7-8914-4397-b9d4-eccb541580c2"),
                             Capacity = 100.0,
                             CurrentCapacity = 0.0,
                             Description = "Recycling Bin Paper",
                             Latitude = 38.521474614438482,
                             Longitude = -8.8366557205732299,
-                            RecyclingBinTypeId = "caa73cfd-a30b-4cc9-a0cd-0c8a0acc351a",
+                            RecyclingBinTypeId = "699f93d3-b283-4546-a409-5e6129e89a1f",
                             Status = true
                         },
                         new
                         {
-                            Id = new Guid("2efd93e4-a3d4-4b90-b24e-dd3bcffa0571"),
+                            Id = new Guid("64edd96b-b07f-46de-80c3-c8c50e68a7fe"),
                             Capacity = 100.0,
                             CurrentCapacity = 0.0,
                             Description = "Recycling Bin Glass",
                             Latitude = 38.519799793743871,
                             Longitude = -8.8360971667515606,
-                            RecyclingBinTypeId = "2e972a57-56b3-45ad-b806-b9ed9860241d",
+                            RecyclingBinTypeId = "b546efd5-5398-4c17-aaa3-186ac0e585ca",
                             Status = true
                         },
                         new
                         {
-                            Id = new Guid("568844f8-8357-41f0-8dec-2f81cc55196f"),
+                            Id = new Guid("41925fde-8703-40fb-95fc-2bb19751b8b2"),
                             Capacity = 100.0,
                             CurrentCapacity = 0.0,
                             Description = "Recycling Bin Plastic",
                             Latitude = 38.522550713957862,
                             Longitude = -8.8395605732421387,
-                            RecyclingBinTypeId = "f0ea7879-d9dd-4e09-b90c-80aca921d747",
+                            RecyclingBinTypeId = "719e2ac6-8931-427d-a473-80ffb96a153a",
                             Status = true
                         },
                         new
                         {
-                            Id = new Guid("d81e3334-3917-43b4-a064-305c6f1a934b"),
+                            Id = new Guid("7183e5fe-a804-4ce4-9e8e-d27807391272"),
                             Capacity = 100.0,
                             CurrentCapacity = 0.0,
                             Description = "Recycling Bin Paper",
                             Latitude = 38.522682016378347,
                             Longitude = -8.8397580181150541,
-                            RecyclingBinTypeId = "caa73cfd-a30b-4cc9-a0cd-0c8a0acc351a",
+                            RecyclingBinTypeId = "699f93d3-b283-4546-a409-5e6129e89a1f",
                             Status = true
                         });
                 });
@@ -412,17 +408,17 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            RecyclingBinTypeId = new Guid("2e972a57-56b3-45ad-b806-b9ed9860241d"),
+                            RecyclingBinTypeId = new Guid("b546efd5-5398-4c17-aaa3-186ac0e585ca"),
                             Type = "glass"
                         },
                         new
                         {
-                            RecyclingBinTypeId = new Guid("f0ea7879-d9dd-4e09-b90c-80aca921d747"),
+                            RecyclingBinTypeId = new Guid("719e2ac6-8931-427d-a473-80ffb96a153a"),
                             Type = "plastic"
                         },
                         new
                         {
-                            RecyclingBinTypeId = new Guid("caa73cfd-a30b-4cc9-a0cd-0c8a0acc351a"),
+                            RecyclingBinTypeId = new Guid("699f93d3-b283-4546-a409-5e6129e89a1f"),
                             Type = "paper"
                         });
                 });
@@ -487,15 +483,15 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5ba49c8c-fbcf-4613-a887-012915fc774c",
-                            ConcurrencyStamp = "e9a5c369-d038-4935-ace3-153edf9f2ca3",
+                            Id = "11796df7-31e8-40c4-99f3-2fbe6699406a",
+                            ConcurrencyStamp = "7dd49f91-5411-4bb3-b029-3f1342d1b82d",
                             Name = "client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
-                            Id = "ef98198e-a356-41dd-a01e-1253955a6c48",
-                            ConcurrencyStamp = "e14e99b6-d461-44c5-98d3-79836e857703",
+                            Id = "b30ca4d6-ae42-4b88-98e7-8a801f57198c",
+                            ConcurrencyStamp = "77bcd177-df15-4fa3-bb3f-1cb6b1071163",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -590,8 +586,8 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "8d6ecba0-d2d5-4297-9890-ecafb0df7e13",
-                            RoleId = "ef98198e-a356-41dd-a01e-1253955a6c48"
+                            UserId = "99c65b6c-9c4b-4e19-a1a2-c36c0cabe9e4",
+                            RoleId = "b30ca4d6-ae42-4b88-98e7-8a801f57198c"
                         });
                 });
 
@@ -612,25 +608,6 @@ namespace GlobalImpact.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("GlobalImpact.Models.Cart", b =>
-                {
-                    b.HasOne("GlobalImpact.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GlobalImpact.Models.AppUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GlobalImpact.Models.RecyclingTransaction", b =>

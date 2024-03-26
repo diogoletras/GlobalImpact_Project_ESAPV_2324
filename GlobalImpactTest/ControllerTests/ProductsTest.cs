@@ -122,8 +122,7 @@ namespace GlobalImpactTest.ControllerTests
                 Id = Guid.NewGuid(),
                 Name = "Batatas",
                 Description = "",
-                Price = 1.5,
-                Tax = 0.1,
+                Points = 2,
                 Stock = 30,
                 ProductCategoryId = categoria,
             };

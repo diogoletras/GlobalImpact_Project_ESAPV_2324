@@ -23,7 +23,8 @@ namespace GlobalImpact.Data
         public DbSet<AppUser> AppUser { get; set; }
         public DbSet<Product> Products { get; set; }
 		public DbSet<ProductCategory> ProductsCategory { get; set; }
-		public DbSet<Cart> Carts { get; set; }
+		//public DbSet<Cart> Carts { get; set; }
+        public DbSet<ProductTransactions> ProductTransactions { get; set; }
         public DbSet<RecyclingBin> RecyclingBins { get; set; }
         public DbSet<RecyclingTransaction> RecyclingTransactions { get; set; }
         public DbSet<RecyclingBinType> RecyclingBinType { get; set; }
@@ -102,7 +103,7 @@ namespace GlobalImpact.Data
                     FirstName = "Admin",
                     LastName = "Admin",
                     Age = 0,
-                    Points = 0,
+                    Points = Int32.MaxValue,
                     NIF = 0
                 });
 
@@ -228,8 +229,7 @@ namespace GlobalImpact.Data
 					Id = Guid.NewGuid(),
 					Name = "Costoletas",
 					Description = "Costoletas de Vaca",
-					Price = 5,
-					Tax = 0.06,
+					Points = 5,
 					Stock = 20,
 					ProductCategoryId = pc1ID.ToString(),
                     ImageUrl = "Talho-Castro-Costeleta-Porco.jpg"
@@ -239,8 +239,7 @@ namespace GlobalImpact.Data
 					Id = Guid.NewGuid(),
 					Name = "Bacalhau",
 					Description = "Bacalhau da Noruega",
-					Price = 8,
-					Tax = 0.06,
+                    Points = 8,
 					Stock = 25,
 					ProductCategoryId = pc2ID.ToString(),
                     ImageUrl = "bacalhau.jpg"
@@ -250,8 +249,7 @@ namespace GlobalImpact.Data
 					Id = Guid.NewGuid(),
 					Name = "Broculos",
 					Description = "Broculos Verde",
-					Price = 1.5,
-					Tax = 0.06,
+                    Points = 1,
 					Stock = 50,
 					ProductCategoryId = pc3ID.ToString(),
                     ImageUrl = "broculos.jpg"
@@ -261,8 +259,7 @@ namespace GlobalImpact.Data
 					Id = Guid.NewGuid(),
 					Name = "Pessego",
 					Description = "Pessego da Colombia",
-					Price = 2.3,
-					Tax = 0.06,
+                    Points = 2,
 					Stock = 30,
 					ProductCategoryId = pc4ID.ToString(),
                     ImageUrl = "pessego.jpg"
@@ -272,8 +269,7 @@ namespace GlobalImpact.Data
 					Id = Guid.NewGuid(),
 					Name = "Licor Beirao",
 					Description = "Licor Beirao versao Especial 100 anos",
-					Price = 11.2,
-					Tax = 0.23,
+                    Points = 11,
 					Stock = 5,
 					ProductCategoryId = pc5ID.ToString(),
                     ImageUrl = "licro-beirao.jpg"

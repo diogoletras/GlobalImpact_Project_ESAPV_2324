@@ -25,10 +25,7 @@
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tax)
+                    @Html.DisplayNameFor(model => model.Points)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Stock)
@@ -53,10 +50,7 @@
                         @Html.DisplayFor(modelItem => item.Description)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Tax)
+                        @Html.DisplayFor(modelItem => item.Points)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Stock)
@@ -65,7 +59,7 @@
                         @Html.DisplayFor(modelItem => item.Category.Category)
                     </td>
                     <td>
-                                <img src="/img/products/@item.ImageUrl" class="detailImage" style="max-width:50px; max-height:50px;" />
+                        <img src="/img/products/@item.ImageUrl" class="detailImage" style="max-width:50px; max-height:50px;" />
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

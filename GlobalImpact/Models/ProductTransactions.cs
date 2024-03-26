@@ -7,13 +7,17 @@ namespace GlobalImpact.Models
     {
         [Key]
         public Guid Id { get; set; }
+        [Required]
+        public Guid TransactionId { get; set; }
         [ForeignKey("UserId")]
-        public virtual AppUser User { get; set; }
+        public Guid UserId { get; set; }
         [ForeignKey("ProductId")]
-        public virtual Product Product { get; set; }
+        public Guid ProductId { get; set; }
         [Required]
         public DateTime Date { get; set; }
         [Required]
-        public int TotalPoints { get; set; }
+        public int Points { get; set; }
+        [Required]
+        public int Quantity { get; set; }
     }
 }

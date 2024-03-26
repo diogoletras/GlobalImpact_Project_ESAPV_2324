@@ -31,11 +31,6 @@ namespace GlobalImpact.Controllers
             var products = await _context.Products.ToListAsync();
             var productsCat = await _context.ProductsCategory.ToListAsync();
 
-            foreach (var product in products)
-            {
-                product.Tax = product.Tax * 100;
-            }
-
             List<SelectListItem> category = new List<SelectListItem>();
             category.Add(new SelectListItem { Text = "", Value = "" });
             foreach (var cat in productsCat)
@@ -60,10 +55,10 @@ namespace GlobalImpact.Controllers
             List<SelectListItem> order = new List<SelectListItem>();
             order.Add(new SelectListItem { Text = "", Value = "" });
             order.Add(new SelectListItem { Text = "Nome A-Z", Value = "NomeA-Z" });
-            order.Add(new SelectListItem { Text = "Price Baixo a Alto", Value = "PriceBaixoaAlto" });
+            order.Add(new SelectListItem { Text = "Ponto Baixo a Alto", Value = "PontoBaixoaAlto" });
             order.Add(new SelectListItem { Text = "Stock Baixo a Alto", Value = "StockBaixoaAlto" });
             order.Add(new SelectListItem { Text = "Nome Z-A", Value = "NomeZ-A" });
-            order.Add(new SelectListItem { Text = "Price Alto a Baixo", Value = "PriceAltoaBaixo" });
+            order.Add(new SelectListItem { Text = "Ponto Alto a Baixo", Value = "PontoAltoaBaixo" });
             order.Add(new SelectListItem { Text = "Stock Alto a Baixo", Value = "StockAltoaBaixo" });
 
 
@@ -125,10 +120,10 @@ namespace GlobalImpact.Controllers
             List<SelectListItem> order = new List<SelectListItem>();
             order.Add(new SelectListItem { Text = "", Value = "" });
             order.Add(new SelectListItem { Text = "Nome A-Z", Value = "NomeA-Z" });
-            order.Add(new SelectListItem { Text = "Price Baixo a Alto", Value = "PriceBaixoaAlto" });
+            order.Add(new SelectListItem { Text = "Ponto Baixo a Alto", Value = "PontoBaixoaAlto" });
             order.Add(new SelectListItem { Text = "Stock Baixo a Alto", Value = "StockBaixoaAlto" });
             order.Add(new SelectListItem { Text = "Nome Z-A", Value = "NomeZ-A" });
-            order.Add(new SelectListItem { Text = "Price Alto a Baixo", Value = "PriceAltoaBaixo" });
+            order.Add(new SelectListItem { Text = "Ponto Alto a Baixo", Value = "PontoAltoaBaixo" });
             order.Add(new SelectListItem { Text = "Stock Alto a Baixo", Value = "StockAltoaBaixo" });
 
 
@@ -157,11 +152,11 @@ namespace GlobalImpact.Controllers
             }
             if (maxp > 0 && maxp != null)
             {
-                products = products.Where(p => p.Price <= maxp).ToList();
+                products = products.Where(p => p.Points <= maxp).ToList();
             }
             if (minp > 0 && minp != null)
             {
-                products = products.Where(p => p.Price >= minp).ToList();
+                products = products.Where(p => p.Points >= minp).ToList();
             }
             if (categoria != null)
             {
@@ -195,10 +190,10 @@ namespace GlobalImpact.Controllers
             List<SelectListItem> order = new List<SelectListItem>();
             order.Add(new SelectListItem { Text = "", Value = "" });
             order.Add(new SelectListItem { Text = "Nome A-Z", Value = "NomeA-Z" });
-            order.Add(new SelectListItem { Text = "Price Baixo a Alto", Value = "PriceBaixoaAlto" });
+            order.Add(new SelectListItem { Text = "Ponto Baixo a Alto", Value = "PontoBaixoaAlto" });
             order.Add(new SelectListItem { Text = "Stock Baixo a Alto", Value = "StockBaixoaAlto" });
             order.Add(new SelectListItem { Text = "Nome Z-A", Value = "NomeZ-A" });
-            order.Add(new SelectListItem { Text = "Price Alto a Baixo", Value = "PriceAltoaBaixo" });
+            order.Add(new SelectListItem { Text = "Ponto Alto a Baixo", Value = "PontoAltoaBaixo" });
             order.Add(new SelectListItem { Text = "Stock Alto a Baixo", Value = "StockAltoaBaixo" });
 
 
@@ -224,9 +219,9 @@ namespace GlobalImpact.Controllers
                 {
                     products = products.OrderBy(p => p.Name).ToList();
                 }
-                if (orderList.Equals("PriceBaixoaAlto"))
+                if (orderList.Equals("PontoBaixoaAlto"))
                 {
-                    products = products.OrderBy(p => p.Price).ToList();
+                    products = products.OrderBy(p => p.Points).ToList();
                 }
                 if (orderList.Equals("StockBaixoaAlto"))
                 {
@@ -236,9 +231,9 @@ namespace GlobalImpact.Controllers
                 {
                     products = products.OrderByDescending(p => p.Name).ToList();
                 }
-                if (orderList.Equals("PriceAltoaBaixo"))
+                if (orderList.Equals("PontoAltoaBaixo"))
                 {
-                    products = products.OrderByDescending(p => p.Price).ToList();
+                    products = products.OrderByDescending(p => p.Points).ToList();
                 }
                 if (orderList.Equals("StockAltoaBaixo"))
                 {
@@ -273,10 +268,10 @@ namespace GlobalImpact.Controllers
             List<SelectListItem> order = new List<SelectListItem>();
             order.Add(new SelectListItem { Text = "", Value = "" });
             order.Add(new SelectListItem { Text = "Nome A-Z", Value = "NomeA-Z" });
-            order.Add(new SelectListItem { Text = "Price Baixo a Alto", Value = "PriceBaixoaAlto" });
+            order.Add(new SelectListItem { Text = "Ponto Baixo a Alto", Value = "PontoBaixoaAlto" });
             order.Add(new SelectListItem { Text = "Stock Baixo a Alto", Value = "StockBaixoaAlto" });
             order.Add(new SelectListItem { Text = "Nome Z-A", Value = "NomeZ-A" });
-            order.Add(new SelectListItem { Text = "Price Alto a Baixo", Value = "PriceAltoaBaixo" });
+            order.Add(new SelectListItem { Text = "Ponto Alto a Baixo", Value = "PontoAltoaBaixo" });
             order.Add(new SelectListItem { Text = "Stock Alto a Baixo", Value = "StockAltoaBaixo" });
 
             ViewBag.Order = order;
@@ -323,10 +318,10 @@ namespace GlobalImpact.Controllers
             List<SelectListItem> order = new List<SelectListItem>();
             order.Add(new SelectListItem { Text = "", Value = "" });
             order.Add(new SelectListItem { Text = "Nome A-Z", Value = "NomeA-Z" });
-            order.Add(new SelectListItem { Text = "Price Baixo a Alto", Value = "PriceBaixoaAlto" });
+            order.Add(new SelectListItem { Text = "Ponto Baixo a Alto", Value = "PontoBaixoaAlto" });
             order.Add(new SelectListItem { Text = "Stock Baixo a Alto", Value = "StockBaixoaAlto" });
             order.Add(new SelectListItem { Text = "Nome Z-A", Value = "NomeZ-A" });
-            order.Add(new SelectListItem { Text = "Price Alto a Baixo", Value = "PriceAltoaBaixo" });
+            order.Add(new SelectListItem { Text = "Ponto Alto a Baixo", Value = "PontoAltoaBaixo" });
             order.Add(new SelectListItem { Text = "Stock Alto a Baixo", Value = "StockAltoaBaixo" });
 
             ViewBag.Order = order;
@@ -372,10 +367,10 @@ namespace GlobalImpact.Controllers
             List<SelectListItem> order = new List<SelectListItem>();
             order.Add(new SelectListItem { Text = "", Value = "" });
             order.Add(new SelectListItem { Text = "Nome A-Z", Value = "NomeA-Z" });
-            order.Add(new SelectListItem { Text = "Price Baixo a Alto", Value = "PriceBaixoaAlto" });
+            order.Add(new SelectListItem { Text = "Ponto Baixo a Alto", Value = "PontoBaixoaAlto" });
             order.Add(new SelectListItem { Text = "Stock Baixo a Alto", Value = "StockBaixoaAlto" });
             order.Add(new SelectListItem { Text = "Nome Z-A", Value = "NomeZ-A" });
-            order.Add(new SelectListItem { Text = "Price Alto a Baixo", Value = "PriceAltoaBaixo" });
+            order.Add(new SelectListItem { Text = "Ponto Alto a Baixo", Value = "PontoAltoaBaixo" });
             order.Add(new SelectListItem { Text = "Stock Alto a Baixo", Value = "StockAltoaBaixo" });
 
             ViewBag.Order = order;
@@ -430,10 +425,10 @@ namespace GlobalImpact.Controllers
             List<SelectListItem> order = new List<SelectListItem>();
             order.Add(new SelectListItem { Text = "", Value = "" });
             order.Add(new SelectListItem { Text = "Nome A-Z", Value = "NomeA-Z" });
-            order.Add(new SelectListItem { Text = "Price Baixo a Alto", Value = "PriceBaixoaAlto" });
+            order.Add(new SelectListItem { Text = "Ponto Baixo a Alto", Value = "PontoBaixoaAlto" });
             order.Add(new SelectListItem { Text = "Stock Baixo a Alto", Value = "StockBaixoaAlto" });
             order.Add(new SelectListItem { Text = "Nome Z-A", Value = "NomeZ-A" });
-            order.Add(new SelectListItem { Text = "Price Alto a Baixo", Value = "PriceAltoaBaixo" });
+            order.Add(new SelectListItem { Text = "Ponto Alto a Baixo", Value = "PontoAltoaBaixo" });
             order.Add(new SelectListItem { Text = "Stock Alto a Baixo", Value = "StockAltoaBaixo" });
 
             ViewBag.Order = order;
@@ -454,6 +449,26 @@ namespace GlobalImpact.Controllers
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == name);
             if (user.Points>=total)
             {
+                ProductTransactions transaction = new ProductTransactions
+                {
+                    TransactionId = Guid.NewGuid(),
+                    UserId = new Guid(user.Id),
+                    Date = DateTime.Now
+                };
+
+                foreach (var item in cartItems)
+                {
+                    transaction.Id = Guid.NewGuid();
+                    transaction.ProductId = item.Id;
+                    transaction.Points = item.Points;
+                    transaction.Quantity = item.Quantity;
+
+                    user.Points -= item.Points * item.Quantity;
+
+                    _context.ProductTransactions.Add(transaction);
+                    _context.SaveChanges();
+                }
+
                 cartItems.Clear();
                 return RedirectToAction("Index");
 
