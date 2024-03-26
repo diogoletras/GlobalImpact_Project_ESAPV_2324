@@ -113,8 +113,5 @@ namespace GlobalImpactTest.ControllerTests
             var resultView = Assert.IsType<Task<IActionResult>>(result);
             var mod = Assert.IsAssignableFrom<JsonResult>(resultView.Result);
         }
-
-
-
     }
 }

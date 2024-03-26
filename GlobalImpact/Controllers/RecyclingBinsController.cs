@@ -41,6 +41,9 @@ namespace GlobalImpact.Controllers
 		[HttpGet]
 		public async Task<IActionResult> EcoLog()
         {
+            var recyclingBins = await _context.RecyclingBins.ToListAsync();
+            ViewBag.RecyclingBins = recyclingBins;
+
 			return View();
         }
 
@@ -52,21 +55,6 @@ namespace GlobalImpact.Controllers
         [HttpGet]
         public async Task<IActionResult> EcoLogin(EcoLogViewModel model)
         {
-	        if (model.IdInput.Contains(","))
-	        {
-				var splitString = model.IdInput.Split(",");
-				if (splitString[1].Equals("enable"))
-				{
-					var ecoponto = await _context.RecyclingBins.FirstOrDefaultAsync(e => e.Id == new Guid(splitString[0]));
-					if (ecoponto.Capacity > ecoponto.CurrentCapacity)
-					{
-						ecoponto.Status = false;
-						_context.RecyclingBins.Update(ecoponto);
-						_context.SaveChanges();
-					}
-					return RedirectToAction("EcoLog");
-				}
-			}
             if (model.IdInput != null && Guid.TryParse(model.IdInput, out Guid id))
             {
                 // Recupera o ecoponto com o ID correspondente
@@ -80,7 +68,6 @@ namespace GlobalImpact.Controllers
 					if (!ecoponto.Status)
 					{
 	                    ecoponto.Type = binType.Type;
-	                    ecoponto.Status = true;
 	                    _context.RecyclingBins.Update(ecoponto);
 	                    _context.SaveChanges();
 						if (ecoponto.Status && ecoponto.Capacity <= ecoponto.CurrentCapacity)
@@ -95,7 +82,6 @@ namespace GlobalImpact.Controllers
 	                    {
 	                        if(ecoponto.Capacity <= ecoponto.CurrentCapacity)
 	                        {
-	                            ecoponto.Status = true;
 	                            _context.RecyclingBins.Update(ecoponto);
 	                            _context.SaveChanges();
 	                            return View(ecoponto);
@@ -113,7 +99,7 @@ namespace GlobalImpact.Controllers
 	                    ecoponto.Status = true;
 	                    _context.RecyclingBins.Update(ecoponto);
 	                    _context.SaveChanges();
-	                    ModelState.AddModelError("IdInput", "Recycling is in Use");
+	                    ModelState.AddModelError("IdInput", "Recycling is full");
 						return RedirectToAction("EcoLog");
 					}
 				}
@@ -146,13 +132,6 @@ namespace GlobalImpact.Controllers
                 var recyclingList = _context.RecyclingBins.ToList();
                 var recyclingBinTypeList = _context.RecyclingBinType.ToList();
 
-                if (uniqueCode.Equals("disable"))
-                {
-	                ecoponto.Status = false;
-                    _context.RecyclingBins.Update(ecoponto);
-                    _context.SaveChanges();
-	                return RedirectToAction("EcoLog");
-				}
                 var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UniqueCode == uniqueCode);
 				if (user != null)
                 {
