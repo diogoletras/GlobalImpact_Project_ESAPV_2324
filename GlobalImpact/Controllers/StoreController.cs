@@ -142,6 +142,7 @@ namespace GlobalImpact.Controllers
         /// <param name="minp">parametro mínimo de preço, minp, para filtragem dos produtos.</param>
         /// <param name="categoria">parametro categoria, categoria, para filtragem dos produtos.</param>
         /// <returns>retorna uma view com a lista atualizada de produtos, depois de «filtrar pelos dados pretendidos pelo user.</returns>
+        [HttpGet]
         public async Task<IActionResult> Filtra(string nome, float maxp, float minp, string categoria)
         {
             var products = await _context.Products.ToListAsync();
@@ -209,6 +210,7 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <param name="orderList">lista de produtos a ser ordenada.</param>
         /// <returns>retorna uma view com a lista atualizada de produtos, depois de ordenar pela forma pretendida.</returns>
+        [HttpGet]
         public async Task<IActionResult> Order(string orderList)
         {
             var products = await _context.Products.ToListAsync();
@@ -285,6 +287,7 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <param name="Id">id do produto a ser eliminado.</param>
         /// <returns>retorna uma view com a lista atualizada de produtos, depois de um ser eliminado.</returns>
+        [HttpGet]
         public async Task<IActionResult> DeleteFromCart(string Id)
         {
             cartItems.RemoveAll(p => p.Id == new Guid(Id));
@@ -334,6 +337,7 @@ namespace GlobalImpact.Controllers
         /// Função que retorna uma view com a lista atualizada de produtos, depois desses serem eliminados.
         /// </summary>
         /// <returns>retorna uma view com a lista atualizada de produtos, depois desses serem eliminados.</returns>
+        [HttpGet]
         public async Task<IActionResult> DeleteAllFromCart()
         {
             cartItems.Clear();
@@ -386,6 +390,7 @@ namespace GlobalImpact.Controllers
         /// <param name="id"></param>
         /// <param name="quantity"></param>
         /// <returns></returns>
+        [HttpGet]
         public async Task<IActionResult> UpdateQuantity(string id, int quantity)
         {
             var products = await _context.Products.ToListAsync();
@@ -438,12 +443,14 @@ namespace GlobalImpact.Controllers
             return Json(new { success = true });
         }
 
+        [HttpGet]
         public async Task<IActionResult> Checkout()
         {
             ViewBag.Items = cartItems;
             return View();
         }
 
+        [HttpPost]
         public async Task<IActionResult> FinalizeCheckout(string name, int total)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == name);
@@ -474,7 +481,7 @@ namespace GlobalImpact.Controllers
 
             }
 
-            return null;
+            return View("Checkout");
         }
     }
 }

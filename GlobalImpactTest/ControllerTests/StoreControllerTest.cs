@@ -56,12 +56,12 @@ namespace GlobalImpactTest.ControllerTests
         [Fact]
         public void Products_CanOrderProductWithSuccess()
         {
-            var order = "PriceBaixoaAlto";
+            var order = "PontoBaixoaAlto";
             var result = controller.Order(order);
             var resultView = Assert.IsType<Task<IActionResult>>(result);
             var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
 
-             order = "PriceAltoaBaixo";
+             order = "PontoAltoaBaixo";
              result = controller.Order(order);
              resultView = Assert.IsType<Task<IActionResult>>(result);
              mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
@@ -112,6 +112,39 @@ namespace GlobalImpactTest.ControllerTests
             var result = controller.UpdateQuantity(id.ToString(), 2);
             var resultView = Assert.IsType<Task<IActionResult>>(result);
             var mod = Assert.IsAssignableFrom<JsonResult>(resultView.Result);
+        }
+
+        [Fact]
+        public void Products_CanGetCheckout()
+        {
+            var result = controller.Checkout();
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+        }
+
+        [Fact]
+        public void Products_CanPostFinalizeCheckout()
+        {
+            var user = dbContext.Users.First();
+            var productList = CartItems.ListItems;
+            var total = 0;
+
+            var products = dbContext.Products.ToList();
+
+            foreach (var product in products)
+            {
+                controller.Add(product.Id.ToString());
+            }
+            
+
+            foreach (var product in productList)
+            {
+                total += product.Points*product.Quantity;
+            }
+
+            var result = controller.FinalizeCheckout(user.UserName, total);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<RedirectToActionResult>(resultView.Result);
         }
     }
 }
