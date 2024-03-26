@@ -15,7 +15,6 @@ namespace GlobalImpactAutomationTest
         [Fact]
         public void Register_Automation_Test()
         {
-
             driver.Url = "https://localhost:7154";
             driver.FindElement(By.LinkText("REGISTER")).Click();
 
