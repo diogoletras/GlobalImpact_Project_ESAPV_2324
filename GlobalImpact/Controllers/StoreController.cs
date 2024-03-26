@@ -406,5 +406,24 @@ namespace GlobalImpact.Controllers
 
             return Json(new { success = true });
         }
+
+        public async Task<IActionResult> Checkout()
+        {
+            ViewBag.Items = cartItems;
+            return View();
+        }
+
+        public async Task<IActionResult> FinalizeCheckout(string name, int total)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == name);
+            if (user.Points>=total)
+            {
+                cartItems.Clear();
+                return RedirectToAction("Index");
+
+            }
+
+            return null;
+        }
     }
 }

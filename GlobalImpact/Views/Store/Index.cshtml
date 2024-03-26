@@ -72,7 +72,7 @@
                             </li>
                         </ul>
                         <div class="button-container d-flex justify-content-center">
-                            <a class="btn btn-primary">Checkout</a>
+                            <a class="btn btn-primary" asp-action="Checkout" asp-route-items="@ViewBag.Items">Checkout</a>
                             <a class="btn btn-secondary" asp-action="DeleteAllFromCart">Clear Cart</a>
                         </div>
                     }
@@ -91,7 +91,7 @@
                                         <div class="card-body">
                                             <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
                                             <p class="card-text">@Html.DisplayNameFor(model => model.Description) - @Html.DisplayFor(modelItem => item.Description)</p>
-                                            <p class="card-text">@Html.DisplayNameFor(model => model.Price) - @Html.DisplayFor(modelItem => item.Price) €</p>
+                                            <p class="card-text">@Html.DisplayNameFor(model => model.Price) - @Html.DisplayFor(modelItem => item.Price) pontos</p>
                                             <p class="card-text">@Html.DisplayNameFor(model => model.Tax) - @Html.DisplayFor(modelItem => item.Tax) %</p>
                                             <p class="card-text">@Html.DisplayNameFor(model => model.Category.Category) - @Html.DisplayFor(modelItem => item.Category.Category)</p>
                                             <a class="btn btn-primary" asp-action="Add" asp-route-id="@item.Id">Buy Now</a>
