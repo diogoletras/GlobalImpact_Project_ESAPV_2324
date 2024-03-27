@@ -24,8 +24,7 @@
 </div>
 
 @{
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=@GoogleMapsApiKeyService.GetApiKey()&callback=initMap" sensor="false"></script>
-
+    
     Dictionary<Guid, double> listLatitude = new Dictionary<Guid, double>();
     Dictionary<Guid, double> listLongitude = new Dictionary<Guid, double>();
     Dictionary<Guid, string> listType = new Dictionary<Guid, string>();
@@ -45,7 +44,8 @@
 
     
 }
-
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=@GoogleMapsApiKeyService.GetApiKey()&callback=initMap" sensor="false"></script>
 <script type="text/javascript">
     let map;
     let userLocationMarker;
@@ -166,6 +166,7 @@
     });
 
 </script>
+
 <div style="width: 80%; height: 30%">
     <div id="map_canvas" style="width:90%; height:650px; margin-left: 300px"></div>
 </div>
