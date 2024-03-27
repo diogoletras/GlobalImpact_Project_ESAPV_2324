@@ -256,5 +256,16 @@ namespace GlobalImpact.Controllers
 			return RedirectToAction("EcoLogin", "RecyclingBins", model);
 		}
 
+        [HttpPost]
+        public async Task<IActionResult> UpdateBin(string id)
+        {
+            var bin = await _db.RecyclingBins.FirstOrDefaultAsync(b => b.Id == new Guid(id));
+            bin.Status = false;
+            bin.CurrentCapacity = 0;
+            _db.RecyclingBins.Update(bin);
+            await _db.SaveChangesAsync();
+            return RedirectToAction("FullBins", "RecyclingBins");
+        }
+
 	}
 }

@@ -1,4 +1,12 @@
-﻿@model IEnumerable<GlobalImpact.Models.RecyclingBin>
+﻿@using Microsoft.IdentityModel.Tokens
+@model IEnumerable<GlobalImpact.Models.RecyclingBin>
+
+@if (Model.IsNullOrEmpty())
+{
+    <div class="d-flex justify-content-center">
+        <h1 class="text-white">Não há Ecopontos Cheios</h1>
+    </div>
+}
 
 @foreach (var bin in Model)
 {
@@ -17,13 +25,81 @@
                     <p class="card-text">Not Full</p>
                 }
 
-                <form method="get" asp-action="">
-
-                <input type="hidden" asp-for="IdInput" class="form-control" value="@bin.Id" />
-
-                    <button id="@bin.Id" type="submit" class="btn-grad">Pedir Recolha</button>
-                </form>
+                    @*<input type="hidden" asp-for="IdInput" class="form-control" value="@bin.Id" />*@
+                <button id="@bin.Id" type="submit" class="btn-grad">Pedir Recolha</button>
             </div>
         </div>
     </div>
 }
+
+
+<script type="text/javascript">
+    var model = @Html.Raw(Json.Serialize(Model));
+
+    const id = model.map(item => item.id);
+
+    console.log(id);
+
+    id.forEach(element => {
+        var button = document.getElementById(element);
+        button.addEventListener('click', function () {
+            // Create an alert with a message and two buttons
+            var alertMessage = 'Enviar Notificação de Recolha';
+            var confirmButtonText = 'OK';
+            var cancelButtonText = 'Cancel';
+            var cancelButtonClickCallback = function () {
+                console.log('Cancel button clicked');
+            };
+
+            // Create a confirmation alert box
+            var result = confirm(alertMessage + '\n\n'
+                + 'Continuar?\n\n'
+                + '(' + confirmButtonText + ' / ' + cancelButtonText + ')');
+
+            // Check the result
+            if (result === true) {
+                // Show an alert box with buttons when the "OK" button is clicked
+                var confirmButtonText = 'OK';
+                var cancelButtonText = 'Cancel';
+                var confirmButtonClickCallback = function () {
+                    console.log('Confirm button clicked');
+
+                    // Send an AJAX request to a controller when the "OK" button on the second alert box is clicked
+                    $.ajax({
+                        url: '/RecyclingTransaction/UpdateBin',
+                        type: 'POST',
+                        data: {
+                            id: element,
+                        },
+                        success: function (data) {
+                            console.log('AJAX request succeeded: ' + data);
+                            location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('AJAX request failed: ' + xhr.responseText);
+                        }
+                    });
+                };
+                var cancelButtonClickCallback = function () {
+                    console.log('Cancel button clicked');
+                };
+
+                // Create a confirmation alert box with a 3-second delay
+                setTimeout(function () {
+                    var result = confirm('Recolha de Ecoponto Concluida!\n\n'
+                        + 'Confirmar?\n\n'
+                        + '(' + confirmButtonText + ' / ' + cancelButtonText + ')');
+
+                    // Check the result
+                    if (result === true) {
+                        confirmButtonClickCallback();
+                    } else {
+                        cancelButtonClickCallback();
+                    }
+                }, 3000);
+            } else {
+                cancelButtonClickCallback();
+            }
+        });
+    });
+</script>
