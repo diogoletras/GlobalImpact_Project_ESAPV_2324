@@ -390,7 +390,7 @@ namespace GlobalImpact.Controllers
         /// <param name="id"></param>
         /// <param name="quantity"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> UpdateQuantity(string id, int quantity)
         {
             var products = await _context.Products.ToListAsync();
@@ -450,7 +450,7 @@ namespace GlobalImpact.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> FinalizeCheckout(string name, int total)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == name);
@@ -480,7 +480,7 @@ namespace GlobalImpact.Controllers
                 return RedirectToAction("Index");
 
             }
-
+            ViewBag.Items = cartItems;
             return View("Checkout");
         }
     }
