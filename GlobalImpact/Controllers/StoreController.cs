@@ -467,6 +467,7 @@ namespace GlobalImpact.Controllers
                 {
                     transaction.Id = Guid.NewGuid();
                     transaction.ProductId = item.Id;
+                    transaction.ProductName = item.Name;
                     transaction.Points = item.Points;
                     transaction.Quantity = item.Quantity;
 

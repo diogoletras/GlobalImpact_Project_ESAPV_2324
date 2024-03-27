@@ -382,6 +382,24 @@ namespace GlobalImpact.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> ProductsTransactions(string userId)
+        {
+            var userTras = await _context.ProductTransactions.Where(p => p.UserId == new Guid(userId)).ToArrayAsync();
+            var products = await _context.Products.ToArrayAsync();
+            foreach(var trans in userTras)
+            {
+                foreach(var prod in products)
+                {
+                    if (prod.Id.Equals(trans.ProductId))
+                    {
+                        trans.ProductName = prod.Name;
+                    }
+                }
+            }
+
+            return View(userTras);
+        }
+
         private bool ProductExists(Guid id)
         {
             return _context.Products.Any(e => e.Id == id);

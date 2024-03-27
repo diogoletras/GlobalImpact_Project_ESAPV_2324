@@ -124,7 +124,7 @@ namespace GlobalImpact.Data
                     Description = "Recycling Bin Glass",
                     Capacity = 100,
                     CurrentCapacity = 0,
-                    Status = true
+                    Status = false
                 },
                 new RecyclingBin
                 {
@@ -135,7 +135,7 @@ namespace GlobalImpact.Data
                     Description = "Recycling Bin Plastic",
                     Capacity = 100,
                     CurrentCapacity = 0,
-                    Status = true
+                    Status = false
                 },
                 new RecyclingBin
                 {
@@ -146,7 +146,7 @@ namespace GlobalImpact.Data
                     Description = "Recycling Bin Paper",
                     Capacity = 100,
                     CurrentCapacity = 0,
-                    Status = true
+                    Status = false
                 },
                 new RecyclingBin
                 {
@@ -157,7 +157,7 @@ namespace GlobalImpact.Data
                     Description = "Recycling Bin Glass",
                     Capacity = 100,
                     CurrentCapacity = 0,
-                    Status = true
+                    Status = false
                 },
                 new RecyclingBin
                 {
@@ -167,7 +167,7 @@ namespace GlobalImpact.Data
                     Longitude = -8.839560573242139,
                     Description = "Recycling Bin Plastic",
                     Capacity = 100,
-                    CurrentCapacity = 0,
+                    CurrentCapacity = 100,
                     Status = true
                 },
                 new RecyclingBin
@@ -178,7 +178,7 @@ namespace GlobalImpact.Data
                     Longitude = -8.839758018115054,
                     Description = "Recycling Bin Paper",
                     Capacity = 100,
-                    CurrentCapacity = 0,
+                    CurrentCapacity = 100,
                     Status = true
                 }
             );

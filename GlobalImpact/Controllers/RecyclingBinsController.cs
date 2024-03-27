@@ -613,6 +613,14 @@ namespace GlobalImpact.Controllers
             return View("GoogleMaps", recyclingBins);
         }
 
+        public async Task<IActionResult> FullBins()
+        {
+            var fullBins = await _context.RecyclingBins.Where(b => b.Status == true).ToArrayAsync();
+            return View(fullBins);
+        }
+
+
+
         /// <summary>
         /// Funçao que recebe um id e verifica se o ecoponto exite
         /// </summary>

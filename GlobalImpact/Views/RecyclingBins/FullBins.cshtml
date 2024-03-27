@@ -1,0 +1,29 @@
+﻿@model IEnumerable<GlobalImpact.Models.RecyclingBin>
+
+@foreach (var bin in Model)
+{
+    <div class="col-md-3">
+        <div class="card" style="min-height:350px">
+            <div class="card-body">
+                <p class="card-text">@bin.Description</p>
+                <p class="card-text">@bin.Capacity</p>
+                <p class="card-text">@bin.CurrentCapacity</p>
+                @if (@bin.Status)
+                {
+                    <p class="card-text">Full</p>
+                }
+                else
+                {
+                    <p class="card-text">Not Full</p>
+                }
+
+                <form method="get" asp-action="">
+
+                <input type="hidden" asp-for="IdInput" class="form-control" value="@bin.Id" />
+
+                    <button id="@bin.Id" type="submit" class="btn-grad">Pedir Recolha</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}

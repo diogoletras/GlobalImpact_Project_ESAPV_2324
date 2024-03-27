@@ -13,6 +13,8 @@ namespace GlobalImpact.Models
         public Guid UserId { get; set; }
         [ForeignKey("ProductId")]
         public Guid ProductId { get; set; }
+        [NotMapped]
+        public string ProductName { get; set; }
         [Required]
         public DateTime Date { get; set; }
         [Required]
