@@ -3,6 +3,7 @@
 *@
 @{
    var sum = 0;
+   var prod = 0;
 }
 @if (User.Identity.IsAuthenticated)
 {
@@ -11,6 +12,7 @@
             <tbody>
             @foreach (var item in ViewBag.Items)
             {
+                prod = item.Points * item.Quantity;
                 <tr>
                     <td>
                         @item.Name
@@ -19,7 +21,7 @@
                         @item.Description
                     </td>
                     <td>
-                        @item.Quantity
+                        @prod pontos
                     </td>
                     <td>
                         <img src="/img/products/@item.ImageUrl" class="detailImage" style="max-width:50px; max-height:50px;" />
@@ -38,7 +40,7 @@
                             
                     @foreach (var item in ViewBag.Items)
                     {
-                        sum += item.Points;
+                        sum += item.Points*item.Quantity;
                     }
                     @sum pontos
                 </td>
