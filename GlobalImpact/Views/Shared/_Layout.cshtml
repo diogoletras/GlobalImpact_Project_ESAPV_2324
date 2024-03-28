@@ -38,30 +38,30 @@
                             @if(User.IsInRole("admin"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Produtos</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="RecyclingBins" asp-action="Index">ReciclingBins</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="RecyclingBins" asp-action="Index">Ecopontos</a>
                                 </li>
 
                                 <li class="nav-item">
-                                     <a class="nav-link text-dark" asp-area="" asp-controller="RecyclingBins" asp-action="FullBins">Full Bins</a>
+                                     <a class="nav-link text-dark" asp-area="" asp-controller="RecyclingBins" asp-action="FullBins">Ecopontos Cheios</a>
                                 </li>
                                 
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Users</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Utilizadores</a>
                                 </li>
                             }
                             
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="UserPage" asp-route-userId="@UserManager.GetUserId(User)" >Profile</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="UserPage" asp-route-userId="@UserManager.GetUserId(User)" >Perfil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="RecyclingTransaction" asp-action="TransacionList" asp-route-userId="@UserManager.GetUserId(User)">TransacoesReciclagens</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RecyclingTransaction" asp-action="TransacionList" asp-route-userId="@UserManager.GetUserId(User)">Transações Reciclagem</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ProductsTransactions" asp-route-userId="@UserManager.GetUserId(User)">TransacoesCompras</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ProductsTransactions" asp-route-userId="@UserManager.GetUserId(User)">Transações Compras</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Store" asp-action="Index" asp-route-userId="@UserManager.GetUserId(User)">Loja Virtual</a>
