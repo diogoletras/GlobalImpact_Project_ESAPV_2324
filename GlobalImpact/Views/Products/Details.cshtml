@@ -8,47 +8,48 @@
 {
     @if (User.IsInRole("admin"))
     {
-        <h1>Details</h1>
-
-        <div>
-            <h4>Product</h4>
-            <hr/>
-            <dl class="row">
+        <div class="text-center">
+            <h1 class="text-white">Detalhes</h1>
+            <dl class="row" style="width: 25%;">
                 <dt class="col-sm-2 text-white">
                     @Html.DisplayNameFor(model => model.Name)
                 </dt>
-                <dd class="col-sm-10 text-white">
+                <dd class="col-sm-10 text-white" style="text-align: end;">
                     @Html.DisplayFor(model => model.Name)
                 </dd>
                 <dt class="col-sm-2 text-white">
                     @Html.DisplayNameFor(model => model.Description)
                 </dt>
-                <dd class="col-sm-10 text-white">
+                <dd class="col-sm-10 text-white" style="text-align: end;">
                     @Html.DisplayFor(model => model.Description)
                 </dd>
                 <dt class="col-sm-2 text-white">
                     @Html.DisplayNameFor(model => model.Points)
                 </dt>
-                <dd class="col-sm-10 text-white">
+                <dd class="col-sm-10 text-white" style="text-align: end;">
                     @Html.DisplayFor(model => model.Points)
                 </dd>
                 <dt class="col-sm-2 text-white">
                     @Html.DisplayNameFor(model => model.Stock)
                 </dt>
-                <dd class="col-sm-10 text-white">
+                <dd class="col-sm-10 text-white" style="text-align: end;">
                     @Html.DisplayFor(model => model.Stock)
                 </dd>
                 <dt class="col-sm-2 text-white">
                     @Html.DisplayNameFor(model => model.Category)
                 </dt>
-                <dd class="col-sm-10 text-white">
+                <dd class="col-sm-10 text-white" style="text-align: end;">
                     @Html.DisplayFor(model => model.Category.Category)
                 </dd>
             </dl>
         </div>
-        <div>
-            <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-            <a asp-action="Index">Back to List</a>
+        <div class="row mt-4 text-center">
+            <div class="text-white" style="margin: 20px 0px;">
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn-grad" style="font-size: 17px;">Editar produto</a>
+            </div>
+            <div class="form-plus text-center">
+                <a asp-action="Index">Voltar</a>
+            </div>
         </div>
     }
     @if (User.IsInRole("client"))
@@ -91,8 +92,12 @@
                 </dd>
             </dl>
         </div>
-        <div>
-            <a asp-controller="Store" asp-action="Index">Back to List</a>
+
+        <div class="row mt-4 text-center">
+            <div class="form-plus text-center">
+                <a asp-action="Index">Voltar</a>
+            </div>
         </div>
+
     }
 }
