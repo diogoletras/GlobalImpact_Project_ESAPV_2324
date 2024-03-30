@@ -9,7 +9,7 @@ namespace GlobalImpact.Models
         [Key]
         public Guid Id { get; set; }
         [ForeignKey("UserId")]
-        public virtual AppUser User { get; set; }
+        public AppUser User { get; set; }
 		[ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
 		[Required]

@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GlobalImpact.Models.AppUser">
+    <Position X="9.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEIAAAAAgAAAEEAAACAAAAAAAAAAAEAAEAAAAAo=</HashCode>
+      <FileName>Models\AppUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlobalImpact.Models.Cart">
+    <Position X="6.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\Cart.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="User" />
+      <Property Name="Product" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GlobalImpact.Models.Product">
+    <Position X="3.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQAAAAAAggAAAAAAAAAQAgAAAABAAAAACgAAACAA=</HashCode>
+      <FileName>Models\Product.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Category" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GlobalImpact.Models.ProductCategory">
+    <Position X="0.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAACAA=</HashCode>
+      <FileName>Models\ProductCategory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlobalImpact.Models.ProductTransactions">
+    <Position X="6.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACAAAAAgAAgAAAACAAAAgAAAAAAAABAAAAgAAIAQA=</HashCode>
+      <FileName>Models\ProductTransactions.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="user" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GlobalImpact.Models.RecItems" Collapsed="true">
+    <Position X="23.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAQ=</HashCode>
+      <FileName>Models\RecItems.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlobalImpact.Models.RecyclingBin">
+    <Position X="12.5" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEIEAgAAAAAAAIAAACAAAAAAAIAQEAAAABAAA=</HashCode>
+      <FileName>Models\RecyclingBin.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="RecyclingBinType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GlobalImpact.Models.RecyclingBinType">
+    <Position X="9.5" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAABAAA=</HashCode>
+      <FileName>Models\RecyclingBinType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlobalImpact.Models.RecyclingTransaction">
+    <Position X="12.5" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAgAAAAAAAAAAAACAAAAABAAAAAIAAAAA=</HashCode>
+      <FileName>Models\RecyclingTransaction.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="User" />
+      <Property Name="RecyclingBin" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Microsoft.AspNetCore.Identity.IdentityUser">
+    <Position X="9.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Microsoft.AspNetCore.Identity.IdentityUser&lt;TKey&gt;">
+    <Position X="9.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="GlobalImpact.Data.ApplicationDbContext">
+    <Position X="13.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQgAAAAAAAAAAgAAAAAAIAEAAABAAIAAAAAAAAAAQ=</HashCode>
+      <FileName>Data\ApplicationDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlobalImpact.Data.CartItems" Collapsed="true">
+    <Position X="22" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\CartItems.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlobalImpact.Data.StationeryDb" Collapsed="true">
+    <Position X="22" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\StationeryDb.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlobalImpact.Data.StationeryItems">
+    <Position X="19.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\StationeryItems.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Items" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GlobalImpact.Controllers.AccountController">
+    <Position X="10.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAhgAhEAAAACAAAABAEgAgBACBAAAAAAERAAQAAAI=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_db" />
+      <Field Name="_emailSender" />
+      <Field Name="_roleManager" />
+      <Field Name="_signInManager" />
+      <Field Name="_userManager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GlobalImpact.Controllers.AdminController">
+    <Position X="16.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAhAAAAAAAAAAAAABAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\AdminController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_db" />
+      <Field Name="_signInManager" />
+      <Field Name="_userManager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GlobalImpact.Controllers.ProductsController">
+    <Position X="16.5" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACABBACAAAAAAAAAAAEAIEACAAkAAAAAAAA=</HashCode>
+      <FileName>Controllers\ProductsController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GlobalImpact.Controllers.RecyclingBinsController">
+    <Position X="16.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAADQAAAAABBACAAAAAAAAAAhMAAEACAAEAUEAAAAA=</HashCode>
+      <FileName>Controllers\RecyclingBinsController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+      <Field Name="_userManager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GlobalImpact.Controllers.RecyclingTransactionController">
+    <Position X="13.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAEgAAAghAAAAAQAggAAAAAAFBAAAAAAA=</HashCode>
+      <FileName>Controllers\RecyclingTransactionController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_db" />
+      <Field Name="_signInManager" />
+      <Field Name="items" />
+      <Field Name="recItems" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GlobalImpact.Controllers.StoreController">
+    <Position X="13.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAOAAAAAAAAABAQAAAAAAAAAAABAIAAAACGAAAAAAAA=</HashCode>
+      <FileName>Controllers\StoreController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+      <Field Name="cartItems" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Microsoft.AspNetCore.Identity.RoleManager&lt;TRole&gt;" Collapsed="true">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Microsoft.AspNetCore.Identity.SignInManager&lt;TUser&gt;" Collapsed="true">
+    <Position X="13.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Microsoft.AspNetCore.Identity.UserManager&lt;TUser&gt;" Collapsed="true">
+    <Position X="16.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Collections.Generic.List&lt;T&gt;" Collapsed="true">
+    <Position X="19.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="GlobalImpact.Interfaces.IEmailSender" Collapsed="true">
+    <Position X="6.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Interfaces\IEmailSender.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

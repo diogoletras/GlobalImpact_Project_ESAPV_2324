@@ -15,7 +15,7 @@ namespace GlobalImpact.Models
 		[ForeignKey("UserId")]
 		public virtual AppUser User { get; set; }
 		[ForeignKey("RecyclingBinId")]
-		public virtual RecyclingBin RecyclingBin { get; set; }
+		public RecyclingBin RecyclingBin { get; set; }
         [Required]
         public double Weight { get; set; }
         [Required]

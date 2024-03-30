@@ -21,7 +21,7 @@ namespace GlobalImpact.Models
 		[ForeignKey("ProductCategoryId")]
 		public string ProductCategoryId { get; set; }
 		[NotMapped]
-		public virtual ProductCategory Category { get; set; }
+		public ProductCategory Category { get; set; }
         [NotMapped]
         [Required(ErrorMessage = "The {0} field is required")]
         [Display(Name = "Image")]
