@@ -1,1 +1,1 @@
-search_result['239']=["topic_0000000000000046.html","ApplicationDbContext Class","Classe de Auxílio à migração dos dados."];
+search_result['239']=["topic_0000000000000045.html","RecyclingTransactionController.Rec Method","Função HTTPPost que recebe um item para reciclagem e verifica se é valido para o ecoponto que esta a ser utilizado"];

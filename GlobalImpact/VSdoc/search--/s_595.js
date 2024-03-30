@@ -1,1 +1,1 @@
-search_result['595']=["topic_000000000000009C.html","EmailSender Class","Classe para envio de email de confirmação de conta."];
+search_result['595']=["topic_0000000000000092_props--.html","ResetPasswordViewModel Properties",""];

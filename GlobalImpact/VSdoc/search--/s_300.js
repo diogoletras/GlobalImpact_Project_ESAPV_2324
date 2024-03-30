@@ -1,1 +1,1 @@
-search_result['300']=["topic_0000000000000051_vars--.html","StationeryItems Fields",""];
+search_result['300']=["topic_0000000000000050.html","StoreController.DeleteFromCart Method","Funçao que retorna uma view com a lista atualizada de produtos, depois de um ser eliminado."];

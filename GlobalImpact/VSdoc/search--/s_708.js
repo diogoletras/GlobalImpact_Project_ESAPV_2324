@@ -1,1 +1,1 @@
-search_result['708']=["topic_00000000000000BA_methods--.html","CreateRecyclingBinViewModel Methods",""];
+search_result['708']=["topic_00000000000000AD.html","RecyclingBin Class","Classe modelo RecyclingBin."];

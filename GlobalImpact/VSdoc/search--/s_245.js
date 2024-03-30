@@ -1,1 +1,1 @@
-search_result['245']=["topic_0000000000000047.html","ApplicationDbContext Constructor",""];
+search_result['245']=["topic_0000000000000046.html","RecyclingTransactionController.FinishRecycling Method","Função HTTPPost que finaliza o processo de reciclagem e guarda na base de dados"];

@@ -1,1 +1,1 @@
-search_result['127']=["topic_0000000000000027.html","ProductsController.Create (Product) Method","Funçãp HttpPost para criação de um produto."];
+search_result['127']=["topic_0000000000000027.html","ProductsController.Create  Method",""];

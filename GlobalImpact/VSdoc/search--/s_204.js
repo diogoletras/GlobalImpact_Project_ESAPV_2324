@@ -1,1 +1,1 @@
-search_result['204']=["topic_000000000000003C.html","RecyclingTransactionController Class","Controller da gestão de Transaçoes de reciclagem"];
+search_result['204']=["topic_000000000000003B_vars--.html","RecyclingTransactionController Fields",""];

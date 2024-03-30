@@ -1,1 +1,1 @@
-search_result['406']=["topic_0000000000000070.html","Cart Class",""];
+search_result['406']=["topic_000000000000006A.html","AppUser.Points Property",""];

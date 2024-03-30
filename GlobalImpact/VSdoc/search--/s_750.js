@@ -1,1 +1,1 @@
-search_result['750']=["topic_00000000000000C5_props--.html","EcoLogViewModel Properties",""];
+search_result['750']=["topic_00000000000000B8_attached_props--.html","CreateRecyclingBinViewModel Attached Properties",""];

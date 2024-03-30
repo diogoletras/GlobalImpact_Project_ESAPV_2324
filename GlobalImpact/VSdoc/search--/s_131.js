@@ -1,1 +1,1 @@
-search_result['131']=["topic_0000000000000029.html","ProductsController.Edit (Guid, Product) Method","Função HttpPost para retornar a página da lista de produtos quando o valor ja tiver sido editado."];
+search_result['131']=["topic_0000000000000029.html","ProductsController.Edit (Nullable\u0026lt;Guid\u0026gt;) Method",""];

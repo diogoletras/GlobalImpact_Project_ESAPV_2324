@@ -1,1 +1,1 @@
-search_result['753']=["topic_00000000000000C7.html","CreateRecyclingBinViewModel.Longitude Property",""];
+search_result['753']=["topic_00000000000000B8_props--.html","CreateRecyclingBinViewModel Properties",""];

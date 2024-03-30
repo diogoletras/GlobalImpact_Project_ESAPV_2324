@@ -1,1 +1,1 @@
-search_result['562']=["topic_0000000000000094_vars--.html","RecyclingTransaction Fields",""];
+search_result['562']=["topic_000000000000008C_events--.html","RecyclingBinType Events",""];

@@ -1,1 +1,1 @@
-search_result['198']=["topic_000000000000003B.html","RecyclingBinsController.GoogleMaps Method",""];
+search_result['198']=["topic_000000000000003A_vars--.html","RecyclingTransactionController Fields",""];

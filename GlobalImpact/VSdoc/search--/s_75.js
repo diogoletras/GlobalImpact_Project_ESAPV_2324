@@ -1,1 +1,1 @@
-search_result['75']=["topic_000000000000001C.html","AdminController.Create (RegisterViewModel, String) Method","Função Post para a criação de um User."];
+search_result['75']=["topic_000000000000001C.html","AdminController.Delete Method","Função Post de apagar User."];

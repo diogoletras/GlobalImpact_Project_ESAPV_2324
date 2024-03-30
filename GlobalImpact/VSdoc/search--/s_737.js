@@ -1,1 +1,1 @@
-search_result['737']=["topic_00000000000000C3_methods--.html","CreateRecyclingBinViewModel Methods",""];
+search_result['737']=["topic_00000000000000B4_events--.html","ResetPasswordViewModel Events",""];

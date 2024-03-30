@@ -1,1 +1,1 @@
-search_result['756']=["topic_00000000000000C7_methods--.html","EcoLogViewModel Methods",""];
+search_result['756']=["topic_00000000000000B9_attached_props--.html","RecyclingBinType Attached Properties",""];

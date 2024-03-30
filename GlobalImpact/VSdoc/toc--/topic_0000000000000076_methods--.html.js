@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_000000000000010D.html"],['134',"GlobalImpact.Interfaces Namespace","topic_0000000000000075.html"],['136',"IEmailSender Interface","topic_0000000000000076.html"],['137',"Methods","topic_0000000000000076_methods--.html"]];

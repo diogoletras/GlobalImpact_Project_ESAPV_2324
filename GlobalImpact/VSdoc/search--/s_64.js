@@ -1,1 +1,1 @@
-search_result['64']=["topic_0000000000000019.html","AdminController.Edit (AppUser) Method","Função Post para o \"Edit User\"."];
+search_result['64']=["topic_0000000000000019.html","AdminController.Create (RegisterViewModel, String) Method","Função Post para a criação de um User."];

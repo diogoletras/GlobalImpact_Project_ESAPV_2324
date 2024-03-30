@@ -1,1 +1,1 @@
-search_result['412']=["topic_0000000000000071.html","Cart.Id Property",""];
+search_result['412']=["topic_000000000000006B.html","ProductType Enumeration",""];

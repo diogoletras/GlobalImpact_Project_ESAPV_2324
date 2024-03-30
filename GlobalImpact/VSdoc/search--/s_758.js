@@ -1,1 +1,1 @@
-search_result['758']=["topic_00000000000000C7_vars--.html","EcoLogViewModel Fields",""];
+search_result['758']=["topic_00000000000000B9_methods--.html","RecyclingBinType Methods",""];

@@ -1,1 +1,0 @@
-var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_00000000000000DD.html"],['185',"GlobalImpact.Utils Namespace","topic_000000000000009B.html"],['191',"GoogleMapsServiceExtensions Class","topic_00000000000000A0.html"],['192',"Methods","topic_00000000000000A0_methods--.html"]];

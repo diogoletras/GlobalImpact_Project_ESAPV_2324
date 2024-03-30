@@ -1,1 +1,1 @@
-search_result['678']=["topic_00000000000000B3.html","RegisterViewModel Class","Classe de visualização da página de registo."];
+search_result['678']=["topic_00000000000000A5_methods--.html","ExternalLoginViewModel Methods",""];

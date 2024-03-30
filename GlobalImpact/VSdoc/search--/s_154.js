@@ -1,1 +1,1 @@
-search_result['154']=["topic_000000000000002E.html","RecyclingBinsController.EcoLog Method","Funçao HttpGet que retorna a página de interface simulada para introduzir o código do ecoponto."];
+search_result['154']=["topic_000000000000002E.html","RecyclingBinsController Class","Contralador dos Ecopontos."];

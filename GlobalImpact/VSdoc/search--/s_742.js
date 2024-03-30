@@ -1,1 +1,1 @@
-search_result['742']=["topic_00000000000000C4_events--.html","ReciclarViewModel Events",""];
+search_result['742']=["topic_00000000000000B6.html","RecyclingBin.Status Property",""];

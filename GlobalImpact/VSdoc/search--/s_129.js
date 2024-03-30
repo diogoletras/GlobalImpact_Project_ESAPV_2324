@@ -1,1 +1,1 @@
-search_result['129']=["topic_0000000000000028.html","ProductsController.Edit (Nullable\u0026lt;Guid\u0026gt;) Method",""];
+search_result['129']=["topic_0000000000000028.html","ProductsController.Create (Product) Method","Funçãp HttpPost para criação de um produto."];

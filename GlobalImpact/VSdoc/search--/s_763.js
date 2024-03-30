@@ -1,1 +1,1 @@
-search_result['763']=["topic_00000000000000C9_methods--.html","FilterViewModel Methods",""];
+search_result['763']=["topic_00000000000000BA_events--.html","CreateRecyclingBinViewModel Events",""];

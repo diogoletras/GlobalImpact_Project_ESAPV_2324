@@ -1,1 +1,1 @@
-search_result['288']=["topic_000000000000004F_vars--.html","StationeryDb Fields",""];
+search_result['288']=["topic_000000000000004E.html","StoreController.Filtra Method","Funçao HTTPGet que retorna uma view com a lista atualizada de produtos, depois de filtrar pelos dados pretendidos pelo user."];

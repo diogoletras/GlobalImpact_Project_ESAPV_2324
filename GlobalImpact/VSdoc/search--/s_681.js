@@ -1,1 +1,1 @@
-search_result['681']=["topic_00000000000000B3_methods--.html","RegisterViewModel Methods",""];
+search_result['681']=["topic_00000000000000A6.html","ProductTransactions.Points Property",""];

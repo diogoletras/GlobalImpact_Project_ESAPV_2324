@@ -1,1 +1,1 @@
-search_result['694']=["topic_00000000000000B6_methods--.html","ResetPasswordViewModel Methods",""];
+search_result['694']=["topic_00000000000000A9.html","RecItems.Tipo Property",""];

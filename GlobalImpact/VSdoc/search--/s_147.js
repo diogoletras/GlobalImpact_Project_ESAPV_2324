@@ -1,1 +1,1 @@
-search_result['147']=["topic_000000000000002C.html","RecyclingBinsController Class","Contralador dos Ecopontos."];
+search_result['147']=["topic_000000000000002C.html","ProductsController.DeleteConfirmed Method","Função HttpPost que retorna a página da lista de produtos."];

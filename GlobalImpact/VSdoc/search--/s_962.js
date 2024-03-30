@@ -1,0 +1,1 @@
+search_result['962']=["topic_0000000000000106.html","ReciclarViewModel Class","Classe ViewModel de simulação do ato de reciclagem."];

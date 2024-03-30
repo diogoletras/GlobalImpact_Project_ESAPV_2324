@@ -1,1 +1,1 @@
-c['195']=[['196',"Properties","topic_00000000000000A3_props--.html",1]];
+c['195']=[['196',"Nome Property","topic_00000000000000AA.html",0],['197',"Peso Property","topic_00000000000000AB.html",0],['198',"Pontos Property","topic_00000000000000AC.html",0],['199',"Tipo Property","topic_00000000000000A9.html",0]];

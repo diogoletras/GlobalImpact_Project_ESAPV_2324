@@ -1,1 +1,1 @@
-search_result['688']=["topic_00000000000000B4_props--.html","ResetPasswordViewModel Properties",""];
+search_result['688']=["topic_00000000000000A8.html","RecItems Class","Classe modelo RecItems.\r\nDados sobre os items reciclaveis."];

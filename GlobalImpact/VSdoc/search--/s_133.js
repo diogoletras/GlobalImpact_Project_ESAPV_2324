@@ -1,1 +1,1 @@
-search_result['133']=["topic_000000000000002A.html","ProductsController.Delete Method","Função HttpGet retorna a página de confirmação de delete."];
+search_result['133']=["topic_000000000000002A.html","ProductsController.Edit (Guid, Product) Method","Função HttpPost para retornar a página da lista de produtos quando o valor ja tiver sido editado."];

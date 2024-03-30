@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_000000000000010D.html"],['295',"GlobalImpact.ViewModels.RecyclingBin Namespace","topic_00000000000000FC.html"],['296',"EcoLogViewModel Class","topic_00000000000000FD.html"]];

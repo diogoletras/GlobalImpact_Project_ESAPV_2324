@@ -1,1 +1,1 @@
-search_result['768']=["topic_00000000000000CC.html","CreateRecyclingBinViewModel.RBTList Property",""];
+search_result['768']=["topic_00000000000000BC.html","RecyclingTransaction Class","Classe de modelo das transações."];

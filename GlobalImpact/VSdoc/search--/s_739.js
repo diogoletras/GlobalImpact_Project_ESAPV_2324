@@ -1,1 +1,1 @@
-search_result['739']=["topic_00000000000000C3_vars--.html","CreateRecyclingBinViewModel Fields",""];
+search_result['739']=["topic_00000000000000B4_props--.html","ResetPasswordViewModel Properties",""];

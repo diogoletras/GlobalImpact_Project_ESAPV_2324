@@ -1,1 +1,1 @@
-var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_00000000000000DD.html"],['185',"GlobalImpact.Utils Namespace","topic_000000000000009B.html"],['191',"GoogleMapsServiceExtensions Class","topic_00000000000000A0.html"]];
+var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_000000000000010D.html"],['145',"GlobalImpact.Models Namespace","topic_0000000000000071.html"],['184',"ProductTransactions Class","topic_000000000000009F.html"],['185',"Properties","topic_000000000000009F_props--.html"],['187',"Id Property","topic_00000000000000A0.html"]];

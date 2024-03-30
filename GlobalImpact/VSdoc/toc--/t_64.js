@@ -1,0 +1,1 @@
+c['64']=[['65',"RecyclingBinsController Constructor","topic_000000000000002F.html",0],['66',"Methods","topic_000000000000002E_methods--.html",1]];

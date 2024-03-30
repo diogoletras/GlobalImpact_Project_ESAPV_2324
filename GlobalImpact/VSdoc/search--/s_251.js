@@ -1,1 +1,1 @@
-search_result['251']=["topic_0000000000000048.html","ApplicationDbContext.AppUser Property",""];
+search_result['251']=["topic_0000000000000047.html","RecyclingTransactionController.CancelTrans Method","Funçao HTTPPost de cancelamento do pocesso de reciclagem"];

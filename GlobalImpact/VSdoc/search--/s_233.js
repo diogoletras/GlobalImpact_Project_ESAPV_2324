@@ -1,1 +1,1 @@
-search_result['233']=["topic_0000000000000045.html","GlobalImpact.Data Namespace",""];
+search_result['233']=["topic_0000000000000044.html","RecyclingTransactionController.Reciclar Method","Função HTTPGet retorna a pagina do processo de reciclagem"];

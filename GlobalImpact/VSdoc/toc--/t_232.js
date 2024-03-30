@@ -1,1 +1,1 @@
-c['232']=[['233',"CreateRecyclingBinViewModel Class","topic_00000000000000C3.html",1]];
+c['232']=[['233',"Properties","topic_00000000000000C8_props--.html",1],['235',"Fields","topic_00000000000000C8_vars--.html",1]];

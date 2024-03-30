@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_000000000000010D.html"],['231',"GlobalImpact.Utils Namespace","topic_00000000000000C7.html"],['232',"CartSingleton Class","topic_00000000000000C8.html"],['233',"Properties","topic_00000000000000C8_props--.html"]];

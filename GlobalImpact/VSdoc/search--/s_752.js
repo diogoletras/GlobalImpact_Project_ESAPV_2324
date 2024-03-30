@@ -1,1 +1,1 @@
-search_result['752']=["topic_00000000000000C6.html","CreateRecyclingBinViewModel.Latitude Property",""];
+search_result['752']=["topic_00000000000000B8_methods--.html","CreateRecyclingBinViewModel Methods",""];

@@ -1,1 +1,1 @@
-search_result['504']=["topic_0000000000000087.html","RecyclingBin.RecyclingBinTypeId Property",""];
+search_result['504']=["topic_000000000000007F_events--.html","RecyclingBin Events",""];

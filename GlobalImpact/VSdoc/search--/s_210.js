@@ -1,1 +1,1 @@
-search_result['210']=["topic_000000000000003D.html","RecyclingTransactionController Constructor","Construtor do Controller RecyclingTransactionController"];
+search_result['210']=["topic_000000000000003C_vars--.html","RecyclingTransactionController Fields",""];

@@ -1,1 +1,1 @@
-c['32']=[['33',"Create Method","topic_000000000000001B_overloads--.html",1],['36',"Delete Method","topic_000000000000001A.html",0],['37',"Edit Method","topic_0000000000000018_overloads--.html",1],['40',"Index Method","topic_0000000000000017.html",0]];
+c['32']=[['33',"AdminController Constructor","topic_0000000000000016.html",0],['34',"Methods","topic_0000000000000015_methods--.html",1]];

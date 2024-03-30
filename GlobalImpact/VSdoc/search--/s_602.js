@@ -1,1 +1,1 @@
-search_result['602']=["topic_000000000000009E.html","GoogleMapsService Class","Classe de implemetação do Google Maps."];
+search_result['602']=["topic_0000000000000094_props--.html","RecyclingTransaction Properties",""];

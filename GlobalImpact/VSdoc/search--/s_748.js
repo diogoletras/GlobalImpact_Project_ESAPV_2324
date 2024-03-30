@@ -1,1 +1,1 @@
-search_result['748']=["topic_00000000000000C5_events--.html","EcoLogViewModel Events",""];
+search_result['748']=["topic_00000000000000B7.html","RecyclingBin.Type Property",""];

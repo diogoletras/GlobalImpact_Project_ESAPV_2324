@@ -1,1 +1,1 @@
-search_result['744']=["topic_00000000000000C4_props--.html","ReciclarViewModel Properties",""];
+search_result['744']=["topic_00000000000000B6_events--.html","ResetPasswordViewModel Events",""];

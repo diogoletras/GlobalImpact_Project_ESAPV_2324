@@ -1,1 +1,1 @@
-search_result['312']=["topic_0000000000000058.html","GlobalImpact.Models Namespace",""];
+search_result['312']=["topic_0000000000000052.html","StoreController.UpdateQuantity Method","Função HTTPGet que retorna uma view com a lista atualizada de produtos, depois desses serem eliminados."];

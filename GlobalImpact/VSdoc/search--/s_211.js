@@ -1,1 +1,1 @@
-search_result['211']=["topic_000000000000003E.html","RecyclingTransactionController.Index Method","Funçao HTTPGet que retorna uma view com a lista dos ecopontos"];
+search_result['211']=["topic_000000000000003D.html","RecyclingBinsController.GoogleMaps Method",""];
