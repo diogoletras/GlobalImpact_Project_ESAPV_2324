@@ -130,14 +130,15 @@ namespace GlobalImpactAutomationTest
 
 			Thread.Sleep(2000);
 
+			ReadOnlyCollection<IWebElement> checkoutButtons = driver.FindElements(By.CssSelector(".btn-grad-small"));
+			checkoutButtons[2].Click();
+			Thread.Sleep(2000);
+
 			var submitButton3 = driver.FindElement(By.CssSelector(".btn-grad-small"));
 			submitButton3.Click();
 
-			//var submitButton4 = driver.FindElement(By.Id("terminar"));
-			//submitButton4.Click();
-
 			Thread.Sleep(2000);
-			driver.Quit();
+			//driver.Quit();
 		}
 
         [Fact]
@@ -176,7 +177,6 @@ namespace GlobalImpactAutomationTest
 			Thread.Sleep(2000);
 
 			//driver.FindElement(By.Id("logout")).Click();
-
 			//driver.Quit();
 		}
 
