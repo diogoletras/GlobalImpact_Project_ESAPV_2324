@@ -2,6 +2,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.ObjectModel;
 
 namespace GlobalImpactAutomationTest
 {
@@ -106,7 +107,7 @@ namespace GlobalImpactAutomationTest
         }
 
         [Fact]
-        public void recycle_Automation_Test()
+        public void Recycle_Automation_Test()
         {
             driver.Url = "https://localhost:7154";
             driver.FindElement(By.LinkText("ECOPONTO")).Click();
@@ -136,8 +137,48 @@ namespace GlobalImpactAutomationTest
 			//submitButton4.Click();
 
 			Thread.Sleep(2000);
+			driver.Quit();
+		}
+
+        [Fact]
+		public void Store_Automation_Test()
+		{
+			driver.Url = "https://localhost:7154";
+			driver.FindElement(By.LinkText("LOGIN")).Click();
+
+			var username = driver.FindElement(By.Id("username"));
+			var password = driver.FindElement(By.Id("password"));
+
+			username.SendKeys("testuser");
+
+			password.SendKeys("!Qq1234");
+
+			driver.FindElement(By.Id("login")).Click();
+
+			Thread.Sleep(2000);
+
+			driver.FindElement(By.LinkText("Loja Virtual")).Click();
+
+			Thread.Sleep(2000);
+
+			ReadOnlyCollection<IWebElement> checkoutButtons = driver.FindElements(By.CssSelector(".btn-primary"));
+            checkoutButtons[1].Click();
+			Thread.Sleep(2000);
+
+
+			ReadOnlyCollection<IWebElement> checkoutButtons2 = driver.FindElements(By.CssSelector(".btn-primary"));
+			checkoutButtons2[0].Click();
+			Thread.Sleep(2000);
+
+			IWebElement checkoutButton = driver.FindElement(By.CssSelector(".btn-primary"));
+			checkoutButton.Click();
+
+			Thread.Sleep(2000);
+
+			//driver.FindElement(By.Id("logout")).Click();
+
 			//driver.Quit();
 		}
 
-    }
+	}
 }
