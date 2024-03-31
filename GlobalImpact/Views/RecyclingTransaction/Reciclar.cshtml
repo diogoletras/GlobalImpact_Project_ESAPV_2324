@@ -68,14 +68,14 @@
 			<input type="hidden" name="nome" value="@Model.UserName" />
 			<input type="hidden" name="peso" value="@totalPeso" />
 			<input type="hidden" name="pontos" value="@totalPontos" />
-			<button type="submit" class="btn-grad-small">Terminar</button>
+			<button type="submit" id="terminar" class="btn-grad">Terminar</button>
 		</form>
 		<p></p>
 		<form method="post" asp-controller="RecyclingTransaction" asp-action="CancelTrans">
 			<input type="hidden" name="idEco" value="@Model.EcoPonto.Id" />
 			<input type="hidden" name="nome" value="@Model.UserName" />
 			<input type="hidden" name="type" value="@Model.Type" />
-			<button type="submit" class="btn-grad-small">Cancelar</button>
+			<button type="submit" id="cancelar" class="btn-grad">Cancelar</button>
 		</form>
 	</div>
 	<p></p>
@@ -96,7 +96,7 @@
 					<input type="hidden" name="type" value="@Model.Type" />
 					<input type="hidden" name="nome" value="@Model.UserName" />
 					<input type="hidden" name="itemName" value="@item.Nome" />
-					<button type="submit" class="btn-grad-small">Adicionar</button>
+					<button type="submit" id="adicionar" class="btn-grad-small">Adicionar</button>
 				</form>
 			</div>
 		}

@@ -53,9 +53,9 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Utilizadores</a>
                                 </li>
                             }
-                            
+
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="UserPage" asp-route-userId="@UserManager.GetUserId(User)" >Perfil</a>
+                                <a id="userpage" class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="UserPage" asp-route-userId="@UserManager.GetUserId(User)">Perfil</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="RecyclingTransaction" asp-action="TransacionList" asp-route-userId="@UserManager.GetUserId(User)">Transações Reciclagem</a>
