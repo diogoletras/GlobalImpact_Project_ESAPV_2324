@@ -60,7 +60,7 @@ namespace GlobalImpactTest.ControllerTests
         [Fact]
         public void EcoLogin_CanGetPageWithSuccess()
         {
-            var user = userManagerMock.Object.Users.FirstOrDefault(u => u.UserName == "test1");
+            var user = userManagerMock.Object.Users.FirstOrDefault();
             EcoLogViewModel model = new EcoLogViewModel
             {
                 IdInput = user.UniqueCode
@@ -343,8 +343,42 @@ namespace GlobalImpactTest.ControllerTests
             Assert.Equal("GoogleMaps", mod.ActionName);
         }
 
+        [Fact]
+        public async void FullBins_CanGetPage()
+        {
+            var result = controller.FullBins();
+			var resultView = Assert.IsType<Task<IActionResult>>(result);
+			var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+			var model = Assert.IsType<RecyclingBin[]>(mod.Model);
+            Assert.Equal(2,model.Count());
+			Assert.NotNull(mod);
+
+		}
+
+		[Fact]
+		public async void FullBins_CheckAfterService()
+		{
+			var result = controller.FullBins();
+			var resultView = Assert.IsType<Task<IActionResult>>(result);
+			var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+			var model = Assert.IsType<RecyclingBin[]>(mod.Model);
+			Assert.Equal(2, model.Count());
+			Assert.NotNull(mod);
+
+            var bin = dbContext.RecyclingBins.FirstOrDefault(b => b.Status == true);
+            bin.Status = false;
+            dbContext.Update(bin);
+            dbContext.SaveChanges();
+
+			var result2 = controller.FullBins();
+			var resultView2 = Assert.IsType<Task<IActionResult>>(result2);
+			var mod2 = Assert.IsAssignableFrom<ViewResult>(resultView2.Result);
+			var model2 = Assert.IsType<RecyclingBin[]>(mod.Model);
+			Assert.Equal(1, model2.Count());
+			Assert.NotNull(mod2);
+
+		}
 
 
-
-    }
+	}
 }
