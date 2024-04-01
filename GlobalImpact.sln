@@ -18,6 +18,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LoadTests", "LoadTests", "{ABE91762-1AB6-4175-AF31-17A2AD56E2AA}"
 	ProjectSection(SolutionItems) = preProject
 		loadTest.js = loadTest.js
+		spikeTest.js = spikeTest.js
+		stressTest.js = stressTest.js
 	EndProjectSection
 EndProject
 Global

@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
+using ConfigurationManager = Microsoft.Extensions.Configuration.ConfigurationManager;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace GlobalImpactTest.ControllerTests
@@ -67,7 +68,7 @@ namespace GlobalImpactTest.ControllerTests
                 .ReturnsAsync(SignInResult.Success);
 
             controller = new AccountController(userManagerMock.Object, signInManagerMock.Object,
-                roleManagerMock.Object, new EmailSender(), dbContext);
+                roleManagerMock.Object, new EmailService(new ConfigurationManager()), dbContext);
             userManagerMock.Setup(u => u.GetUserAsync(controller.User)).ReturnsAsync(users.First());
 
         }

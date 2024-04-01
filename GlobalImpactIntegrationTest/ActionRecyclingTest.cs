@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
@@ -71,7 +72,7 @@ namespace GlobalImpactIntegrationTest
                 .ReturnsAsync(SignInResult.Success);
 
             controllerAccount = new AccountController(userManagerMock.Object, signInManagerMock.Object,
-                roleManagerMock.Object, new EmailSender(), _context);
+                roleManagerMock.Object, new EmailService(new ConfigurationManager()), _context);
 
             controllerRecBin = new RecyclingBinsController(_context, userManagerMock.Object);
             controllerRecBinTrans = new RecyclingTransactionController(_context, signInManagerMock.Object);
