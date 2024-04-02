@@ -106,7 +106,7 @@ namespace GlobalImpact.Controllers
             {
                 foreach (var prod in cartItems)
                 {
-                    if(prod.Id == product.Id)
+                    if (prod.Id == product.Id)
                     {
                         prod.Quantity++;
                     }
@@ -132,7 +132,7 @@ namespace GlobalImpact.Controllers
 
             ViewBag.Categorias = category;
             ViewBag.Items = cartItems;
-            return View("Index",products);
+            return View("Index", products);
         }
         /// <summary>
         /// Funçao HTTPGet que retorna uma view com a lista atualizada de produtos, depois de filtrar pelos dados pretendidos pelo user.
@@ -142,7 +142,7 @@ namespace GlobalImpact.Controllers
         /// <param name="minp">parametro mínimo de preço, minp, para filtragem dos produtos.</param>
         /// <param name="categoria">parametro categoria, categoria, para filtragem dos produtos.</param>
         /// <returns>retorna uma view com a lista atualizada de produtos, depois de «filtrar pelos dados pretendidos pelo user.</returns>
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Filtra(string nome, float maxp, float minp, string categoria)
         {
             var products = await _context.Products.ToListAsync();
@@ -210,12 +210,12 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <param name="orderList">lista de produtos a ser ordenada.</param>
         /// <returns>retorna uma view com a lista atualizada de produtos, depois de ordenar pela forma pretendida.</returns>
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Order(string orderList)
         {
             var products = await _context.Products.ToListAsync();
 
-            if(orderList != null)
+            if (orderList != null)
             {
                 if (orderList.Equals("NomeA-Z"))
                 {
@@ -454,7 +454,7 @@ namespace GlobalImpact.Controllers
         public async Task<IActionResult> FinalizeCheckout(string name, int total)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == name);
-            if (user.Points>=total)
+            if (user.Points >= total)
             {
                 ProductTransactions transaction = new ProductTransactions
                 {
