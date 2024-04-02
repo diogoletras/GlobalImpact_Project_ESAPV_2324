@@ -396,8 +396,9 @@ namespace GlobalImpact.Controllers
                     }
                 }
             }
+            var groupedTrans = userTras.GroupBy(p => p.TransactionId);
 
-            return View(userTras);
+            return View(groupedTrans);
         }
 
         private bool ProductExists(Guid id)

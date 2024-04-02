@@ -1,54 +1,53 @@
-﻿@model IEnumerable<GlobalImpact.Models.ProductTransactions>
+﻿@model IEnumerable<IGrouping<Guid, ProductTransactions>>
 
-<div class="text-center>" style="text-align: -webkit-center;">
-    <h1 class="display-4">TransacionList</h1>
-
-
-    <table class="table table-striped border">
-        <thead>
-            <tr class="table-secondary">
-                <th>
-                    @Html.DisplayNameFor(model => model.TransactionId)
-                </th>
-                <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.Date)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Points)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Quantity)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
+<div class="container">
+    <h1>Encomendas</h1>
+    <div class="row">
+        <div class="col">
+            @foreach (var group in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TransactionId)
-                    </td>
+                <div class="card mb-3">
+                    @{
+                        var firstTransaction = group.FirstOrDefault();
+                        var totalPoints = 0;
+                    }
+                    @if(firstTransaction != null)
+                    {
+                    <div class="card-header">
+                        <h5 class="card-title"> Data: @firstTransaction.Date</h5>
+                    </div>
+                    }
+                    <div class="card-header">
+                        <span class="text-muted">Transação ID: @group.Key</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            @foreach (var transaction in group)
+                            {
+                                var transactionPoints = transaction.Quantity * transaction.Points;
+                                totalPoints += transactionPoints;
 
-                <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Points)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Quantity)
-                    </td>
-                </tr>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <strong>Produto:</strong> @transaction.ProductName
+                                        </div>
+                                        <div class="col-md-3">
+                                            <strong>Quantidade:</strong> @transaction.Quantity
+                                        </div>
+                                        <div class="col-md-3">
+                                            <strong>Pontos/Uni:</strong> @transaction.Points
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                            <li class="list-group-item">
+                                <strong>Total de Pontos Gastos:</strong> @totalPoints
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
+        </div>
+    </div>
 </div>
