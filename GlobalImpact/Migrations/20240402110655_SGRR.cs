@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GlobalImpact.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class SGRR : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -273,25 +273,29 @@ namespace GlobalImpact.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "11796df7-31e8-40c4-99f3-2fbe6699406a", "7dd49f91-5411-4bb3-b029-3f1342d1b82d", "client", "CLIENT" },
-                    { "b30ca4d6-ae42-4b88-98e7-8a801f57198c", "77bcd177-df15-4fa3-bb3f-1cb6b1071163", "admin", "ADMIN" }
+                    { "07dcb156-acd8-45f0-ac69-d08cbc0c5b88", "3c4e26af-bebb-42d9-a942-64fb6e7ed98f", "admin", "ADMIN" },
+                    { "150b930b-3db2-4b29-ba47-6ec9a8851537", "24a3921a-b7d5-4a6b-ad46-61b8d795d996", "client", "CLIENT" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Age", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NIF", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Points", "SecurityStamp", "TwoFactorEnabled", "UniqueCode", "UserName" },
-                values: new object[] { "99c65b6c-9c4b-4e19-a1a2-c36c0cabe9e4", 0, 0, "a3bd81e3-d147-404c-a4ff-ee8eddcd6db9", "admin@gmail.com", true, "Admin", "Admin", true, null, 0, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEE1TKpAXJ0jh0DxGXPi+R6cAc7mNjwvu6OTkxmCxIgAj63I0ncFGZaOmjApUMDJNuA==", "123456789", true, 2147483647, "", false, "4fa967c3-7352-4e58-9c9c-e1c6d2c74ad6", "admin" });
+                values: new object[,]
+                {
+                    { "73b8cb14-e80c-4777-8258-75606d9d234b", 0, 0, "f359d7f5-0e37-49bd-9c19-9b8d746674e4", "admin@gmail.com", true, "Admin", "Admin", true, null, 0, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEMRQcHtRAXe5djEQDmB8fHvKvlYc2PprYjxib7G7R6FM1b4H859DMzrncjB2kfRoWw==", "123456789", true, 10000, "", false, "fb134550-849d-4f43-9401-da0c2d09ccf2", "admin" },
+                    { "8a81f419-95a5-4960-aee2-3d7cd184db0d", 0, 50, "61e5028c-f72b-4b84-829a-401df272cf49", "cliente@exemplo.com", true, "Cliente", "Cliente", true, null, 0, "CLIENTE@EXEMPLO.COM", "CLIENTE", "AQAAAAIAAYagAAAAEGUeTW70wU3s4Sd2Fjz9yv2EuSXADBPorsTA22Z1thHuGydBk0drTEZEBRMVI4p74g==", "123456789", true, 10000, "", false, "897959b8-f7ff-4aa9-b280-ef7573601c4b", "cliente" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "Description", "ImageUrl", "Name", "Points", "ProductCategoryId", "Stock" },
                 values: new object[,]
                 {
-                    { new Guid("177986dd-5a83-4099-b873-3331318fb151"), "Bacalhau da Noruega", "bacalhau.jpg", "Bacalhau", 8, "7a19feff-dc18-495a-8ef7-008b93deb42e", 25 },
-                    { new Guid("20fdb71f-d23b-449d-a80a-844fc5e1dcd8"), "Broculos Verde", "broculos.jpg", "Broculos", 1, "6a52e52d-c4a7-49e6-b65d-7ed1f1f22702", 50 },
-                    { new Guid("3aa7b75a-ffc8-4f6d-968f-8f14ed0d6be7"), "Licor Beirao versao Especial 100 anos", "licro-beirao.jpg", "Licor Beirao", 11, "ca5d2d90-6ef6-4292-8f6a-541cc9785856", 5 },
-                    { new Guid("771e22b2-0b75-42d2-a6ba-82e37a2bf8d1"), "Pessego da Colombia", "pessego.jpg", "Pessego", 2, "e1003399-d90d-42b3-8292-4a30d59e4d2e", 30 },
-                    { new Guid("c0ce259e-31d9-471b-be82-26d3a0ac9a2e"), "Costoletas de Vaca", "Talho-Castro-Costeleta-Porco.jpg", "Costoletas", 5, "869b6dc2-3e2a-43b5-bf0e-f2fa9a6e4793", 20 }
+                    { new Guid("4a4c91eb-f87e-4cdf-88e0-8134fdc8ed56"), "Bacalhau da Noruega", "bacalhau.jpg", "Bacalhau", 8, "3f23444c-ef54-4dee-a206-f11aae233c4f", 25 },
+                    { new Guid("7ba23eb4-36e9-40d1-b28b-a0b3192b6f7a"), "Licor Beirao versao Especial 100 anos", "licro-beirao.jpg", "Licor Beirao", 11, "e0fdfe38-4523-47af-9f12-e80a2d88873a", 5 },
+                    { new Guid("88d6af65-edc0-4450-9566-86f3809f28d1"), "Costoletas de Vaca", "Talho-Castro-Costeleta-Porco.jpg", "Costoletas", 5, "5e497b29-5150-4608-9ef2-048e5b3f9c7a", 20 },
+                    { new Guid("e740c75f-4092-454e-a3d5-23b185a45b68"), "Pessego da Colombia", "pessego.jpg", "Pessego", 2, "b833ce30-fb27-407c-bb61-bbed0a3d645e", 30 },
+                    { new Guid("f70cc9d9-9030-4615-bd78-b399f869f903"), "Broculos Verde", "broculos.jpg", "Broculos", 1, "bc7dc632-d46d-48d3-bbac-cc1a45689072", 50 }
                 });
 
             migrationBuilder.InsertData(
@@ -299,11 +303,11 @@ namespace GlobalImpact.Migrations
                 columns: new[] { "ProductCategoryId", "Category" },
                 values: new object[,]
                 {
-                    { new Guid("6a52e52d-c4a7-49e6-b65d-7ed1f1f22702"), "legumes" },
-                    { new Guid("7a19feff-dc18-495a-8ef7-008b93deb42e"), "peixaria" },
-                    { new Guid("869b6dc2-3e2a-43b5-bf0e-f2fa9a6e4793"), "talho" },
-                    { new Guid("ca5d2d90-6ef6-4292-8f6a-541cc9785856"), "bebidas" },
-                    { new Guid("e1003399-d90d-42b3-8292-4a30d59e4d2e"), "frutas" }
+                    { new Guid("3f23444c-ef54-4dee-a206-f11aae233c4f"), "peixaria" },
+                    { new Guid("5e497b29-5150-4608-9ef2-048e5b3f9c7a"), "talho" },
+                    { new Guid("b833ce30-fb27-407c-bb61-bbed0a3d645e"), "frutas" },
+                    { new Guid("bc7dc632-d46d-48d3-bbac-cc1a45689072"), "legumes" },
+                    { new Guid("e0fdfe38-4523-47af-9f12-e80a2d88873a"), "bebidas" }
                 });
 
             migrationBuilder.InsertData(
@@ -311,9 +315,9 @@ namespace GlobalImpact.Migrations
                 columns: new[] { "RecyclingBinTypeId", "Type" },
                 values: new object[,]
                 {
-                    { new Guid("699f93d3-b283-4546-a409-5e6129e89a1f"), "paper" },
-                    { new Guid("719e2ac6-8931-427d-a473-80ffb96a153a"), "plastic" },
-                    { new Guid("b546efd5-5398-4c17-aaa3-186ac0e585ca"), "glass" }
+                    { new Guid("127e3726-65fe-4164-98a5-a6c154a34de5"), "paper" },
+                    { new Guid("802f94ed-6561-433b-a126-ac60b55078f7"), "glass" },
+                    { new Guid("ac82b0ee-29b8-4370-8110-dc4afa1d0ea2"), "plastic" }
                 });
 
             migrationBuilder.InsertData(
@@ -321,18 +325,22 @@ namespace GlobalImpact.Migrations
                 columns: new[] { "Id", "Capacity", "CurrentCapacity", "Description", "Latitude", "Longitude", "RecyclingBinTypeId", "Status" },
                 values: new object[,]
                 {
-                    { new Guid("18e5f1a7-8914-4397-b9d4-eccb541580c2"), 100.0, 0.0, "Recycling Bin Paper", 38.521474614438482, -8.8366557205732299, "699f93d3-b283-4546-a409-5e6129e89a1f", true },
-                    { new Guid("41925fde-8703-40fb-95fc-2bb19751b8b2"), 100.0, 0.0, "Recycling Bin Plastic", 38.522550713957862, -8.8395605732421387, "719e2ac6-8931-427d-a473-80ffb96a153a", true },
-                    { new Guid("64edd96b-b07f-46de-80c3-c8c50e68a7fe"), 100.0, 0.0, "Recycling Bin Glass", 38.519799793743871, -8.8360971667515606, "b546efd5-5398-4c17-aaa3-186ac0e585ca", true },
-                    { new Guid("7183e5fe-a804-4ce4-9e8e-d27807391272"), 100.0, 0.0, "Recycling Bin Paper", 38.522682016378347, -8.8397580181150541, "699f93d3-b283-4546-a409-5e6129e89a1f", true },
-                    { new Guid("84696df6-c4c5-407b-870b-2802dc3fab23"), 100.0, 0.0, "Recycling Bin Glass", 38.521607817359822, -8.8368159603671987, "b546efd5-5398-4c17-aaa3-186ac0e585ca", true },
-                    { new Guid("f57c3a22-3183-4477-aabe-35815a187ec4"), 100.0, 0.0, "Recycling Bin Plastic", 38.52171490188254, -8.83694281687076, "719e2ac6-8931-427d-a473-80ffb96a153a", true }
+                    { new Guid("2137b3f7-3492-4937-b69c-90b57834ec04"), 100.0, 0.0, "Recycling Bin Plastic", 38.52171490188254, -8.83694281687076, "ac82b0ee-29b8-4370-8110-dc4afa1d0ea2", false },
+                    { new Guid("2a1bce9f-4c36-4edf-a797-336ef56edece"), 100.0, 100.0, "Recycling Bin Plastic", 38.522550713957862, -8.8395605732421387, "ac82b0ee-29b8-4370-8110-dc4afa1d0ea2", true },
+                    { new Guid("58b7d4c1-a3c6-4053-8ab4-d2a1cf7f75ff"), 100.0, 0.0, "Recycling Bin Paper", 38.521474614438482, -8.8366557205732299, "127e3726-65fe-4164-98a5-a6c154a34de5", false },
+                    { new Guid("8d1940a1-5aa9-4760-ae7c-bc9584a324cc"), 100.0, 0.0, "Recycling Bin Glass", 38.521607817359822, -8.8368159603671987, "802f94ed-6561-433b-a126-ac60b55078f7", false },
+                    { new Guid("f1549c50-5e1b-4714-ad8b-0b6cc6e45ca9"), 100.0, 100.0, "Recycling Bin Paper", 38.522682016378347, -8.8397580181150541, "127e3726-65fe-4164-98a5-a6c154a34de5", true },
+                    { new Guid("f81b3465-319f-406a-a758-2ba1eda49b45"), 100.0, 0.0, "Recycling Bin Glass", 38.519799793743871, -8.8360971667515606, "802f94ed-6561-433b-a126-ac60b55078f7", false }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "b30ca4d6-ae42-4b88-98e7-8a801f57198c", "99c65b6c-9c4b-4e19-a1a2-c36c0cabe9e4" });
+                values: new object[,]
+                {
+                    { "07dcb156-acd8-45f0-ac69-d08cbc0c5b88", "73b8cb14-e80c-4777-8258-75606d9d234b" },
+                    { "150b930b-3db2-4b29-ba47-6ec9a8851537", "8a81f419-95a5-4960-aee2-3d7cd184db0d" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
