@@ -1,1 +1,1 @@
-search_result['176']=["topic_000000000000003E.html","RecyclingTransactionController.Reciclar Method","Função HTTPGet retorna a pagina do processo de reciclagem"];
+search_result['176']=["topic_0000000000000035_methods--.html","ApplicationDbContext Methods",""];

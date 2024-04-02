@@ -1,10 +1,17 @@
+using System.Configuration;
 using GlobalImpact.Data;
 using GlobalImpact.Interfaces;
 using GlobalImpact.Models;
+using GlobalImpact.Services;
 using GlobalImpact.Utils;
-using Humanizer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using EmailService = GlobalImpact.Utils.EmailService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,13 +19,28 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("AzureConnection")));
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+
+builder.Services.AddSingleton<IHttpContextAccessor>((provider) => new HttpContextAccessor());
+
+// Add the Google Maps API key to the ViewData dictionary
+builder.Services.AddScoped<GoogleMapsApiKeyService>((provider) =>
+{
+    var httpContextAccessor = provider.GetService<IHttpContextAccessor>();
+    var actionContext = new ActionContext(httpContextAccessor.HttpContext, new RouteData(), new ActionDescriptor());
+    var viewDataDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), actionContext.ModelState);
+
+    viewDataDictionary["GoogleMapsApiKey"] = "AIzaSyAnaT4ITxYnVC69ETzeLpuOAvAOh6nNfTA";
+
+    return new GoogleMapsApiKeyService(viewDataDictionary);
+});
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -69,3 +91,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+public partial class Program { }

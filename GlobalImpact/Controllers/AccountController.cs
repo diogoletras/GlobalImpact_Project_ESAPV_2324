@@ -23,7 +23,7 @@ namespace GlobalImpact.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _db;
-        private readonly IEmailSender _emailSender;
+        private readonly IEmailService _emailService;
 
         /// <summary>
         /// Construtor do Controller AccountController
@@ -31,18 +31,18 @@ namespace GlobalImpact.Controllers
         /// <param name="userManager">Fornece APIs para gestao de utilizadores</param>
         /// <param name="signInManager">Fornece APIs para Login de utilizadores</param>
         /// <param name="roleManager">Fornece APIs para gestao de roles de utilizadores</param>
-        /// <param name="emailSender">Fornece Envio de Emails</param>
+        /// <param name="emailService">Fornece Envio de Emails</param>
         /// <param name="db">Base de Dados</param>
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IEmailSender emailSender, ApplicationDbContext db)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IEmailService emailService, ApplicationDbContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
-            _emailSender = emailSender;
+            _emailService = emailService;
             _db = db;
         }
 
-        public IActionResult UserPage(String userId)
+        public IActionResult UserPage(string userId)
         {
             var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
             return View(user);
@@ -55,7 +55,7 @@ namespace GlobalImpact.Controllers
         /// <returns> retorna a página de registo.</returns>
 
         [HttpGet]
-        public async Task<IActionResult> Register( string? returnUrl)
+        public async Task<IActionResult> Register(string? returnUrl)
         {
             RegisterViewModel registerViewModel = new RegisterViewModel();
             registerViewModel.ReturnUrl = returnUrl;
@@ -90,7 +90,7 @@ namespace GlobalImpact.Controllers
                 }
                 else
                 {
-                    var user = new AppUser
+	                AppUser user = new AppUser
                     {
                         UserName = registerViewModel.UserName,
                         Email = registerViewModel.Email,
@@ -110,7 +110,7 @@ namespace GlobalImpact.Controllers
                         if (!string.IsNullOrEmpty(code))
                         {
                             var callbackUrl = Url.Action("ConfirmEmailTask", "Account", new { userId = user.Id, code }, protocol: HttpContext.Request.Scheme);
-                            await _emailSender.SendEmailAsync(user.Email, "Account Verification",
+                            await _emailService.SendEmailAsync(user.Email, "Account Verification",
                                 $"Please verify your account by clicking here: <a href='{callbackUrl}'>link</a>");
                         }
                         //await _signInManager.SignInAsync(user, isPersistent: false);
@@ -148,7 +148,7 @@ namespace GlobalImpact.Controllers
             }
             else
             {
-                var user = await _userManager.FindByIdAsync(userId);
+                var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
                 if (user == null)
                 {
                     return View("Error");
@@ -156,9 +156,13 @@ namespace GlobalImpact.Controllers
                 else
                 {
                     var result = await _userManager.ConfirmEmailAsync(user, code);
-                    return View("EmailConfirmation");
+                    return RedirectToAction("EmailConfirmation");
                 }
             }
+        }
+        public IActionResult EmailConfirmation()
+        {
+            return View();
         }
 
 
@@ -234,9 +238,9 @@ namespace GlobalImpact.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public IActionResult ExternalLogin(string provider, string returnUrl = null)
+        public IActionResult ExternalLogin(string provider)
         {
-            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Account");
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return new ChallengeResult(provider, properties);
         }
@@ -248,7 +252,7 @@ namespace GlobalImpact.Controllers
         /// <param name="remoteError">Se houver algum problema com o provider.</param>
         /// <returns>Se houver um problema retorna para a página de login; se o user já tiver uma conta vai para o DashBoard, se não vai para o registo.</returns>
         [HttpGet]
-        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
+        public async Task<IActionResult> ExternalLoginCallback(string remoteError = null)
         {
             if (remoteError != null)
             {
@@ -272,7 +276,6 @@ namespace GlobalImpact.Controllers
             else
             {
                 //If the user does not have account, then we will ask the user to create an account.
-                ViewData["ReturnUrl"] = returnUrl;
                 ViewData["ProviderDisplayName"] = info.ProviderDisplayName;
 
                 var model = new ExternalLoginViewModel
@@ -409,7 +412,7 @@ namespace GlobalImpact.Controllers
                 
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code }, protocol: HttpContext.Request.Scheme);
-                await _emailSender.SendEmailAsync(forgotPasswordViewModel.Email, "Reset Password",
+                await _emailService.SendEmailAsync(forgotPasswordViewModel.Email, "Reset Password",
                                        $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
                 return RedirectToAction("ForgotPasswordConfirmation");
             }

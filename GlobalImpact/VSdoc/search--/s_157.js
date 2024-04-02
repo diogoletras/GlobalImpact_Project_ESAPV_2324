@@ -1,1 +1,1 @@
-search_result['157']=["topic_0000000000000036_events--.html","ApplicationDbContext Events",""];
+search_result['157']=["topic_000000000000002E_methods--.html","RecyclingBinsController Methods",""];

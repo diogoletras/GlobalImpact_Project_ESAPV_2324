@@ -1,1 +1,1 @@
-search_result['82']=["topic_000000000000001F_props--.html","HomeController Properties",""];
+search_result['82']=["topic_000000000000001D.html","HomeController Class","Classe de controlo da HomePage."];

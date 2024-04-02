@@ -1,1 +1,1 @@
-search_result['112']=["topic_0000000000000028_overloads--.html","ProductsController.Create Method",""];
+search_result['112']=["topic_0000000000000022_methods--.html","ProductsController Methods",""];

@@ -1,4 +1,4 @@
-﻿@model GlobalImpact.ViewModels.NewFolder.EcoLogViewModel
+﻿@model GlobalImpact.ViewModels.RecyclingBin.EcoLogViewModel
 @{
 	ViewData["Title"] = "Login Ecoponto";
 }
@@ -10,18 +10,35 @@
 
 	<div class="container">
 		<div class="row justify-content-center mt-5">
-			<div class="col-md-6">
-				<h2 class="display-4">Insira o ID do Ecoponto</h2>
-				<form method="get" asp-action="EcoLogin">
-					<div class="form-group">
-						<input asp-for="IdInput" class="form-control" />
-						<span asp-validation-for="IdInput" class="text-danger"></span>
-					</div>
-					<div class="text-center">
-						<button type="submit" class="btn-grad">Submeter</button>
-					</div>
-				</form>
-			</div>
+            <div class="col-md-6">
+                <div class="row">
+                    @foreach (var bin in ViewBag.RecyclingBins)
+                    {
+                        <div class="col-md-3">
+                            <div class="card" style="min-height:350px">
+                                <div class="card-body">
+                                    <p class="card-text">@bin.Description</p>
+                                    <p class="card-text">@bin.Capacity</p>
+                                    <p class="card-text">@bin.CurrentCapacity</p>
+                                    @if (@bin.Status)
+                                    {
+                                        <p class="card-text">Full</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="card-text">Not Full</p>
+                                    }
+
+                                    <form method="get" asp-action="EcoLogin">
+                                        <input type="hidden" asp-for="IdInput" class="form-control" value="@bin.Id" />
+                                        <button type="submit" class="btn-grad">Submeter</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
 		</div>
 	</div>
 </div>

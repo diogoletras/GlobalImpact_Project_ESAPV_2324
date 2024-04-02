@@ -1,0 +1,1 @@
+search_result['768']=["topic_00000000000000BC.html","RecyclingTransaction Class","Classe de modelo das transações."];

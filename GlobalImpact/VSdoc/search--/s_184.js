@@ -1,1 +1,1 @@
-search_result['184']=["topic_0000000000000041_vars--.html","ApplicationDbContext Fields",""];
+search_result['184']=["topic_0000000000000036_overloads--.html","RecyclingBinsController.Edit Method","Função HttpGet para a edição de um ecoponto."];

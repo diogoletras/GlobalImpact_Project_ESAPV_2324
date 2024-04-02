@@ -1,1 +1,1 @@
-search_result['192']=["topic_0000000000000044_vars--.html","IEmailSender Fields",""];
+search_result['192']=["topic_0000000000000039_overloads--.html","RecyclingBinsController.Edit Method","Função HttpPost que retorna a lista de ecoponto depois de um ser editado."];

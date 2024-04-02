@@ -1,79 +1,97 @@
 ﻿@model GlobalImpact.Models.RecyclingBin
 
 @{
-    ViewData["Title"] = "Create";
+	ViewData["Title"] = "Create";
 }
 
 @if (User.Identity.IsAuthenticated)
 {
-    @if (User.IsInRole("admin"))
-    {
+	@if (User.IsInRole("admin"))
+	{
+		<div class="row text-center">
+			<h1 class="text-white">Create Recycling Bin</h1>
+			<div class="col-md-4">
+				<form asp-action="Create">
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+					<div class="form-group-register">
+						<div class="form-group-register-plus">
+							<label asp-for="Type" class="control-label"></label>
+							<select id="mySelect" asp-for="Type" asp-items="@Model.RBTList" class="form-control">
+								<option disabled selected>--Select Role--</option>
+							</select>
+							<span asp-validation-for="Type" class="text-danger"></span>
+						</div>
+						<div class="form-group-register-plus">
+							<label asp-for="Description" class="control-label"></label>
+							<input asp-for="Description" class="form-control" />
+							<span asp-validation-for="Description" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="form-group-register">
+						<div class="form-group-register-plus">
+							<label asp-for="Latitude" class="control-label"></label>
+							<input asp-for="Latitude" class="form-control" />
+							<span asp-validation-for="Latitude" class="text-danger"></span>
+						</div>
+						<div class="form-group-register-plus">
+							<label asp-for="Longitude" class="control-label"></label>
+							<input asp-for="Longitude" class="form-control" />
+							<span asp-validation-for="Longitude" class="text-danger"></span>
+						</div>
+					</div>
 
-        <h1>Create</h1>
+					<div class="form-group-register">
+						<div class="form-group-register-plus">
+							<label asp-for="Capacity" class="control-label"></label>
+							<input asp-for="Capacity" class="form-control" />
+							<span asp-validation-for="Capacity" class="text-danger"></span>
+						</div>
+						<div class="form-group-register-plus">
+							<label asp-for="CurrentCapacity" class="control-label"></label>
+							<input asp-for="CurrentCapacity" class="form-control" />
+							<span asp-validation-for="CurrentCapacity" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="form-group form-check mt-2">
+						<div class="col-12 text-center text-white">
+							<label class="form-check-label">
+								<input class="form-check-input" asp-for="Status" /> @Html.DisplayNameFor(model => model.Status)
+							</label>
+						</div>
+					</div>
+					<div class="row mt-4 text-center">
+						<div class="col-3 text-white">
+							<input id="RecyclingBinTypeId" type="hidden" asp-for="RecyclingBinTypeId" class="form-control" />
+							<input type="submit" value="Create" class="btn-grad" />
+						</div>
+						<div class="form-plus text-center">
+							<a asp-action="Index">Back to List</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 
-        <h4>RecyclingBin</h4>
-        <hr/>
-        <div class="row">
-            <div class="col-md-4">
-                <form asp-action="Create">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="RecyclingBinType" class="col-md-2 text-light"></label>
-                        <div class="col-md-10">
-                            <select asp-for="RecyclingBinType" class="form-control">
-                                <option disabled selected>--Select Role--</option>
 
-                                @foreach (var option1 in Model.RBTList)
-                                {
-                                    <option asp-for="RecyclingBinType" asp-item="@option1">@option1.Type</option>
-                                }
-                            </select>
-                            <span asp-validation-for="RecyclingBinType" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Latitude" class="control-label"></label>
-                        <input asp-for="Latitude" class="form-control"/>
-                        <span asp-validation-for="Latitude" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Longitude" class="control-label"></label>
-                        <input asp-for="Longitude" class="form-control"/>
-                        <span asp-validation-for="Longitude" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Description" class="control-label"></label>
-                        <input asp-for="Description" class="form-control"/>
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Capacity" class="control-label"></label>
-                        <input asp-for="Capacity" class="form-control"/>
-                        <span asp-validation-for="Capacity" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="CurrentCapacity" class="control-label"></label>
-                        <input asp-for="CurrentCapacity" class="form-control"/>
-                        <span asp-validation-for="CurrentCapacity" class="text-danger"></span>
-                    </div>
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="Status"/> @Html.DisplayNameFor(model => model.Status)
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary"/>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div>
-            <a asp-action="Index">Back to List</a>
-        </div>
-    }
+	}
 }
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$('#mySelect').change(function () {
+			var selectedOption = $(this).val();
+			var url = '@Url.Action("UpdateTypeChoise")' + '?selectedOption=' + selectedOption;
+			$.get(url, function (data) {
+				// Handle the response from the controller action
+				$('#RecyclingBinTypeId').val(data.recyclingBinTypeId);
+			});
+		});
+	});
+</script>
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
 }

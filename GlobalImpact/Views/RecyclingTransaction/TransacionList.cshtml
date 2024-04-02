@@ -1,0 +1,54 @@
+﻿@model IEnumerable<GlobalImpact.Models.RecyclingTransaction>
+
+@{
+	ViewData["Title"] = "TransacionList";
+}
+
+<div class="text-center>" style="text-align: -webkit-center;">
+	<h1 class="display-4">TransacionList</h1>
+
+
+	<table class="table table-striped border">
+		<thead>
+        <tr class="table-secondary">
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecyclingBin.RecyclingBinType.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Points)
+            </th>
+        </tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RecyclingBin.RecyclingBinType.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Weight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Points)
+                    </td>
+                </tr>
+			}
+		</tbody>
+	</table>
+</div>

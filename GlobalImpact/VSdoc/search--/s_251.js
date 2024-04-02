@@ -1,1 +1,1 @@
-search_result['251']=["topic_0000000000000057.html","AppUser.NIF Property",""];
+search_result['251']=["topic_0000000000000047.html","RecyclingTransactionController.CancelTrans Method","Funçao HTTPPost de cancelamento do pocesso de reciclagem"];

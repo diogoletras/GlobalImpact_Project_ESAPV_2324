@@ -1,0 +1,1 @@
+search_result['927']=["topic_00000000000000F2.html","CreateRecyclingBinViewModel Class","Classe de visualição da página de criar ecoponto."];

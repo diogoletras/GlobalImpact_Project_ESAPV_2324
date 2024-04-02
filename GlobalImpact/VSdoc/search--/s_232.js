@@ -1,1 +1,1 @@
-search_result['232']=["topic_000000000000004E.html","StationeryItems.Items Property",""];
+search_result['232']=["topic_0000000000000043.html","RecyclingTransactionController.TransacionList Method","Funçao HTTPpost que recebe o id do utilizador e retorna uma view com as transaçoes de reciclagem do respetivo utilizador"];

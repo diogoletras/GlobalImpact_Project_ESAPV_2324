@@ -1,1 +1,1 @@
-search_result['294']=["topic_0000000000000063_attached_props--.html","Product Attached Properties",""];
+search_result['294']=["topic_000000000000004F.html","StoreController.Order Method","Funçao que retorna uma view com a lista atualizada de produtos, depois de ordenar pela forma pretendida."];

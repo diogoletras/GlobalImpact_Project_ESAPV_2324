@@ -116,5 +116,8 @@
       <add key="VBdocman_fileNamingConvention"><![CDATA[1]]></add>
     </SettingsGroup>
     <add key="VBdocman_GlobalImpact"><![CDATA[default]]></add>
+    <add key="VBdocman_GlobalImpactAutomationTest"><![CDATA[default]]></add>
+    <add key="VBdocman_GlobalImpactIntegrationTest"><![CDATA[default]]></add>
+    <add key="VBdocman_GlobalImpactTest"><![CDATA[default]]></add>
   </appSettings>
 </configuration>

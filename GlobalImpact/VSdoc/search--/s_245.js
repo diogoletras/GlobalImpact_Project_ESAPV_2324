@@ -1,1 +1,1 @@
-search_result['245']=["topic_0000000000000055_attached_props--.html","Cart Attached Properties",""];
+search_result['245']=["topic_0000000000000046.html","RecyclingTransactionController.FinishRecycling Method","Função HTTPPost que finaliza o processo de reciclagem e guarda na base de dados"];

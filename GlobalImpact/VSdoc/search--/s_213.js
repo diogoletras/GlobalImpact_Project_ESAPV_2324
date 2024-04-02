@@ -1,1 +1,1 @@
-search_result['213']=["topic_000000000000004A.html","ApplicationDbContext.CreateRecyclingBinViewModel Property",""];
+search_result['213']=["topic_000000000000003F.html","RecyclingBinsController.FullBins Method",""];

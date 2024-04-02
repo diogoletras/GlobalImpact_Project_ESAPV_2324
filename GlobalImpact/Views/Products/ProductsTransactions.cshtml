@@ -1,0 +1,54 @@
+﻿@model IEnumerable<GlobalImpact.Models.ProductTransactions>
+
+<div class="text-center>" style="text-align: -webkit-center;">
+    <h1 class="display-4">TransacionList</h1>
+
+
+    <table class="table table-striped border">
+        <thead>
+            <tr class="table-secondary">
+                <th>
+                    @Html.DisplayNameFor(model => model.TransactionId)
+                </th>
+                <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Points)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransactionId)
+                    </td>
+
+                <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Points)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

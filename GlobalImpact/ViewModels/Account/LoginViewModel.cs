@@ -2,6 +2,9 @@
 
 namespace GlobalImpact.ViewModels.Account
 {
+    /// <summary>
+    /// Classe View de ecrã de login.
+    /// </summary>
     public class LoginViewModel
     {
 

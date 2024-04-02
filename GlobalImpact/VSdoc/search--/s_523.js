@@ -1,1 +1,1 @@
-search_result['523']=["topic_00000000000000B8_vars--.html","CreateRecyclingBinViewModel Fields",""];
+search_result['523']=["topic_0000000000000082_methods--.html","RecyclingBin Methods",""];

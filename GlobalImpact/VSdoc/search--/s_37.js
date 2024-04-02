@@ -1,1 +1,1 @@
-search_result['37']=["topic_0000000000000012_overloads--.html","AccountController.ResetPassword Method","Função Post para a trocar de PassWord."];
+search_result['37']=["topic_0000000000000012.html","AccountController.ResetPassword (String, String) Method","Função Get para retornar a página de Reset PassWord."];

@@ -1,1 +1,1 @@
-search_result['68']=["topic_000000000000001C.html","AdminController.RecyclingBinList Method",""];
+search_result['68']=["topic_000000000000001B.html","AdminController.Edit (AppUser) Method","Função Post para o \"Edit User\"."];

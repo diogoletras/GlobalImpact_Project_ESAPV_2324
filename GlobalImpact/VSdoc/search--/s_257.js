@@ -1,1 +1,1 @@
-search_result['257']=["topic_0000000000000059_props--.html","IEmailSender Properties",""];
+search_result['257']=["topic_0000000000000048.html","RecyclingTransactionController.CancelConfirm Method","Função HTTPPost que confirma o cancelarmento da transação de reciclagem"];

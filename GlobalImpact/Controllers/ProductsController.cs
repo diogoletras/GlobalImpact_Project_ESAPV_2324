@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using GlobalImpact.Data;
 using GlobalImpact.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace GlobalImpact.Controllers
 {
@@ -27,7 +29,7 @@ namespace GlobalImpact.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         // GET: Products
         /// <summary>
@@ -36,10 +38,84 @@ namespace GlobalImpact.Controllers
         /// <returns>retorna a página da lista de produtos.</returns>
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.ToListAsync());
+            var products = await _context.Products.ToListAsync();
+
+
+			List<SelectListItem> category = new List<SelectListItem>();
+            category.Add(new SelectListItem { Text = "", Value = "" });
+            var productsCat = await _context.ProductsCategory.ToListAsync();
+            foreach(var cat in productsCat)
+            {
+                category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+			}
+            foreach(var prod in products)
+            {
+                foreach(var cat in productsCat)
+                {
+                    if (prod.ProductCategoryId.Equals(cat.ProductCategoryId.ToString()))
+                    {
+                        prod.Category = new ProductCategory
+                        {
+                            Category = cat.Category
+                        };
+                    }
+                }
+            }
+			ViewBag.Categorias = category;
+            return View(products);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public async Task<IActionResult> Filtra(string nome , float maxp, float minp, string categoria)
+        {
+            var products = await _context.Products.ToListAsync();
+
+            if (nome!= null)
+            {
+                products = products.Where(p => p.Name.Contains(nome, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+            if (maxp>0 && maxp!=null)
+            {
+                products = products.Where(p => p.Points <= maxp).ToList();
+            }
+            if (minp>0 && minp!=null)
+            {
+                products = products.Where(p => p.Points >= minp).ToList();
+            }
+            if (categoria != null)
+            {
+                products = products.Where(p => p.ProductCategoryId.Equals(categoria)).ToList();
+            }
+
+			List<SelectListItem> category = new List<SelectListItem>();
+			category.Add(new SelectListItem { Text = "", Value = "" });
+			var productsCat = await _context.ProductsCategory.ToListAsync();
+			foreach (var cat in productsCat)
+			{
+				category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+			}
+
+			foreach (var prod in products)
+			{
+				foreach (var cat in productsCat)
+				{
+					if (prod.ProductCategoryId.Equals(cat.ProductCategoryId.ToString()))
+					{
+						prod.Category = new ProductCategory
+						{
+							Category = cat.Category
+						};
+					}
+				}
+			}
+
+			ViewBag.Categorias = category;
+
+			return View("Index", products);
+        }
+
+        //[Authorize(Roles = "admin")]
         [HttpGet]
         // GET: Products/Details/5
         /// <summary>
@@ -56,15 +132,18 @@ namespace GlobalImpact.Controllers
 
             var product = await _context.Products
                 .FirstOrDefaultAsync(m => m.Id == id);
+            var productsCat =
+                await _context.ProductsCategory.FirstOrDefaultAsync(c =>
+                    c.ProductCategoryId == new Guid(product.ProductCategoryId));
             if (product == null)
             {
                 return NotFound();
             }
-
+            product.Category = productsCat;
             return View(product);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         // GET: Products/Create
         /// <summary>
@@ -72,8 +151,15 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <returns>retorna a criação do produto.</returns>
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            List<SelectListItem> category = new List<SelectListItem>();
+            var productsCat = await _context.ProductsCategory.ToListAsync();
+            foreach (var cat in productsCat)
+            {
+                category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+            }
+            ViewBag.Categorias = category;
             return View();
         }
 
@@ -85,22 +171,49 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <param name="product">parametro para guardar os dados acerca do produto.</param>
         /// <returns></returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,Tax,Stock,Category")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,Tax,Stock,ProductCategoryId,Image")] Product product)
         {
-            if (ModelState.IsValid)
+            if (product.Image == null)
+                return View(product);
+
+            IWebHostEnvironment webHostEnvironment = Request.HttpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
+
+            string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "img/products");
+            string ImagePath = Guid.NewGuid().ToString() + "_" + product.Image.FileName;
+            string filePath = Path.Combine(uploadsFolder, ImagePath);
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            {
+                await product.Image.CopyToAsync(fs);
+            }
+
+            ModelState.Remove("Category");
+            ModelState.Remove("ImageUrl");
+            if (ModelState.IsValid && product != null)
             {
                 product.Id = Guid.NewGuid();
+                product.ImageUrl = ImagePath;
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            else
+            {
+                List<SelectListItem> category = new List<SelectListItem>();
+                var productsCat = await _context.ProductsCategory.ToListAsync();
+                foreach (var cat in productsCat)
+                {
+                    category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+                }
+                ViewBag.Categorias = category;
+                return View(product);
+            }
+           
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         // GET: Products/Edit/5
         /// <summary>
@@ -119,6 +232,13 @@ namespace GlobalImpact.Controllers
             {
                 return NotFound();
             }
+            List<SelectListItem> category = new List<SelectListItem>();
+            var productsCat = await _context.ProductsCategory.ToListAsync();
+            foreach (var cat in productsCat)
+            {
+                category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+            }
+            ViewBag.Categorias = category;
             return View(product);
         }
 
@@ -131,20 +251,44 @@ namespace GlobalImpact.Controllers
         /// <param name="id">parametro que guarda o id do produto.</param>
         /// <param name="product">paramentro que guarda os valores do produto.</param>
         /// <returns>retorna a página da lista de produtos quando o valor ja tiver sido editado</returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description,Price,Tax,Stock,Category")] Product product)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description,Price,Tax,Stock,ProductCategoryId,Image")] Product product)
         {
             if (id != product.Id)
             {
                 return NotFound();
             }
 
+            if (product.Image == null)
+            {
+                List<SelectListItem> category = new List<SelectListItem>();
+                var productsCat = await _context.ProductsCategory.ToListAsync();
+                foreach (var cat in productsCat)
+                {
+                    category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+                }
+                ViewBag.Categorias = category;
+                return View(product);
+            }
+
+            IWebHostEnvironment webHostEnvironment = Request.HttpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
+
+            string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "img/products");
+            string ImagePath = Guid.NewGuid().ToString() + "_" + product.Image.FileName;
+            string filePath = Path.Combine(uploadsFolder, ImagePath);
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            {
+                await product.Image.CopyToAsync(fs);
+            }
+            ModelState.Remove("Category");
+            ModelState.Remove("ImageUrl");
             if (ModelState.IsValid)
             {
                 try
                 {
+                    product.ImageUrl = ImagePath;
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
@@ -161,6 +305,17 @@ namespace GlobalImpact.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            else
+            {
+                List<SelectListItem> category = new List<SelectListItem>();
+                var productsCat = await _context.ProductsCategory.ToListAsync();
+                foreach (var cat in productsCat)
+                {
+                    category.Add(new SelectListItem { Text = cat.Category.ToString(), Value = cat.ProductCategoryId.ToString() });
+                }
+                ViewBag.Categorias = category;
+                return View(product);
+            }
             return View(product);
         }
 
@@ -170,7 +325,7 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <param name="id">parametro que guarda o id do produto a ser eliminado.</param>
         /// <returns>retorna a página de confirmação de delete</returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> Delete(Guid? id)
         {
@@ -195,7 +350,7 @@ namespace GlobalImpact.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>retorna a página da lista de produtos</returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -204,10 +359,45 @@ namespace GlobalImpact.Controllers
             if (product != null)
             {
                 _context.Products.Remove(product);
+                try
+                {
+                    IWebHostEnvironment webHostEnvironment = Request.HttpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
+
+                    string folder = Path.Combine(webHostEnvironment.WebRootPath, "img\\products");
+                    FileInfo file = new FileInfo(folder+"\\"+product.ImageUrl);
+                    // Check if file exists with its full path
+                    if (file.Exists)
+                    {
+                        // If file found, delete it
+                        file.Delete();
+                    }
+                }
+                catch (IOException ioExp)
+                {
+                    Console.WriteLine(ioExp.Message);
+                }
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> ProductsTransactions(string userId)
+        {
+            var userTras = await _context.ProductTransactions.Where(p => p.UserId == new Guid(userId)).ToArrayAsync();
+            var products = await _context.Products.ToArrayAsync();
+            foreach(var trans in userTras)
+            {
+                foreach(var prod in products)
+                {
+                    if (prod.Id.Equals(trans.ProductId))
+                    {
+                        trans.ProductName = prod.Name;
+                    }
+                }
+            }
+
+            return View(userTras);
         }
 
         private bool ProductExists(Guid id)

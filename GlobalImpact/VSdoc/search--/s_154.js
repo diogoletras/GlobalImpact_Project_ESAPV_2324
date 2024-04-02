@@ -1,1 +1,1 @@
-search_result['154']=["topic_0000000000000035_vars--.html","ApplicationDbContext Fields",""];
+search_result['154']=["topic_000000000000002E.html","RecyclingBinsController Class","Contralador dos Ecopontos."];

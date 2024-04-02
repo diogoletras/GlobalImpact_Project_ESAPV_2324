@@ -1,1 +1,1 @@
-var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_00000000000000CA.html"],['221',"GlobalImpact.ViewModels.NewFolder Namespace","topic_00000000000000B7.html"],['236',"ReciclarViewModel Class","topic_00000000000000C4.html"],['237',"Properties","topic_00000000000000C4_props--.html"],['239',"RecItems Property","topic_00000000000000C8.html"]];
+var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_000000000000010D.html"],['231',"GlobalImpact.Utils Namespace","topic_00000000000000C7.html"],['232',"CartSingleton Class","topic_00000000000000C8.html"]];

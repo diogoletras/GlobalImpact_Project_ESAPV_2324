@@ -1,1 +1,1 @@
-search_result['282']=["topic_000000000000005D_vars--.html","Product Fields",""];
+search_result['282']=["topic_000000000000004D.html","StoreController.Add Method","Funçao HTTPGet que retorna uma view com a lista atualizada de produtos, depois de adicionar um."];

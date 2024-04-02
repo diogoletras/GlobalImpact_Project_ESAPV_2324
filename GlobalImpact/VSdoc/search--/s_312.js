@@ -1,1 +1,1 @@
-search_result['312']=["topic_000000000000006A_events--.html","Cart Events",""];
+search_result['312']=["topic_0000000000000052.html","StoreController.UpdateQuantity Method","Função HTTPGet que retorna uma view com a lista atualizada de produtos, depois desses serem eliminados."];

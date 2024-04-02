@@ -1,1 +1,1 @@
-search_result['41']=["topic_0000000000000013_methods--.html","AdminController Methods",""];
+search_result['41']=["topic_0000000000000013_events--.html","AdminController Events",""];

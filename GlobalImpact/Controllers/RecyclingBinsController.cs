@@ -9,6 +9,7 @@ using GlobalImpact.Data;
 using GlobalImpact.Enumerates;
 using GlobalImpact.Models;
 using GlobalImpact.ViewModels.NewFolder;
+using GlobalImpact.ViewModels.RecyclingBin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
@@ -40,6 +41,9 @@ namespace GlobalImpact.Controllers
 		[HttpGet]
 		public async Task<IActionResult> EcoLog()
         {
+            var recyclingBins = await _context.RecyclingBins.ToListAsync();
+            ViewBag.RecyclingBins = recyclingBins;
+
 			return View();
         }
 
@@ -59,24 +63,46 @@ namespace GlobalImpact.Controllers
                 // Verifica se o ecoponto foi encontrado
                 if (ecoponto != null)
                 {
-                    if (ecoponto.Status || ecoponto.Capacity <= ecoponto.CurrentCapacity)
-                    {
-                        ecoponto.Status = false;
-                        _context.RecyclingBins.Update(ecoponto);
-                        _context.SaveChanges();
-                        ModelState.AddModelError("IdInput", "Recycling bin is already in use");
-                        return RedirectToAction("EcoLogin", "RecyclingBins", new {model = model});
-                        
+	                var typeId = _context.RecyclingBins.FirstOrDefault(e => e.Id == id).RecyclingBinTypeId;
+	                var binType = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(typeId));
+					if (!ecoponto.Status)
+					{
+	                    ecoponto.Type = binType.Type;
+	                    _context.RecyclingBins.Update(ecoponto);
+	                    _context.SaveChanges();
+						if (ecoponto.Status && ecoponto.Capacity <= ecoponto.CurrentCapacity)
+	                    {
+	                        _context.RecyclingBins.Update(ecoponto);
+	                        _context.SaveChanges();
+	                        ModelState.AddModelError("IdInput", "Recycling bin is Full");
+	                        return RedirectToAction("EcoLogin", "RecyclingBins",model);
+	                        
+	                    }
+	                    else
+	                    {
+	                        if(ecoponto.Capacity <= ecoponto.CurrentCapacity)
+	                        {
+	                            _context.RecyclingBins.Update(ecoponto);
+	                            _context.SaveChanges();
+	                            return View(ecoponto);
+	                        }
+	                        else
+	                        {
+	                            return View(ecoponto);
+	                        }
+	                        
+	                    }
                     }
                     else
                     {
-                        ecoponto.Status = true;
-                        _context.RecyclingBins.Update(ecoponto);
-                        _context.SaveChanges();
-                        return View(ecoponto);
-                    }
-                        
-                }
+	                    ecoponto.Type = binType.Type;
+	                    ecoponto.Status = true;
+	                    _context.RecyclingBins.Update(ecoponto);
+	                    _context.SaveChanges();
+	                    ModelState.AddModelError("IdInput", "Recycling is full");
+						return RedirectToAction("EcoLog");
+					}
+				}
                 else
                 {
                     // Se o ecoponto não foi encontrado, você pode exibir uma mensagem de erro ou redirecionar para uma página de erro
@@ -100,18 +126,20 @@ namespace GlobalImpact.Controllers
         {
             if (uniqueCode != null && binId != null )
             {
-                var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UniqueCode == uniqueCode);
+	            
+                
                 var ecoponto = await _context.RecyclingBins.FirstOrDefaultAsync(e => e.Id == binId);
                 var recyclingList = _context.RecyclingBins.ToList();
                 var recyclingBinTypeList = _context.RecyclingBinType.ToList();
 
-                if (user != null)
+                var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UniqueCode == uniqueCode);
+				if (user != null)
                 {
                     foreach (var recyclingBin in recyclingList)
                     {
                         if (recyclingBin.Id.Equals(binId))
                         {
-                            var ecoType = recyclingBinTypeList.FirstOrDefault(r => r.RecyclingBinTypeId == recyclingBin.RecyclingBinType.RecyclingBinTypeId);
+                            var ecoType = recyclingBinTypeList.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(recyclingBin.RecyclingBinTypeId));
                             return RedirectToAction("Reciclar", "RecyclingTransaction", new { binid = binId.ToString(), type = ecoType.Type, userName = user.UserName });
                         }
                     }
@@ -134,7 +162,21 @@ namespace GlobalImpact.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.RecyclingBins.ToListAsync());
+            FilterViewModel model = new FilterViewModel();
+            model.RecyclingBins = await _context.RecyclingBins.ToListAsync();
+
+
+            foreach (var recyclingBin in model.RecyclingBins)
+            {
+                recyclingBin.Type = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(recyclingBin.RecyclingBinTypeId)).Type;
+            }
+
+            model.Capacity = null;
+            model.CurrentCapacity = null;
+            model.Status = "none";
+            model.Type = "none";
+
+            return View(model);
         }
 
         /// <summary>
@@ -169,18 +211,69 @@ namespace GlobalImpact.Controllers
         // GET: RecyclingBins/Create
         [Authorize(Roles = "admin")]
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(string? selectedOption)
         {
-            var res = new RecyclingBin
+            RecyclingBin res = null;
+            if (selectedOption != null)
             {
-                RBTList = new List<RecyclingBinType>
+                var type = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(selectedOption.ToLower()));
+                res = new RecyclingBin
                 {
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.paper.ToString() },
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.plastic.ToString() },
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.glass.ToString() },
-                }
-            };
+                    RBTList = new List<SelectListItem>(
+                        _context.RecyclingBinType.Select(r => new SelectListItem
+                        {
+                            Value = r.RecyclingBinTypeId.ToString(),
+                            Text = r.Type
+                        })
+                    ),
+                    RecyclingBinType = type,
+                    RecyclingBinTypeId = type.RecyclingBinTypeId.ToString()
+                };
+            }
+            else
+            {
+                res = new RecyclingBin
+                {
+                    RBTList = new List<SelectListItem>(
+                        _context.RecyclingBinType.Select(r => new SelectListItem
+                        {
+                            Value = r.RecyclingBinTypeId.ToString(),
+                            Text = r.Type
+                        })
+                    )
+                };
+                RecyclingBinType temp = new RecyclingBinType { RecyclingBinTypeId = new Guid(), Type = "None" };
+
+                res.RecyclingBinTypeId = temp.RecyclingBinTypeId.ToString();
+                res.RecyclingBinType = temp;
+            }
+
             return View(res);
+        }
+
+        /// <summary>
+        /// Funçao que devolve o id do tipo de ecoponto
+        /// </summary>
+        /// <param name="selectedOption">opçao escolhida</param>
+        /// <returns></returns>
+        public RecyclingBin UpdateTypeChoise(string? selectedOption)
+        {
+            RecyclingBin res = null;
+            if (selectedOption != null)
+            {
+                var type = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(selectedOption.ToLower()));
+                res = new RecyclingBin
+                {
+                    RecyclingBinType = type,
+                    RecyclingBinTypeId = type.RecyclingBinTypeId.ToString()
+                };
+            }
+            else
+            {
+                return new RecyclingBin();
+            }
+
+            return res;
         }
 
         /// <summary>
@@ -194,8 +287,9 @@ namespace GlobalImpact.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,RecyclingBinType,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status")] RecyclingBin recyclingBin)
+        public async Task<IActionResult> Create([Bind("Id,Type,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status,RecyclingBinTypeId")] RecyclingBin recyclingBin)
         {
+            ModelState.Remove("RecyclingBinType");
             if (ModelState.IsValid)
             {
                 recyclingBin.Id = Guid.NewGuid();
@@ -205,12 +299,13 @@ namespace GlobalImpact.Controllers
             }
             var res = new RecyclingBin
             {
-                RBTList = new List<RecyclingBinType>
-                {
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.paper.ToString() },
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.plastic.ToString() },
-                    new RecyclingBinType { RecyclingBinTypeId = Guid.NewGuid(), Type = BinType.glass.ToString() }
-                }
+                RBTList = new List<SelectListItem>(
+                    _context.RecyclingBinType.Select(r => new SelectListItem
+                    {
+                        Value = r.RecyclingBinTypeId.ToString(),
+                        Text = r.Type
+                    })
+                  )
             };
 
             recyclingBin.RBTList = res.RBTList;
@@ -237,7 +332,49 @@ namespace GlobalImpact.Controllers
             {
                 return NotFound();
             }
-            return View(recyclingBin);
+            var typeId = _context.RecyclingBins.FirstOrDefault(e => e.Id == id).RecyclingBinTypeId;
+            var binType = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(typeId));
+            recyclingBin.RecyclingBinType = binType;
+            recyclingBin.Type = binType.Type;
+            recyclingBin.RecyclingBinTypeId = typeId;
+
+            RecyclingBin res = null;
+
+
+			if (recyclingBin != null)
+            {
+	            res = new RecyclingBin
+	            {
+		            RBTList = new List<SelectListItem>(
+			            _context.RecyclingBinType.Select(r => new SelectListItem
+			            {
+				            Value = r.RecyclingBinTypeId.ToString(),
+				            Text = r.Type
+			            })
+		            ),
+		            RecyclingBinType = binType,
+		            RecyclingBinTypeId = binType.RecyclingBinTypeId.ToString()
+	            };
+            }
+            else
+            {
+	            res = new RecyclingBin
+	            {
+		            RBTList = new List<SelectListItem>(
+			            _context.RecyclingBinType.Select(r => new SelectListItem
+			            {
+				            Value = r.RecyclingBinTypeId.ToString(),
+				            Text = r.Type
+			            })
+		            )
+	            };
+
+	            
+            }
+
+            recyclingBin.RBTList = res.RBTList;
+
+			return View(recyclingBin);
         }
 
         /// <summary>
@@ -252,13 +389,14 @@ namespace GlobalImpact.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Type,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status")] RecyclingBin recyclingBin)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Type,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status, RecyclingBinTypeId")] RecyclingBin recyclingBin)
         {
             if (id != recyclingBin.Id)
             {
                 return NotFound();
             }
 
+            ModelState.Remove("RecyclingBinType");
             if (ModelState.IsValid)
             {
                 try
@@ -315,18 +453,179 @@ namespace GlobalImpact.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(Guid? id)
         {
-            var recyclingBin = await _context.RecyclingBins.FindAsync(id);
-            if (recyclingBin != null)
+
+            if (id == null)
             {
-                _context.RecyclingBins.Remove(recyclingBin);
+                return NotFound();
             }
 
+            var recyclingBin = await _context.RecyclingBins.FindAsync(id);
+            if (recyclingBin == null)
+            {
+                return NotFound();
+            }
+            _context.RecyclingBins.Remove(recyclingBin);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
+
+        /// <summary>
+        /// Funçao HTTPGet que devolve uma view com os ecopontos filtrados 
+        /// </summary>
+        /// <param name="model">modelo utilizado no formulario</param>
+        /// <returns></returns>
+        [Authorize(Roles = "admin")]
+        [HttpGet]
+        public async Task<IActionResult> Filter(FilterViewModel model)
+        {
+            var query = _context.RecyclingBins.AsQueryable();
+
+            if (model.Capacity != null)
+            {
+                query = query.Where(r => r.Capacity == model.Capacity);
+            }
+
+            if (model.CurrentCapacity != null)
+            {
+                query = query.Where(r => r.CurrentCapacity == model.CurrentCapacity);
+            }
+
+            if (!model.Status.Equals("none"))
+            {
+                if(model.Status.Equals("available"))
+                    query = query.Where(r => r.Status == true);
+                else
+                    query = query.Where(r => r.Status == false);
+            }
+
+            if (!model.Type.Equals("none") || model.Type != null)
+            {
+                var type = _context.RecyclingBinType.FirstOrDefault(r => r.Type == model.Type);
+                if (type != null)
+                {
+                    query = query.Where(r => r.RecyclingBinTypeId == type.RecyclingBinTypeId.ToString());
+                }
+            }
+
+            model.RecyclingBins = await query.ToListAsync();
+            foreach (var recyclingBin in model.RecyclingBins)
+            {
+                recyclingBin.Type = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(recyclingBin.RecyclingBinTypeId)).Type;
+            }
+            return View("Index", model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GoogleMaps()
+        {
+            List<RecyclingBin> recyclingBins = _context.RecyclingBins.ToList();
+
+            foreach (var recyclingBin in recyclingBins)
+            {
+                RecyclingBinType recyclingBinType = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(recyclingBin.RecyclingBinTypeId));
+                recyclingBin.Type = recyclingBinType.Type;
+            }
+
+            var recyclingBinTypes = await _context.RecyclingBinType.ToListAsync();
+
+            List<SelectListItem> types = new List<SelectListItem>();
+
+            types.Add(new SelectListItem { Value = "", Text = "" });
+            foreach (var type in recyclingBinTypes)
+            {
+                types.Add(new SelectListItem { Value = type.RecyclingBinTypeId.ToString(), Text = type.Type });
+            }
+
+            ViewBag.Types = types;
+
+            List<SelectListItem> statuss = new List<SelectListItem>();
+
+            statuss.Add(new SelectListItem { Value = null, Text = "" });
+            statuss.Add(new SelectListItem { Value = true.ToString(), Text = "Disponivel" });
+            statuss.Add(new SelectListItem { Value = false.ToString(), Text = "Indisponivel" });
+
+            ViewBag.Status = statuss;
+
+            return View(recyclingBins);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FiltrarMapa(string status, double tolcap, double curcap, string type)
+        {
+            var recyclingBins = await _context.RecyclingBins.ToListAsync();
+
+            if (status == null && tolcap == 0 && curcap == 0 && type == null)
+            {
+                return RedirectToAction("GoogleMaps");
+            }
+
+            foreach (var recyclingBin in recyclingBins)
+            {
+                RecyclingBinType recyclingBinType = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(recyclingBin.RecyclingBinTypeId));
+                recyclingBin.Type = recyclingBinType.Type;
+            }
+
+            if (status != null)
+            {
+                if (status.ToLower().Equals("true"))
+                    recyclingBins = recyclingBins.Where(r => r.Status == true).ToList();
+                else
+                    recyclingBins = recyclingBins.Where(r => r.Status == false).ToList();
+            }
+            
+            if (tolcap != null && tolcap > 0)
+            {
+                recyclingBins = recyclingBins.Where(r => r.Capacity <= tolcap).ToList();
+            }
+            if (curcap != null && curcap > 0)
+            {
+                recyclingBins = recyclingBins.Where(r => r.CurrentCapacity <= curcap).ToList();
+            }
+            if (type != null)
+            {
+                recyclingBins = recyclingBins.Where(r => r.RecyclingBinTypeId.Equals(type)).ToList();
+            }
+
+            var recyclingBinTypes = await _context.RecyclingBinType.ToListAsync();
+
+            List<SelectListItem> types = new List<SelectListItem>();
+
+            types.Add(new SelectListItem { Value = "", Text = "" });
+            foreach (var t in recyclingBinTypes)
+            {
+                types.Add(new SelectListItem { Value = t.RecyclingBinTypeId.ToString(), Text = t.Type });
+            }
+
+            ViewBag.Types = types;
+
+            List<SelectListItem> statuss = new List<SelectListItem>();
+
+            statuss.Add(new SelectListItem { Value = null, Text = "" });
+            statuss.Add(new SelectListItem { Value = true.ToString(), Text = "Disponivel" });
+            statuss.Add(new SelectListItem { Value = false.ToString(), Text = "Indisponivel" });
+
+            ViewBag.Status = statuss;
+
+
+            return View("GoogleMaps", recyclingBins);
+        }
+
+        public async Task<IActionResult> FullBins()
+        {
+            var fullBins = await _context.RecyclingBins.Where(b => b.Status == true).ToArrayAsync();
+            return View(fullBins);
+        }
+
+
+
+        /// <summary>
+        /// Funçao que recebe um id e verifica se o ecoponto exite
+        /// </summary>
+        /// <param name="id">id a veririfcar</param>
+        /// <returns></returns>
         private bool recyclingBinExists(Guid id)
         {
             return _context.RecyclingBins.Any(e => e.Id == id);

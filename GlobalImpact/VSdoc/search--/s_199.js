@@ -1,1 +1,1 @@
-search_result['199']=["topic_0000000000000046.html","ApplicationDbContext.RecyclingBins Property",""];
+search_result['199']=["topic_000000000000003B.html","RecyclingBinsController.DeleteConfirmed Method","Função HttpPost que retorna a página de confirmação de delete."];

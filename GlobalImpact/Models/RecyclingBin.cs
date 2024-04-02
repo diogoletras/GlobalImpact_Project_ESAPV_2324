@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 
 namespace GlobalImpact.Models
 {
+    /// <summary>
+    /// Classe modelo RecyclingBin.
+    /// </summary>
     public class RecyclingBin
     {
         [PersonalData]
@@ -14,34 +17,36 @@ namespace GlobalImpact.Models
         public Guid Id { get; set; }
 
         [ForeignKey("RecyclingBinTypeId")]
-        public virtual RecyclingBinType RecyclingBinType { get; set; }
-
+        public string RecyclingBinTypeId { get; set; }
         [NotMapped]
-        public int RecyclingBTId { get; set; }
-
+        public RecyclingBinType RecyclingBinType { get; set; }
         [Required]
         public double Latitude { get; set; }
         [Required]
         public double Longitude { get; set; }
 
-        [Display(Name = "Tipo Ecoponto")]
+        [Display(Name = "Description")]
         [Required]
         public string Description { get; set; }
 
-        [Display(Name = "Capacidade Total")]
+        [Display(Name = "Total Capacity")]
         [Required]
         public double Capacity { get; set; }
 
-        [Display(Name = "Capacidade Atual")]
+        [Display(Name = "Current Capacity")]
         [Required]
         public double CurrentCapacity { get; set; }
 
-        [Display(Name = "Disponivel ?")]
+        [Display(Name = "Available")]
         [Required]
         public bool Status { get; set; }
 
         [NotMapped]
-        public List<RecyclingBinType>? RBTList { get; set; }
+        [Display(Name = "Recycling Bin Type")]
+        public string Type { get; set; }
+
+        [NotMapped]
+        public IEnumerable<SelectListItem>? RBTList { get; set; }
 
     }
 }

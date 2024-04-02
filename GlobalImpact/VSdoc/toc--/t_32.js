@@ -1,1 +1,1 @@
-c['32']=[['33',"Create(string) Method","topic_000000000000001A.html",0],['34',"Create(RegisterViewModel, string) Method","topic_000000000000001B.html",0]];
+c['32']=[['33',"AdminController Constructor","topic_0000000000000016.html",0],['34',"Methods","topic_0000000000000015_methods--.html",1]];

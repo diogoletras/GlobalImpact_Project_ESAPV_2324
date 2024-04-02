@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="GENERATOR" content="VSdocman - documentation generator; https://www.helixoft.com" />
 	<link rel="icon" href="favicon.ico">
-	<title>RecyclingBinsController.Create (RecyclingBin) Method</title>
+	<title>RecyclingBinsController.UpdateTypeChoise Method</title>
 
 	<link rel="stylesheet" type="text/css" href="msdn2019/toc.css" />
 	<script src="msdn2019/toc.js"></script>
@@ -74,7 +74,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
   </div>
 
 <div id="mainBody">
-		<h1 class="title">RecyclingBinsController.Create (RecyclingBin) Method</h1>
+		<h1 class="title">RecyclingBinsController.UpdateTypeChoise Method</h1>
         
 		<div class="metadata">
         Namespace:
@@ -89,7 +89,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
        
        
-        <summary-info>Função HttpPost que retorna a página do ecoponto criado.</summary-info>
+        <summary-info>Funçao que devolve o id do tipo de ecoponto</summary-info>
 
 
 
@@ -139,7 +139,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeVB">
-					<pre xml:space="preserve" class="brush: vb">&lt;Authorize(Roles = &quot;admin&quot;)&gt; _&nbsp;<br />&lt;HttpPost()&gt; _&nbsp;<br />&lt;ValidateAntiForgeryToken()&gt; _&nbsp;<br />Public Function Create( _&nbsp;<br />   &lt;Bind(&quot;Id,RecyclingBinType,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status&quot;)&gt; _&nbsp;<br />   ByVal <i>recyclingBin</i> As <a target="_top" href="topic_000000000000007F.html" onclick="this.target='';return true;">RecyclingBin</a> _&nbsp;<br />) As <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1">Task</a>(Of <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a>)</pre>			
+					<pre xml:space="preserve" class="brush: vb">Public Function UpdateTypeChoise( _&nbsp;<br />   ByVal <i>selectedOption</i> As <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a> _&nbsp;<br />) As <a target="_top" href="topic_00000000000000AD.html" onclick="this.target='';return true;">RecyclingBin</a></pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -178,7 +178,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeCsharp">
-					<pre xml:space="preserve" class="brush: csharp">[Authorize(Roles = &quot;admin&quot;)]&nbsp;<br />[HttpPost()]&nbsp;<br />[ValidateAntiForgeryToken()]&nbsp;<br />public <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a>&gt; Create(&nbsp;<br />   [Bind(&quot;Id,RecyclingBinType,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status&quot;)]&nbsp;<br />   <a target="_top" href="topic_000000000000007F.html" onclick="this.target='';return true;">RecyclingBin</a> <i>recyclingBin</i>&nbsp;<br />)</pre>			
+					<pre xml:space="preserve" class="brush: csharp">public <a target="_top" href="topic_00000000000000AD.html" onclick="this.target='';return true;">RecyclingBin</a> UpdateTypeChoise(&nbsp;<br />   <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">string</a> <i>selectedOption</i>&nbsp;<br />)</pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -218,7 +218,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeCpp">
-					<pre xml:space="preserve" class="brush: cpp">[Authorize(Roles = &quot;admin&quot;)]&nbsp;<br />[HttpPost()]&nbsp;<br />[ValidateAntiForgeryToken()]&nbsp;<br />public: &nbsp;<br /><a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a>^&gt;^ Create(&nbsp;<br />   [Bind(&quot;Id,RecyclingBinType,Latitude,Longitude,Description,Capacity,CurrentCapacity,Status&quot;)]&nbsp;<br />   <a target="_top" href="topic_000000000000007F.html" onclick="this.target='';return true;">RecyclingBin</a>^ <i>recyclingBin</i>&nbsp;<br />) </pre>			
+					<pre xml:space="preserve" class="brush: cpp">public: &nbsp;<br /><a target="_top" href="topic_00000000000000AD.html" onclick="this.target='';return true;">RecyclingBin</a>^ UpdateTypeChoise(&nbsp;<br />   <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>^ <i>selectedOption</i>&nbsp;<br />) </pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -257,7 +257,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeJScript">
-					<pre xml:space="preserve" class="brush: js">JScript does not support generic types and methods.</pre>			
+					<pre xml:space="preserve" class="brush: js">public function UpdateTypeChoise(&nbsp;<br />    <i>selectedOption</i> : <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>&nbsp;<br />) : <a target="_top" href="topic_00000000000000AD.html" onclick="this.target='';return true;">RecyclingBin</a>;</pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -269,28 +269,25 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 
 <h4 class="subHeading">
-	Parameters</h4><dl paramName="recyclingBin" class="parameterList">
+	Parameters</h4><dl paramName="selectedOption" class="parameterList">
 	<dt>
 		<span class="parameter">
-			recyclingBin
+			selectedOption
 		</span>
 	</dt>
 	<dd>
-		<a target="_top" href="topic_000000000000007F.html" onclick="this.target='';return true;">RecyclingBin</a> 
+		<a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">string</a> 
 	</dd>
 </dl>
 <p>
-	dados do ecoponto a ser criado. 
+	opçao escolhida 
 </p>
 
 <p />
 
 	<h4 class="subHeading">
 		Return Value</h4>
-	<a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a>&gt; 
-		<p>
-		retorna a página do ecoponto criado 
-	</p>
+	<a target="_top" href="topic_00000000000000AD.html" onclick="this.target='';return true;">RecyclingBin</a> 
 	
 
 

@@ -1,1 +1,1 @@
-search_result['90']=["topic_0000000000000021.html","HomeController.Index Method","Função de criação de Role, caso não exista."];
+search_result['90']=["topic_000000000000001E_overloads--.html","AdminController.CreateRecyclingBin Method",""];

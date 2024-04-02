@@ -1,1 +1,1 @@
-search_result['151']=["topic_0000000000000035_methods--.html","ApplicationDbContext Methods",""];
+search_result['151']=["topic_000000000000002C_props--.html","RecyclingBinsController Properties",""];

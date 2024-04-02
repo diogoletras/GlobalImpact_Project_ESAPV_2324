@@ -1,1 +1,1 @@
-search_result['430']=["topic_000000000000008D.html","RecyclingTransaction Class","Classe de modelo das transações."];
+search_result['430']=["topic_000000000000006F_props--.html","ErrorViewModel Properties",""];

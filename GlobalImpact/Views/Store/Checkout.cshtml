@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+   var sum = 0;
+   var prod = 0;
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="text-center">
+        <table class="table">
+            <tbody>
+            @foreach (var item in ViewBag.Items)
+            {
+                prod = item.Points * item.Quantity;
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @prod pontos
+                    </td>
+                    <td>
+                        <img src="/img/products/@item.ImageUrl" class="detailImage" style="max-width:50px; max-height:50px;" />
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                    Total
+                </td>
+                <td>
+                            
+                    @foreach (var item in ViewBag.Items)
+                    {
+                        sum += item.Points*item.Quantity;
+                    }
+                    @sum pontos
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-primary" asp-action="FinalizeCheckout" asp-route-name="@User.Identity.Name" asp-route-total="@sum">Finish Checkout</a>
+    </div>
+}

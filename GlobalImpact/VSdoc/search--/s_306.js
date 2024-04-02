@@ -1,1 +1,1 @@
-search_result['306']=["topic_0000000000000066.html","AppUser.NIF Property",""];
+search_result['306']=["topic_0000000000000051.html","StoreController.DeleteAllFromCart Method","Função que retorna uma view com a lista atualizada de produtos, depois desses serem eliminados."];

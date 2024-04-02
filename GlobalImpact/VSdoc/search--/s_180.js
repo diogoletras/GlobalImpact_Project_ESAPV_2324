@@ -1,1 +1,1 @@
-search_result['180']=["topic_0000000000000041_attached_props--.html","ApplicationDbContext Attached Properties",""];
+search_result['180']=["topic_0000000000000036.html","RecyclingBinsController.UpdateTypeChoise Method","Funçao que devolve o id do tipo de ecoponto"];

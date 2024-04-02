@@ -1,1 +1,1 @@
-c['35']=[['36',"CreateRecyclingBin() Method","topic_000000000000001D.html",0],['37',"CreateRecyclingBin(CreateRecyclingBinViewModel) Method","topic_000000000000001E.html",0]];
+c['35']=[['36',"Create(string) Method","topic_0000000000000018.html",0],['37',"Create(RegisterViewModel, string) Method","topic_0000000000000019.html",0]];

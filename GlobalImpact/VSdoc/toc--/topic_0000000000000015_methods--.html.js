@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"GlobalImpact Reference","topic_000000000000010D.html"],['6',"GlobalImpact.Controllers Namespace","topic_0000000000000000.html"],['32',"AdminController Class","topic_0000000000000015.html"],['34',"Methods","topic_0000000000000015_methods--.html"]];

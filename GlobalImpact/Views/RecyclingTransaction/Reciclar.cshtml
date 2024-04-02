@@ -1,7 +1,6 @@
-﻿@model GlobalImpact.ViewModels.NewFolder.ReciclarViewModel
+﻿@model GlobalImpact.ViewModels.RecyclingBin.ReciclarViewModel
 
 @{
-	// Calcula a soma dos pesos e a soma dos pontos
 	string eco = "";
 	if(Model.Type.Equals("glass"))
 	{
@@ -30,11 +29,9 @@
 				</div>
 			</div>
 			<p></p>
-			<div class="row">
-				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+			<div class="flex-row">
 					<p class="text-center">Capacidade Total: @Model.EcoPonto.Capacity Kg</p>
 					<p class="text-center">Capacidade Atual: @Model.EcoPonto.CurrentCapacity Kg</p>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -66,8 +63,22 @@
 				</div>
 			}
 		</div>
+		<form method="post" asp-controller="RecyclingTransaction" asp-action="FinishRecycling">
+			<input type="hidden" name="idEco" value="@Model.EcoPonto.Id" />
+			<input type="hidden" name="nome" value="@Model.UserName" />
+			<input type="hidden" name="peso" value="@totalPeso" />
+			<input type="hidden" name="pontos" value="@totalPontos" />
+			<button type="submit" id="terminar" class="btn-grad">Terminar</button>
+		</form>
+		<p></p>
+		<form method="post" asp-controller="RecyclingTransaction" asp-action="CancelTrans">
+			<input type="hidden" name="idEco" value="@Model.EcoPonto.Id" />
+			<input type="hidden" name="nome" value="@Model.UserName" />
+			<input type="hidden" name="type" value="@Model.Type" />
+			<button type="submit" id="cancelar" class="btn-grad">Cancelar</button>
+		</form>
 	</div>
-
+	<p></p>
 	<div class="text-center">
 		<h2 class="display-4">Itens Disponiveis</h2>
 		@foreach (var item in Model.RecItems)
@@ -85,7 +96,7 @@
 					<input type="hidden" name="type" value="@Model.Type" />
 					<input type="hidden" name="nome" value="@Model.UserName" />
 					<input type="hidden" name="itemName" value="@item.Nome" />
-					<button type="submit" class="btn-grad-small">Adicionar</button>
+					<button type="submit" id="adicionar" class="btn-grad-small">Adicionar</button>
 				</form>
 			</div>
 		}

@@ -1,1 +1,1 @@
-c['86']=[['87',"ApplicationDbContext Class","topic_0000000000000041.html",1],['99',"StationeryDb Class","topic_000000000000004B.html",1],['102',"StationeryItems Class","topic_000000000000004D.html",1]];
+c['86']=[['87',"RecyclingTransactionController Constructor","topic_0000000000000041.html",0],['88',"Methods","topic_0000000000000040_methods--.html",1]];

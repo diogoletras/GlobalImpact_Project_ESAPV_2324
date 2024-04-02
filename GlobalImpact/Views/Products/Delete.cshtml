@@ -1,64 +1,76 @@
 ﻿@model GlobalImpact.Models.Product
 
 @{
-    ViewData["Title"] = "Delete";
+	ViewData["Title"] = "Delete";
 }
+
+<style>
+	dl {
+		width: 40%;
+		margin-top: 20px;
+	}
+
+	dt {
+		text-align: start;
+	}
+
+	dd {
+		text-align: end;
+	}
+</style>
 
 @if (User.Identity.IsAuthenticated)
 {
-    @if (User.IsInRole("Admin"))
-    {
+	@if (User.IsInRole("admin"))
+	{
 
-        <h1>Delete</h1>
+		<div class="text-center text-white">
+			<h1 class="text-white">Apagar produto?</h1>
+			<dl class="row">
+				<dl class="row">
+					<dt class="col-sm-2">
+						@Html.DisplayNameFor(model => model.Name)
+					</dt>
+					<dd class="col-sm-10">
+						@Html.DisplayFor(model => model.Name)
+					</dd>
+					<dt class="col-sm-2">
+						@Html.DisplayNameFor(model => model.Description)
+					</dt>
+					<dd class="col-sm-10">
+						@Html.DisplayFor(model => model.Description)
+					</dd>
+					<dt class="col-sm-2">
+						@Html.DisplayNameFor(model => model.Points)
+					</dt>
+					<dd class="col-sm-10">
+						@Html.DisplayFor(model => model.Points)
+					</dd>
+					<dt class="col-sm-2">
+						@Html.DisplayNameFor(model => model.Stock)
+					</dt>
+					<dd class="col-sm-10">
+						@Html.DisplayFor(model => model.Stock)
+					</dd>
+					<dt class="col-sm-2">
+						@Html.DisplayNameFor(model => model.Category)
+					</dt>
+					<dd class="col-sm-10">
+						@Html.DisplayFor(model => model.Category.Category)
+					</dd>
+				</dl>
 
-        <h3>Are you sure you want to delete this?</h3>
-        <div>
-            <h4>Product</h4>
-            <hr/>
-            <dl class="row">
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Name)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Name)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Description)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Description)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Price)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Price)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Tax)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Tax)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Stock)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Stock)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Category)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Category)
-                </dd>
-            </dl>
-
-            <form asp-action="Delete">
-                <input type="hidden" asp-for="Id"/>
-                <input type="submit" value="Delete" class="btn btn-danger"/> |
-                <a asp-action="Index">Back to List</a>
-            </form>
-        </div>
-    }
+				<form asp-action="Delete">
+					<input type="hidden" asp-for="Id" />
+					<div class="row mt-4 text-center">
+						<div class="text-white" style="margin: 20px 0px;">
+							<input type="submit" value="Apagar produto" class="btn-grad" style="font-size: 17px; background-color: red;" />
+						</div>
+						<div class="form-plus text-center">
+							<a asp-action="Index">Voltar</a>
+						</div>
+					</div>
+				</form>
+		</div>
+	}
 }

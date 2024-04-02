@@ -4,57 +4,112 @@
     ViewData["Title"] = "Details";
 }
 
+<style>
+    dl {
+        width: 40%; 
+        margin-top: 20px;
+    }
+
+    dt {
+        text-align: start;
+    }
+
+    dd {
+        text-align: end;
+    }
+</style>
+
 @if (User.Identity.IsAuthenticated)
 {
-    @if (User.IsInRole("Admin"))
+    @if (User.IsInRole("admin"))
     {
-        <h1>Details</h1>
-
-        <div>
-            <h4>Product</h4>
-            <hr/>
+        <div class="text-center">
+            <h1 class="text-white">Detalhes</h1>
             <dl class="row">
-                <dt class="col-sm-2">
+                <dt class="col-sm-2 text-white">
                     @Html.DisplayNameFor(model => model.Name)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-sm-10 text-white">
                     @Html.DisplayFor(model => model.Name)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-sm-2 text-white">
                     @Html.DisplayNameFor(model => model.Description)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-sm-10 text-white">
                     @Html.DisplayFor(model => model.Description)
                 </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Price)
+                <dt class="col-sm-2 text-white">
+                    @Html.DisplayNameFor(model => model.Points)
                 </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Price)
+                <dd class="col-sm-10 text-white">
+                    @Html.DisplayFor(model => model.Points)
                 </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Tax)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Tax)
-                </dd>
-                <dt class="col-sm-2">
+                <dt class="col-sm-2 text-white">
                     @Html.DisplayNameFor(model => model.Stock)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-sm-10 text-white">
                     @Html.DisplayFor(model => model.Stock)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-sm-2 text-white">
                     @Html.DisplayNameFor(model => model.Category)
                 </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Category)
+                <dd class="col-sm-10 text-white">
+                    @Html.DisplayFor(model => model.Category.Category)
                 </dd>
             </dl>
         </div>
-        <div>
-            <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-            <a asp-action="Index">Back to List</a>
+        <div class="row mt-4 text-center">
+            <div class="text-white" style="margin: 20px 0px;">
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn-grad" style="font-size: 17px;">Editar produto</a>
+            </div>
+            <div class="form-plus text-center">
+                <a asp-action="Index">Voltar</a>
+            </div>
         </div>
+    }
+    @if (User.IsInRole("client"))
+    {
+        <div class="text-center">
+            <h1 class="text-white">Detalhes</h1>
+            <dl class="row">
+                <dt class="col-sm-2 text-white">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-10 text-white">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-sm-2 text-white">
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd class="col-sm-10 text-white">
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+                <dt class="col-sm-2 text-white">
+                    @Html.DisplayNameFor(model => model.Points)
+                </dt>
+                <dd class="col-sm-10 text-white">
+                    @Html.DisplayFor(model => model.Points)
+                </dd>
+                <dt class="col-sm-2 text-white">
+                    @Html.DisplayNameFor(model => model.Stock)
+                </dt>
+                <dd class="col-sm-10 text-white">
+                    @Html.DisplayFor(model => model.Stock)
+                </dd>
+                <dt class="col-sm-2 text-white">
+                    @Html.DisplayNameFor(model => model.Category)
+                </dt>
+                <dd class="col-sm-10 text-white">
+                    @Html.DisplayFor(model => model.Category.Category)
+                </dd>
+            </dl>
+        </div>
+
+        <div class="row mt-4 text-center">
+            <div class="form-plus text-center">
+                <a asp-action="Index">Voltar</a>
+            </div>
+        </div>
+
     }
 }
