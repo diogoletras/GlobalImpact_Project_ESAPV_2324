@@ -110,8 +110,13 @@ namespace GlobalImpact.Controllers
                         if (!string.IsNullOrEmpty(code))
                         {
                             var callbackUrl = Url.Action("ConfirmEmailTask", "Account", new { userId = user.Id, code }, protocol: HttpContext.Request.Scheme);
-                            await _emailService.SendEmailAsync(user.Email, "Account Verification",
-                                $"Please verify your account by clicking here: <a href='{callbackUrl}'>link</a>");
+                            string emailBody = $"Olá {user.UserName},\n" +
+                                $"Obrigado por se registar na GlobalImpack! Para completar o processo de registro e começar a usar nossa plataforma de reciclagem, por favor, verifique sua conta clicando no link abaixo:\n" +
+                                $"<a href='{callbackUrl}'>Confirmar Conta</a>\n" +
+                                $"Se você não solicitou esta verificação, por favor, ignore este e-mail. Sua conta permanecerá pendente de verificação.\n" +
+                                $"Atenciosamente,\n" +
+                                $"GlobalImpack Develop Team";
+                            await _emailService.SendEmailAsync(user.Email, "Verificação de Conta - GlobalImpack", emailBody);
                         }
                         //await _signInManager.SignInAsync(user, isPersistent: false);
                         return RedirectToAction("EmailSending", "Account");
