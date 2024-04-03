@@ -619,7 +619,15 @@ namespace GlobalImpact.Controllers
             return View(fullBins);
         }
 
-
+        public async Task<IActionResult> Ecos()
+        {
+            var ecopontos = _context.RecyclingBins.ToList();
+            foreach(var eco in ecopontos)
+            {
+				eco.Type = _context.RecyclingBinType.FirstOrDefault(r => r.RecyclingBinTypeId == new Guid(eco.RecyclingBinTypeId)).Type;
+			}
+            return View(ecopontos);
+        }
 
         /// <summary>
         /// Funçao que recebe um id e verifica se o ecoponto exite
