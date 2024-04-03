@@ -110,10 +110,10 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "73b8cb14-e80c-4777-8258-75606d9d234b",
+                            Id = "08345297-5853-4b89-ad62-6a1b23c00dcc",
                             AccessFailedCount = 0,
                             Age = 0,
-                            ConcurrencyStamp = "f359d7f5-0e37-49bd-9c19-9b8d746674e4",
+                            ConcurrencyStamp = "ee1d8506-8be4-40f5-8d03-bc549f5ac908",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -122,21 +122,21 @@ namespace GlobalImpact.Migrations
                             NIF = 0,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMRQcHtRAXe5djEQDmB8fHvKvlYc2PprYjxib7G7R6FM1b4H859DMzrncjB2kfRoWw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEM/dVKiYnhadx6Ev4VYV6MUn5OGL7008maXMXcesMEOrKpKQ4nUHjkZpQTPUFvUp1A==",
                             PhoneNumber = "123456789",
                             PhoneNumberConfirmed = true,
                             Points = 10000,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
-                            UniqueCode = "fb134550-849d-4f43-9401-da0c2d09ccf2",
+                            UniqueCode = "f101563e-c9c7-4a7f-8bbc-066437d7344f",
                             UserName = "admin"
                         },
                         new
                         {
-                            Id = "8a81f419-95a5-4960-aee2-3d7cd184db0d",
+                            Id = "42003a85-23eb-4a34-bee0-66f05ab91e61",
                             AccessFailedCount = 0,
                             Age = 50,
-                            ConcurrencyStamp = "61e5028c-f72b-4b84-829a-401df272cf49",
+                            ConcurrencyStamp = "1edcb778-69c4-46d6-9cbf-b47912c9ea92",
                             Email = "cliente@exemplo.com",
                             EmailConfirmed = true,
                             FirstName = "Cliente",
@@ -145,13 +145,13 @@ namespace GlobalImpact.Migrations
                             NIF = 0,
                             NormalizedEmail = "CLIENTE@EXEMPLO.COM",
                             NormalizedUserName = "CLIENTE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGUeTW70wU3s4Sd2Fjz9yv2EuSXADBPorsTA22Z1thHuGydBk0drTEZEBRMVI4p74g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKt9B93zAq7ZTNd7VZe/jd5znuwkQfUNszASCHo8i9hq75I2aQRuFKuNbiE0OmxU5A==",
                             PhoneNumber = "123456789",
                             PhoneNumberConfirmed = true,
                             Points = 10000,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
-                            UniqueCode = "897959b8-f7ff-4aa9-b280-ef7573601c4b",
+                            UniqueCode = "cc5ec226-2e94-40f4-a0a2-036fae335413",
                             UserName = "cliente"
                         });
                 });
@@ -191,52 +191,52 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("88d6af65-edc0-4450-9566-86f3809f28d1"),
+                            Id = new Guid("2b39fbec-4835-42ec-80df-24cf0e2d404d"),
                             Description = "Costoletas de Vaca",
                             ImageUrl = "Talho-Castro-Costeleta-Porco.jpg",
                             Name = "Costoletas",
                             Points = 5,
-                            ProductCategoryId = "5e497b29-5150-4608-9ef2-048e5b3f9c7a",
+                            ProductCategoryId = "dfe993ee-e166-4b37-a7b0-3d1a79d73dcf",
                             Stock = 20
                         },
                         new
                         {
-                            Id = new Guid("4a4c91eb-f87e-4cdf-88e0-8134fdc8ed56"),
+                            Id = new Guid("195f93f8-1169-4053-89ea-3af890734743"),
                             Description = "Bacalhau da Noruega",
                             ImageUrl = "bacalhau.jpg",
                             Name = "Bacalhau",
                             Points = 8,
-                            ProductCategoryId = "3f23444c-ef54-4dee-a206-f11aae233c4f",
+                            ProductCategoryId = "896430dc-6dec-4bc6-a800-f57102bdde38",
                             Stock = 25
                         },
                         new
                         {
-                            Id = new Guid("f70cc9d9-9030-4615-bd78-b399f869f903"),
+                            Id = new Guid("0a656c7f-6a93-4d93-b0a6-709e6cc59435"),
                             Description = "Broculos Verde",
                             ImageUrl = "broculos.jpg",
                             Name = "Broculos",
                             Points = 1,
-                            ProductCategoryId = "bc7dc632-d46d-48d3-bbac-cc1a45689072",
+                            ProductCategoryId = "c46c467c-2c2a-406f-933a-d94e1bb1d708",
                             Stock = 50
                         },
                         new
                         {
-                            Id = new Guid("e740c75f-4092-454e-a3d5-23b185a45b68"),
+                            Id = new Guid("28018811-e2ac-44e8-a87f-2da208e8be94"),
                             Description = "Pessego da Colombia",
                             ImageUrl = "pessego.jpg",
                             Name = "Pessego",
                             Points = 2,
-                            ProductCategoryId = "b833ce30-fb27-407c-bb61-bbed0a3d645e",
+                            ProductCategoryId = "bd25d7bf-2191-4cc9-85de-56dd53305046",
                             Stock = 30
                         },
                         new
                         {
-                            Id = new Guid("7ba23eb4-36e9-40d1-b28b-a0b3192b6f7a"),
+                            Id = new Guid("2e521fb1-f2e2-4a9f-b632-23483ec58a31"),
                             Description = "Licor Beirao versao Especial 100 anos",
                             ImageUrl = "licro-beirao.jpg",
                             Name = "Licor Beirao",
                             Points = 11,
-                            ProductCategoryId = "e0fdfe38-4523-47af-9f12-e80a2d88873a",
+                            ProductCategoryId = "36c8176f-a513-4e8b-bdb4-5cf3af9f8e75",
                             Stock = 5
                         });
                 });
@@ -258,28 +258,60 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            ProductCategoryId = new Guid("5e497b29-5150-4608-9ef2-048e5b3f9c7a"),
+                            ProductCategoryId = new Guid("dfe993ee-e166-4b37-a7b0-3d1a79d73dcf"),
                             Category = "talho"
                         },
                         new
                         {
-                            ProductCategoryId = new Guid("3f23444c-ef54-4dee-a206-f11aae233c4f"),
+                            ProductCategoryId = new Guid("896430dc-6dec-4bc6-a800-f57102bdde38"),
                             Category = "peixaria"
                         },
                         new
                         {
-                            ProductCategoryId = new Guid("bc7dc632-d46d-48d3-bbac-cc1a45689072"),
+                            ProductCategoryId = new Guid("c46c467c-2c2a-406f-933a-d94e1bb1d708"),
                             Category = "legumes"
                         },
                         new
                         {
-                            ProductCategoryId = new Guid("b833ce30-fb27-407c-bb61-bbed0a3d645e"),
+                            ProductCategoryId = new Guid("bd25d7bf-2191-4cc9-85de-56dd53305046"),
                             Category = "frutas"
                         },
                         new
                         {
-                            ProductCategoryId = new Guid("e0fdfe38-4523-47af-9f12-e80a2d88873a"),
+                            ProductCategoryId = new Guid("36c8176f-a513-4e8b-bdb4-5cf3af9f8e75"),
                             Category = "bebidas"
+                        });
+                });
+
+            modelBuilder.Entity("GlobalImpact.Models.ProductTransactionStatus", b =>
+                {
+                    b.Property<Guid>("ProductTransactionStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProductTransactionStatusId");
+
+                    b.ToTable("ProductTransactionStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductTransactionStatusId = new Guid("ec00cd92-5e26-473b-8060-0fb2f9853a68"),
+                            Status = "Completed"
+                        },
+                        new
+                        {
+                            ProductTransactionStatusId = new Guid("6a29600e-1b3a-4726-9243-07c3685279fd"),
+                            Status = "Pending"
+                        },
+                        new
+                        {
+                            ProductTransactionStatusId = new Guid("1c065574-b70c-4c49-8949-01788d0cc0c2"),
+                            Status = "Cancelled"
                         });
                 });
 
@@ -348,68 +380,68 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8d1940a1-5aa9-4760-ae7c-bc9584a324cc"),
+                            Id = new Guid("2e9e099c-a34a-40d6-8e53-fb0a2ab7cb3c"),
                             Capacity = 100.0,
                             CurrentCapacity = 0.0,
                             Description = "Recycling Bin Glass",
                             Latitude = 38.521607817359822,
                             Longitude = -8.8368159603671987,
-                            RecyclingBinTypeId = "802f94ed-6561-433b-a126-ac60b55078f7",
+                            RecyclingBinTypeId = "ca51ea2c-94df-46c1-8c34-95cc31e720fd",
                             Status = false
                         },
                         new
                         {
-                            Id = new Guid("2137b3f7-3492-4937-b69c-90b57834ec04"),
+                            Id = new Guid("bf4028b2-0729-4be7-981d-5047faf7bc4e"),
                             Capacity = 100.0,
                             CurrentCapacity = 0.0,
                             Description = "Recycling Bin Plastic",
                             Latitude = 38.52171490188254,
                             Longitude = -8.83694281687076,
-                            RecyclingBinTypeId = "ac82b0ee-29b8-4370-8110-dc4afa1d0ea2",
+                            RecyclingBinTypeId = "6b131442-388a-491f-9216-9da450a055bd",
                             Status = false
                         },
                         new
                         {
-                            Id = new Guid("58b7d4c1-a3c6-4053-8ab4-d2a1cf7f75ff"),
+                            Id = new Guid("9ce798ab-5d60-4229-8c65-df9d9c9ce54f"),
                             Capacity = 100.0,
                             CurrentCapacity = 0.0,
                             Description = "Recycling Bin Paper",
                             Latitude = 38.521474614438482,
                             Longitude = -8.8366557205732299,
-                            RecyclingBinTypeId = "127e3726-65fe-4164-98a5-a6c154a34de5",
+                            RecyclingBinTypeId = "494e9f48-4598-45df-a7e4-91f2fe2d0055",
                             Status = false
                         },
                         new
                         {
-                            Id = new Guid("f81b3465-319f-406a-a758-2ba1eda49b45"),
+                            Id = new Guid("5be8de11-4493-4c42-bcff-daf9f6bee6e1"),
                             Capacity = 100.0,
                             CurrentCapacity = 0.0,
                             Description = "Recycling Bin Glass",
                             Latitude = 38.519799793743871,
                             Longitude = -8.8360971667515606,
-                            RecyclingBinTypeId = "802f94ed-6561-433b-a126-ac60b55078f7",
+                            RecyclingBinTypeId = "ca51ea2c-94df-46c1-8c34-95cc31e720fd",
                             Status = false
                         },
                         new
                         {
-                            Id = new Guid("2a1bce9f-4c36-4edf-a797-336ef56edece"),
+                            Id = new Guid("302268d0-5a63-4544-bfd6-658f043d6003"),
                             Capacity = 100.0,
                             CurrentCapacity = 100.0,
                             Description = "Recycling Bin Plastic",
                             Latitude = 38.522550713957862,
                             Longitude = -8.8395605732421387,
-                            RecyclingBinTypeId = "ac82b0ee-29b8-4370-8110-dc4afa1d0ea2",
+                            RecyclingBinTypeId = "6b131442-388a-491f-9216-9da450a055bd",
                             Status = true
                         },
                         new
                         {
-                            Id = new Guid("f1549c50-5e1b-4714-ad8b-0b6cc6e45ca9"),
+                            Id = new Guid("0bc21829-4deb-4eca-9805-ea1df30a5a2f"),
                             Capacity = 100.0,
                             CurrentCapacity = 100.0,
                             Description = "Recycling Bin Paper",
                             Latitude = 38.522682016378347,
                             Longitude = -8.8397580181150541,
-                            RecyclingBinTypeId = "127e3726-65fe-4164-98a5-a6c154a34de5",
+                            RecyclingBinTypeId = "494e9f48-4598-45df-a7e4-91f2fe2d0055",
                             Status = true
                         });
                 });
@@ -431,17 +463,17 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            RecyclingBinTypeId = new Guid("802f94ed-6561-433b-a126-ac60b55078f7"),
+                            RecyclingBinTypeId = new Guid("ca51ea2c-94df-46c1-8c34-95cc31e720fd"),
                             Type = "glass"
                         },
                         new
                         {
-                            RecyclingBinTypeId = new Guid("ac82b0ee-29b8-4370-8110-dc4afa1d0ea2"),
+                            RecyclingBinTypeId = new Guid("6b131442-388a-491f-9216-9da450a055bd"),
                             Type = "plastic"
                         },
                         new
                         {
-                            RecyclingBinTypeId = new Guid("127e3726-65fe-4164-98a5-a6c154a34de5"),
+                            RecyclingBinTypeId = new Guid("494e9f48-4598-45df-a7e4-91f2fe2d0055"),
                             Type = "paper"
                         });
                 });
@@ -506,15 +538,15 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "150b930b-3db2-4b29-ba47-6ec9a8851537",
-                            ConcurrencyStamp = "24a3921a-b7d5-4a6b-ad46-61b8d795d996",
+                            Id = "bf60fa39-50ed-4f64-8e8a-0adf5dd5e9c7",
+                            ConcurrencyStamp = "73a01f9f-a1ab-4cbd-8742-e064b2c8debe",
                             Name = "client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
-                            Id = "07dcb156-acd8-45f0-ac69-d08cbc0c5b88",
-                            ConcurrencyStamp = "3c4e26af-bebb-42d9-a942-64fb6e7ed98f",
+                            Id = "862a3e4b-48f2-48b5-92a5-d633a4424185",
+                            ConcurrencyStamp = "6d9713b0-8205-4629-a5ff-2c431f2ee28a",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -609,13 +641,13 @@ namespace GlobalImpact.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "8a81f419-95a5-4960-aee2-3d7cd184db0d",
-                            RoleId = "150b930b-3db2-4b29-ba47-6ec9a8851537"
+                            UserId = "42003a85-23eb-4a34-bee0-66f05ab91e61",
+                            RoleId = "bf60fa39-50ed-4f64-8e8a-0adf5dd5e9c7"
                         },
                         new
                         {
-                            UserId = "73b8cb14-e80c-4777-8258-75606d9d234b",
-                            RoleId = "07dcb156-acd8-45f0-ac69-d08cbc0c5b88"
+                            UserId = "08345297-5853-4b89-ad62-6a1b23c00dcc",
+                            RoleId = "862a3e4b-48f2-48b5-92a5-d633a4424185"
                         });
                 });
 

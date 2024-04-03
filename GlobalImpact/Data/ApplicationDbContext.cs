@@ -28,11 +28,39 @@ namespace GlobalImpact.Data
         public DbSet<RecyclingBin> RecyclingBins { get; set; }
         public DbSet<RecyclingTransaction> RecyclingTransactions { get; set; }
         public DbSet<RecyclingBinType> RecyclingBinType { get; set; }
+        public DbSet<ProductTransactionStatus> ProductTransactionStatus { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            var productTransactionStatusId = Guid.NewGuid();
+            var productTransactionStatusId2 = Guid.NewGuid();
+            var productTransactionStatusId3 = Guid.NewGuid();
+
+            ProductTransactionStatus productTransactionStatus = new ProductTransactionStatus
+            {
+                ProductTransactionStatusId = productTransactionStatusId,
+                Status = ProductTransactionStatusType.Completed.ToString()
+            };
+            ProductTransactionStatus productTransactionStatus2 = new ProductTransactionStatus
+            {
+                ProductTransactionStatusId = productTransactionStatusId2,
+                Status = ProductTransactionStatusType.Pending.ToString()
+            };
+            ProductTransactionStatus productTransactionStatus3 = new ProductTransactionStatus
+            {
+                ProductTransactionStatusId = productTransactionStatusId3,
+                Status = ProductTransactionStatusType.Cancelled.ToString()
+            };
+
+            builder.Entity<ProductTransactionStatus>().HasData(
+                productTransactionStatus,
+                productTransactionStatus2,
+                productTransactionStatus3
+            );
+
 
             var rb1ID = Guid.NewGuid();
             var rb2ID = Guid.NewGuid();
