@@ -13,7 +13,10 @@ namespace GlobalImpact.Models
         public Guid UserId { get; set; }
         [ForeignKey("ProductId")]
         public Guid ProductId { get; set; }
-        
+
+        [ForeignKey("TransactionStatusId")]
+        public Guid TransactionStatusId { get; set; }
+
         [Required]
         public DateTime Date { get; set; }
         [Required]
@@ -27,5 +30,7 @@ namespace GlobalImpact.Models
         public Product product { get; set; }
         [NotMapped]
         public string ProductName { get; set; }
+        [NotMapped]
+        public string TransStatus { get; set; }
     }
 }

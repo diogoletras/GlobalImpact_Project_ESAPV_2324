@@ -112,7 +112,7 @@ namespace GlobalImpact.Controllers
                             var callbackUrl = Url.Action("ConfirmEmailTask", "Account", new { userId = user.Id, code }, protocol: HttpContext.Request.Scheme);
                             string emailBody = $"Olá {user.UserName},\n" +
                                 $"Obrigado por se registar na GlobalImpack! Para completar o processo de registro e começar a usar nossa plataforma de reciclagem, por favor, verifique sua conta clicando no link abaixo:\n" +
-                                $"<a href='{callbackUrl}'>Confirmar Conta</a>\n" +
+                                $"{callbackUrl}\n" +
                                 $"Se você não solicitou esta verificação, por favor, ignore este e-mail. Sua conta permanecerá pendente de verificação.\n" +
                                 $"Atenciosamente,\n" +
                                 $"GlobalImpack Develop Team";

@@ -386,6 +386,7 @@ namespace GlobalImpact.Controllers
         {
             var userTras = await _context.ProductTransactions.Where(p => p.UserId == new Guid(userId)).ToArrayAsync();
             var products = await _context.Products.ToArrayAsync();
+            var transStatus = await _context.ProductTransactionStatus.ToListAsync();
             foreach(var trans in userTras)
             {
                 foreach(var prod in products)
@@ -395,8 +396,17 @@ namespace GlobalImpact.Controllers
                         trans.ProductName = prod.Name;
                     }
                 }
+                foreach(var status in transStatus)
+                {
+                    if(status.ProductTransactionStatusId.Equals(trans.TransactionStatusId))
+                    {
+                        trans.TransStatus = status.Status;
+                    }
+                }
             }
-            var groupedTrans = userTras.GroupBy(p => p.TransactionId);
+
+            var userTras2 = userTras.OrderByDescending(p => p.Date);
+            var groupedTrans = userTras2.GroupBy(p => p.TransactionId);
 
             return View(groupedTrans);
         }

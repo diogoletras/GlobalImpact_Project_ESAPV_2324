@@ -1,4 +1,7 @@
-﻿using GlobalImpact.Data;
+﻿using System.Transactions;
+using GlobalImpact.Data;
+using GlobalImpact.Enumerates;
+using GlobalImpact.Interfaces;
 using GlobalImpact.Models;
 using GlobalImpact.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -12,13 +15,16 @@ namespace GlobalImpact.Controllers
         private readonly ApplicationDbContext _context;
         private List<Product> cartItems = CartItems.ListItems;
 
+        private readonly IEmailService _emailService;
+
         /// <summary>
         /// Constutor da classe.
         /// </summary>
         /// <param name="context"> parametro para a database</param>
-        public StoreController(ApplicationDbContext context)
+        public StoreController(ApplicationDbContext context, IEmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         /// <summary>
@@ -454,13 +460,15 @@ namespace GlobalImpact.Controllers
         public async Task<IActionResult> FinalizeCheckout(string name, int total)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == name);
+            var idPending = await _context.ProductTransactionStatus.FirstOrDefaultAsync(s => s.Status.Equals(ProductTransactionStatusType.Pending.ToString()));
             if (user.Points >= total)
             {
                 ProductTransactions transaction = new ProductTransactions
                 {
                     TransactionId = Guid.NewGuid(),
                     UserId = new Guid(user.Id),
-                    Date = DateTime.Now
+                    Date = DateTime.Now,
+                    TransactionStatusId = idPending.ProductTransactionStatusId
                 };
 
                 foreach (var item in cartItems)
@@ -476,6 +484,25 @@ namespace GlobalImpact.Controllers
                     _context.ProductTransactions.Add(transaction);
                     _context.SaveChanges();
                 }
+
+                string carItemsList = "";
+                int totalPoints = 0;
+                foreach(var item in cartItems)
+                {
+                    carItemsList += $"{item.Name} P/uni {item.Points} x {item.Quantity} = {item.Points * item.Quantity} pontos \n";
+                    totalPoints += item.Points * item.Quantity;
+                }
+                carItemsList += $"\nTotal da Encomenda: {totalPoints} pontos \n";
+
+                string emailBody = $"Olá {user.UserName},\n" +
+                                $"Obrigado fazer a sua encomenda na GlobalImpack! \n\n" +
+                                $"Lista: \n" +
+                                $"{carItemsList} \n\n"+
+                                $"A sua encomenda encontra-se pronta para recolha no Campus do IPS,\n" +
+                                $"Atenciosamente,\n" +
+                                $"GlobalImpack Develop Team";
+
+                await _emailService.SendEmailAsync(user.Email, $"Encomenda Loja Virtual - GlobalImpack ID {transaction.Id}", emailBody);
 
                 cartItems.Clear();
                 return RedirectToAction("Index");
