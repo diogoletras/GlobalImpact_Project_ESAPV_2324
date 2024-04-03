@@ -286,8 +286,8 @@ namespace GlobalImpact.Data
                 new Product
                 {
                     Id = Guid.NewGuid(),
-                    Name = "Costoletas",
-                    Description = "Costoletas de Vaca",
+                    Name = "Costeletas",
+                    Description = "Costeletas de Vaca",
                     Points = 5,
                     Stock = 20,
                     ProductCategoryId = pc1ID.ToString(),
@@ -306,8 +306,8 @@ namespace GlobalImpact.Data
                 new Product
                 {
                     Id = Guid.NewGuid(),
-                    Name = "Broculos",
-                    Description = "Broculos Verde",
+                    Name = "Brócolos",
+                    Description = "Brócolos Verde",
                     Points = 1,
                     Stock = 50,
                     ProductCategoryId = pc3ID.ToString(),
@@ -316,8 +316,8 @@ namespace GlobalImpact.Data
                 new Product
                 {
                     Id = Guid.NewGuid(),
-                    Name = "Pessego",
-                    Description = "Pessego da Colombia",
+                    Name = "Pêssego",
+                    Description = "Pêssego da Colombia",
                     Points = 2,
                     Stock = 30,
                     ProductCategoryId = pc4ID.ToString(),
@@ -326,8 +326,8 @@ namespace GlobalImpact.Data
                 new Product
                 {
                     Id = Guid.NewGuid(),
-                    Name = "Licor Beirao",
-                    Description = "Licor Beirao versao Especial 100 anos",
+                    Name = "Licor Beirão",
+                    Description = "Licor Beirão versão Especial 100 anos",
                     Points = 11,
                     Stock = 5,
                     ProductCategoryId = pc5ID.ToString(),
