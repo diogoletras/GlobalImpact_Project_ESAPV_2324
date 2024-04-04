@@ -174,7 +174,7 @@ namespace GlobalImpact.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,Tax,Stock,ProductCategoryId,Image")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Points,Tax,Stock,ProductCategoryId,Image")] Product product)
         {
             if (product.Image == null)
                 return View(product);
