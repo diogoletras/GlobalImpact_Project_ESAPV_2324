@@ -66,26 +66,23 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="list-unstyled components">
-                        <li class="product-container d-flex flex-column">
-                            <div class="product-item align-items-center">
-                                @foreach (var item in ViewBag.Items)
-                                {
-                                    <div class="row">
-                                        <div class="col-4" style="padding-right:0!important"><h6>@item.Name</h6></div>
-                                        <div class="col-3" style="padding-right:0!important; padding-left:0!important">
-                                            <p>@item.Points GIcoins</p>
-                                        </div>
-                                        <div class="col-3" style="padding-right:0!important; padding-left:0!important">
-                                            <input id="@item.Id" type="number" value="@item.Quantity" min="1" class="rounded-3 w-100">
-                                        </div>
-                                        <div class="col-1">
-                                            <a class="btn btn-danger btn-sm remove-btn" asp-controller="Store" asp-action="DeleteFromCart" asp-route-id="@item.Id">X</a>
-                                        </div>
+                    <br />
+                    <ul class="list-group">
+                        @foreach (var item in ViewBag.Items)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6>@item.Name</h6>
+                                    <p>@item.Points GIcoins</p>
+                                </div>
+                                <div class="input-group" style="width: 120px;">
+                                    <input id="@item.Id" type="number" value="@item.Quantity" min="1" class="form-control rounded-3">
+                                    <div class="input-group-append">
+                                        <a class="btn btn-danger remove-btn" asp-controller="Store" asp-action="DeleteFromCart" asp-route-id="@item.Id">X</a>
                                     </div>
-                                }
-                            </div>
-                        </li>
+                                </div>
+                            </li>
+                        }
                     </ul>
                 }
             </div>

@@ -39,6 +39,12 @@
                                         <div class="col-md-3">
                                             <strong>Pontos/Uni:</strong> @transaction.Points
                                         </div>
+                                        <div class="col-3" style="padding-right:0!important; padding-left:0!important">
+                                            <input id="@item.Id" type="number" value="@item.Quantity" min="1" class="rounded-3 w-100">
+                                        </div>
+                                        <div class="col-1">
+                                            <a class="btn btn-danger btn-sm remove-btn" asp-controller="Store" asp-action="DeleteFromCart" asp-route-id="@item.Id">X</a>
+                                        </div>
                                     </div>
                                 </li>
                             }
