@@ -10,6 +10,7 @@ using GlobalImpact.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using GlobalImpact.Enumerates;
 
 namespace GlobalImpact.Controllers
 {
@@ -410,6 +411,83 @@ namespace GlobalImpact.Controllers
 
             return View(groupedTrans);
         }
+
+        public async Task<IActionResult> CancelTransaction(Guid transId)
+        {
+            var userTras = await _context.ProductTransactions.Where(p => p.TransactionId == transId).ToArrayAsync();
+            var products = await _context.Products.ToArrayAsync();
+            var transStatus = await _context.ProductTransactionStatus.ToListAsync();
+            foreach (var trans in userTras)
+            {
+                foreach (var prod in products)
+                {
+                    if (prod.Id.Equals(trans.ProductId))
+                    {
+                        trans.ProductName = prod.Name;
+                    }
+                }
+                foreach (var status in transStatus)
+                {
+                    if (status.ProductTransactionStatusId.Equals(trans.TransactionStatusId))
+                    {
+                        trans.TransStatus = status.Status;
+                    }
+                }
+            }
+
+            var groupedTrans = userTras.GroupBy(p => p.TransactionId);
+
+            return View(groupedTrans);
+        }
+
+        public async Task<IActionResult> ConfirmCancelTransaction(Guid transId)
+        {
+            var userTras = await _context.ProductTransactions.Where(p => p.TransactionId == transId).ToArrayAsync();
+            var transStatus = await _context.ProductTransactionStatus.FirstOrDefaultAsync(s => s.Status.Equals(ProductTransactionStatusType.Cancelled.ToString()));
+            var totalPoints = 0;
+            foreach (var trans in userTras)
+            {
+                trans.TransactionStatusId = transStatus.ProductTransactionStatusId;
+
+                totalPoints += trans.Quantity * trans.Points;
+
+                _context.Update(trans);
+                _context.SaveChanges();
+                
+            }
+
+            var user = _context.Users.FirstOrDefault(u => u.Id.Equals(userTras[0].UserId.ToString()));
+            user.Points += totalPoints;
+            _context.Update(user);
+            await _context.SaveChangesAsync();
+
+            var userTras2 = await _context.ProductTransactions.Where(p => p.UserId == userTras.FirstOrDefault().UserId).ToArrayAsync();
+            var products = await _context.Products.ToArrayAsync();
+            var transStatus2 = await _context.ProductTransactionStatus.ToListAsync();
+            foreach (var trans in userTras2)
+            {
+                foreach (var prod in products)
+                {
+                    if (prod.Id.Equals(trans.ProductId))
+                    {
+                        trans.ProductName = prod.Name;
+                    }
+                }
+                foreach (var status in transStatus2)
+                {
+                    if (status.ProductTransactionStatusId.Equals(trans.TransactionStatusId))
+                    {
+                        trans.TransStatus = status.Status;
+                    }
+                }
+            }
+
+            var userTras3 = userTras2.OrderByDescending(p => p.Date);
+            var groupedTrans = userTras3.GroupBy(p => p.TransactionId);
+
+            return View("ProductsTransactions", groupedTrans);
+        }
+
 
         private bool ProductExists(Guid id)
         {

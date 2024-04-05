@@ -1,8 +1,17 @@
 ﻿@model IEnumerable<IGrouping<Guid, ProductTransactions>>
-@inject GlobalImpact.Enumerates.ProductTransactionStatusType
 
 <div class="container">
-    <h1>Encomendas</h1>
+    <h1>Cancelar Encomenda</h1>
+    <h5>Tem a certeza que deseja <strong>Cancelar</strong>  a Encomenda ?</h5>
+    @{
+        var transId = Model.FirstOrDefault();
+    }
+
+    <form method="post" asp-controller="Products" asp-action="ConfirmCancelTransaction">
+        <input type="hidden" name="transId" value="@transId.Key" /> <!-- O ID do item -->
+        <button type="submit" class="btn btn-danger">Cancelar Encomenda</button>
+    </form>
+
     <div class="row">
         <div class="col">
             @foreach (var group in Model)
@@ -12,12 +21,12 @@
                         var firstTransaction = group.FirstOrDefault();
                         var totalPoints = 0;
                     }
-                    @if(firstTransaction != null)
+                    @if (firstTransaction != null)
                     {
-                    <div class="card-header">
-                        <h5 class="card-title"> Data: @firstTransaction.Date</h5>
-                        <h5 class="card-title"> Status: @firstTransaction.TransStatus</h5>
-                    </div>
+                        <div class="card-header">
+                            <h5 class="card-title"> Data: @firstTransaction.Date</h5>
+                            <h5 class="card-title"> Status: @firstTransaction.TransStatus</h5>
+                        </div>
                     }
                     <div class="card-header">
                         <span class="text-muted">Transação ID: @group.Key</span>
@@ -45,16 +54,7 @@
                             }
                             <li class="list-group-item">
                                 <strong>Total de Pontos Gastos:</strong> @totalPoints
-                                <p></p>
-                                @if (!firstTransaction.TransStatus.Equals("Cancelled"))
-                                {
-                                    <form method="post" asp-controller="Products" asp-action="CancelTransaction">
-                                        <input type="hidden" name="transId" value="@group.Key" /> <!-- O ID do item -->
-                                        <button type="submit" class="btn btn-danger">Cancelar Encomenda</button>
-                                    </form>
-                                }
                             </li>
-                            
                         </ul>
                     </div>
                 </div>
