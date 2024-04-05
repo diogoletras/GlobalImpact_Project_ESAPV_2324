@@ -32,5 +32,7 @@ namespace GlobalImpact.Models
         public string ProductName { get; set; }
         [NotMapped]
         public string TransStatus { get; set; }
+        [NotMapped]
+        public string UserName { get; set; }
     }
 }

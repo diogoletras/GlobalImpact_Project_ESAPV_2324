@@ -1,9 +1,7 @@
 ﻿@model IEnumerable<IGrouping<Guid, ProductTransactions>>
 
-
-
 <div class="container">
-    <h1>Minhas Encomendas</h1>
+    <h1>Administração de Encomendas</h1>
     <div class="row">
         <div class="col">
             @foreach (var group in Model)
@@ -13,12 +11,13 @@
                         var firstTransaction = group.FirstOrDefault();
                         var totalPoints = 0;
                     }
-                    @if(firstTransaction != null)
+                    @if (firstTransaction != null)
                     {
-                    <div class="card-header">
-                        <h5 class="card-title"> Data: @firstTransaction.Date</h5>
-                        <h5 class="card-title"> Status: @firstTransaction.TransStatus</h5>
-                    </div>
+                        <div class="card-header">
+                            <h5 class="card-title"> Data: @firstTransaction.Date</h5>
+                            <h5 class="card-title"> Status: @firstTransaction.TransStatus</h5>
+                            <h5 class="card-title"> Nome: @firstTransaction.UserName</h5>
+                        </div>
                     }
                     <div class="card-header">
                         <span class="text-muted">Transação ID: @group.Key</span>
@@ -47,15 +46,11 @@
                             <li class="list-group-item">
                                 <strong>Total de Pontos Gastos:</strong> @totalPoints
                                 <p></p>
-                                @if (firstTransaction.TransStatus.Equals("Pending"))
-                                {
-                                    <form method="post" asp-controller="Products" asp-action="CancelTransaction">
-                                        <input type="hidden" name="transId" value="@group.Key" /> <!-- O ID do item -->
-                                        <button type="submit" class="btn btn-danger">Cancelar Encomenda</button>
-                                    </form>
-                                }
+                                <form method="post" asp-controller="Products" asp-action="ConfirmTransactions">
+                                    <input type="hidden" name="transId" value="@group.Key" /> <!-- O ID do item -->
+                                    <button type="submit" class="btn btn-success">Confirmar Encomenda</button>
+                                </form>
                             </li>
-                            
                         </ul>
                     </div>
                 </div>

@@ -488,6 +488,115 @@ namespace GlobalImpact.Controllers
             return View("ProductsTransactions", groupedTrans);
         }
 
+        public async Task<IActionResult> AdminProductsTransactions()
+        {
+            var transStatus = await _context.ProductTransactionStatus.FirstOrDefaultAsync(s => s.Status.Equals(ProductTransactionStatusType.Pending.ToString()));
+            var userTras = await _context.ProductTransactions.Where(p => p.TransactionStatusId == transStatus.ProductTransactionStatusId).ToArrayAsync();
+            var users = await _context.Users.ToListAsync();
+            var products = await _context.Products.ToArrayAsync();
+            foreach (var trans in userTras)
+            {
+                trans.TransStatus = transStatus.Status;
+                foreach (var prod in products)
+                {
+                    if (prod.Id.Equals(trans.ProductId))
+                    {
+                        trans.ProductName = prod.Name;
+                    }
+                }
+                foreach (var user in users)
+                {
+                    if (user.Id.Equals(trans.UserId.ToString()))
+                    {
+                        trans.UserName = user.UserName;
+                    }
+                }
+            }
+
+            var groupedTrans = userTras.GroupBy(p => p.TransactionId);
+
+            return View(groupedTrans);
+        }
+
+        public async Task<IActionResult> ConfirmTransactions(Guid transId)
+        {
+
+            var userTras = await _context.ProductTransactions.Where(p => p.TransactionId == transId).ToArrayAsync();
+            var products = await _context.Products.ToArrayAsync();
+            var users = await _context.Users.ToListAsync();
+            var transStatus = await _context.ProductTransactionStatus.ToListAsync();
+            foreach (var trans in userTras)
+            {
+                foreach (var prod in products)
+                {
+                    if (prod.Id.Equals(trans.ProductId))
+                    {
+                        trans.ProductName = prod.Name;
+                    }
+                }
+                foreach (var status in transStatus)
+                {
+                    if (status.ProductTransactionStatusId.Equals(trans.TransactionStatusId))
+                    {
+                        trans.TransStatus = status.Status;
+                    }
+                }
+                foreach (var user in users)
+                {
+                    if (user.Id.Equals(trans.UserId.ToString()))
+                    {
+                        trans.UserName = user.UserName;
+                    }
+                }
+            }
+
+            var groupedTrans = userTras.GroupBy(p => p.TransactionId);
+
+            return View(groupedTrans);
+        }
+
+        public async Task<IActionResult> ConfirmDeliverTransaction(Guid transId)
+        {
+
+            var userTras = await _context.ProductTransactions.Where(p => p.TransactionId == transId).ToArrayAsync();
+            var transStatus = await _context.ProductTransactionStatus.FirstOrDefaultAsync(s => s.Status.Equals(ProductTransactionStatusType.Completed.ToString()));
+            foreach (var trans in userTras)
+            {
+                trans.TransactionStatusId = transStatus.ProductTransactionStatusId;
+
+                _context.Update(trans);
+                _context.SaveChanges();
+
+            }
+
+            var transStatus2 = await _context.ProductTransactionStatus.FirstOrDefaultAsync(s => s.Status.Equals(ProductTransactionStatusType.Pending.ToString()));
+            var userTras2 = await _context.ProductTransactions.Where(p => p.TransactionStatusId == transStatus2.ProductTransactionStatusId).ToArrayAsync();
+            var users = await _context.Users.ToListAsync();
+            var products = await _context.Products.ToArrayAsync();
+            foreach (var trans in userTras2)
+            {
+                trans.TransStatus = transStatus2.Status;
+                foreach (var prod in products)
+                {
+                    if (prod.Id.Equals(trans.ProductId))
+                    {
+                        trans.ProductName = prod.Name;
+                    }
+                }
+                foreach (var user in users)
+                {
+                    if (user.Id.Equals(trans.UserId.ToString()))
+                    {
+                        trans.UserName = user.UserName;
+                    }
+                }
+            }
+
+            var groupedTrans = userTras2.GroupBy(p => p.TransactionId);
+
+            return View("AdminProductsTransactions", groupedTrans);
+        }
+
 
         private bool ProductExists(Guid id)
         {

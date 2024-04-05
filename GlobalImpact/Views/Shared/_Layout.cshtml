@@ -52,6 +52,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Utilizadores</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="AdminProductsTransactions">Encomendas</a>
+                                </li>
                             }
 
                             <li class="nav-item">
@@ -61,7 +64,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="RecyclingTransaction" asp-action="TransacionList" asp-route-userId="@UserManager.GetUserId(User)">Transações Reciclagem</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ProductsTransactions" asp-route-userId="@UserManager.GetUserId(User)">Transações Compras</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ProductsTransactions" asp-route-userId="@UserManager.GetUserId(User)">Minhas Encomendas</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Store" asp-action="Index" asp-route-userId="@UserManager.GetUserId(User)">Loja Virtual</a>
