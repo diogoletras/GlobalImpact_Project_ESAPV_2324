@@ -2,6 +2,15 @@
 
 <div class="container">
     <h1>Administração de Encomendas</h1>
+    <form method="post" asp-controller="Products" asp-action="FilterAdminTransactions" class="d-flex align-items-center">
+        <div class="mr-2">
+            <input type="date" id="date" name="date" class="form-control" style="width: 200px;">
+        </div>
+        <div class="mr-2">
+            <input type="text" id="userName" name="userName" class="form-control" style="width: 200px;">
+        </div>
+        <button type="submit" class="btn-grad">Filtrar</button>
+    </form>
     <div class="row">
         <div class="col">
             @foreach (var group in Model)

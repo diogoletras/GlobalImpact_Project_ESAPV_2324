@@ -583,7 +583,48 @@ namespace GlobalImpact.Controllers
             return View(groupedTrans);
         }
 
-        public async Task<IActionResult> ConfirmTransactions(Guid transId)
+        public async Task<IActionResult> FilterAdminTransactions(string userName, DateTime date)
+        {
+            var transStatus = await _context.ProductTransactionStatus.FirstOrDefaultAsync(s => s.Status.Equals(ProductTransactionStatusType.Pending.ToString()));
+            var userTras = await _context.ProductTransactions.Where(p => p.TransactionStatusId == transStatus.ProductTransactionStatusId).ToArrayAsync();
+            var users = await _context.Users.ToListAsync();
+            var products = await _context.Products.ToArrayAsync();
+            foreach (var trans in userTras)
+            {
+                trans.TransStatus = transStatus.Status;
+                foreach (var prod in products)
+                {
+                    if (prod.Id.Equals(trans.ProductId))
+                    {
+                        trans.ProductName = prod.Name;
+                    }
+                }
+                foreach (var user in users)
+                {
+                    if (user.Id.Equals(trans.UserId.ToString()))
+                    {
+                        trans.UserName = user.UserName;
+                    }
+                }
+            }
+
+            DateTime dataReferencia = new DateTime(2024, 1, 1);
+
+            if (date > dataReferencia)
+            {
+                userTras = userTras.Where(t => t.Date.Year == date.Year && t.Date.Month == date.Month && t.Date.Day == date.Day).ToArray();
+            }
+            if(userName != null)
+            {
+                userTras = userTras.Where(t => t.UserName.Contains(userName, StringComparison.OrdinalIgnoreCase)).ToArray();
+            }
+
+            var groupedTrans = userTras.GroupBy(p => p.TransactionId);
+
+            return View("AdminProductsTransactions",groupedTrans);
+        }
+
+            public async Task<IActionResult> ConfirmTransactions(Guid transId)
         {
 
             var userTras = await _context.ProductTransactions.Where(p => p.TransactionId == transId).ToArrayAsync();
