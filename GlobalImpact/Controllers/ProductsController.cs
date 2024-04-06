@@ -409,10 +409,67 @@ namespace GlobalImpact.Controllers
             var userTras2 = userTras.OrderByDescending(p => p.Date);
             var groupedTrans = userTras2.GroupBy(p => p.TransactionId);
 
+            List<SelectListItem> statusList = new List<SelectListItem>();
+            statusList.Add(new SelectListItem { Text = "", Value = "" });
+            foreach (var status in transStatus)
+            {
+                statusList.Add(new SelectListItem { Text = status.Status, Value = status.ProductTransactionStatusId.ToString()});
+            }
+            ViewBag.Status = statusList;
+
             return View(groupedTrans);
         }
 
-        public async Task<IActionResult> CancelTransaction(Guid transId)
+        public async Task<IActionResult> FilterProductsTransactions(string userId, DateTime date,string statusId)
+        {
+            var userTras = await _context.ProductTransactions.Where(p => p.UserId == new Guid(userId)).ToArrayAsync();
+            var products = await _context.Products.ToArrayAsync();
+            var transStatus = await _context.ProductTransactionStatus.ToListAsync();
+            foreach (var trans in userTras)
+            {
+                foreach (var prod in products)
+                {
+                    if (prod.Id.Equals(trans.ProductId))
+                    {
+                        trans.ProductName = prod.Name;
+                    }
+                }
+                foreach (var status in transStatus)
+                {
+                    if (status.ProductTransactionStatusId.Equals(trans.TransactionStatusId))
+                    {
+                        trans.TransStatus = status.Status;
+                    }
+                }
+            }
+
+            if(statusId != null)
+            {
+                userTras = userTras.Where(t => t.TransactionStatusId == new Guid(statusId)).ToArray();
+            }
+
+            DateTime dataReferencia = new DateTime(2024, 1, 1);
+
+            if(date>dataReferencia)
+            {
+                userTras = userTras.Where(t => t.Date.Year == date.Year && t.Date.Month == date.Month && t.Date.Day == date.Day).ToArray();
+            }
+
+            var userTras2 = userTras.OrderByDescending(p => p.Date);
+            var groupedTrans = userTras2.GroupBy(p => p.TransactionId);
+
+            List<SelectListItem> statusList = new List<SelectListItem>();
+            statusList.Add(new SelectListItem { Text = "", Value = "" });
+            foreach (var status in transStatus)
+            {
+                statusList.Add(new SelectListItem { Text = status.Status, Value = status.ProductTransactionStatusId.ToString() });
+            }
+            ViewBag.Status = statusList;
+
+            return View("ProductsTransactions", groupedTrans);
+        }
+
+            public async Task<IActionResult> CancelTransaction(Guid transId)
         {
             var userTras = await _context.ProductTransactions.Where(p => p.TransactionId == transId).ToArrayAsync();
             var products = await _context.Products.ToArrayAsync();
@@ -484,6 +541,14 @@ namespace GlobalImpact.Controllers
 
             var userTras3 = userTras2.OrderByDescending(p => p.Date);
             var groupedTrans = userTras3.GroupBy(p => p.TransactionId);
+
+            List<SelectListItem> statusList = new List<SelectListItem>();
+            statusList.Add(new SelectListItem { Text = "", Value = "" });
+            foreach (var status in transStatus2)
+            {
+                statusList.Add(new SelectListItem { Text = status.Status, Value = status.ProductTransactionStatusId.ToString() });
+            }
+            ViewBag.Status = statusList;
 
             return View("ProductsTransactions", groupedTrans);
         }
