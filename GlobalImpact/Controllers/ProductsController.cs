@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using GlobalImpact.Enumerates;
+using GlobalImpact.Interfaces;
 
 namespace GlobalImpact.Controllers
 {
@@ -20,14 +21,16 @@ namespace GlobalImpact.Controllers
         /// Classe de controlador de produtos.
         /// </summary>
         private readonly ApplicationDbContext _context;
+        private readonly IEmailService _emailService;
 
         /// <summary>
         /// Constutor da classe.
         /// </summary>
         /// <param name="context"> parametro para a database</param>
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context, IEmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         [Authorize(Roles = "admin")]
@@ -666,19 +669,48 @@ namespace GlobalImpact.Controllers
 
             var userTras = await _context.ProductTransactions.Where(p => p.TransactionId == transId).ToArrayAsync();
             var transStatus = await _context.ProductTransactionStatus.FirstOrDefaultAsync(s => s.Status.Equals(ProductTransactionStatusType.Completed.ToString()));
+            var products = await _context.Products.ToArrayAsync();
+            var user = _context.Users.FirstOrDefault(u => u.Id.Equals(userTras.FirstOrDefault().UserId.ToString()));
             foreach (var trans in userTras)
             {
                 trans.TransactionStatusId = transStatus.ProductTransactionStatusId;
-
                 _context.Update(trans);
                 _context.SaveChanges();
-
+                foreach (var prod in products)
+                {
+                    if (prod.Id.Equals(trans.ProductId))
+                    {
+                        trans.ProductName = prod.Name;
+                    }
+                }
             }
+
+            string itemList = "";
+            int totalPoints = 0;
+
+
+            foreach (var trans in userTras)
+            {
+                itemList += $"{trans.ProductName} P/uni {trans.Points} x {trans.Quantity} = {trans.Points * trans.Quantity} GIcoins \n";
+                totalPoints += trans.Points * trans.Quantity;
+            }
+            itemList += $"\nTotal da Encomenda: {totalPoints} GIcoins\n";
+
+            string emailBody = $"Olá {user.UserName},\n" +
+                                $"Obrigado pela sua Contribuição na GlobalImpack! \n\n" +
+                                $"Lista: \n" +
+                                $"{itemList} \n\n" +
+                                $"A sua encomenda foi entregue com sucesso,\n" +
+                                $"Volte Sempre !!,\n" +
+                                $"Atenciosamente,\n" +
+                                $"GlobalImpack Develop Team";
+
+            await _emailService.SendEmailAsync(user.Email, $"Encomenda Entregue - GlobalImpack ID {userTras.FirstOrDefault().TransactionId.ToString()}", emailBody);
 
             var transStatus2 = await _context.ProductTransactionStatus.FirstOrDefaultAsync(s => s.Status.Equals(ProductTransactionStatusType.Pending.ToString()));
             var userTras2 = await _context.ProductTransactions.Where(p => p.TransactionStatusId == transStatus2.ProductTransactionStatusId).ToArrayAsync();
             var users = await _context.Users.ToListAsync();
-            var products = await _context.Products.ToArrayAsync();
+            
             foreach (var trans in userTras2)
             {
                 trans.TransStatus = transStatus2.Status;
@@ -689,11 +721,11 @@ namespace GlobalImpact.Controllers
                         trans.ProductName = prod.Name;
                     }
                 }
-                foreach (var user in users)
+                foreach (var user1 in users)
                 {
-                    if (user.Id.Equals(trans.UserId.ToString()))
+                    if (user1.Id.Equals(trans.UserId.ToString()))
                     {
-                        trans.UserName = user.UserName;
+                        trans.UserName = user1.UserName;
                     }
                 }
             }

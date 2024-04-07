@@ -489,16 +489,16 @@ namespace GlobalImpact.Controllers
                 int totalPoints = 0;
                 foreach(var item in cartItems)
                 {
-                    carItemsList += $"{item.Name} P/uni {item.Points} x {item.Quantity} = {item.Points * item.Quantity} pontos \n";
+                    carItemsList += $"{item.Name} P/uni {item.Points} x {item.Quantity} = {item.Points * item.Quantity} GIcoins \n";
                     totalPoints += item.Points * item.Quantity;
                 }
-                carItemsList += $"\nTotal da Encomenda: {totalPoints} pontos \n";
+                carItemsList += $"\nTotal da Encomenda: {totalPoints} GIcoins\n";
 
                 string emailBody = $"Olá {user.UserName},\n" +
                                 $"Obrigado fazer a sua encomenda na GlobalImpack! \n\n" +
                                 $"Lista: \n" +
                                 $"{carItemsList} \n\n"+
-                                $"A sua encomenda encontra-se pronta para recolha no Campus do IPS,\n" +
+                                $"A sua encomenda encontra-se disponivel para recolha no Campus do IPS,\n" +
                                 $"Atenciosamente,\n" +
                                 $"GlobalImpack Develop Team";
 
