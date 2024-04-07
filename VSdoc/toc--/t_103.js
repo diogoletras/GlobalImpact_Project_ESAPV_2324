@@ -1,1 +1,1 @@
-c['103']=[['104',"Id Property","topic_0000000000000056.html",0],['105',"ProductId Property","topic_0000000000000058.html",0],['106',"Quantity Property","topic_0000000000000059.html",0],['107',"UserId Property","topic_0000000000000057.html",0]];
+c['103']=[['104',"StoreController Constructor","topic_0000000000000051.html",0],['105',"Methods","topic_0000000000000050_methods--.html",1]];

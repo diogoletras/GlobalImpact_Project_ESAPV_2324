@@ -1,1 +1,1 @@
-search_result['39']=["topic_0000000000000015.html","AdminController.Index Method",""];
+search_result['39']=["topic_0000000000000013.html","AccountController.ResetPassword (ResetPasswordViewModel) Method","Função Post para a trocar de PassWord."];

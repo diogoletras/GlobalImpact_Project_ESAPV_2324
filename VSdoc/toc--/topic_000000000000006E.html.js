@@ -1,1 +1,1 @@
-var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_0000000000000091.html"],['131',"GlobalImpact.Utils Namespace","topic_000000000000006E.html"]];
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_00000000000001B9.html"],['138',"GlobalImpact.Enumerates Namespace","topic_000000000000006D.html"],['139',"BinType Enumeration","topic_000000000000006E.html"]];

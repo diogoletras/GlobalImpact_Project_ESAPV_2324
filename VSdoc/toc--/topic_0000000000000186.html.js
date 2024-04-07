@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_00000000000001B9.html"],['495',"GlobalImpactTest.IClassFixture Namespace","topic_0000000000000183.html"],['496',"ApplicationDbContextFixture Class","topic_0000000000000184.html"],['497',"ApplicationDbContextFixture Constructor","topic_0000000000000186.html"]];

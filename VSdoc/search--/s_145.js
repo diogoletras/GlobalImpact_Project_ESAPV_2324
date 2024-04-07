@@ -1,1 +1,1 @@
-search_result['145']=["topic_0000000000000055_attached_props--.html","Cart Attached Properties",""];
+search_result['145']=["topic_000000000000003B.html","RecyclingBinsController.UpdateTypeChoise Method","Funçao que devolve o id do tipo de ecoponto"];

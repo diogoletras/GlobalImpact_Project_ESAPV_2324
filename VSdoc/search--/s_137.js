@@ -1,1 +1,1 @@
-search_result['137']=["topic_000000000000004E.html","AppUser.LastName Property",""];
+search_result['137']=["topic_0000000000000036.html","RecyclingBinsController.EcoLogin (EcoLogViewModel) Method","Função HttpGet que retorna a página de introduzação do código de reciclagem."];

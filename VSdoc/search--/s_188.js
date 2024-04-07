@@ -1,1 +1,1 @@
-search_result['188']=["topic_000000000000006D.html","ReciclingBin.Status Property",""];
+search_result['188']=["topic_000000000000004F.html","RecyclingTransactionController.UpdateBin Method",""];

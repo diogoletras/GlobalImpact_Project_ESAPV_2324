@@ -1,1 +1,1 @@
-search_result['130']=["topic_000000000000004C.html","AppUser Class",""];
+search_result['130']=["topic_0000000000000034.html","RecyclingBinsController Constructor","Construtor da classe."];

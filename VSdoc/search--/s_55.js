@@ -1,1 +1,1 @@
-search_result['55']=["topic_000000000000001C.html","HomeController Constructor",""];
+search_result['55']=["topic_0000000000000017.html","AdminController.Index Method","Função Get para retornar uma lista de Users."];

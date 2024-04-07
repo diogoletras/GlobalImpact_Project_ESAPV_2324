@@ -1,1 +1,1 @@
-search_result['14']=["topic_0000000000000007.html","AccountController.Login (String) Method","Get da página de login."];
+search_result['14']=["topic_0000000000000005.html","AccountController.Register (RegisterViewModel, String) Method","Função HttpPost função para o registo de um user."];

@@ -1,1 +1,1 @@
-search_result['11']=["topic_0000000000000004_overloads--.html","AccountController.Register Method","Função HttpPost função para o registo de um user."];
+search_result['11']=["topic_0000000000000003_overloads--.html","AccountController.Register Method","Função para o retornar (get) da página de registo."];

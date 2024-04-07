@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_00000000000001B9.html"],['267',"GlobalImpact.ViewModels.Account Namespace","topic_00000000000000E8.html"],['271',"ExternalLoginViewModel Class","topic_00000000000000EB.html"],['272',"Properties","topic_00000000000000EB_props--.html"],['273',"Age Property","topic_00000000000000F0.html"]];

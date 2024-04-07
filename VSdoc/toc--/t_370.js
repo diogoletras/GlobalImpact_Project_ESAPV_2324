@@ -1,0 +1,1 @@
+c['370']=[['371',"RecyclingStoreIntegrationTest Constructor","topic_000000000000019E.html",0],['372',"Methods","topic_000000000000019D_methods--.html",1]];

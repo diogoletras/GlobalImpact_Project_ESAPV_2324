@@ -1,1 +1,1 @@
-search_result['47']=["topic_000000000000001A.html","AdminController.Create (RegisterViewModel, String) Method",""];
+search_result['47']=["topic_0000000000000015.html","AdminController Class","Controller da Gestao de Administraçao"];

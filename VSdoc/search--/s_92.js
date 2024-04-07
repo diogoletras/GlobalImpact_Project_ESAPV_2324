@@ -1,1 +1,1 @@
-search_result['92']=["topic_0000000000000030_overloads--.html","ReciclingBinsController.Edit Method",""];
+search_result['92']=["topic_0000000000000023.html","ProductsController Constructor","Constutor da classe."];

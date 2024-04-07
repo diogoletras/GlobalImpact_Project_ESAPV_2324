@@ -1,1 +1,1 @@
-search_result['170']=["topic_0000000000000060.html","Product.Description Property",""];
+search_result['170']=["topic_0000000000000047.html","RecyclingTransactionController Constructor","Construtor do Controller RecyclingTransactionController"];

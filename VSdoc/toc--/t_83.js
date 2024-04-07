@@ -1,1 +1,1 @@
-c['83']=[['84',"SendEmailAsync Method","topic_0000000000000045.html",0]];
+c['83']=[['84',"Edit(Nullable\u003cGuid\u003e) Method","topic_000000000000003D.html",0],['85',"Edit(Guid, RecyclingBin) Method","topic_000000000000003E.html",0]];

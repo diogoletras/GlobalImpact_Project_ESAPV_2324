@@ -1,1 +1,1 @@
-search_result['142']=["topic_0000000000000053.html","AppUser.Role Property",""];
+search_result['142']=["topic_0000000000000039.html","RecyclingBinsController.Details Method","Função HttpGet que retorna o detalhes de um ecoponto."];

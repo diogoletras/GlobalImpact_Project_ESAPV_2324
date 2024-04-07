@@ -1,1 +1,1 @@
-search_result['179']=["topic_0000000000000065_props--.html","ReciclingBin Properties",""];
+search_result['179']=["topic_000000000000004B.html","RecyclingTransactionController.Rec Method","Função HTTPPost que recebe um item para reciclagem e verifica se é valido para o ecoponto que esta a ser utilizado"];

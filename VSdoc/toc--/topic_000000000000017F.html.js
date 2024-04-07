@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_00000000000001B9.html"],['488',"GlobalImpactTest.FakeManagers Namespace","topic_000000000000017D.html"],['489',"FakeSignInManager Class","topic_000000000000017E.html"],['490',"FakeSignInManager Constructor","topic_000000000000017F.html"]];

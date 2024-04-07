@@ -1,1 +1,1 @@
-search_result['3']=["topic_0000000000000001_events--.html","AccountController Events",""];
+search_result['3']=["topic_0000000000000001.html","AccountController Class","Controller da gestão de Acessos"];

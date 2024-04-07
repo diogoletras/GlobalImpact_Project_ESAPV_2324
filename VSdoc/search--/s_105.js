@@ -1,1 +1,1 @@
-search_result['105']=["topic_0000000000000037.html","ApplicationDbContext.AppUser Property",""];
+search_result['105']=["topic_000000000000002A.html","ProductsController.Edit (Guid, Product) Method","Função HttpPost para retornar a página da lista de produtos quando o valor ja tiver sido editado."];

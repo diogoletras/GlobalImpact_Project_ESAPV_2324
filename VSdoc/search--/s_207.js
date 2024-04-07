@@ -1,1 +1,1 @@
-search_result['207']=["topic_0000000000000074_events--.html","ExternalLoginViewModel Events",""];
+search_result['207']=["topic_0000000000000058.html","StoreController.UpdateQuantity Method","Função HTTPGet que retorna uma view com a lista atualizada de produtos, depois desses serem eliminados."];

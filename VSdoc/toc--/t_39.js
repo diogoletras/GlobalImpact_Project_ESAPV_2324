@@ -1,1 +1,1 @@
-c['39']=[['40',"HomeController Constructor","topic_000000000000001C.html",0],['41',"Methods","topic_000000000000001B_methods--.html",1]];
+c['39']=[['40',"Edit(AppUser) Method","topic_000000000000001B.html",0],['41',"Edit(string) Method","topic_000000000000001A.html",0]];

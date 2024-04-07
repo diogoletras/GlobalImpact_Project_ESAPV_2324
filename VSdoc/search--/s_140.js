@@ -1,1 +1,1 @@
-search_result['140']=["topic_0000000000000051.html","AppUser.NIF Property",""];
+search_result['140']=["topic_0000000000000037_overloads--.html","RecyclingBinsController.EcoLogin Method","Função HttpPost que retorna a página de simulação de reciclagem no ecoponto escolhido em caso de sucesso, e em caso de insucesso retorna para a página de introduzição do código único."];

@@ -1,1 +1,1 @@
-c['72']=[['73',"ApplicationDbContext Constructor","topic_0000000000000036.html",0],['74',"Properties","topic_0000000000000035_props--.html",1]];
+c['72']=[['73',"Create(string) Method","topic_000000000000003A.html",0],['74',"Create(RecyclingBin) Method","topic_000000000000003C.html",0]];

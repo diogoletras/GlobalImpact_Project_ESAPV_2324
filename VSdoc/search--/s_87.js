@@ -1,1 +1,1 @@
-search_result['87']=["topic_000000000000002E.html","ReciclingBinsController.Create  Method",""];
+search_result['87']=["topic_0000000000000022_attached_props--.html","ProductsController Attached Properties",""];

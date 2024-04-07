@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_00000000000001B9.html"],['392',"GlobalImpactTest.ControllerTests Namespace","topic_0000000000000124.html"],['404',"AdminControllerTest Class","topic_000000000000012F.html"],['420',"Fields","topic_000000000000012F_vars--.html"]];

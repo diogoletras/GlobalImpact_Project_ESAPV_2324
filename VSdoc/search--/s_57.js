@@ -1,1 +1,1 @@
-search_result['57']=["topic_000000000000001E.html","HomeController.Privacy Method",""];
+search_result['57']=["topic_0000000000000018.html","AdminController.Create (String) Method","Função Get para a página de criação de um User."];

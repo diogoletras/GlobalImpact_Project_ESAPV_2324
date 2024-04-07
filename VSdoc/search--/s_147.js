@@ -1,1 +1,1 @@
-search_result['147']=["topic_0000000000000055_methods--.html","Cart Methods",""];
+search_result['147']=["topic_000000000000003C_overloads--.html","RecyclingBinsController.Create Method","Função HttpPost que retorna a página do ecoponto criado."];

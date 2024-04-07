@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="GENERATOR" content="VSdocman - documentation generator; https://www.helixoft.com" />
 	<link rel="icon" href="favicon.ico">
-	<title>ApplicationDbContext Constructor</title>
+	<title>RecyclingBinsController.EcoLogin (EcoLogViewModel) Method</title>
 
 	<link rel="stylesheet" type="text/css" href="msdn2019/toc.css" />
 	<script src="msdn2019/toc.js"></script>
@@ -74,11 +74,11 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
   </div>
 
 <div id="mainBody">
-		<h1 class="title">ApplicationDbContext Constructor</h1>
+		<h1 class="title">RecyclingBinsController.EcoLogin (EcoLogViewModel) Method</h1>
         
 		<div class="metadata">
         Namespace:
-<a href="topic_0000000000000034.html">GlobalImpact.Data</a>
+<a href="topic_0000000000000000.html">GlobalImpact.Controllers</a>
 
 
 
@@ -89,6 +89,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
        
        
+        <summary-info>Função HttpGet que retorna a página de introduzação do código de reciclagem.</summary-info>
 
 
 
@@ -138,7 +139,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeVB">
-					<pre xml:space="preserve" class="brush: vb">Public Sub New( _&nbsp;<br />   ByVal <i>options</i> As <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions-1">DbContextOptions</a>(Of <a target="_top" href="topic_0000000000000035.html" onclick="this.target='';return true;">ApplicationDbContext</a>) _&nbsp;<br />)</pre>			
+					<pre xml:space="preserve" class="brush: vb">&lt;HttpGet()&gt; _&nbsp;<br />Public Function EcoLogin( _&nbsp;<br />   ByVal <i>model</i> As <a target="_top" href="topic_0000000000000114.html" onclick="this.target='';return true;">EcoLogViewModel</a> _&nbsp;<br />) As <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1">Task</a>(Of <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a>)</pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -177,7 +178,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeCsharp">
-					<pre xml:space="preserve" class="brush: csharp">public ApplicationDbContext(&nbsp;<br />   <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions-1">DbContextOptions</a>&lt;<a target="_top" href="topic_0000000000000035.html" onclick="this.target='';return true;">ApplicationDbContext</a>&gt; <i>options</i>&nbsp;<br />)</pre>			
+					<pre xml:space="preserve" class="brush: csharp">[HttpGet()]&nbsp;<br />public <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a>&gt; EcoLogin(&nbsp;<br />   <a target="_top" href="topic_0000000000000114.html" onclick="this.target='';return true;">EcoLogViewModel</a> <i>model</i>&nbsp;<br />)</pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -217,7 +218,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeCpp">
-					<pre xml:space="preserve" class="brush: cpp">public: &nbsp;<br />ApplicationDbContext(&nbsp;<br />   <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions-1">DbContextOptions</a>&lt;<a target="_top" href="topic_0000000000000035.html" onclick="this.target='';return true;">ApplicationDbContext</a>^&gt;^ <i>options</i>&nbsp;<br />) </pre>			
+					<pre xml:space="preserve" class="brush: cpp">[HttpGet()]&nbsp;<br />public: &nbsp;<br /><a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a>^&gt;^ EcoLogin(&nbsp;<br />   <a target="_top" href="topic_0000000000000114.html" onclick="this.target='';return true;">EcoLogViewModel</a>^ <i>model</i>&nbsp;<br />) </pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -268,22 +269,29 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 
 <h4 class="subHeading">
-	Parameters</h4><dl paramName="options" class="parameterList">
+	Parameters</h4><dl paramName="model" class="parameterList">
 	<dt>
 		<span class="parameter">
-			options
+			model
 		</span>
 	</dt>
 	<dd>
-		<a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions-1">DbContextOptions</a>&lt;<a target="_top" href="topic_0000000000000035.html" onclick="this.target='';return true;">ApplicationDbContext</a>&gt; 
+		<a target="_top" href="topic_0000000000000114.html" onclick="this.target='';return true;">EcoLogViewModel</a> 
 	</dd>
 </dl>
 <p>
-	 
+	&lt;default&gt; 
 </p>
 
 <p />
 
+	<h4 class="subHeading">
+		Return Value</h4>
+	<a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a>&gt; 
+		<p>
+		retorna a página de introduzação do código de reciclagem 
+	</p>
+	
 
 
 
@@ -371,11 +379,11 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 	<div id="seeAlsoSection" class="section">	
 		<div>
-			<a href="topic_0000000000000035.html">ApplicationDbContext Class</a><br />
+			<a href="topic_0000000000000033.html">RecyclingBinsController Class</a><br />
 
 
 
-<a href="topic_0000000000000034.html">GlobalImpact.Data Namespace</a><br />
+<a href="topic_0000000000000000.html">GlobalImpact.Controllers Namespace</a><br />
 
 
 			

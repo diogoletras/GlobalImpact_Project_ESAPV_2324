@@ -1,1 +1,1 @@
-search_result['13']=["topic_0000000000000006.html","AccountController.ConfirmEmailTask Method","se o email for verificado com sucesso, redericiona para a página de confirmação."];
+search_result['13']=["topic_0000000000000004_overloads--.html","AccountController.Register Method","Função Get para retornar a página de registo."];

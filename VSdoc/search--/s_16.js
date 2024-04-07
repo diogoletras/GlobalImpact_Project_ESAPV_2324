@@ -1,1 +1,1 @@
-search_result['16']=["topic_0000000000000008.html","AccountController.Login (LoginViewModel, String) Method","Função Post do login."];
+search_result['16']=["topic_0000000000000006.html","AccountController.EmailSending Method","Função Get que retorna a pagina de envio de email de confirmaçao"];

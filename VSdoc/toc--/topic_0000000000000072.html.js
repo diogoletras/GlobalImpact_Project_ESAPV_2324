@@ -1,1 +1,1 @@
-var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_0000000000000091.html"],['135',"GlobalImpact.ViewModels.Account Namespace","topic_0000000000000071.html"],['136',"ConfirmEmailViewModel Class","topic_0000000000000072.html"]];
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_00000000000001B9.html"],['138',"GlobalImpact.Enumerates Namespace","topic_000000000000006D.html"],['140',"ProductTransactionStatusType Enumeration","topic_0000000000000072.html"]];

@@ -1,1 +1,1 @@
-search_result['152']=["topic_0000000000000058.html","Cart.ProductId Property",""];
+search_result['152']=["topic_000000000000003F.html","RecyclingBinsController.Delete Method","Função HttpGet para a eliminação de um ecoponto."];

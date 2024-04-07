@@ -1,1 +1,1 @@
-search_result['193']=["topic_000000000000006F_methods--.html","EmailSender Methods",""];
+search_result['193']=["topic_0000000000000050_props--.html","StoreController Properties",""];

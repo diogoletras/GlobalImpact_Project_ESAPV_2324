@@ -1,1 +1,1 @@
-c['24']=[['25',"ResetPassword(string) Method","topic_0000000000000010.html",0],['26',"ResetPassword(ResetPasswordViewModel) Method","topic_0000000000000011.html",0]];
+c['24']=[['25',"Register(string) Method","topic_0000000000000004.html",0],['26',"Register(RegisterViewModel, string) Method","topic_0000000000000005.html",0]];

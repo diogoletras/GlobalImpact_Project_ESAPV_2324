@@ -1,1 +1,1 @@
-search_result['154']=["topic_000000000000005A.html","ErrorViewModel Class",""];
+search_result['154']=["topic_0000000000000041.html","RecyclingBinsController.Filter Method","Funçao HTTPGet que devolve uma view com os ecopontos filtrados"];

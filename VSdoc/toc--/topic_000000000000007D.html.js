@@ -1,1 +1,1 @@
-var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_0000000000000091.html"],['135',"GlobalImpact.ViewModels.Account Namespace","topic_0000000000000071.html"],['150',"LoginViewModel Class","topic_000000000000007D.html"]];
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_00000000000001B9.html"],['153',"GlobalImpact.Models Namespace","topic_000000000000007C.html"],['243',"RoleType Enumeration","topic_000000000000007D.html"]];

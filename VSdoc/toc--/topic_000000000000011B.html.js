@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_00000000000001B9.html"],['317',"GlobalImpact.ViewModels.RecyclingBin Namespace","topic_0000000000000113.html"],['321',"FilterViewModel Class","topic_0000000000000116.html"],['322',"Properties","topic_0000000000000116_props--.html"],['327',"Status Property","topic_000000000000011B.html"]];

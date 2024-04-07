@@ -1,0 +1,1 @@
+search_result['426']=["topic_00000000000000BB.html","RecItems Class","Classe modelo RecItems.\r\nDados sobre os items reciclaveis."];

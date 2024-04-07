@@ -1,1 +1,1 @@
-search_result['131']=["topic_000000000000004C_attached_props--.html","AppUser Attached Properties",""];
+search_result['131']=["topic_0000000000000035.html","RecyclingBinsController.EcoLog Method","Funçao HttpGet que retorna a página de interface simulada para introduzir o código do ecoponto."];

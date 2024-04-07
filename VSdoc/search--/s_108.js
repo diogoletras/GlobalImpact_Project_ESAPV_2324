@@ -1,1 +1,1 @@
-search_result['108']=["topic_000000000000003A.html","ApplicationDbContext.ReciclingBins Property",""];
+search_result['108']=["topic_000000000000002A_methods--.html","ReciclingBinsController Methods",""];

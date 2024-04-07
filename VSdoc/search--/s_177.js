@@ -1,1 +1,1 @@
-search_result['177']=["topic_0000000000000065_events--.html","ReciclingBin Events",""];
+search_result['177']=["topic_0000000000000049.html","RecyclingTransactionController.TransacionList Method","Funçao HTTPpost que recebe o id do utilizador e retorna uma view com as transaçoes de reciclagem do respetivo utilizador"];
