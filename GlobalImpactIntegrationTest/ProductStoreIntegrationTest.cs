@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GlobalImpact.Controllers;
 using GlobalImpact.Data;
+using GlobalImpact.Interfaces;
 using GlobalImpact.Models;
 using GlobalImpact.Utils;
 using GlobalImpact.ViewModels.Account;
@@ -19,6 +20,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
+using ConfigurationManager = Microsoft.Extensions.Configuration.ConfigurationManager;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace GlobalImpactIntegrationTest
@@ -28,12 +30,15 @@ namespace GlobalImpactIntegrationTest
 		private ApplicationDbContext dbContext;
 		private StoreController controllerStore;
 		private ProductsController controllerProducts;
+        private IEmailService emailService;
 
-		public ProductStoreIntegrationTest(ApplicationDbContextFixture context)
+
+        public ProductStoreIntegrationTest(ApplicationDbContextFixture context)
 		{
 			dbContext = context.DbContext;
-			controllerProducts = new ProductsController(dbContext);
-			controllerStore = new StoreController(dbContext);
+			emailService = new EmailService(new ConfigurationManager());
+			controllerProducts = new ProductsController(dbContext, emailService);
+			controllerStore = new StoreController(dbContext, emailService);
 		}
 
 		[Fact]

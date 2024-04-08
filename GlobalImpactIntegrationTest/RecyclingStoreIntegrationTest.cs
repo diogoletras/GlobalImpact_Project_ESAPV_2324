@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GlobalImpact.Controllers;
 using GlobalImpact.Data;
+using GlobalImpact.Interfaces;
 using GlobalImpact.Models;
 using GlobalImpact.Utils;
 using GlobalImpact.ViewModels.Account;
@@ -20,6 +21,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
+using ConfigurationManager = Microsoft.Extensions.Configuration.ConfigurationManager;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace GlobalImpactIntegrationTest
@@ -34,10 +36,12 @@ namespace GlobalImpactIntegrationTest
         private RecyclingBinsController controllerRecBin;
         private RecyclingTransactionController controllerRecBinTrans;
         private StoreController controllerStore;
+        private IEmailService emailService;
 
         public RecyclingStoreIntegrationTest(ApplicationDbContextFixture context)
         {
             dbContext = context.DbContext;
+            emailService = new EmailService(new ConfigurationManager());
 
             var listRoles = dbContext.Roles.AsQueryable();
 
@@ -76,7 +80,7 @@ namespace GlobalImpactIntegrationTest
                 roleManagerMock.Object, new EmailService(new ConfigurationManager()), dbContext);
 
             controllerRecBinTrans = new RecyclingTransactionController(dbContext, signInManagerMock.Object);
-            controllerStore = new StoreController(dbContext);
+            controllerStore = new StoreController(dbContext, emailService);
         }
 
         [Fact]

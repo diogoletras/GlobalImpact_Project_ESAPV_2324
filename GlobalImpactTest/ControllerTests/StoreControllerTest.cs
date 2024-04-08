@@ -1,10 +1,14 @@
 ﻿using GlobalImpact.Controllers;
 using GlobalImpact.Data;
+using GlobalImpact.Interfaces;
+using GlobalImpact.Utils;
 using GlobalImpactTest.IClassFixture;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using ConfigurationManager = Microsoft.Extensions.Configuration.ConfigurationManager;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,13 +18,15 @@ namespace GlobalImpactTest.ControllerTests
     {
         private ApplicationDbContext dbContext;
         private StoreController controller;
+        private IEmailService emailService;
 
 
         public StoreControllerTest(ApplicationDbContextFixture context)
         {
             dbContext = context.DbContext;
+            emailService = new EmailService(new ConfigurationManager());
 
-            controller = new StoreController(dbContext);
+            controller = new StoreController(dbContext, emailService);
         }
 
 

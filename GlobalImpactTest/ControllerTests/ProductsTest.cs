@@ -1,30 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GlobalImpact.Controllers;
 using GlobalImpact.Data;
 using GlobalImpact.Models;
+using GlobalImpact.Services;
 using GlobalImpactTest.FakeManagers;
 using GlobalImpactTest.IClassFixture;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using ConfigurationManager = Microsoft.Extensions.Configuration.ConfigurationManager;
 using Moq;
+using GlobalImpact.Interfaces;
+using GlobalImpact.Utils;
+using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace GlobalImpactTest.ControllerTests
 {
-    public class ProductsTest : IClassFixture<ApplicationDbContextFixture> 
+    public class ProductsTest : IClassFixture<ApplicationDbContextFixture>
     {
         private Mock<FakeUserManager> userManagerMock;
         private ApplicationDbContext dbContext;
-        private ProductsController controller;		
+        private ProductsController controller;
 
-		public ProductsTest(ApplicationDbContextFixture context)
+        private IEmailService emailService;
+
+        public ProductsTest(ApplicationDbContextFixture context)
         {
             dbContext = context.DbContext;
+            emailService = new EmailService(new ConfigurationManager());
 
             var users = new List<AppUser>
             {
@@ -77,7 +86,7 @@ namespace GlobalImpactTest.ControllerTests
                 .ReturnsAsync(IdentityResult.Success);
 
 
-			controller = new ProductsController(dbContext);
+            controller = new ProductsController(dbContext, emailService);
             userManagerMock.Setup(u => u.GetUserAsync(controller.User)).ReturnsAsync(users.First());
         }
 
@@ -97,10 +106,10 @@ namespace GlobalImpactTest.ControllerTests
             var products = dbContext.Products.ToList();
             Assert.Equal(5, products.Count);
 
-            var filterProducts = dbContext.Products.Where(p => p.ProductCategoryId.ToString().Equals(categoria)).ToList() ;
+            var filterProducts = dbContext.Products.Where(p => p.ProductCategoryId.ToString().Equals(categoria)).ToList();
             Assert.Equal(1, filterProducts.Count);
 
-            var result = controller.Filtra(null,float.NaN,float.NaN,categoria);
+            var result = controller.Filtra(null, float.NaN, float.NaN, categoria);
             Assert.IsType<Task<IActionResult>>(result);
         }
 
@@ -132,66 +141,118 @@ namespace GlobalImpactTest.ControllerTests
 
             var result = controller.Create(product);
             var viewResult = Assert.IsType<ViewResult>(result.Result);
-			var model = Assert.IsType<Product>(viewResult.Model);
+            var model = Assert.IsType<Product>(viewResult.Model);
             Assert.NotNull(model);
 
-		}
+        }
 
 
         [Fact]
         public async void DeleteProduct_GetPage()
         {
             var prod1 = dbContext.Products.FirstOrDefault();
-			var result = controller.Delete(prod1.Id);
-			var resultView = Assert.IsType<Task<IActionResult>>(result);
-			var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
-			var model = Assert.IsType<Product>(mod.Model);
-		}
+            var result = controller.Delete(prod1.Id);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+            var model = Assert.IsType<Product>(mod.Model);
+        }
 
-		[Fact]
-		public async void CanDeleteProduct_Success()
-		{
-			var prod1 = dbContext.Products.FirstOrDefault();
-			var result = controller.Delete(prod1.Id);
-			var resultView = Assert.IsType<Task<IActionResult>>(result);
-			var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
-			var model = Assert.IsType<Product>(mod.Model);
+        [Fact]
+        public async void CanDeleteProduct_Success()
+        {
+            var prod1 = dbContext.Products.FirstOrDefault();
+            var result = controller.Delete(prod1.Id);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+            var model = Assert.IsType<Product>(mod.Model);
 
             dbContext.Products.Remove(prod1);
             dbContext.SaveChanges();
 
-			var result2 = controller.Delete(prod1.Id);
-			var resultView2 = Assert.IsType<Task<IActionResult>>(result2);
-			var mod2 = Assert.IsAssignableFrom<NotFoundResult>(resultView2.Result);
-		}
+            var result2 = controller.Delete(prod1.Id);
+            var resultView2 = Assert.IsType<Task<IActionResult>>(result2);
+            var mod2 = Assert.IsAssignableFrom<NotFoundResult>(resultView2.Result);
+        }
 
         [Fact]
         public async void EditProduct_CanGetPage()
         {
-			var prod1 = dbContext.Products.FirstOrDefault();
-			var result = controller.Edit(prod1.Id);
-			var resultView = Assert.IsType<Task<IActionResult>>(result);
-			var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
-			var model = Assert.IsType<Product>(mod.Model);
-		}
+            var prod1 = dbContext.Products.FirstOrDefault();
+            var result = controller.Edit(prod1.Id);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+            var model = Assert.IsType<Product>(mod.Model);
+        }
 
-		[Fact]
-		public async void CanEditProduct_Success()
-		{
-			var prod1 = dbContext.Products.FirstOrDefault();
-			var result = controller.Edit(prod1.Id);
-			var resultView = Assert.IsType<Task<IActionResult>>(result);
-			var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
-			var model = Assert.IsType<Product>(mod.Model);
+        [Fact]
+        public async void CanEditProduct_Success()
+        {
+            var prod1 = dbContext.Products.FirstOrDefault();
+            var result = controller.Edit(prod1.Id);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+            var model = Assert.IsType<Product>(mod.Model);
 
             prod1.Description = "Editado";
-			dbContext.Products.Update(prod1);
-			dbContext.SaveChanges();
+            dbContext.Products.Update(prod1);
+            dbContext.SaveChanges();
 
-			var result2 = controller.Edit(prod1.Id);
-			var resultView2 = Assert.IsType<Task<IActionResult>>(result2);
-			var mod2 = Assert.IsAssignableFrom<ViewResult>(resultView2.Result);
-			var model2 = Assert.IsType<Product>(mod2.Model);
-		}
-	}
+            var result2 = controller.Edit(prod1.Id);
+            var resultView2 = Assert.IsType<Task<IActionResult>>(result2);
+            var mod2 = Assert.IsAssignableFrom<ViewResult>(resultView2.Result);
+            var model2 = Assert.IsType<Product>(mod2.Model);
+        }
+        [Fact]
+        public async void CanViewProductsTransaction_Success()
+        {
+            var id = dbContext.Users.FirstOrDefault().Id.ToString();
+            var result = controller.ProductsTransactions(id);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+
+        }
+
+        [Fact]
+        public async void CanCancelProductsTransaction_Success()
+        {
+            var prodtrans = new ProductTransactions
+            {
+                Id = new Guid(),
+                TransactionId = new Guid(),
+                Date = DateTime.Now,
+                Points = 12,
+                Quantity = 1
+            };
+            //var id = dbContext.ProductTransactions.FirstOrDefault().Id.ToString();
+            var result = controller.CancelTransaction(new Guid(prodtrans.Id.ToString()));
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+
+        }
+
+        [Fact]
+        public async void CanFilterProductsTransaction_Success()
+        {
+            var id = dbContext.Users.FirstOrDefault().Id.ToString();
+            var datetime = new DateTime(2024, 1, 1);
+            var status = dbContext.ProductTransactionStatus.FirstOrDefault();
+            var result = controller.FilterProductsTransactions(id, datetime,status.ToString());
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result); 
+
+        }
+
+        [Fact]
+        public async void CanConfirmProductsTransaction_Success()
+        {
+            var id = dbContext.Users.FirstOrDefault().Id.ToString();
+
+            var result = controller.ConfirmTransactions(new Guid(id));
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+        }
+
+      
+
+    }
 }
