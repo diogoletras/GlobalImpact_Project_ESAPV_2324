@@ -18,6 +18,22 @@ export let options = {
 
 const url = 'https://localhost:7154';
 
-export default () => {
-    const res = http.get(url);
+const payload = {
+    UserName: 'Cliente',
+    Password: 'Cliente123',
+    RememberMe: false,
+    // add more properties as needed
 };
+
+export default function () {
+    const response = http.get(url + "/Account/Login");
+
+    const token = response.html().find('input[name="__RequestVerificationToken"]').attr('value');
+
+    http.post(url + "/Account/Login", JSON.stringify(payload), {
+        headers: {
+            'Content-Type': 'application/json',
+            'RequestVerificationToken': token,
+        },
+    });
+}

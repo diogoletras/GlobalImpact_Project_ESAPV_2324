@@ -23,22 +23,30 @@ export let options = {
         { duration: '5m', target: 25 },
         { duration: '2m', target: 50 }, // around the breaking point
         { duration: '5m', target: 50 },
-        { duration: '2m', target: 75 }, // beyond the breaking point
-        { duration: '5m', target: 75 },
+        { duration: '2m', target: 100 }, // beyond the breaking point
+        { duration: '5m', target: 100 },
         { duration: '10m', target: 0 }, // scale down. Recovery stage.
     ]
 };
 
 const url = 'https://localhost:7154';
 
-export default () => {
-    let data = {
-        idEco: "84696df6-c4c5-407b-870b-2802dc3fab23",
-        nome: "teste1",
-        peso: 0,
-        pontos: 0,
-    }
-
-    const res = http.post(url + '/RecyclingTransaction/FinishRecycling', data)
-    sleep(1);
+const payload = {
+    UserName: 'Cliente',
+    Password: 'Cliente123',
+    RememberMe: false,
+    // add more properties as needed
 };
+
+export default function () {
+    const response = http.get(url + "/Account/Login");
+
+    const token = response.html().find('input[name="__RequestVerificationToken"]').attr('value');
+
+    http.post(url + "/Account/Login", JSON.stringify(payload), {
+        headers: {
+            'Content-Type': 'application/json',
+            'RequestVerificationToken': token,
+        },
+    });
+}

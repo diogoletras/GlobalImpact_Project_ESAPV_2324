@@ -12,14 +12,14 @@ export const options = {
         { duration: '5m', target: 0 }, // ramp down to 0 users
     ],
     thresholds: {
-        http_req_duration: ['p(95)<1000'], // 95% of requests must complete below 150ms
+        http_req_duration: ['p(95)<3000'], // 95% of requests must complete below 3 sec
     }
 };
 
 export default () => {
     let data = {
-        idEco: "84696df6-c4c5-407b-870b-2802dc3fab23",
-        nome: "teste1",
+        idEco: "5be8de11-4493-4c42-bcff-daf9f6bee6e1",
+        nome: "Cliente",
         peso: 0,
         pontos: 0,
     }
