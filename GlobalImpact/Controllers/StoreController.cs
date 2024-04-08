@@ -401,13 +401,17 @@ namespace GlobalImpact.Controllers
         {
             var products = await _context.Products.ToListAsync();
 
-            foreach (var prod in cartItems)
+            if(quantity > 0)
             {
-                if (prod.Id == new Guid(id))
+                foreach (var prod in cartItems)
                 {
-                    prod.Quantity = quantity;
+                    if (prod.Id == new Guid(id))
+                    {
+                        prod.Quantity = quantity;
+                    }
                 }
             }
+            
 
             var productsCat = await _context.ProductsCategory.ToListAsync();
 

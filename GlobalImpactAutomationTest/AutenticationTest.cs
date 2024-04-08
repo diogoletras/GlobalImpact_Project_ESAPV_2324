@@ -250,6 +250,27 @@ namespace GlobalImpactAutomationTest
 
             Thread.Sleep(2000);
 
+            driver.FindElement(By.Id("home")).Click();
+
+            driver.FindElement(By.LinkText("LOGIN")).Click();
+
+            var username2 = driver.FindElement(By.Id("username"));
+            var password2 = driver.FindElement(By.Id("password"));
+
+            username2.SendKeys("cliente");
+            password2.SendKeys("Cliente123");
+
+            driver.FindElement(By.Id("login")).Click();
+
+            Thread.Sleep(2000);
+
+            driver.FindElement(By.LinkText("Perfil")).Click();
+
+            Thread.Sleep(2000);
+            driver.FindElement(By.Id("logout")).Click();
+
+            Thread.Sleep(2000);
+
             driver.Quit();
         }
 

@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
 @{
    var sum = 0;
    var prod = 0;
@@ -9,6 +7,25 @@
 {
     <div class="text-center">
         <table class="table">
+            <thead>
+                <tr>
+                    <td>
+                        Nome
+                    </td>
+                    <td>
+                        Descrição
+                    </td>
+                    <td>
+                        GIcoins
+                    </td>
+                    <td>
+                        Quantitade
+                    </td>
+                    <td>
+                       
+                    </td>
+                </tr>
+            </thead>
             <tbody>
             @foreach (var item in ViewBag.Items)
             {
@@ -21,7 +38,10 @@
                         @item.Description
                     </td>
                     <td>
-                        @prod pontos
+                        @prod GIcoins
+                    </td>
+                    <td>
+                        @item.Quantity
                     </td>
                     <td>
                         <img src="/img/products/@item.ImageUrl" class="detailImage" style="max-width:50px; max-height:50px;" />
@@ -29,8 +49,6 @@
                 </tr>
             }
             <tr>
-                <td>
-                </td>
                 <td>
                 </td>
                 <td>
@@ -43,6 +61,10 @@
                         sum += item.Points*item.Quantity;
                     }
                     @sum pontos
+                </td>
+                <td>
+                </td>
+                <td>
                 </td>
             </tr>
             </tbody>
