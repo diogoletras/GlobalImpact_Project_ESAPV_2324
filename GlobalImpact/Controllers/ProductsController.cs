@@ -667,9 +667,9 @@ namespace GlobalImpact.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Função que confirma as transações.
         /// </summary>
-        /// <param name="transId"></param>
+        /// <param name="transId">id da transação a ser confirmada.</param>
         /// <returns></returns>
             public async Task<IActionResult> ConfirmTransactions(Guid transId)
         {

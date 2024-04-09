@@ -20,6 +20,7 @@ using Moq;
 using GlobalImpact.Interfaces;
 using GlobalImpact.Utils;
 using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
+using Microsoft.EntityFrameworkCore;
 
 namespace GlobalImpactTest.ControllerTests
 {
@@ -234,20 +235,16 @@ namespace GlobalImpactTest.ControllerTests
         [Fact]
         public async void CanConfirmCancelProductsTransaction_Success()
         {
+            
             var prodtrans = new ProductTransactions
             {
                 Id = new Guid(),
                 TransactionId = new Guid(),
                 Date = DateTime.Now,
-                TransactionStatusId = dbContext.ProductTransactions.First().Id,
-                UserId = new Guid(dbContext.Users.First().Id),
-                ProductId = new Guid(dbContext.Products.First().Id.ToString()),
                 Points = 12,
                 Quantity = 1
             };
-            //var id = dbContext.ProductTransactions.FirstOrDefault().Id.ToString();
-            dbContext.ProductTransactions.Add(prodtrans);
-            dbContext.SaveChanges();
+            
             var result = controller.ConfirmCancelTransaction(new Guid(prodtrans.Id.ToString()));
             var resultView = Assert.IsType<Task<IActionResult>>(result);
             var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
@@ -295,8 +292,30 @@ namespace GlobalImpactTest.ControllerTests
             var result = controller.FilterAdminTransactions(userName, date);
             var resultView = Assert.IsType<Task<IActionResult>>(result);
             var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+        }
+
+        [Fact]
+        public async void CanConfirmDeliverTransaction_Success()
+        {
+            var prodtrans = new ProductTransactions
+            {
+                Id = new Guid(),
+                TransactionId = new Guid(),
+                Date = DateTime.Now,
+                Points = 12,
+                Quantity = 1
+            };
+            
+            //var id = dbContext.ProductTransactions.FirstOrDefault().Id.ToString();
+            var result = controller.ConfirmDeliverTransaction(new Guid(prodtrans.Id.ToString()));
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
 
         }
+
+
+
+
 
 
     }
