@@ -8,6 +8,7 @@ using GlobalImpact.Controllers;
 using GlobalImpact.Data;
 using GlobalImpact.Models;
 using GlobalImpact.Services;
+using GlobalImpact.Enumerates;
 using GlobalImpactTest.FakeManagers;
 using GlobalImpactTest.IClassFixture;
 using Microsoft.AspNetCore.Http;
@@ -231,14 +232,37 @@ namespace GlobalImpactTest.ControllerTests
         }
 
         [Fact]
+        public async void CanConfirmCancelProductsTransaction_Success()
+        {
+            var prodtrans = new ProductTransactions
+            {
+                Id = new Guid(),
+                TransactionId = new Guid(),
+                Date = DateTime.Now,
+                TransactionStatusId = dbContext.ProductTransactions.First().Id,
+                UserId = new Guid(dbContext.Users.First().Id),
+                ProductId = new Guid(dbContext.Products.First().Id.ToString()),
+                Points = 12,
+                Quantity = 1
+            };
+            //var id = dbContext.ProductTransactions.FirstOrDefault().Id.ToString();
+            dbContext.ProductTransactions.Add(prodtrans);
+            dbContext.SaveChanges();
+            var result = controller.ConfirmCancelTransaction(new Guid(prodtrans.Id.ToString()));
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+
+        }
+
+        [Fact]
         public async void CanFilterProductsTransaction_Success()
         {
             var id = dbContext.Users.FirstOrDefault().Id.ToString();
             var datetime = new DateTime(2024, 1, 1);
             var status = dbContext.ProductTransactionStatus.FirstOrDefault();
-            var result = controller.FilterProductsTransactions(id, datetime,status.ToString());
+            var result = controller.FilterProductsTransactions(id, datetime, status.ToString());
             var resultView = Assert.IsType<Task<IActionResult>>(result);
-            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result); 
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
 
         }
 
@@ -252,7 +276,28 @@ namespace GlobalImpactTest.ControllerTests
             var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
         }
 
-      
+
+        [Fact]
+        public async void CanViewAdminTransactions_Success()
+        {
+
+            var result = controller.AdminProductsTransactions();
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+
+        }
+
+        [Fact]
+        public async void CanFilterAdminTransactions_Success()
+        {
+            var userName = dbContext.Users.FirstOrDefault().UserName;
+            var date = DateTime.Now;
+            var result = controller.FilterAdminTransactions(userName, date);
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
+            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+
+        }
+
 
     }
 }

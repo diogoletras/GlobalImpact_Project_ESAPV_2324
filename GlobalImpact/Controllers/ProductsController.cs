@@ -69,11 +69,11 @@ namespace GlobalImpact.Controllers
             return View(products);
         }
         /// <summary>
-        /// 
+        /// Função HtpPost que retorna uma view com a lista de produtos atualizada depois de filtrada.
         /// </summary>
-        /// <param name="nome"></param>
-        /// <param name="maxp"></param>
-        /// <param name="minp"></param>
+        /// <param name="nome">parametro nome do produto, pelo qual podemos filtrar a lista.</param>
+        /// <param name="maxp">parametro maximo de preço do produto, pelo qual podemos filtrar a lista.</param>
+        /// <param name="minp">parametro minimo de preço do produto, pelo qual podemos filtrar a lista.</param>
         /// <param name="categoria"></param>
         /// <returns></returns>
 
@@ -546,7 +546,7 @@ namespace GlobalImpact.Controllers
                 
             }
 
-            var user = _context.Users.FirstOrDefault(u => u.Id.Equals(userTras[0].UserId.ToString()));
+            var user =  await _context.Users.FirstOrDefaultAsync(u => u.Id.Equals(userTras[0].UserId.ToString()));
             user.Points += totalPoints;
             _context.Update(user);
             await _context.SaveChangesAsync();
@@ -583,13 +583,13 @@ namespace GlobalImpact.Controllers
             }
             ViewBag.Status = statusList;
 
-            return View("ProdutsTransactions", groupedTrans);
+            return View("ProductsTransactions", groupedTrans);
         }
 
         /// <summary>
-        /// 
+        /// Função que retorna a lista de transações de um user Admin.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>retorna a lista de transações de um user Admin.</returns>
         public async Task<IActionResult> AdminProductsTransactions()
         {
             var transStatus = await _context.ProductTransactionStatus.FirstOrDefaultAsync(s => s.Status.Equals(ProductTransactionStatusType.Pending.ToString()));
@@ -620,11 +620,11 @@ namespace GlobalImpact.Controllers
             return View(groupedTrans);
         }
         /// <summary>
-        /// 
+        /// Função que retorna a lista de transações de um user admin, depois de ser filtrada.
         /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="date"></param>
-        /// <returns></returns>
+        /// <param name="userName">nome do user a quem a lista de transações pertence.</param>
+        /// <param name="date">data da transição.</param>
+        /// <returns>retorna a lista de transações de um user admin, depois de ser filtrada.</returns>
         public async Task<IActionResult> FilterAdminTransactions(string userName, DateTime date)
         {
             var transStatus = await _context.ProductTransactionStatus.FirstOrDefaultAsync(s => s.Status.Equals(ProductTransactionStatusType.Pending.ToString()));
