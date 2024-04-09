@@ -68,6 +68,14 @@ namespace GlobalImpact.Controllers
 			ViewBag.Categorias = category;
             return View(products);
         }
+        /// <summary>
+        /// Função HtpPost que retorna uma view com a lista de produtos atualizada depois de filtrada.
+        /// </summary>
+        /// <param name="nome">parametro nome do produto, pelo qual podemos filtrar a lista.</param>
+        /// <param name="maxp">parametro maximo de preço do produto, pelo qual podemos filtrar a lista.</param>
+        /// <param name="minp">parametro minimo de preço do produto, pelo qual podemos filtrar a lista.</param>
+        /// <param name="categoria"></param>
+        /// <returns></returns>
 
         [Authorize(Roles = "admin")]
         [HttpPost]
@@ -386,6 +394,11 @@ namespace GlobalImpact.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Função que retorna a lista de produtos que o user encomendou, na página "minhas encomendas".
+        /// </summary>
+        /// <param name="userId">id do user que fez as encomendas.</param>
+        /// <returns>retorna a lista de produtos que o user encomendou, na página "minhas encomendas"</returns>
         public async Task<IActionResult> ProductsTransactions(string userId)
         {
             var userTras = await _context.ProductTransactions.Where(p => p.UserId == new Guid(userId)).ToArrayAsync();
@@ -423,6 +436,13 @@ namespace GlobalImpact.Controllers
             return View(groupedTrans);
         }
 
+        /// <summary>
+        /// Função que retorna a lista de produtos filtrada que o user encomendou, na página "minhas encomendas".
+        /// </summary>
+        /// <param name="userId">id do user que fez as encomendas.</param>
+        /// <param name="date">parametro pelo qual a lista está ordenada.</param>
+        /// <param name="statusId">status das encomendas que o user fez.</param>
+        /// <returns></returns>
         public async Task<IActionResult> FilterProductsTransactions(string userId, DateTime date,string statusId)
         {
             var userTras = await _context.ProductTransactions.Where(p => p.UserId == new Guid(userId)).ToArrayAsync();
@@ -472,7 +492,12 @@ namespace GlobalImpact.Controllers
             return View("ProductsTransactions", groupedTrans);
         }
 
-            public async Task<IActionResult> CancelTransaction(Guid transId)
+        /// <summary>
+        /// Função que retorna deixa o utilizador cancelar a transação de produtos.
+        /// </summary>
+        /// <param name="transId"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> CancelTransaction(Guid transId)
         {
             var userTras = await _context.ProductTransactions.Where(p => p.TransactionId == transId).ToArrayAsync();
             var products = await _context.Products.ToArrayAsync();
@@ -500,6 +525,11 @@ namespace GlobalImpact.Controllers
             return View(groupedTrans);
         }
 
+        /// <summary>
+        /// Função que retorna deixa o utilizador confirmar o cancelamento da transação de produtos.
+        /// </summary>
+        /// <param name="transId"></param>
+        /// <returns></returns>
         public async Task<IActionResult> ConfirmCancelTransaction(Guid transId)
         {
             var userTras = await _context.ProductTransactions.Where(p => p.TransactionId == transId).ToArrayAsync();
@@ -516,7 +546,7 @@ namespace GlobalImpact.Controllers
                 
             }
 
-            var user = _context.Users.FirstOrDefault(u => u.Id.Equals(userTras[0].UserId.ToString()));
+            var user =  await _context.Users.FirstOrDefaultAsync(u => u.Id.Equals(userTras[0].UserId.ToString()));
             user.Points += totalPoints;
             _context.Update(user);
             await _context.SaveChangesAsync();
@@ -556,6 +586,10 @@ namespace GlobalImpact.Controllers
             return View("ProductsTransactions", groupedTrans);
         }
 
+        /// <summary>
+        /// Função que retorna a lista de transações de um user Admin.
+        /// </summary>
+        /// <returns>retorna a lista de transações de um user Admin.</returns>
         public async Task<IActionResult> AdminProductsTransactions()
         {
             var transStatus = await _context.ProductTransactionStatus.FirstOrDefaultAsync(s => s.Status.Equals(ProductTransactionStatusType.Pending.ToString()));
@@ -585,7 +619,12 @@ namespace GlobalImpact.Controllers
 
             return View(groupedTrans);
         }
-
+        /// <summary>
+        /// Função que retorna a lista de transações de um user admin, depois de ser filtrada.
+        /// </summary>
+        /// <param name="userName">nome do user a quem a lista de transações pertence.</param>
+        /// <param name="date">data da transição.</param>
+        /// <returns>retorna a lista de transações de um user admin, depois de ser filtrada.</returns>
         public async Task<IActionResult> FilterAdminTransactions(string userName, DateTime date)
         {
             var transStatus = await _context.ProductTransactionStatus.FirstOrDefaultAsync(s => s.Status.Equals(ProductTransactionStatusType.Pending.ToString()));
@@ -627,6 +666,11 @@ namespace GlobalImpact.Controllers
             return View("AdminProductsTransactions",groupedTrans);
         }
 
+        /// <summary>
+        /// Função que confirma as transações.
+        /// </summary>
+        /// <param name="transId">id da transação a ser confirmada.</param>
+        /// <returns></returns>
             public async Task<IActionResult> ConfirmTransactions(Guid transId)
         {
 
@@ -663,7 +707,11 @@ namespace GlobalImpact.Controllers
 
             return View(groupedTrans);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="transId"></param>
+        /// <returns></returns>
         public async Task<IActionResult> ConfirmDeliverTransaction(Guid transId)
         {
 
@@ -735,7 +783,11 @@ namespace GlobalImpact.Controllers
             return View("AdminProductsTransactions", groupedTrans);
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool ProductExists(Guid id)
         {
             return _context.Products.Any(e => e.Id == id);

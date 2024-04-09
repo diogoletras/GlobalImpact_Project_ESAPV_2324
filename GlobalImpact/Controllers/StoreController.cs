@@ -452,6 +452,10 @@ namespace GlobalImpact.Controllers
 
             return Json(new { success = true });
         }
+        /// <summary>
+        /// Função HTTPGet que retorna uma view com uma lista de produtos escolhidos pelo user.
+        /// </summary>
+        /// <returns></returns>
 
         [HttpGet]
         public async Task<IActionResult> Checkout()
