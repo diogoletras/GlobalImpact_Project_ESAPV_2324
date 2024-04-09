@@ -583,7 +583,7 @@ namespace GlobalImpact.Controllers
             }
             ViewBag.Status = statusList;
 
-            return View("ProdutsTransactions", groupedTrans);
+            return View("ProductsTransactions", groupedTrans);
         }
 
         /// <summary>

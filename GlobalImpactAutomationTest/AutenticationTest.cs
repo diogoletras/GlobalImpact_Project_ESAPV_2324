@@ -274,5 +274,165 @@ namespace GlobalImpactAutomationTest
             driver.Quit();
         }
 
-    }
+        [Fact]
+        public void CancelDelivery_Automation_Test()
+        {
+			driver.Url = "https://localhost:7154";
+			driver.FindElement(By.LinkText("LOGIN")).Click();
+
+			var username = driver.FindElement(By.Id("username"));
+			var password = driver.FindElement(By.Id("password"));
+
+			username.SendKeys("cliente");
+
+			password.SendKeys("Cliente123");
+
+			driver.FindElement(By.Id("login")).Click();
+
+			Thread.Sleep(2000);
+
+			driver.FindElement(By.LinkText("Loja Virtual")).Click();
+
+			Thread.Sleep(2000);
+
+			ReadOnlyCollection<IWebElement> checkoutButtons = driver.FindElements(By.CssSelector(".btn-primary"));
+			checkoutButtons[1].Click();
+			Thread.Sleep(2000);
+
+			ReadOnlyCollection<IWebElement> checkoutButtons2 = driver.FindElements(By.CssSelector(".btn-primary"));
+			checkoutButtons2[2].Click();
+			Thread.Sleep(2000);
+
+			ReadOnlyCollection<IWebElement> checkoutButtons3 = driver.FindElements(By.CssSelector(".btn-primary"));
+			checkoutButtons3[3].Click();
+			Thread.Sleep(2000);
+
+
+			ReadOnlyCollection<IWebElement> checkoutButtons4 = driver.FindElements(By.CssSelector(".btn-primary"));
+			checkoutButtons4[0].Click();
+			Thread.Sleep(2000);
+
+			IWebElement checkoutButton = driver.FindElement(By.CssSelector(".btn-primary"));
+			checkoutButton.Click();
+
+			Thread.Sleep(2000);
+
+			driver.FindElement(By.LinkText("Minhas Encomendas")).Click();
+
+			Thread.Sleep(2000);
+
+			IWebElement checkoutButton2 = driver.FindElement(By.CssSelector(".btn-danger"));
+			checkoutButton2.Click();
+
+			Thread.Sleep(2000);
+
+			IWebElement checkoutButton3 = driver.FindElement(By.CssSelector(".btn-danger"));
+			checkoutButton3.Click();
+
+			Thread.Sleep(2000);
+
+			driver.Quit();
+		}
+
+        [Fact]
+        public void ConfirmDelivery_Automation_Test()
+        {
+			driver.Url = "https://localhost:7154";
+			driver.FindElement(By.LinkText("LOGIN")).Click();
+
+			var username = driver.FindElement(By.Id("username"));
+			var password = driver.FindElement(By.Id("password"));
+
+			username.SendKeys("cliente");
+
+			password.SendKeys("Cliente123");
+
+			driver.FindElement(By.Id("login")).Click();
+
+			Thread.Sleep(2000);
+
+			driver.FindElement(By.LinkText("Loja Virtual")).Click();
+
+			Thread.Sleep(2000);
+
+			ReadOnlyCollection<IWebElement> checkoutButtons = driver.FindElements(By.CssSelector(".btn-primary"));
+			checkoutButtons[1].Click();
+			Thread.Sleep(2000);
+
+			ReadOnlyCollection<IWebElement> checkoutButtons2 = driver.FindElements(By.CssSelector(".btn-primary"));
+			checkoutButtons2[2].Click();
+			Thread.Sleep(2000);
+
+			ReadOnlyCollection<IWebElement> checkoutButtons3 = driver.FindElements(By.CssSelector(".btn-primary"));
+			checkoutButtons3[3].Click();
+			Thread.Sleep(2000);
+
+
+			ReadOnlyCollection<IWebElement> checkoutButtons4 = driver.FindElements(By.CssSelector(".btn-primary"));
+			checkoutButtons4[0].Click();
+			Thread.Sleep(2000);
+
+			IWebElement checkoutButton = driver.FindElement(By.CssSelector(".btn-primary"));
+			checkoutButton.Click();
+
+			Thread.Sleep(2000);
+
+			driver.FindElement(By.Id("logout")).Click();
+
+			Thread.Sleep(2000);
+
+			driver.FindElement(By.LinkText("LOGIN")).Click();
+
+			var username2 = driver.FindElement(By.Id("username"));
+			var password2 = driver.FindElement(By.Id("password"));
+
+			username2.SendKeys("admin");
+
+			password2.SendKeys("Admin123");
+
+			driver.FindElement(By.Id("login")).Click();
+
+			Thread.Sleep(2000);
+
+			driver.FindElement(By.LinkText("Encomendas")).Click();
+
+			Thread.Sleep(2000);
+
+			IWebElement checkoutButton2 = driver.FindElement(By.CssSelector(".btn-success"));
+			checkoutButton2.Click();
+
+			Thread.Sleep(2000);
+
+			IWebElement checkoutButton3 = driver.FindElement(By.CssSelector(".btn-success"));
+			checkoutButton3.Click();
+
+			Thread.Sleep(2000);
+
+			driver.FindElement(By.Id("logout")).Click();
+
+			Thread.Sleep(2000);
+
+			driver.FindElement(By.LinkText("LOGIN")).Click();
+
+			var username3 = driver.FindElement(By.Id("username"));
+			var password3 = driver.FindElement(By.Id("password"));
+
+			username3.SendKeys("cliente");
+
+			password3.SendKeys("Cliente123");
+
+			driver.FindElement(By.Id("login")).Click();
+
+			Thread.Sleep(2000);
+
+			driver.FindElement(By.LinkText("Minhas Encomendas")).Click();
+
+			Thread.Sleep(2000);
+
+			driver.Quit();
+
+		}
+
+
+	}
 }
