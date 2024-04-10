@@ -21,6 +21,9 @@ using GlobalImpact.Interfaces;
 using GlobalImpact.Utils;
 using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 using Microsoft.EntityFrameworkCore;
+using SQLitePCL;
+using Microsoft.CodeAnalysis;
+using System.Transactions;
 
 namespace GlobalImpactTest.ControllerTests
 {
@@ -217,16 +220,26 @@ namespace GlobalImpactTest.ControllerTests
         [Fact]
         public async void CanCancelProductsTransaction_Success()
         {
-            var prodtrans = new ProductTransactions
-            {
-                Id = new Guid(),
-                TransactionId = new Guid(),
-                Date = DateTime.Now,
-                Points = 12,
-                Quantity = 1
-            };
-            //var id = dbContext.ProductTransactions.FirstOrDefault().Id.ToString();
-            var result = controller.CancelTransaction(new Guid(prodtrans.Id.ToString()));
+			var user = dbContext.Users.FirstOrDefault();
+			var prod = dbContext.Products.FirstOrDefault();
+			var transStatus = dbContext.ProductTransactionStatus.FirstOrDefault();
+			var prodtrans = new ProductTransactions
+			{
+				Id = new Guid(),
+				TransactionId = new Guid(),
+				Date = DateTime.Now,
+				Points = 12,
+				Quantity = 1,
+				UserId = new Guid(user.Id),
+				ProductId = prod.Id,
+				TransactionStatusId = transStatus.ProductTransactionStatusId,
+
+			};
+
+			dbContext.Add(prodtrans);
+			dbContext.SaveChanges();
+			//var id = dbContext.ProductTransactions.FirstOrDefault().Id.ToString();
+			var result = controller.CancelTransaction(prodtrans.TransactionId);
             var resultView = Assert.IsType<Task<IActionResult>>(result);
             var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
 
@@ -235,17 +248,26 @@ namespace GlobalImpactTest.ControllerTests
         [Fact]
         public async void CanConfirmCancelProductsTransaction_Success()
         {
-            
+            var user = dbContext.Users.FirstOrDefault();
+            var prod = dbContext.Products.FirstOrDefault();
+            var transStatus = dbContext.ProductTransactionStatus.FirstOrDefault();
             var prodtrans = new ProductTransactions
             {
                 Id = new Guid(),
                 TransactionId = new Guid(),
                 Date = DateTime.Now,
                 Points = 12,
-                Quantity = 1
-            };
-            
-            var result = controller.ConfirmCancelTransaction(new Guid(prodtrans.Id.ToString()));
+                Quantity = 1,
+                UserId = new Guid(user.Id),
+				ProductId = prod.Id,
+				TransactionStatusId = transStatus.ProductTransactionStatusId,
+				
+			};
+
+            dbContext.Add(prodtrans);
+            dbContext.SaveChanges();
+
+			var result = controller.ConfirmCancelTransaction(prodtrans.TransactionId);
             var resultView = Assert.IsType<Task<IActionResult>>(result);
             var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
 
