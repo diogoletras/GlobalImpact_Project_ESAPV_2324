@@ -31,7 +31,7 @@ namespace GlobalImpact.Controllers
         /// <returns>Retorno da página principal.</returns>
         public async Task<IActionResult> Index()
         {
-            return RedirectToAction("GoogleMaps", "RecyclingBins");
+            return View() ;
         }
 
         /// <summary>
