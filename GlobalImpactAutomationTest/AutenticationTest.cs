@@ -111,13 +111,26 @@ namespace GlobalImpactAutomationTest
         [Fact]
         public void Recycle_Automation_Test()
         {
-            driver.Url = "https://localhost:7154";
-            driver.FindElement(By.LinkText("ECOPONTO")).Click();
+			driver.Url = "https://localhost:7154";
+			driver.FindElement(By.LinkText("LOGIN")).Click();
 
-            Thread.Sleep(2000);
+			var username = driver.FindElement(By.Id("username"));
+			var password = driver.FindElement(By.Id("password"));
 
-            // Encontrar e clicar no primeiro botão "Submeter"
-            var submitButton = driver.FindElement(By.CssSelector(".btn-grad"));
+			username.SendKeys("cliente");
+
+			password.SendKeys("Cliente123");
+
+			driver.FindElement(By.Id("login")).Click();
+
+			Thread.Sleep(2000);
+
+			driver.FindElement(By.LinkText("ECOPONTO")).Click();
+
+			Thread.Sleep(2000);
+
+			// Encontrar e clicar no primeiro botão "Submeter"
+			var submitButton = driver.FindElement(By.CssSelector(".btn-grad"));
             submitButton.Click();
 
             Thread.Sleep(2000);
@@ -213,9 +226,10 @@ namespace GlobalImpactAutomationTest
             driver.FindElement(By.LinkText("Perfil")).Click();
 
             Thread.Sleep(2000);
-            driver.FindElement(By.Id("logout")).Click();
 
-            Thread.Sleep(2000);
+			driver.FindElement(By.Id("home")).Click();
+
+			Thread.Sleep(2000);
 
             driver.FindElement(By.LinkText("ECOPONTO")).Click();
 
@@ -247,20 +261,6 @@ namespace GlobalImpactAutomationTest
 
             var submitButton3 = driver.FindElement(By.CssSelector(".btn-grad"));
             submitButton3.Click();
-
-            Thread.Sleep(2000);
-
-            driver.FindElement(By.Id("home")).Click();
-
-            driver.FindElement(By.LinkText("LOGIN")).Click();
-
-            var username2 = driver.FindElement(By.Id("username"));
-            var password2 = driver.FindElement(By.Id("password"));
-
-            username2.SendKeys("cliente");
-            password2.SendKeys("Cliente123");
-
-            driver.FindElement(By.Id("login")).Click();
 
             Thread.Sleep(2000);
 

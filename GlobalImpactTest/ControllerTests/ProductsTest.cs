@@ -319,20 +319,28 @@ namespace GlobalImpactTest.ControllerTests
         [Fact]
         public async void CanConfirmDeliverTransaction_Success()
         {
-            var prodtrans = new ProductTransactions
-            {
-                Id = new Guid(),
-                TransactionId = new Guid(),
-                Date = DateTime.Now,
-                Points = 12,
-                Quantity = 1
-            };
-            
-            //var id = dbContext.ProductTransactions.FirstOrDefault().Id.ToString();
-            var result = controller.ConfirmDeliverTransaction(new Guid(prodtrans.Id.ToString()));
-            var resultView = Assert.IsType<Task<IActionResult>>(result);
-            var mod = Assert.IsAssignableFrom<ViewResult>(resultView.Result);
+			var user = dbContext.Users.FirstOrDefault();
+			var prod = dbContext.Products.FirstOrDefault();
+			var transStatus = dbContext.ProductTransactionStatus.FirstOrDefault();
+			var prodtrans = new ProductTransactions
+			{
+				Id = new Guid(),
+				TransactionId = new Guid(),
+				Date = DateTime.Now,
+				Points = 12,
+				Quantity = 1,
+				UserId = new Guid(user.Id),
+				ProductId = prod.Id,
+				TransactionStatusId = transStatus.ProductTransactionStatusId,
 
+			};
+
+			dbContext.Add(prodtrans);
+			dbContext.SaveChanges();
+
+			//var id = dbContext.ProductTransactions.FirstOrDefault().Id.ToString();
+			var result = controller.ConfirmDeliverTransaction(new Guid(prodtrans.Id.ToString()));
+            var resultView = Assert.IsType<Task<IActionResult>>(result);
         }
 
 
