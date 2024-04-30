@@ -7,7 +7,7 @@
     max-width: 200px;
     height: 40px;
     padding: 10px 15px;
-    background-image: linear-gradient(to right, #16A085 0%, #059742 51%, #16A085 100%);
+    background-image: linear-gradient(to right, #9ebc70 0%, #dbd789 51%, #9ebc70 100%);
     margin: 20px 0;
     text-align: center;
     text-transform: uppercase;
@@ -15,7 +15,7 @@
     background-size: 200% auto;
     font-size: 16px;
     border-radius: 25px;
-    box-shadow: 0 0 20px #023F3A;
+    box-shadow: 0 0 20px #dbd789;
     border: none;
     color: var(--bs-body-color);
     text-decoration: none;
@@ -39,14 +39,14 @@
     max-width: 200px;
     margin: 0px 5px;
     padding: 5px 10px;
-    background-image: linear-gradient(to right, #16A085 0%, #059742 51%, #16A085 100%);
+    background-image: linear-gradient(to right, #9ebc70 0%, #dbd789 51%, #9ebc70 100%);
     text-align: center;
     text-transform: uppercase;
     transition: 0.5s;
     background-size: 200% auto;
     font-size: 15px;
     border-radius: 25px;
-    box-shadow: 0 0 10px #023F3A;
+    box-shadow: 0 0 10px #dbd789;
     border: none;
     color: var(--bs-body-color);
     text-decoration: none;

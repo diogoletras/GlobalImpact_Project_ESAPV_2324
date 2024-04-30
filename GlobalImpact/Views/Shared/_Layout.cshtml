@@ -4,104 +4,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - GlobalImpact</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/GlobalImpact.styles.css" asp-append-version="true" />
-    <link rel="icon" href="/SGRR_LOGO.png" type="image/x-icon">
-    <link rel="shortcut icon" href="/SGRR_LOGO.png" type="image/x-icon">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - GlobalImpact</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/profile.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/GlobalImpact.styles.css" asp-append-version="true" />
+	<link rel="icon" href="/SGRR_LOGO.png" type="image/x-icon">
+	<link rel="shortcut icon" href="/SGRR_LOGO.png" type="image/x-icon">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="navbar-brand" id="home" asp-area="" asp-controller="Home" asp-action="Index">
-                                <img src="/SGRR_LOGO.png" alt="Global Impact Logo" />
-                            </a>
+	<header>
+		@if (User.Identity.IsAuthenticated)
+		{
+			<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3">
+				<div class="container-fluid">
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+							aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+						<ul class="navbar-nav flex-grow-1">
 
-                        </li>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            @if(User.IsInRole("admin"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Produtos</a>
-                                </li>
+							<a class="navbar-brand" id="home" asp-area="" asp-controller="Home" asp-action="Index">
+								<img src="/sgrr_logo_dark.png" alt="Global Impact Logo" />
+							</a>
 
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="RecyclingBins" asp-action="Index">Ecopontos</a>
-                                </li>
+							@if (User.IsInRole("admin"))
+							{
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">PRODUCTS</a>
+								</li>
 
-                                <li class="nav-item">
-                                     <a class="nav-link text-dark" asp-area="" asp-controller="RecyclingBins" asp-action="FullBins">Ecopontos Cheios</a>
-                                </li>
-                                
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Utilizadores</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="AdminProductsTransactions">Encomendas</a>
-                                </li>
-                            }
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-controller="RecyclingBins" asp-action="Index">BINS</a>
+								</li>
 
-                            <li class="nav-item">
-                                <a id="userpage" class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="UserPage" asp-route-userId="@UserManager.GetUserId(User)">Perfil</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="RecyclingTransaction" asp-action="TransacionList" asp-route-userId="@UserManager.GetUserId(User)">Transações Reciclagem</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ProductsTransactions" asp-route-userId="@UserManager.GetUserId(User)">Minhas Encomendas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Store" asp-action="Index" asp-route-userId="@UserManager.GetUserId(User)">Loja Virtual</a>
-                            </li>
-                            <li class="nav-item">
-                                <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="LogOff">
-                                    <button id="logout" type="submit" class="btn-grad-logout">Logout</button>
-                                </form>
-                            </li>
-                        }
-                        else
-                        {
-                            /*<li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                            </li>*/
-                        }
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-<main role="main" class="pb-3">
-    @RenderBody()
-</main>
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-controller="RecyclingBins" asp-action="FullBins">FULL BINS</a>
+								</li>
 
-    <footer class="footer">
-        <div class="container">
-            &copy; 2024 - Global Impact
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">USERS</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="AdminProductsTransactions">ORDERS</a>
+								</li>
+							}
+							else
+							{
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-controller="RecyclingTransaction" asp-action="TransacionList" asp-route-userId="@UserManager.GetUserId(User)">TRANSACTIONS</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ProductsTransactions" asp-route-userId="@UserManager.GetUserId(User)">ORDERS</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-controller="Store" asp-action="Index" asp-route-userId="@UserManager.GetUserId(User)">STORE</a>
+								</li>
+							}
+
+							<li class="nav-item">
+								<a id="userpage" class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="UserPage" asp-route-userId="@UserManager.GetUserId(User)">@User.Identity.Name</a>
+							</li>
+
+							<li class="nav-item">
+								<form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="LogOff">
+									<button id="logout" type="submit" class="btn-grad-logout">Logout</button>
+								</form>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		}
+		else
+		{
+			<a class="navbar-brand" id="home" asp-area="" asp-controller="Home" asp-action="Index">
+				<img src="/sgrr_logo_dark.png" alt="Global Impact Logo" />
+			</a>
+		}
+	</header>
+
+	<main role="main" class="pb-3">
+		@RenderBody()
+	</main>
+
+	<footer class="footer">
+		<div class="container">
+			&copy; 2024 - Global Impact
+		</div>
+	</footer>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

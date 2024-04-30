@@ -23,13 +23,13 @@
     border: none;
     border-radius: 40px;
     width: 250px;
-    background-image: linear-gradient(to right, #16A085 0%, #059742 51%, #16A085 100%);
+    background-image: linear-gradient(to right, #9ebc70 0%, #dbd789 51%, #9ebc70 100%);
     text-align: center;
     text-transform: uppercase;
     transition: 0.5s;
     background-size: 200% auto;
     font-size: 20px;
-    box-shadow: 0 0 20px #023F3A;
+    box-shadow: 0 0 20px #dbd789;
     border: none;
     text-decoration: none;
     color: var(--bs-body-color);

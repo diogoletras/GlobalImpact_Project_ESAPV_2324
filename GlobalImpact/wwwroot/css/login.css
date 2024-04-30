@@ -1,8 +1,5 @@
 ﻿body {
-    background-image: url("https://i.pinimg.com/564x/73/58/1c/73581c8c9c75066db29158bbaed34e08.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    background-color: #F6F6F6;
     margin: 0;
 }
 
@@ -37,7 +34,7 @@
 
 .form-control {
     border-radius: 20px;
-    box-shadow: 0 0 10px #023F3A;
+    box-shadow: 0 0 10px #dbd789;
     padding: 10px 20px;
 }
 
@@ -71,7 +68,7 @@
     max-width: 200px;
     height: 40px;
     padding: 5px;
-    background-image: linear-gradient(to right, #16A085 0%, #059742 51%, #16A085 100%);
+    background-image: linear-gradient(to right, #9ebc70 0%, #dbd789 51%, #9ebc70 100%);
     margin: 20px 0;
     text-align: center;
     text-transform: uppercase;
@@ -79,7 +76,7 @@
     background-size: 200% auto;
     font-size: 20px;
     border-radius: 25px;
-    box-shadow: 0 0 20px #023F3A;
+    box-shadow: 0 0 20px #dbd789;
     border: none;
     color: var(--bs-body-color);
     text-decoration: none;
@@ -182,5 +179,5 @@
     padding: 10px 20px;
     border: none;
     border-radius: 20px;
-    box-shadow: 0 0 10px #023F3A;
+    box-shadow: 0 0 10px #dbd789;
 }

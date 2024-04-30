@@ -1,49 +1,55 @@
-﻿<div class="container">
-    <h1 class="display-4 text-center mb-5">UserPage</h1>
-    @if (User.Identity.IsAuthenticated)
-    {
-        <div class="row justify-content-center">
-            <div class="col-md-6"> <div class="card shadow-sm border-0 rounded-3">
-                    <div class="card-header bg-primary text-white py-3" style="background-color: #21262B !important;">
-                    @if (User.IsInRole("client"))
-                    {
-                        <h3 class="card-title text-center">Your role is Client</h3>
-                    }
-                    else
-                    {
-                            <h3 class="card-title text-center">Your role is Admin</h3>
-                    }
-                </div>
-                    <div class="card-body p-4" style="background-color: #fffbc9;">
-                    <div class="row">
-                        <div class="col-md-12 text-center"> <i class="fas fa-user-circle fa-3x"></i> <h6 class="mt-3">Recycling Code:</h6>
-                            <p>@Model.UniqueCode</p> 
-                            </div>
-                            <div class="col-md-12 text-center">
-                                <i class="fas fa-id-card fa-3x"></i> <h6 class="mt-3">Username:</h6>
-                            <p>@Model.UserName</p> </div>
-                            <div class="col-md-12 text-center">
-                                <i class="fas fa-birthday-cake fa-3x"></i> <h6 class="mt-3">Age:</h6>
-                            <p>@Model.Age</p> </div>
-                            <div class="col-md-12 text-center">
-                                <i class="fas fa-star fa-3x"></i>
-                                <h6 class="mt-3">Points:</h6>
-                                <p>@Model.Points</p>
-                            </div>
-                            <div class="col-md-12 text-center">
-                                <i class="fas fa-id-card fa-3x"></i>
-                                <h6 class="mt-3">NIF:</h6>
-                                <p>@Model.NIF</p>
-                            </div>
-                            <div class="col-md-12 text-center">
-                                <i class="fas fa-at fa-3x"></i>
-                                <h6 class="mt-3">Email:</h6>
-                                <p>@Model.Email</p>
-                            </div>
-                        </div>
-                </div>
-                </div>
-            </div>
-        </div>
-    }
-    </div>
+﻿<section class="profile">
+	<h1 class="page-name">PROFILE</h1>
+
+	<section class="profile-info">
+
+		<section class="general-info">
+			<img src="/userpic.jpg" alt="User Profile Picture" />
+			<h5>@Model.FirstName @Model.LastName</h5>
+			@if (User.IsInRole("client"))
+			{
+				<h6>Client Profile</h6>
+			}
+			else
+			{
+				<h6>Admin Profile</h6>
+			}
+			<div class="more-info">
+				<p>Email</p>
+				<p>@Model.Email</p>
+			</div>
+			<div class="more-info-side">
+				<div class="more-info">
+					<p>Age</p>
+					<p>@Model.Age</p>
+				</div>
+				<div class="more-info">
+					<p>NIF</p>
+					<p>@Model.NIF</p>
+				</div>
+			</div>
+			<div class="more-info">
+				<p>My Points</p>
+				<p>@Model.Points</p>
+			</div>
+
+		</section>
+
+		<section class="other-info">
+			<section class="code">
+				<h6>My Recycling Code</h6>
+				<h5>@Model.UniqueCode</h5>
+			</section>
+			<section class="last">
+				<section class="last-transaction">
+					<h6>My Last Transaction</h6>
+					_context.ProductTransactions.OrderByDescending(r => r.Date)FirstOrDefault();
+				</section>
+				<section class="last-order">
+					<h6>My Last Order</h6>
+					<h5>@Model.UniqueCode</h5>
+				</section>
+			</section>
+		</section>
+	</section>
+</section>

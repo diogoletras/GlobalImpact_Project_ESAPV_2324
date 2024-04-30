@@ -1,5 +1,5 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 main {
@@ -7,77 +7,83 @@ main {
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 header {
-    display: flex;
-    justify-content: center;
-    background-color: none;
-}
+    display: grid;
+    flex-direction: row;
+    justify-content: center}
 
-.navbar-nav {
-    align-items: center;
-}
-
-.nav-item img {
-    width: 75px;
-}
-
-.nav-link {
-    color: white !important;
-    font-size: 20px;
-}
-
-    .nav-link:hover {
-        color: white;
-        font-size: 20px;
-        font-weight: bold;
+    header img {
+        width: 75px;
     }
 
-.btn-grad-logout {
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     width: 100%;
-    max-width: 200px;
-    height: 40px;
-    padding: 5px 10px;
-    background-image: linear-gradient(to right, #16A085 0%, #059742 51%, #16A085 100%);
-    margin: 20px 0;
-    text-align: center;
-    text-transform: uppercase;
-    transition: 0.5s;
-    background-size: 200% auto;
-    font-size: 16px;
-    border-radius: 25px;
-    box-shadow: 0 0 20px #023F3A;
-    border: none;
-    color: var(--bs-body-color);
-    text-decoration: none;
+    height: 60px;
+    margin: 10px 100px;
 }
 
-.btn-grad-logout:hover {
-    background-position: right center;
+.menu-right,
+.menu-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: larger;
     color: white;
-    text-decoration: none;
 }
+
+.menu-right a,
+.menu-left a {
+    color: white;
+}
+
+.menu-right a:hover,
+.menu-left a:hover {
+    color: black;
+}
+
+.profile-link {
+    display: flex;
+    flex-direction: row;
+}
+
+    .profile-link img {
+        width: 30px;
+        margin-left: 5px;
+        border-radius: 50%;
+    }
+
+    .profile-link img:hover {
+        content: url('/userpic-hover.jpg');
+    }
 
 footer {
     display: flex;
     justify-content: center;
     text-align: center;
-    color: white;
+    color: #3D4044;
+}
+
+.header-empty {
+    display: block;
 }
