@@ -1,11 +1,13 @@
-﻿<section class="profile">
+﻿@using GlobalImpact.ViewModels.Account
+@model UserPageViewModel
+<section class="profile">
 	<h1 class="page-name">PROFILE</h1>
 
 	<section class="profile-info">
 
 		<section class="general-info">
 			<img src="/userpic.jpg" alt="User Profile Picture" />
-			<h5>@Model.FirstName @Model.LastName</h5>
+			<h5>@Model.user.FirstName @Model.user.LastName</h5>
 			@if (User.IsInRole("client"))
 			{
 				<h6>Client Profile</h6>
@@ -16,21 +18,21 @@
 			}
 			<div class="more-info">
 				<p>Email</p>
-				<p>@Model.Email</p>
+				<p>@Model.user.Email</p>
 			</div>
 			<div class="more-info-side">
 				<div class="more-info">
 					<p>Age</p>
-					<p>@Model.Age</p>
+					<p>@Model.user.Age</p>
 				</div>
 				<div class="more-info">
 					<p>NIF</p>
-					<p>@Model.NIF</p>
+					<p>@Model.user.NIF</p>
 				</div>
 			</div>
 			<div class="more-info">
 				<p>My Points</p>
-				<p>@Model.Points</p>
+				<p>@Model.user.Points</p>
 			</div>
 
 		</section>
@@ -38,16 +40,49 @@
 		<section class="other-info">
 			<section class="code">
 				<h6>My Recycling Code</h6>
-				<h5>@Model.UniqueCode</h5>
+				<h5>@Model.user.UniqueCode</h5>
 			</section>
 			<section class="last">
 				<section class="last-transaction">
 					<h6>My Last Transaction</h6>
-					_context.ProductTransactions.OrderByDescending(r => r.Date)FirstOrDefault();
+					@if (Model.confirmRecyclingTransaction)
+					{
+						<h5>Id Transação: @Model.recyclingTransaction.Id</h5>
+						<h5>Tipo de Ecoponto: @Model.recyclingTransaction.RecyclingBin.Type</h5>
+						<h5>Peso Reciclado: @Model.recyclingTransaction.Weight</h5>
+						<h5>Data: @Model.recyclingTransaction.Date</h5>
+						<h5>Pontos Ganhos: @Model.recyclingTransaction.Points</h5>
+					}
+					else
+					{
+						<h5>No Transactions</h5>
+					}
+					
+					
+
 				</section>
 				<section class="last-order">
 					<h6>My Last Order</h6>
-					<h5>@Model.UniqueCode</h5>
+					
+					@if (Model.confirmProductTransactions)
+					{
+						var points = 0;
+						<h5>Id Transação: @Model.productTransactions.Id</h5>
+						<h5>Data: @Model.productTransactions.Date</h5>
+						<h5>Status: @Model.productTransactions.TransStatus</h5>
+						@for (int i = 0; i < Model.produtos.Count; i++)
+						{
+							points += Model.precoProduto[i];
+							<h5>Produto: @Model.produtos[i]</h5>
+							<h5>Quantidade: @Model.quantidades[i]</h5>
+							<h5>Pontos: @Model.precoProduto[i]</h5>
+						}
+						<h5>Total Pontos: @points</h5>
+					}
+					else
+					{
+						<h5>No Orders</h5>
+					}
 				</section>
 			</section>
 		</section>

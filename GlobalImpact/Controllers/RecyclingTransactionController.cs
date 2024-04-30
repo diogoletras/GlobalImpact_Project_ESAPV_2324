@@ -174,7 +174,7 @@ namespace GlobalImpact.Controllers
                 {
                     Id = new Guid(),
                     User = user,
-                    RecyclingBin = ecoponto,
+                    RecyclingBinId = ecoponto.Id,
                     Weight = peso,
                     Points = pontos,
                     Date = DateTime.Now

@@ -44,8 +44,67 @@ namespace GlobalImpact.Controllers
 
         public IActionResult UserPage(string userId)
         {
-            var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
-            return View(user);
+			UserPageViewModel viewModel = new UserPageViewModel();
+
+			viewModel.user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
+			viewModel.produtos = new List<string>();
+			viewModel.quantidades = new List<int>();
+			viewModel.precoProduto = new List<int>();
+			if (_db.ProductTransactions.Count() > 0)
+            {
+				viewModel.productTransactions = _db.ProductTransactions.OrderByDescending(r => r.Date).FirstOrDefault();
+
+                var list = _db.ProductTransactions.OrderByDescending(r => r.Date).ToList();
+
+				foreach (var trans in list)
+                {
+                    var productname = _db.Products.FirstOrDefault(p => p.Id.Equals(trans.ProductId)).Name;
+
+                    viewModel.produtos.Add(productname);
+                    viewModel.quantidades.Add(trans.Quantity);
+                    viewModel.precoProduto.Add(trans.Points);
+                }
+                viewModel.confirmProductTransactions = true;
+			}
+            else
+            {
+                viewModel.productTransactions = new ProductTransactions();
+                viewModel.productTransactions.Id = Guid.NewGuid();
+                viewModel.productTransactions.ProductName = "";
+                viewModel.productTransactions.TransStatus = "";
+				viewModel.productTransactions.Points = 0;
+                viewModel.productTransactions.Date = DateTime.Now;
+                viewModel.productTransactions.TransStatus = "";
+				viewModel.confirmProductTransactions = false;
+
+			}
+			if (_db.RecyclingTransactions.Count() > 0)
+            {
+				viewModel.recyclingTransaction = _db.RecyclingTransactions.OrderByDescending(r => r.Date).FirstOrDefault();
+                var recyclingBin = _db.RecyclingBins.FirstOrDefault(r => r.Id.Equals(viewModel.recyclingTransaction.RecyclingBinId));
+                viewModel.recyclingTransaction.RecyclingBin = recyclingBin;
+                var types = _db.RecyclingBinType.ToList();
+
+                foreach(var type in types)
+                {
+                    if (type.RecyclingBinTypeId.Equals(new Guid(viewModel.recyclingTransaction.RecyclingBin.RecyclingBinTypeId)))
+                    {
+						viewModel.recyclingTransaction.RecyclingBin.Type = type.Type;
+					}
+                }
+				viewModel.confirmRecyclingTransaction = true;
+			}
+            else
+            {
+                viewModel.recyclingTransaction = new RecyclingTransaction();
+				viewModel.recyclingTransaction.Id = Guid.NewGuid();
+				viewModel.recyclingTransaction.Points = 0;
+				viewModel.recyclingTransaction.Date = DateTime.Now;
+                viewModel.recyclingTransaction.Weight = 0;
+				viewModel.confirmRecyclingTransaction = false;
+			}
+
+			return View(viewModel);
         }
 
         /// <summary>
