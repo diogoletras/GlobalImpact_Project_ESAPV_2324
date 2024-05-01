@@ -44,7 +44,6 @@
     }
 
     .general-info p {
-
     }
 
 .more-info {
@@ -65,7 +64,12 @@
 
 .other-info {
     width: 55%;
+    color: rgb(61,64,68);
 }
+
+    .other-info h6 {
+        color: rgb(61,64,68, 50%);
+    }
 
 .code {
     padding: 20px;
@@ -94,3 +98,11 @@
         text-align: left;
         font-size: smaller;
     }
+
+.last-transaction p {
+    color: rgb(61,64,68, 50%);
+}
+
+.last-order img {
+    width: 100px;
+}

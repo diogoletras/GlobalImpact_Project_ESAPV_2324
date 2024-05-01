@@ -1,0 +1,150 @@
+﻿.store {
+    margin: 10px 200px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: rgb(61,64,68);
+}
+
+.top-main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.page-name {
+    display: block;
+    text-align: left;
+    color: rgb(61,64,68);
+}
+
+.order-filter-buttons {
+    display: flex;
+}
+
+.filter-button,
+.order-button {
+    margin-block: auto;
+    padding: 5px 20px;
+    background-color: #D9D9D9;
+    border-radius: 20px;
+}
+
+    .filter-button button,
+    .order-button button {
+        margin-block: auto;
+        border: none;
+        background: none;
+    }
+
+    .filter-button:hover,
+    .order-button:hover {
+        background-color: #887E7B;
+        cursor: pointer;
+    }
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: space-evenly;
+    gap: 20px;
+    width: 100%;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #D9D9D9;
+    border-radius: 20px;
+    width: 100%;
+    height: 250px;
+}
+
+.product-img {
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+}
+
+.product img {
+    width: 75px;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    text-align: left;
+}
+
+    .product-info p {
+        color: rgb(61,64,68, 75%);
+    }
+
+.points-add {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+    .points-add h5 {
+        margin-block: auto;
+    }
+
+    .points-add img {
+        width: 30px;
+    }
+
+        .points-add img:hover {
+            content: url('/add-cart-hover.png');
+        }
+
+/** FILTER */
+.filter, .order {
+    display: none;
+    background-color: #f9f9f9;
+    width: 500px;
+    padding: 20px;
+    margin-block: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 25px;
+    z-index: 999;
+    text-align-last: center;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 320px;
+    padding: 20px;
+    text-align-last: left;
+}
+
+.points-max-min h6 {
+    color: rgb(61,64,68, 75%);
+}
+
+.min-max {
+    display: flex;
+}
+
+.text-center {
+    text-align-last: center;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black color */
+    z-index: 999; /* Ensure the backdrop is above other content */
+    display: none; /* Initially hidden */
+}

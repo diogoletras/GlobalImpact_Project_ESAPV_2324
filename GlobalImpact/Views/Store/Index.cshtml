@@ -2,160 +2,278 @@
 @using Microsoft.AspNetCore.Razor.Language.Extensions
 @model IEnumerable<GlobalImpact.Models.Product>
 
-
 @{
-    ViewData["Title"] = "Index";
-    Dictionary<Guid, int> cart = new Dictionary<Guid, int>();
+	ViewData["Title"] = "Index";
+	Dictionary<Guid, int> cart = new Dictionary<Guid, int>();
 }
+
 @if (User.Identity.IsAuthenticated)
 {
-    @if (User.IsInRole("client") || User.IsInRole("admin"))
-    {
+	@if (User.IsInRole("client") || User.IsInRole("admin"))
+	{
+		<div class="modal-backdrop"></div>
 
-        <h1>Loja GlobalImpackt</h1>
-        <h5>Encomenda aqui produtos alimentares e higiene, gasta os teus pontos ganhos pela tua contribuição  !!</h5>
-        <p></p>
+		<section class="store">
+			<section class="top-main">
+				<h1 class="page-name">STORE</h1>
+				<div class="order-filter-buttons">
+					<div class="order-button">
+						<button id="orderButton">ORDER</button>
+					</div>
+					<div class="filter-button">
+						<button id="filterButton">FILTER</button>
+					</div>
+				</div>
+			</section>
 
-        <div class="text-center">
-            <!-- Div para centralizar -->
-            <div class="">
-                <form method="post" asp-controller="Store" asp-action="Order" class="d-flex align-items-center">
-                    <div class="form-group mr-2 mb-0">
-                        <select class="form-control" id="orderList" name="orderList" asp-items="@ViewBag.Order" style="width: 200px;"></select>
-                    </div>
-                    <button style="width: 200px;" type="submit" class="btn-grad">Ordenar</button>
-                </form>
-            </div>
-        </div>
-        
-        <div class="container mt-3 ml-3"> 
-        <div class="row">
-            <div class="col-md-3">
-                <form method="post" asp-controller="Store" asp-action="Filtra">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do Produto">
-                    </div>
-                    <div class="form-group">
-                        <input type="number" class="form-control" id="maxp" name="maxp" placeholder="GI coins Maximo">
-                    </div>
-                    <div class="form-group">
-                        <input type="number" class="form-control" id="minp" name="minp" placeholder="GI coins Minimo">
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control" id="categoria" name="categoria" asp-items="@ViewBag.Categorias"></select>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn-grad">Filtrar</button>
-                    </div>
-                </form>
+			<section class="products">
+				@if (Model != null)
+				{
+					@foreach (var item in Model)
+					{
+						<div class="product">
+							<div class="product-img-imfo">
+								<div class="product-img">
+									<img src="/img/products/@item.ImageUrl" alt="Product">
+								</div>
+								<div class="product-info">
+									<h5>@Html.DisplayFor(modelItem => item.Name)</h5>
+									<p>@Html.DisplayFor(modelItem => item.Description)</p>
+								</div>
+							</div>
 
-                @if (ViewBag.Items != null)
-                {
+							<div class="points-add">
+								<h5>@Html.DisplayFor(modelItem => item.Points) P</h5>
+								<a asp-action="Add" asp-route-id="@item.Id">
+									<img src="/add-cart.png" alt="Product">
+								</a>
+							</div>
+						</div>
+					}
+				}
+			</section>
+		</section>
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="sidebar-header d-flex justify-content-between align-items-center">
-                                <h3>Carrinho</h3>
-                                <div class="button-container">
-                                    <a class="btn btn-primary" asp-action="Checkout" asp-route-items="@ViewBag.Items">Checkout</a>                                    
-                                </div>
-                                <div class="button-container">
-                                    <a class="btn btn-secondary ml-2" asp-action="DeleteAllFromCart">Clear</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <br />
-                    <ul class="list-group">
-                        @foreach (var item in ViewBag.Items)
-                        {
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <div>
-                                    <h6>@item.Name</h6>
-                                    <p>@item.Points GIcoins</p>
-                                </div>
-                                <div class="input-group" style="width: 120px;">
-                                    <input id="@item.Id" type="number" value="@item.Quantity" min="1" class="form-control rounded-3">
-                                    <div class="input-group-append">
-                                        <a class="btn btn-danger remove-btn" asp-controller="Store" asp-action="DeleteFromCart" asp-route-id="@item.Id">X</a>
-                                    </div>
-                                </div>
-                            </li>
-                        }
-                    </ul>
-                }
-            </div>
-            <div class="col-md-9">
-                <div class="container">
-                    <div class="row">
-                        @if (Model != null)
-                        {
-                            @foreach (var item in Model)
-                            {
-                                <div class="col-md-3 mb-4">
-                                    <div class="card h-100">
-                                        <img src="/img/products/@item.ImageUrl" class="card-img-top mx-auto" alt="Product" style="width: 120px; height: 120px; object-fit: contain;">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
-                                            <p class="card-text" style="font-size: 16px;">@Html.DisplayFor(modelItem => item.Description) <br />
-                                                @Html.DisplayFor(modelItem => item.Points) GIcoins/un
-                                            </p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="btn-group">
-                                                    <a class="btn btn-sm btn-primary" asp-action="Add" asp-route-id="@item.Id">Buy Now</a>
-                                                </div>
-                                                <!-- Se desejar adicionar algum botão ou conteúdo extra -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        }
-                    </div>
-                </div>
+		<section id="filter" class="filter">
+			<form method="post" asp-controller="Store" asp-action="Filtra">
+				<h1 class="page-name">FILTER</h1>
+				<div class="form-fields">
+					<div class="form-group">
+						<select class="form-control" id="categoria" name="categoria">
+							<option value="" disabled selected>Select a category...</option>
+							@foreach (var category in ViewBag.Categorias)
+							{
+								<option value="@category.Value">@category.Text</option>
+							}
+						</select>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="nome" name="nome" placeholder="Name">
+					</div>
+
+					<div class="points-max-min">
+						<h6>Points</h6>
+						<div class="min-max">
+							<div class="form-group">
+								<input type="number" class="form-control" id="minp" name="minp" placeholder="MIN">
+							</div>
+							<div class="form-group">
+								<input type="number" class="form-control" id="maxp" name="maxp" placeholder="MAX">
+							</div>
+						</div>
+					</div>
+					<div class="text-center">
+						<button type="submit" class="btn-grad">Filter</button>
+					</div>
+				</div>
+			</form>
+		</section>
+
+		<section id="order" class="order">
+			<form method="post" asp-controller="Store" asp-action="Order">
+				<h1 class="page-name">ORDER</h1>
+				<div class="form-group">
+					<select class="form-control" id="orderList" name="orderList" style="width: 200px;">
+						<option value="" disabled selected>Select order...</option>
+						@foreach (var order in ViewBag.Order)
+						{
+							<option value="@order.Value">@order.Text</option>
+						}
+					</select>
+				</div>
+				<div class="text-center">
+					<button type="submit" class="btn-grad">Order</button>
+				</div>
+			</form>
+		</section>
 
 
-            </div>
-        </div>
-        </div>
-    }
+
+
+
+
+
+		<div class="container mt-3 ml-3" style="display: ;">
+			<div class="row">
+				<div class="col-md-3">
+
+					@if (ViewBag.Items != null)
+					{
+
+						<div class="row">
+							<div class="col-md-3">
+								<div class="sidebar-header d-flex justify-content-between align-items-center">
+									<h3>Carrinho</h3>
+									<div class="button-container">
+										<a class="btn btn-primary" asp-action="Checkout" asp-route-items="@ViewBag.Items">Checkout</a>
+									</div>
+									<div class="button-container">
+										<a class="btn btn-secondary ml-2" asp-action="DeleteAllFromCart">Clear</a>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<br />
+						<ul class="list-group">
+							@foreach (var item in ViewBag.Items)
+							{
+								<li class="list-group-item d-flex justify-content-between align-items-center">
+									<div>
+										<h6>@item.Name</h6>
+										<p>@item.Points GIcoins</p>
+									</div>
+									<div class="input-group" style="width: 120px;">
+										<input id="@item.Id" type="number" value="@item.Quantity" min="1" class="form-control rounded-3">
+										<div class="input-group-append">
+											<a class="btn btn-danger remove-btn" asp-controller="Store" asp-action="DeleteFromCart" asp-route-id="@item.Id">X</a>
+										</div>
+									</div>
+								</li>
+							}
+						</ul>
+					}
+				</div>
+			</div>
+		</div>
+	}
 }
 
 @foreach (var item in ViewBag.Items)
 {
-    cart.Add(item.Id, item.Quantity);
+	cart.Add(item.Id, item.Quantity);
 }
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    let model = @Html.Raw(Json.Serialize(cart));
+	let model = @Html.Raw(Json.Serialize(cart));
 
-    console.log(model);
+	console.log(model);
 
-    for (let key in model) {
-        document.getElementById(key).addEventListener("input", function () {
-            let quantity = document.getElementById(key).value;
-            updateQuantity(key, quantity);
-        });
-    }
+	for (let key in model) {
+		document.getElementById(key).addEventListener("input", function () {
+			let quantity = document.getElementById(key).value;
+			updateQuantity(key, quantity);
+		});
+	}
 
-    function updateQuantity(id, quantity) {
-        $.ajax(
-            {
-                type: 'POST',
-                dataType: 'JSON',
-                url: '/Store/UpdateQuantity',
-                data: { id: id, quantity: quantity },
-                success:
-                    function (response) {
-                        // Generate HTML table.
-                        console.log("success");
-                    },
-                error:
-                    function (response) {
-                        alert("Error: " + response);
-                    }
-            });
-    }
+	function updateQuantity(id, quantity) {
+		$.ajax(
+			{
+				type: 'POST',
+				dataType: 'JSON',
+				url: '/Store/UpdateQuantity',
+				data: { id: id, quantity: quantity },
+				success:
+					function (response) {
+						// Generate HTML table.
+						console.log("success");
+					},
+				error:
+					function (response) {
+						alert("Error: " + response);
+					}
+			});
+	}
+</script>
+
+<script>
+	function showFilter() {
+		var filterSection = document.getElementById("filter");
+
+		if (filterSection) {
+			filterSection.style.display = "block";
+		} else {
+			console.error("Filter section not found.");
+		}
+	}
+
+	document.addEventListener('DOMContentLoaded', function () {
+		var filterButton = document.getElementById('filterButton');
+
+		if (filterButton) {
+			filterButton.addEventListener('click', showFilter);
+		} else {
+			console.error("Filter button not found.");
+		}
+	});
+
+	function showOrder() {
+		var orderSection = document.getElementById("order");
+
+		if (orderSection) {
+			orderSection.style.display = "block";
+		} else {
+			console.error("Order section not found.");
+		}
+	}
+
+	document.addEventListener('DOMContentLoaded', function () {
+		var orderButton = document.getElementById('orderButton');
+
+		if (orderButton) {
+			orderButton.addEventListener('click', showOrder);
+		} else {
+			console.error("Order button not found.");
+		}
+	});
+
+	function showBackdrop() {
+		var backdrop = document.querySelector('.modal-backdrop');
+		if (backdrop) {
+			backdrop.style.display = 'block';
+		}
+	}
+
+	function hideBackdrop() {
+		var backdrop = document.querySelector('.modal-backdrop');
+		if (backdrop) {
+			backdrop.style.display = 'none';
+		}
+	}
+
+	document.addEventListener('DOMContentLoaded', function () {
+		var filterButton = document.getElementById('filterButton');
+		if (filterButton) {
+			filterButton.addEventListener('click', function () {
+				showBackdrop();
+			});
+		}
+	});
+
+	document.addEventListener('DOMContentLoaded', function () {
+		var orderButton = document.getElementById('orderButton');
+		if (orderButton) {
+			orderButton.addEventListener('click', function () {
+				showBackdrop();
+			});
+		}
+	});
+
+	document.addEventListener('submit', function (event) {
+		var form = event.target;
+		if (form && form.id === 'filterForm') {
+			hideBackdrop();
+		}
+	});
 </script>

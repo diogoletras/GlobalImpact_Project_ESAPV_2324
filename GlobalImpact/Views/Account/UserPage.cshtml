@@ -47,19 +47,21 @@
 					<h6>My Last Transaction</h6>
 					@if (Model.confirmRecyclingTransaction)
 					{
-						<h5>Id Transação: @Model.recyclingTransaction.Id</h5>
-						<h5>Tipo de Ecoponto: @Model.recyclingTransaction.RecyclingBin.Type</h5>
-						<h5>Peso Reciclado: @Model.recyclingTransaction.Weight</h5>
-						<h5>Data: @Model.recyclingTransaction.Date</h5>
-						<h5>Pontos Ganhos: @Model.recyclingTransaction.Points</h5>
+						<h5>@Model.recyclingTransaction.RecyclingBin.Type Bin</h5>
+						<p>@Model.recyclingTransaction.Id</p>
+						
+						<h5>@Model.recyclingTransaction.Weight Kg</h5>
+
+						<h4>@Model.recyclingTransaction.Points Points</h4>
+
+						<h5>
+							@Model.recyclingTransaction.Date.ToShortDateString()
+						</h5>
 					}
 					else
 					{
 						<h5>No Transactions</h5>
 					}
-					
-					
-
 				</section>
 				<section class="last-order">
 					<h6>My Last Order</h6>
@@ -67,17 +69,17 @@
 					@if (Model.confirmProductTransactions)
 					{
 						var points = 0;
-						<h5>Id Transação: @Model.productTransactions.Id</h5>
-						<h5>Data: @Model.productTransactions.Date</h5>
-						<h5>Status: @Model.productTransactions.TransStatus</h5>
+						<h5>@Model.productTransactions.TransStatus</h5>
+						<p>@Model.productTransactions.Id</p>
+
+						<img src="/box.png" alt="CardboardBox Picture" />
+						
 						@for (int i = 0; i < Model.produtos.Count; i++)
 						{
 							points += Model.precoProduto[i];
-							<h5>Produto: @Model.produtos[i]</h5>
-							<h5>Quantidade: @Model.quantidades[i]</h5>
-							<h5>Pontos: @Model.precoProduto[i]</h5>
 						}
-						<h5>Total Pontos: @points</h5>
+						<h5>@points Points</h5>
+						<h5>@Model.productTransactions.Date.ToShortDateString()</h5>
 					}
 					else
 					{
