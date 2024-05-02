@@ -37,7 +37,7 @@ builder.Services.AddScoped<GoogleMapsApiKeyService>((provider) =>
     var actionContext = new ActionContext(httpContextAccessor.HttpContext, new RouteData(), new ActionDescriptor());
     var viewDataDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), actionContext.ModelState);
 
-    viewDataDictionary["GoogleMapsApiKey"] = "AIzaSyAnaT4ITxYnVC69ETzeLpuOAvAOh6nNfTA";
+    viewDataDictionary["GoogleMapsApiKey"] = "AIzaSyC_rB7yqusDIvp90Qeyap_j3NBKLLDYWys";
 
     return new GoogleMapsApiKeyService(viewDataDictionary);
 });
