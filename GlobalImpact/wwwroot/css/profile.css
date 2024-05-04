@@ -31,12 +31,13 @@
 }
 
     .general-info img {
-        width: 50px;
+        width: 100px;
         border-radius: 50%;
     }
 
-    .general-info h5 {
+    .general-info h4 {
         color: rgb(61,64,68);
+        margin: 0;
     }
 
     .general-info h6 {
@@ -56,18 +57,30 @@
     margin: 10px 0px;
 }
 
+    .more-info h5, .more-info h6 {
+        margin: 0;
+    }
+
+    .more-info p:first-child {
+        color: rgb(61,64,68, 50%);
+    }
+
 .more-info-side {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
+    .more-info-side p:first-child {
+        color: rgb(61,64,68, 50%);
+    }
+
 .other-info {
     width: 55%;
     color: rgb(61,64,68);
 }
 
-    .other-info h6 {
+    .other-info p {
         color: rgb(61,64,68, 50%);
     }
 
@@ -99,10 +112,11 @@
         font-size: smaller;
     }
 
-.last-transaction p {
-    color: rgb(61,64,68, 50%);
+.last-order h5 {
+    align-self: center;
 }
 
 .last-order img {
-    width: 100px;
+    width: 175px;
+    align-self: center;
 }

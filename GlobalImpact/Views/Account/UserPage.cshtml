@@ -7,7 +7,7 @@
 
 		<section class="general-info">
 			<img src="/userpic.jpg" alt="User Profile Picture" />
-			<h5>@Model.user.FirstName @Model.user.LastName</h5>
+			<h4>@Model.user.FirstName @Model.user.LastName</h4>
 			@if (User.IsInRole("client"))
 			{
 				<h6>Client Profile</h6>
@@ -17,46 +17,46 @@
 				<h6>Admin Profile</h6>
 			}
 			<div class="more-info">
-				<p>Email</p>
-				<p>@Model.user.Email</p>
+				<h6>Email</h6>
+				<h5>@Model.user.Email</h5>
 			</div>
 			<div class="more-info-side">
 				<div class="more-info">
-					<p>Age</p>
-					<p>@Model.user.Age</p>
+					<h6>Age</h6>
+					<h5>@Model.user.Age</h5>
 				</div>
 				<div class="more-info">
-					<p>NIF</p>
-					<p>@Model.user.NIF</p>
+					<h6>NIF</h6>
+					<h5>@Model.user.NIF</h5>
 				</div>
 			</div>
 			<div class="more-info">
-				<p>My Points</p>
-				<p>@Model.user.Points</p>
+				<h6>My Points</h6>
+				<h5>@Model.user.Points</h5>
 			</div>
 
 		</section>
 
 		<section class="other-info">
 			<section class="code">
-				<h6>My Recycling Code</h6>
+				<h6 style="color: rgb(61,64,68, 50%);">My Recycling Code</h6>
 				<h5>@Model.user.UniqueCode</h5>
 			</section>
 			<section class="last">
 				<section class="last-transaction">
-					<h6>My Last Transaction</h6>
+					<h6 style="color: rgb(61,64,68, 50%);">My Last Transaction</h6>
 					@if (Model.confirmRecyclingTransaction)
 					{
 						<h5>@Model.recyclingTransaction.RecyclingBin.Type Bin</h5>
 						<p>@Model.recyclingTransaction.Id</p>
 						
-						<h5>@Model.recyclingTransaction.Weight Kg</h5>
+						<h6>@Model.recyclingTransaction.Weight Kg</h6>
 
-						<h4>@Model.recyclingTransaction.Points Points</h4>
+						<h5>@Model.recyclingTransaction.Points Points</h5>
 
-						<h5>
+						<h6>
 							@Model.recyclingTransaction.Date.ToShortDateString()
-						</h5>
+						</h6>
 					}
 					else
 					{
@@ -64,7 +64,7 @@
 					}
 				</section>
 				<section class="last-order">
-					<h6>My Last Order</h6>
+					<h6 style="color: rgb(61,64,68, 50%);">My Last Order</h6>
 					
 					@if (Model.confirmProductTransactions)
 					{
@@ -79,7 +79,7 @@
 							points += Model.precoProduto[i];
 						}
 						<h5>@points Points</h5>
-						<h5>@Model.productTransactions.Date.ToShortDateString()</h5>
+						<h6>@Model.productTransactions.Date.ToShortDateString()</h6>
 					}
 					else
 					{
