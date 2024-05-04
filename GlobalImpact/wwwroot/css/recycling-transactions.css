@@ -1,5 +1,6 @@
 ﻿.recycling-transactions-user-page,
-.eco-log {
+.eco-log,
+.recycle-page {
     margin: 10px 200px;
     display: flex;
     flex-direction: column;
@@ -41,11 +42,19 @@
 
 /** ECO LOGIN */
 
+.eco-login {
+    margin: 10px 200px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    color: rgb(61,64,68);
+}
+
 .eco-login-info {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 50%;
+    width: 100%;
     align-self: center;
     padding: 20px 30px;
     background-color: #D9D9D9;
@@ -56,4 +65,68 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+/** RECYCLE */
+.recycle-main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.recycle-info {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+    background-color: #D9D9D9;
+    border-radius: 20px;
+    width: 35%;
+    height: fit-content;
+}
+
+.recycle-bin-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.recycle-bin-info-c {
+    display: flex;
+    justify-content: space-between;
+}
+
+.recycle-current-info-p {
+    display: flex;
+    justify-content: space-between;
+}
+
+.recycle-current-info-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.recycle-current-info-items-det {
+    display: flex;
+    justify-content: space-between;
+}
+
+.recycle-current-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.available-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 30px;
+    background-color: #D9D9D9;
+    border-radius: 20px;
+    width: 60%;
+}
+
+.items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

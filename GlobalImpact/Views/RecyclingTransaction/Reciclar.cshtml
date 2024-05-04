@@ -2,7 +2,7 @@
 
 @{
 	string eco = "";
-	if(Model.Type.Equals("glass"))
+	if (Model.Type.Equals("glass"))
 	{
 		eco = "Ecoponto Verde (Vidro)";
 	}
@@ -16,89 +16,78 @@
 	}
 }
 
-<div class="container-background">
-	<div class="text-center">
-		<h1 class="display-4">Detalhes do Ecoponto</h1>
-		<div class="text-left">
-			<div class="row">
-				<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-					Tipo do Ecoponto: @eco
+<section class="recycle-page">
+	<section class="top-main">
+		<h1 class="page-name">RECYCLE</h1>
+	</section>
+	<section class="recycle-main">
+		<section class="recycle-info">
+			<div class="recycle-bin-info">
+				<h5>Bin Info</h5>
+				<div class="recycle-bin-info-c">
+					<p>@eco</p>
+					<p>@Model.EcoPonto.CurrentCapacity/@Model.EcoPonto.Capacity Kg</p>
 				</div>
-				<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-					Nome do Utilizador: @Model.UserName
+			</div>
+			<div class="recycle-current-info">
+				@{
+					double totalPeso = Model.Reciclados.Sum(item => item.Peso);
+					int totalPontos = Model.Reciclados.Sum(item => item.Pontos);
+				}
+
+				<span asp-validation-for="@Model.Type" class="text-danger"></span>
+				<h5>Recycling</h5>
+				<div class="recycle-current-info-p">
+					<p>@totalPeso Kg</p>
+					<p>@totalPontos Points</p>
+				</div>
+				<div class="recycle-current-info-items">
+					<h6 style="float: inline-start;">Items To Recycle:</h6>
+					@foreach (var item in Model.Reciclados)
+					{
+						<div class="recycle-current-info-items-det">
+							<p>@item.Nome</p>
+							<p>@item.Peso KG</p>
+							<p>@item.Pontos PONTOS</p>
+						</div>
+					}
+				</div>
+				<div class="recycle-current-buttons">
+					<form method="post" asp-controller="RecyclingTransaction" asp-action="FinishRecycling">
+						<input type="hidden" name="idEco" value="@Model.EcoPonto.Id" />
+						<input type="hidden" name="nome" value="@Model.UserName" />
+						<input type="hidden" name="peso" value="@totalPeso" />
+						<input type="hidden" name="pontos" value="@totalPontos" />
+						<button type="submit" id="terminar" class="btn-grad">Terminar</button>
+					</form>
+					<form method="post" asp-controller="RecyclingTransaction" asp-action="CancelTrans">
+						<input type="hidden" name="idEco" value="@Model.EcoPonto.Id" />
+						<input type="hidden" name="nome" value="@Model.UserName" />
+						<input type="hidden" name="type" value="@Model.Type" />
+						<button type="submit" id="cancelar" class="btn-grad">Cancelar</button>
+					</form>
 				</div>
 			</div>
-			<p></p>
-			<div class="flex-row">
-					<p class="text-center">Capacidade Total: @Model.EcoPonto.Capacity Kg</p>
-					<p class="text-center">Capacidade Atual: @Model.EcoPonto.CurrentCapacity Kg</p>
-			</div>
-		</div>
-	</div>
-
-	<p></p>
-	@{
-		// Calcula a soma dos pesos e a soma dos pontos
-		double totalPeso = Model.Reciclados.Sum(item => item.Peso);
-		int totalPontos = Model.Reciclados.Sum(item => item.Pontos);
-	}
-
-	<div class="text-center">
-		<h3 class="display-4">Items Reciclados</h3>
-		<div class="text-left">
-			<span asp-validation-for="@Model.Type" class="text-danger"></span>
-			<div class="flex-row">
-				<p>Peso Total: @totalPeso Kg</p>
-				<p>Total dos Pontos: @totalPontos</p>
-			</div>
-			<p>Lista de Items:</p>
-			@foreach (var item in Model.Reciclados)
+		</section>
+		<section class="available-items">
+			<h5>Available Items To Recycle</h5>
+			@foreach (var item in Model.RecItems)
 			{
-				<div class="items-available-details" style="width: 40%">
-					<div class="items-available-details-">
+				<div class="items">
+					<div class="items-available-details">
 						<h6>@item.Nome</h6>
 						<p>@item.Peso KG</p>
+						<h6>@item.Pontos PONTOS</h6>
 					</div>
-					<h6>@item.Pontos PONTOS</h6>
+					<form method="post" asp-controller="RecyclingTransaction" asp-action="Rec">
+						<input type="hidden" name="idEco" value="@Model.EcoPonto.Id" />
+						<input type="hidden" name="type" value="@Model.Type" />
+						<input type="hidden" name="nome" value="@Model.UserName" />
+						<input type="hidden" name="itemName" value="@item.Nome" />
+						<button type="submit" id="adicionar" class="btn-grad-small">Adicionar</button>
+					</form>
 				</div>
+				<hr / style="margin: 0;">
 			}
-		</div>
-		<form method="post" asp-controller="RecyclingTransaction" asp-action="FinishRecycling">
-			<input type="hidden" name="idEco" value="@Model.EcoPonto.Id" />
-			<input type="hidden" name="nome" value="@Model.UserName" />
-			<input type="hidden" name="peso" value="@totalPeso" />
-			<input type="hidden" name="pontos" value="@totalPontos" />
-			<button type="submit" id="terminar" class="btn-grad">Terminar</button>
-		</form>
-		<p></p>
-		<form method="post" asp-controller="RecyclingTransaction" asp-action="CancelTrans">
-			<input type="hidden" name="idEco" value="@Model.EcoPonto.Id" />
-			<input type="hidden" name="nome" value="@Model.UserName" />
-			<input type="hidden" name="type" value="@Model.Type" />
-			<button type="submit" id="cancelar" class="btn-grad">Cancelar</button>
-		</form>
-	</div>
-	<p></p>
-	<div class="text-center">
-		<h2 class="display-4">Itens Disponiveis</h2>
-		@foreach (var item in Model.RecItems)
-		{
-			<div class="items-available text-left">
-				<div class="items-available-details">
-					<div class="items-available-details-">
-						<h6>@item.Nome</h6>
-						<p>@item.Peso KG</p>
-					</div>
-					<h6>@item.Pontos PONTOS</h6>
-				</div>
-				<form method="post" asp-controller="RecyclingTransaction" asp-action="Rec">
-					<input type="hidden" name="idEco" value="@Model.EcoPonto.Id" />
-					<input type="hidden" name="type" value="@Model.Type" />
-					<input type="hidden" name="nome" value="@Model.UserName" />
-					<input type="hidden" name="itemName" value="@item.Nome" />
-					<button type="submit" id="adicionar" class="btn-grad-small">Adicionar</button>
-				</form>
-			</div>
-		}
-	</div>
-</div>
+		</section>
+	</section>
