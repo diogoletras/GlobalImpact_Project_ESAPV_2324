@@ -40,7 +40,7 @@
                             @Html.DisplayFor(modelItem => item.Capacity)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.CurrentCapacity)
+                            @Html.DisplayFor(modelItem => Math.Round(item.CurrentCapacity,2))
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Status)

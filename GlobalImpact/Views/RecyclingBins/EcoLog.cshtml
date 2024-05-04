@@ -19,7 +19,7 @@
                                 <div class="card-body">
                                     <p class="card-text">@bin.Description</p>
                                     <p class="card-text">@bin.Capacity</p>
-                                    <p class="card-text">@bin.CurrentCapacity</p>
+                                    <p class="card-text">@Math.Round(bin.CurrentCapacity, 2)</p>
                                     @if (@bin.Status)
                                     {
                                         <p class="card-text">Full</p>

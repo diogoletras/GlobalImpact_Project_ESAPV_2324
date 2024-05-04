@@ -50,11 +50,12 @@ namespace GlobalImpact.Controllers
 			viewModel.produtos = new List<string>();
 			viewModel.quantidades = new List<int>();
 			viewModel.precoProduto = new List<int>();
-			if (_db.ProductTransactions.Count() > 0)
+			if (_db.ProductTransactions.Where(t => t.UserId.Equals(new Guid(userId))).Count() > 0)
             {
-				viewModel.productTransactions = _db.ProductTransactions.OrderByDescending(r => r.Date).FirstOrDefault();
+                var transId = _db.ProductTransactions.OrderByDescending(r => r.Date).FirstOrDefault().TransactionId;
+				viewModel.productTransactions = _db.ProductTransactions.Where(t => t.UserId.Equals(new Guid(userId)) && t.TransactionId.Equals(transId)).OrderByDescending(r => r.Date).FirstOrDefault();
 
-                var list = _db.ProductTransactions.OrderByDescending(r => r.Date).ToList();
+                var list = _db.ProductTransactions.Where(t => t.UserId.Equals(new Guid(userId)) && t.TransactionId.Equals(transId)).OrderByDescending(r => r.Date).ToList();
 
 				foreach (var trans in list)
                 {
@@ -78,9 +79,9 @@ namespace GlobalImpact.Controllers
 				viewModel.confirmProductTransactions = false;
 
 			}
-			if (_db.RecyclingTransactions.Count() > 0)
+			if (_db.RecyclingTransactions.Where(t => t.User.Id.Equals(userId)).Count() > 0)
             {
-				viewModel.recyclingTransaction = _db.RecyclingTransactions.OrderByDescending(r => r.Date).FirstOrDefault();
+				viewModel.recyclingTransaction = _db.RecyclingTransactions.Where(t => t.User.Id.Equals(userId)).OrderByDescending(r => r.Date).FirstOrDefault();
                 var recyclingBin = _db.RecyclingBins.FirstOrDefault(r => r.Id.Equals(viewModel.recyclingTransaction.RecyclingBinId));
                 viewModel.recyclingTransaction.RecyclingBin = recyclingBin;
                 var types = _db.RecyclingBinType.ToList();
