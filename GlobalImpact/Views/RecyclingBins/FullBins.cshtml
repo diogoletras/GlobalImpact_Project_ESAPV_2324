@@ -4,33 +4,35 @@
 @if (Model.IsNullOrEmpty())
 {
     <div class="d-flex justify-content-center">
-        <h1 class="text-white">Não há Ecopontos Cheios</h1>
+        <h1 class="text-white">There are no full bins</h1>
     </div>
 }
+    <section class="eco-log">
+        <section class="top-main">
+            <h1 class="page-name">FULL BINS</h1>
+        </section>
 
-@foreach (var bin in Model)
-{
-    <div class="col-md-3">
-        <div class="card" style="min-height:350px">
-            <div class="card-body">
-                <p class="card-text">@bin.Description</p>
-                <p class="card-text">@bin.Capacity</p>
-                <p class="card-text">@bin.CurrentCapacity</p>
-                @if (@bin.Status)
-                {
-                    <p class="card-text">Full</p>
-                }
-                else
-                {
-                    <p class="card-text">Not Full</p>
-                }
+        <section class="eco-log-bins">
+            @foreach (var bin in Model)
+            {
+                <div class="eco-log-bin">
+                    <h6>@bin.Description</h6>
+                    <h6>@Math.Round(bin.CurrentCapacity, 2)/@bin.Capacity</h6>
 
-                    @*<input type="hidden" asp-for="IdInput" class="form-control" value="@bin.Id" />*@
-                <button id="@bin.Id" type="submit" class="btn-grad">Pedir Recolha</button>
-            </div>
-        </div>
-    </div>
-}
+                    @if (@bin.Status)
+                    {
+                        <h5>Full</h5>
+                    }
+                    else
+                    {
+                        <h5>Not Full</h5>
+                    }
+                    <button id="@bin.Id" type="submit" class="btn-grad">Collect</button>
+
+                </div>
+            }
+        </section>
+    </section>
 
 
 <script type="text/javascript">

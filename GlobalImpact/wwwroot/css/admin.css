@@ -13,6 +13,7 @@
     text-transform: uppercase;
     transition: 0.5s;
     background-size: 200% auto;
+    align-content: center;
     font-size: 16px;
     border-radius: 25px;
     box-shadow: 0 0 20px #dbd789;
@@ -31,6 +32,42 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+.admin-buttons-btn-grad-edit {
+    display: flex;
+    width: 100%;
+    max-width: 200px;
+    margin: 0px 5px;
+    padding: 5px 10px;
+    background-image: linear-gradient(to right, #092cb8 0%, #6190ff 51%, #092cb8 100%);
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    font-size: 15px;
+    border-radius: 25px;
+    border: none;
+    color: var(--bs-body-color);
+    text-decoration: none;
+}
+
+.admin-buttons-btn-grad-del {
+    display: flex;
+    width: 100%;
+    max-width: 200px;
+    margin: 0px 5px;
+    padding: 5px 10px;
+    background-image: linear-gradient(to right, #ff4538 0%, #ff735e 51%, #ff4538 100%);
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    font-size: 15px;
+    border-radius: 25px;
+    border: none;
+    color: var(--bs-body-color);
+    text-decoration: none;
 }
 
 .admin-buttons-btn-grad {
@@ -52,7 +89,9 @@
     text-decoration: none;
 }
 
-    .admin-buttons-btn-grad:hover {
+    .admin-buttons-btn-grad:hover,
+    .admin-buttons-btn-grad-edit:hover,
+    .admin-buttons-btn-grad-del:hover {
         background-position: right center;
         color: white;
         text-decoration: none;
@@ -205,6 +244,39 @@ tr {
     width: 100%;
 }
 
+.btn-grad-small-edit,
+.btn-grad-small-det {
+    width: 100%;
+    max-width: 200px;
+    padding: 5px;
+    background-image: linear-gradient(to right, #bfbfbf 0%, #ede9dc 51%, #bfbfbf 100%);
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    font-size: 13px;
+    border-radius: 25px;
+    border: none;
+    color: black;
+    text-decoration: none;
+}
+
+.btn-grad-small-del {
+    width: 100%;
+    max-width: 200px;
+    padding: 5px;
+    background-image: linear-gradient(to right, #ff4538 0%, #ff735e 51%, #ff4538 100%);
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    font-size: 13px;
+    border-radius: 25px;
+    border: none;
+    color: black;
+    text-decoration: none;
+}
+
 .btn-grad-small {
     width: 100%;
     max-width: 200px;
@@ -222,11 +294,14 @@ tr {
     text-decoration: none;
 }
 
-.btn-grad-small:hover {
-    background-position: right center;
-    color: white;
-    text-decoration: none;
-}
+    .btn-grad-small:hover,
+    .btn-grad-small-edit:hover,
+    .btn-grad-small-det:hover,
+    .btn-grad-small-del:hover {
+        background-position: right center;
+        color: black;
+        text-decoration: none;
+    }
 
 .buttons-edd {
     display: flex;
@@ -245,4 +320,46 @@ tr {
         align-items: center;
         flex-wrap: nowrap;
     }
+}
+
+/***/
+.users-page {
+    margin: 10px 200px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: rgb(61,64,68);
+}
+
+.users-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.users-list-user {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 30px;
+    background-color: #D9D9D9;
+    border-radius: 20px;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.user-info-a {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.recycling-transactions-user-list table {
+    width: 100% !important;
 }
