@@ -198,82 +198,54 @@
 </script>
 
 <script>
-	function showFilter() {
-		var filterSection = document.getElementById("filter");
-
-		if (filterSection) {
-			filterSection.style.display = "block";
-		} else {
-			console.error("Filter section not found.");
-		}
-	}
-
 	document.addEventListener('DOMContentLoaded', function () {
-		var filterButton = document.getElementById('filterButton');
+		const filterButton = document.getElementById('filterButton');
+		const sortButton = document.getElementById('sortButton');
+		const backdrop = document.querySelector('.modal-backdrop');
 
 		if (filterButton) {
-			filterButton.addEventListener('click', showFilter);
-		} else {
-			console.error("Filter button not found.");
+			filterButton.addEventListener('click', () => toggleSection('filter'));
+		}
+
+		if (sortButton) {
+			sortButton.addEventListener('click', () => toggleSection('sort'));
+		}
+
+		if (backdrop) {
+			backdrop.addEventListener('click', () => {
+				hideSection('filter');
+				hideSection('sort');
+				hideBackdrop();
+			});
 		}
 	});
 
-	function showSort() {
-		var sortSection = document.getElementById("sort");
-
-		if (sortSection) {
-			sortSection.style.display = "block";
-		} else {
-			console.error("Sort section not found.");
+	function toggleSection(sectionId) {
+		const section = document.getElementById(sectionId);
+		if (section) {
+			section.style.display = (section.style.display === 'block') ? 'none' : 'block';
+			showBackdrop();
 		}
 	}
 
-	document.addEventListener('DOMContentLoaded', function () {
-		var sortButton = document.getElementById('sortButton');
-
-		if (sortButton) {
-			sortButton.addEventListener('click', showSort);
-		} else {
-			console.error("Sort button not found.");
+	function hideSection(sectionId) {
+		const section = document.getElementById(sectionId);
+		if (section) {
+			section.style.display = 'none';
 		}
-	});
+	}
 
 	function showBackdrop() {
-		var backdrop = document.querySelector('.modal-backdrop');
+		const backdrop = document.querySelector('.modal-backdrop');
 		if (backdrop) {
 			backdrop.style.display = 'block';
 		}
 	}
 
 	function hideBackdrop() {
-		var backdrop = document.querySelector('.modal-backdrop');
+		const backdrop = document.querySelector('.modal-backdrop');
 		if (backdrop) {
 			backdrop.style.display = 'none';
 		}
 	}
-
-	document.addEventListener('DOMContentLoaded', function () {
-		var filterButton = document.getElementById('filterButton');
-		if (filterButton) {
-			filterButton.addEventListener('click', function () {
-				showBackdrop();
-			});
-		}
-	});
-
-	document.addEventListener('DOMContentLoaded', function () {
-		var sortButton = document.getElementById('sortButton');
-		if (sortButton) {
-			sortButton.addEventListener('click', function () {
-				showBackdrop();
-			});
-		}
-	});
-
-	document.addEventListener('submit', function (event) {
-		var form = event.target;
-		if (form && form.id === 'filterForm') {
-			hideBackdrop();
-		}
-	});
 </script>

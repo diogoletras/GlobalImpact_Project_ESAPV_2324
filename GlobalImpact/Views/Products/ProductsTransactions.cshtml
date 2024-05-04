@@ -86,53 +86,35 @@
 </section>
 
 <script>
-	function showFilter() {
-		var filterSection = document.getElementById("filter");
-
-		if (filterSection) {
-			filterSection.style.display = "block";
-		} else {
-			console.error("Filter section not found.");
-		}
-	}
-
 	document.addEventListener('DOMContentLoaded', function () {
-		var filterButton = document.getElementById('filterButton');
+		const filterButton = document.getElementById('filterButton');
+		const backdrop = document.querySelector('.modal-backdrop');
+		const filterSection = document.getElementById('filter');
+
+		function toggleFilter() {
+			if (filterSection) {
+				filterSection.style.display = (filterSection.style.display === 'block') ? 'none' : 'block';
+			}
+			if (backdrop) {
+				backdrop.style.display = (backdrop.style.display === 'block') ? 'none' : 'block';
+			}
+		}
 
 		if (filterButton) {
-			filterButton.addEventListener('click', showFilter);
+			filterButton.addEventListener('click', toggleFilter);
 		} else {
 			console.error("Filter button not found.");
 		}
-	});
 
-	function showBackdrop() {
-		var backdrop = document.querySelector('.modal-backdrop');
 		if (backdrop) {
-			backdrop.style.display = 'block';
+			backdrop.addEventListener('click', toggleFilter);
 		}
-	}
 
-	function hideBackdrop() {
-		var backdrop = document.querySelector('.modal-backdrop');
-		if (backdrop) {
-			backdrop.style.display = 'none';
-		}
-	}
-
-	document.addEventListener('DOMContentLoaded', function () {
-		var filterButton = document.getElementById('filterButton');
-		if (filterButton) {
-			filterButton.addEventListener('click', function () {
-				showBackdrop();
-			});
-		}
-	});
-
-	document.addEventListener('submit', function (event) {
-		var form = event.target;
-		if (form && form.id === 'filterForm') {
-			hideBackdrop();
-		}
+		document.addEventListener('submit', function (event) {
+			const form = event.target;
+			if (form && form.id === 'filterForm' && backdrop) {
+				backdrop.style.display = 'none';
+			}
+		});
 	});
 </script>
