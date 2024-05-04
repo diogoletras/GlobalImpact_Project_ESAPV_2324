@@ -3,42 +3,77 @@
 	ViewData["Title"] = "Login Ecoponto";
 }
 
-<div class="text-center">
-	<h2 class="display-4">EcoLog</h2>
+<section class="eco-log">
+	<section class="top-main">
+		<h1 class="page-name">ECO LOG</h1>
+	</section>
 
-	<h5>Ecoponto Desligado</h5>
+	<section class="eco-log-bins">
+		@foreach (var bin in ViewBag.RecyclingBins)
+		{
+			<div class="eco-log-bin">
+				<h6>@bin.Description</h6>
+				<h6>@Math.Round(bin.CurrentCapacity, 2)/@bin.Capacity</h6>
 
-	<div class="container">
-		<div class="row justify-content-center mt-5">
-            <div class="col-md-6">
-                <div class="row">
-                    @foreach (var bin in ViewBag.RecyclingBins)
-                    {
-                        <div class="col-md-3">
-                            <div class="card" style="min-height:350px">
-                                <div class="card-body">
-                                    <p class="card-text">@bin.Description</p>
-                                    <p class="card-text">@bin.Capacity</p>
-                                    <p class="card-text">@Math.Round(bin.CurrentCapacity, 2)</p>
-                                    @if (@bin.Status)
-                                    {
-                                        <p class="card-text">Full</p>
-                                    }
-                                    else
-                                    {
-                                        <p class="card-text">Not Full</p>
-                                    }
+				@if (@bin.Status)
+				{
+					<h5>Full</h5>
+				}
+				else
+				{
+					<h5>Not Full</h5>
+				}
+				<form method="get" asp-action="EcoLogin">
+					<input type="hidden" asp-for="IdInput" class="form-control" value="@bin.Id" />
+					<button type="submit" class="btn-grad">Recycle</button>
+				</form>
+			</div>
+		}
+	</section>
 
-                                    <form method="get" asp-action="EcoLogin">
-                                        <input type="hidden" asp-for="IdInput" class="form-control" value="@bin.Id" />
-                                        <button type="submit" class="btn-grad">Submeter</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
+
+
+
+
+
+
+
+	<div class="text-center" style="display:none;">
+		<h2 class="display-4">EcoLog</h2>
+
+		<h5>Ecoponto Desligado</h5>
+
+		<div class="container">
+			<div class="row justify-content-center mt-5">
+				<div class="col-md-6">
+					<div class="row">
+						@foreach (var bin in ViewBag.RecyclingBins)
+						{
+							<div class="col-md-3">
+								<div class="card" style="min-height:350px">
+									<div class="card-body">
+										<p class="card-text">@bin.Description</p>
+										<p class="card-text">@bin.Capacity</p>
+										<p class="card-text">@Math.Round(bin.CurrentCapacity, 2)</p>
+										@if (@bin.Status)
+										{
+											<p class="card-text">Full</p>
+										}
+										else
+										{
+											<p class="card-text">Not Full</p>
+										}
+
+										<form method="get" asp-action="EcoLogin">
+											<input type="hidden" asp-for="IdInput" class="form-control" value="@bin.Id" />
+											<button type="submit" class="btn-grad">Submeter</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						}
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>

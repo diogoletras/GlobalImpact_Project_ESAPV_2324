@@ -1,5 +1,6 @@
 ﻿.store,
-.maps-page{
+.maps-page,
+.eco-log {
     margin: 10px 200px;
     display: flex;
     flex-direction: column;
@@ -43,7 +44,7 @@
         cursor: pointer;
     }
 
-.products {
+.products, .eco-log-bins {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     justify-content: space-evenly;
@@ -51,7 +52,8 @@
     width: 100%;
 }
 
-.product {
+.product,
+.eco-log-bin {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
