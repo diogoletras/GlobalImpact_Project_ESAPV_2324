@@ -120,3 +120,26 @@
     width: 175px;
     align-self: center;
 }
+
+/** MEDIA QUERIES */
+
+@media (max-width: 768px) {
+    .profile {
+        margin: 10px 20px;
+    }
+
+    .general-info,
+    .other-info {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile {
+        margin: 10px 10px;
+    }
+
+    .general-info img {
+        width: 80px;
+    }
+}

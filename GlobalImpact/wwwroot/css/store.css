@@ -148,3 +148,49 @@
     z-index: 999; /* Ensure the backdrop is above other content */
     display: none; /* Initially hidden */
 }
+
+/** MEDIA QUERIES */
+
+@media screen and (max-width: 768px) {
+    .store {
+        margin: 10px 200px;
+    }
+
+    .products {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .store {
+        margin: 10px 200px;
+    }
+
+    .products {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .product {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .store {
+        margin: 10px 300px;
+    }
+
+    .products {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .store {
+        margin: 10px 100px;
+    }
+
+    .products {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
