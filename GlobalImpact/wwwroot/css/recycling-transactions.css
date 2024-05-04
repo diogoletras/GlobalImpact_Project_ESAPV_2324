@@ -1,0 +1,39 @@
+﻿.recycling-transactions-user-page {
+    margin: 10px 200px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: rgb(61,64,68);
+}
+
+.recycling-transactions-user-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.recycling-transaction-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 30px;
+    background-color: #D9D9D9;
+    border-radius: 20px;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.bin-img {
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+}
+
+.recycling-transaction-item img {
+    width: 75px;
+}
+
+.bin-info {
+    text-align: left;
+}

@@ -4,51 +4,32 @@
 	ViewData["Title"] = "TransacionList";
 }
 
-<div class="text-center>" style="text-align: -webkit-center;">
-	<h1 class="display-4">TransacionList</h1>
+<section class="recycling-transactions-user-page">
+	<section class="top-main">
+		<h1 class="page-name">RECYCLING TRANSACTIONS</h1>
+	</section>
 
-
-	<table class="table table-striped border">
-		<thead>
-        <tr class="table-secondary">
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RecyclingBin.RecyclingBinType.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Weight)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Points)
-            </th>
-        </tr>
-		</thead>
-		<tbody>
-			@foreach (var item in Model)
-			{
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RecyclingBin.RecyclingBinType.Type)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Weight)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Points)
-                    </td>
-                </tr>
-			}
-		</tbody>
-	</table>
-</div>
+	<section class="recycling-transactions-user-list">
+		@foreach (var item in Model)
+		{
+			<div class="recycling-transaction-item">
+				<div class="bin-img">
+					<img src="/paper-bin.png" alt="Paper Bin">
+				</div>
+				<div class="bin-info">
+					<h6>@Html.DisplayFor(modelItem => item.RecyclingBin.RecyclingBinType.Type) Bin</h6>
+					<p>@Html.DisplayFor(modelItem => item.Id)</p>
+				</div>
+				<div class="recycling-transactions-weight">
+					<h6>@Html.DisplayFor(modelItem => item.Weight) Kg</h6>
+				</div>
+				<div class="recycling-transactions-date">
+					<h6>@item.Date.ToString("MM/dd/yyyy")</h6>
+				</div>
+				<div class="recycling-transactions-points">
+					<h5>@Html.DisplayFor(modelItem => item.Points) Points</h5>
+				</div>
+			</div>
+		}
+	</section>
+</section>
