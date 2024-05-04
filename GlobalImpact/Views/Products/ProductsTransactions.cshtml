@@ -4,76 +4,135 @@
 @using GlobalImpact.Models
 @inject UserManager<AppUser> UserManager
 
-<div class="container">
-    <h1>Minhas Encomendas</h1>
-    <form method="post" asp-controller="Products" asp-action="FilterProductsTransactions" class="d-flex align-items-center">
-        <div class="mr-2">
-            <select class="form-control" id="statusId" name="statusId" asp-items="@ViewBag.Status" style="width: 200px;"></select>
-        </div>
-        <div class="mr-2">
-            <input type="date" id="date" name="date" class="form-control" style="width: 200px;">
-        </div>
-        <div class="mr-2">
-            <input type="hidden" id="userId" name="userId" value="@UserManager.GetUserId(User)">
-        </div>
-        <button type="submit" class="btn-grad">Filtrar</button>
-    </form>
-    <div class="row">
-        <div class="col">
-            @foreach (var group in Model)
-            {
-                <div class="card mb-3">
-                    @{
-                        var firstTransaction = group.FirstOrDefault();
-                        var totalPoints = 0;
-                    }
-                    @if(firstTransaction != null)
-                    {
-                    <div class="card-header">
-                        <h5 class="card-title"> Data: @firstTransaction.Date</h5>
-                        <h5 class="card-title"> Status: @firstTransaction.TransStatus</h5>
-                    </div>
-                    }
-                    <div class="card-header">
-                        <span class="text-muted">Transação ID: @group.Key</span>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            @foreach (var transaction in group)
-                            {
-                                var transactionPoints = transaction.Quantity * transaction.Points;
-                                totalPoints += transactionPoints;
+<div class="modal-backdrop"></div>
 
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <strong>Produto:</strong> @transaction.ProductName
-                                        </div>
-                                        <div class="col-md-3">
-                                            <strong>Quantidade:</strong> @transaction.Quantity
-                                        </div>
-                                        <div class="col-md-3">
-                                            <strong>Pontos/Uni:</strong> @transaction.Points
-                                        </div>
-                                    </div>
-                                </li>
-                            }
-                            <li class="list-group-item">
-                                <strong>Total de Pontos Gastos:</strong> @totalPoints
-                                <p></p>
-                                @if (firstTransaction.TransStatus.Equals("Pending"))
-                                {
-                                    <form method="post" asp-controller="Products" asp-action="CancelTransaction">
-                                        <input type="hidden" name="transId" value="@group.Key" /> <!-- O ID do item -->
-                                        <button type="submit" class="btn btn-danger">Cancelar Encomenda</button>
-                                    </form>
-                                }
-                            </li>
-                            
-                        </ul>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-</div>
+<section class="orders-page">
+	<section class="top-main">
+		<h1 class="page-name">ORDERS</h1>
+		<div class="filter-button">
+			<button id="filterButton">FILTER</button>
+		</div>
+	</section>
+
+	<section class="orders">
+		@foreach (var group in Model)
+		{
+			<div class="order">
+				@{
+					var firstTransaction = group.FirstOrDefault();
+					var totalPoints = 0;
+				}
+				@if (firstTransaction != null)
+				{
+					<div class="order-status">
+						<h5 class="card-title">@firstTransaction.TransStatus</h5>
+						<p>@group.Key</p>
+					</div>
+					<div class="order-img">
+						<img src="/box.png" alt="Order">
+					</div>
+				}
+				<div class="order-info">
+					@foreach (var transaction in group)
+					{
+						var transactionPoints = transaction.Quantity * transaction.Points;
+						totalPoints += transactionPoints;
+					}
+					<h5>@totalPoints Points</h5>
+
+					@if (firstTransaction.TransStatus.Equals("Pending"))
+					{
+						<form method="post" asp-controller="Products" asp-action="CancelTransaction">
+							<input type="hidden" name="transId" value="@group.Key" /> <!-- O ID do item -->
+							<button type="submit" class="btn btn-danger">Cancelar Encomenda</button>
+						</form>
+					}
+					else
+					{
+						<h6>@firstTransaction.Date.ToShortDateString()</h6>
+
+					}
+				</div>
+			</div>
+		}
+	</section>
+
+	<section id="filter" class="filter">
+		<form method="post" asp-controller="Products" asp-action="FilterProductsTransactions">
+			<h1 class="page-name">FILTER</h1>
+			<div class="form-fields">
+				<div class="form-group">
+					<select class="form-control" id="statusId" name="statusId">
+						<option value="" disabled selected>Select status...</option>
+						@foreach (var status in ViewBag.Status)
+						{
+							<option value="@status.Value">@status.Text</option>
+						}
+					</select>
+				</div>
+				<div class="form-group">
+					<input type="date" id="date" name="date" class="form-control">
+				</div>
+				<div class="form-group">
+					<input type="hidden" id="userId" name="userId" value="@UserManager.GetUserId(User)">
+				</div>
+
+				<div class="text-center">
+					<button type="submit" class="btn-grad">Filter</button>
+				</div>
+			</div>
+		</form>
+	</section>
+</section>
+
+<script>
+	function showFilter() {
+		var filterSection = document.getElementById("filter");
+
+		if (filterSection) {
+			filterSection.style.display = "block";
+		} else {
+			console.error("Filter section not found.");
+		}
+	}
+
+	document.addEventListener('DOMContentLoaded', function () {
+		var filterButton = document.getElementById('filterButton');
+
+		if (filterButton) {
+			filterButton.addEventListener('click', showFilter);
+		} else {
+			console.error("Filter button not found.");
+		}
+	});
+
+	function showBackdrop() {
+		var backdrop = document.querySelector('.modal-backdrop');
+		if (backdrop) {
+			backdrop.style.display = 'block';
+		}
+	}
+
+	function hideBackdrop() {
+		var backdrop = document.querySelector('.modal-backdrop');
+		if (backdrop) {
+			backdrop.style.display = 'none';
+		}
+	}
+
+	document.addEventListener('DOMContentLoaded', function () {
+		var filterButton = document.getElementById('filterButton');
+		if (filterButton) {
+			filterButton.addEventListener('click', function () {
+				showBackdrop();
+			});
+		}
+	});
+
+	document.addEventListener('submit', function (event) {
+		var form = event.target;
+		if (form && form.id === 'filterForm') {
+			hideBackdrop();
+		}
+	});
+</script>

@@ -16,9 +16,9 @@
 		<section class="store">
 			<section class="top-main">
 				<h1 class="page-name">STORE</h1>
-				<div class="order-filter-buttons">
-					<div class="order-button">
-						<button id="orderButton">ORDER</button>
+				<div class="sort-filter-buttons">
+					<div class="sort-button">
+						<button id="sortButton">SORT</button>
 					</div>
 					<div class="filter-button">
 						<button id="filterButton">FILTER</button>
@@ -89,12 +89,12 @@
 			</form>
 		</section>
 
-		<section id="order" class="order">
+		<section id="sort" class="sort">
 			<form method="post" asp-controller="Store" asp-action="Order">
-				<h1 class="page-name">ORDER</h1>
+				<h1 class="page-name">SORT</h1>
 				<div class="form-group">
 					<select class="form-control" id="orderList" name="orderList" style="width: 200px;">
-						<option value="" disabled selected>Select order...</option>
+						<option value="" disabled selected>Select sort...</option>
 						@foreach (var order in ViewBag.Order)
 						{
 							<option value="@order.Value">@order.Text</option>
@@ -102,7 +102,7 @@
 					</select>
 				</div>
 				<div class="text-center">
-					<button type="submit" class="btn-grad">Order</button>
+					<button type="submit" class="btn-grad">Sort</button>
 				</div>
 			</form>
 		</section>
@@ -218,23 +218,23 @@
 		}
 	});
 
-	function showOrder() {
-		var orderSection = document.getElementById("order");
+	function showSort() {
+		var sortSection = document.getElementById("sort");
 
-		if (orderSection) {
-			orderSection.style.display = "block";
+		if (sortSection) {
+			sortSection.style.display = "block";
 		} else {
-			console.error("Order section not found.");
+			console.error("Sort section not found.");
 		}
 	}
 
 	document.addEventListener('DOMContentLoaded', function () {
-		var orderButton = document.getElementById('orderButton');
+		var sortButton = document.getElementById('sortButton');
 
-		if (orderButton) {
-			orderButton.addEventListener('click', showOrder);
+		if (sortButton) {
+			sortButton.addEventListener('click', showSort);
 		} else {
-			console.error("Order button not found.");
+			console.error("Sort button not found.");
 		}
 	});
 
@@ -262,9 +262,9 @@
 	});
 
 	document.addEventListener('DOMContentLoaded', function () {
-		var orderButton = document.getElementById('orderButton');
-		if (orderButton) {
-			orderButton.addEventListener('click', function () {
+		var sortButton = document.getElementById('sortButton');
+		if (sortButton) {
+			sortButton.addEventListener('click', function () {
 				showBackdrop();
 			});
 		}
