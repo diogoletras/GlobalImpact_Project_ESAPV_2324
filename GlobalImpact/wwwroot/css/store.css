@@ -1,4 +1,5 @@
-﻿.store {
+﻿.store,
+.maps-page{
     margin: 10px 200px;
     display: flex;
     flex-direction: column;

@@ -2,172 +2,233 @@
 @using GlobalImpact.Services
 @inject GoogleMapsApiKeyService GoogleMapsApiKeyService
 
-<div class="row text-white text-center">
-    <h1 class="text-white text-center col-2">Filters</h1>
-    <form method="post" asp-controller="RecyclingBins" asp-action="FiltrarMapa" class="col-2">
-        <div class="form-group">
-            <input type="number" step="0.001" class="form-control" id="tolcap" name="tolcap" placeholder="Capacidade Total">
-        </div>
-        <div class="form-group">
-            <input type="number" step="0.001" class="form-control" id="curcap" name="curcap" placeholder="Capacidade Atual">
-        </div>
-        <div class="form-group">
-            <select class="form-control" id="status" name="status" asp-items="@ViewBag.Status"></select>
-        </div>
-        <div class="form-group">
-            <select class="form-control" id="type" name="type" asp-items="@ViewBag.Types"></select>
-        </div>
-        <div class="text-center">
-            <button type="submit" class="btn-grad">Filtrar</button>
-        </div>
-    </form>
-</div>
+<div class="modal-backdrop"></div>
 
-@{
-    
-    Dictionary<Guid, double> listLatitude = new Dictionary<Guid, double>();
-    Dictionary<Guid, double> listLongitude = new Dictionary<Guid, double>();
-    Dictionary<Guid, string> listType = new Dictionary<Guid, string>();
-    Dictionary<Guid, bool> listStatus = new Dictionary<Guid, bool>();
-    Dictionary<Guid, double> listTotalCapacity = new Dictionary<Guid, double>();
-    Dictionary<Guid, double> listCurrentCapacity = new Dictionary<Guid, double>();
+<section class="maps-page">
+	<section class="top-main">
+		<h1 class="page-name">MAPS</h1>
+		<div class="filter-button">
+			<button id="filterButton">FILTER</button>
+		</div>
+	</section>
 
-    foreach (var item in Model)
-    {
-        listLatitude.Add(item.Id, item.Latitude);
-        listLongitude.Add(item.Id, item.Latitude);
-        listType.Add(item.Id, item.Type);
-        listStatus.Add(item.Id, item.Status);
-        listTotalCapacity.Add(item.Id, item.Capacity);
-        listCurrentCapacity.Add(item.Id, item.CurrentCapacity);
-    }
+	<section id="filter" class="filter">
+		<form method="post" asp-controller="RecyclingBins" asp-action="FiltrarMapa">
+			<h1 class="page-name">FILTER</h1>
+			<div class="form-fields">
+				<div class="form-group">
+					<select class="form-control">
+						<option value="" disabled selected>Select bin type...</option>
+						@foreach (var type in ViewBag.Types)
+						{
+							<option value="@type.Value">@type.Text</option>
+						}
+					</select>
+				</div>
+				<div class="form-group">
+					<select class="form-control">
+						<option value="" disabled selected>Select status...</option>
+						@foreach (var status in ViewBag.Status)
+						{
+							<option value="@status.Value">@status.Text</option>
+						}
+					</select>
+				</div>
+				<div class="form-group">
+					<input type="number" step="0.001" class="form-control" id="tolcap" name="tolcap" placeholder="Total Capacity">
+				</div>
+				<div class="form-group">
+					<input type="number" step="0.001" class="form-control" id="curcap" name="curcap" placeholder="Current Capacity">
+				</div>
+				<div class="text-center">
+					<button type="submit" class="btn-grad">Filter</button>
+				</div>
+			</div>
+		</form>
+	</section>
 
-    
-}
+	@{
+
+		Dictionary<Guid, double> listLatitude = new Dictionary<Guid, double>();
+		Dictionary<Guid, double> listLongitude = new Dictionary<Guid, double>();
+		Dictionary<Guid, string> listType = new Dictionary<Guid, string>();
+		Dictionary<Guid, bool> listStatus = new Dictionary<Guid, bool>();
+		Dictionary<Guid, double> listTotalCapacity = new Dictionary<Guid, double>();
+		Dictionary<Guid, double> listCurrentCapacity = new Dictionary<Guid, double>();
+
+		foreach (var item in Model)
+		{
+			listLatitude.Add(item.Id, item.Latitude);
+			listLongitude.Add(item.Id, item.Latitude);
+			listType.Add(item.Id, item.Type);
+			listStatus.Add(item.Id, item.Status);
+			listTotalCapacity.Add(item.Id, item.Capacity);
+			listCurrentCapacity.Add(item.Id, item.CurrentCapacity);
+		}
+
+
+	}
+</section>
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=@GoogleMapsApiKeyService.GetApiKey()&callback=initMap" sensor="false"></script>
 
 <script type="text/javascript">
-    let map;
-    let userLocationMarker;
-    let markers = [];
+	let map;
+	let userLocationMarker;
+	let markers = [];
 
-    function initialize() {
-        const directionsService = new google.maps.DirectionsService();
-        const directionsRenderer = new google.maps.DirectionsRenderer();
+	function initialize() {
+		const directionsService = new google.maps.DirectionsService();
+		const directionsRenderer = new google.maps.DirectionsRenderer();
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                let userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                userLocationMarker = new google.maps.Marker({
-                    position: userLocation,
-                    map: map,
-                    title: 'Your location'
-                });
-                markers.push(userLocationMarker);
-                //map.setCenter(userLocation);
-            });
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function (position) {
+				let userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+				userLocationMarker = new google.maps.Marker({
+					position: userLocation,
+					map: map,
+					title: 'Your location'
+				});
+				markers.push(userLocationMarker);
+				//map.setCenter(userLocation);
+			});
+		} else {
+			alert("Geolocation is not supported by this browser.");
+		}
 
-        var model = @Html.Raw(Json.Serialize(Model));
+		var model = @Html.Raw(Json.Serialize(Model));
 
-        const latitudes = model.map(item => item.latitude);
-        const longitudes = model.map(item => item.longitude);
-        const types = model.map(item => item.type);
-        const statuss = model.map(item => item.status);
-        const tolcaps = model.map(item => item.capacity);
-        const curcaps = model.map(item => item.currentCapacity);
+		const latitudes = model.map(item => item.latitude);
+		const longitudes = model.map(item => item.longitude);
+		const types = model.map(item => item.type);
+		const statuss = model.map(item => item.status);
+		const tolcaps = model.map(item => item.capacity);
+		const curcaps = model.map(item => item.currentCapacity);
 
-        var canvas = $("#map_canvas");
+		var canvas = $("#map_canvas");
 
-        // Create the map instance before the loop
-        const options = {
-            zoom: 17,
-            center: new google.maps.LatLng(latitudes[0], longitudes[0]),
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        map = new google.maps.Map(canvas[0], options);
+		// Create the map instance before the loop
+		const options = {
+			zoom: 17,
+			center: new google.maps.LatLng(latitudes[0], longitudes[0]),
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		map = new google.maps.Map(canvas[0], options);
 
-        const infoWindow = new google.maps.InfoWindow();
+		const infoWindow = new google.maps.InfoWindow();
 
-        directionsRenderer.setMap(map);
+		directionsRenderer.setMap(map);
 
-        latitudes.forEach((latitude, index) => {
-            const longitude = longitudes[index];
-            const type = types[index];
-            const status = statuss[index];
-            const tolcap = tolcaps[index];
-            const curcap = curcaps[index];
+		latitudes.forEach((latitude, index) => {
+			const longitude = longitudes[index];
+			const type = types[index];
+			const status = statuss[index];
+			const tolcap = tolcaps[index];
+			const curcap = curcaps[index];
 
-            var latlng = new google.maps.LatLng(latitude, longitude);
+			var latlng = new google.maps.LatLng(latitude, longitude);
 
-            let marker = new google.maps.Marker({
-                position: new google.maps.LatLng(latitude, longitude),
-                title: type,
-                map: map
-            });
-            markers.push(marker);
+			let marker = new google.maps.Marker({
+				position: new google.maps.LatLng(latitude, longitude),
+				title: type,
+				map: map
+			});
+			markers.push(marker);
 
-            if (type === 'plastic') {
-                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
-            } else if (type === 'paper') {
-                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
-            } else if (type === 'glass') {
-                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
-            }
+			if (type === 'plastic') {
+				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
+			} else if (type === 'paper') {
+				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+			} else if (type === 'glass') {
+				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+			}
 
-            marker.addListener('mouseover', function () {
-                infoWindow.setContent(`
-                    <strong>Type: </strong> ${type}<br />
-                    <strong> Total Capacity: </strong> ${tolcap}<br />
-                    <strong> Current Capacity: </strong> ${curcap}<br />
-                    <strong> Available: </strong> ${status}
-                `);
-                infoWindow.open(map, marker);
-            });
+			marker.addListener('mouseover', function () {
+				infoWindow.setContent(`
+								<strong>Type: </strong> ${type}<br />
+								<strong> Total Capacity: </strong> ${tolcap}<br />
+								<strong> Current Capacity: </strong> ${curcap}<br />
+								<strong> Available: </strong> ${status}
+							`);
+				infoWindow.open(map, marker);
+			});
 
-            marker.addListener('click', function () {
-                selectedMarker = marker;
+			marker.addListener('click', function () {
+				selectedMarker = marker;
 
-                markers.forEach(marker => {
-                    if (marker.getMap() === null) {
-                        marker.setMap(map);
-                    } else {
-                        marker.setMap(null);
-                    }
-                });
+				markers.forEach(marker => {
+					if (marker.getMap() === null) {
+						marker.setMap(map);
+					} else {
+						marker.setMap(null);
+					}
+				});
 
-                calculateAndDisplayRoute(marker);
-            });
-        });
-    }
+				calculateAndDisplayRoute(marker);
+			});
+		});
+	}
 
-    function calculateAndDisplayRoute(marker) {
-        const directionsService = new google.maps.DirectionsService();
-        const directionsRenderer = new google.maps.DirectionsRenderer();
+	function calculateAndDisplayRoute(marker) {
+		const directionsService = new google.maps.DirectionsService();
+		const directionsRenderer = new google.maps.DirectionsRenderer();
 
-        directionsRenderer.setMap(map);
+		directionsRenderer.setMap(map);
 
-        directionsService
-            .route({
-                origin: userLocationMarker.getPosition(),
-                destination: marker.getPosition(), // Use the existing marker's position
-                travelMode: google.maps.TravelMode.WALKING,
-            })
-            .then((response) => {
-                directionsRenderer.setDirections(response);
-            })
-            .catch((e) => window.alert("Directions request failed due to " + status));
-    }
+		directionsService
+			.route({
+				origin: userLocationMarker.getPosition(),
+				destination: marker.getPosition(), // Use the existing marker's position
+				travelMode: google.maps.TravelMode.WALKING,
+			})
+			.then((response) => {
+				directionsRenderer.setDirections(response);
+			})
+			.catch((e) => window.alert("Directions request failed due to " + status));
+	}
 
-    $(function () {
-        initialize();
-    });
+	$(function () {
+		initialize();
+	});
 
 </script>
 
 <div style="width: 80%; height: 30%">
-    <div id="map_canvas" style="width: 60%; height: 500px; margin: 0 auto;"></div>
+	<div id="map_canvas" style="width: 60%; height: 500px; margin: 0 auto;"></div>
 </div>
+
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const filterButton = document.getElementById('filterButton');
+		const backdrop = document.querySelector('.modal-backdrop');
+		const filterSection = document.getElementById('filter');
+
+		function toggleFilter() {
+			if (filterSection) {
+				filterSection.style.display = (filterSection.style.display === 'block') ? 'none' : 'block';
+			}
+			if (backdrop) {
+				backdrop.style.display = (backdrop.style.display === 'block') ? 'none' : 'block';
+			}
+		}
+
+		if (filterButton) {
+			filterButton.addEventListener('click', toggleFilter);
+		} else {
+			console.error("Filter button not found.");
+		}
+
+		if (backdrop) {
+			backdrop.addEventListener('click', toggleFilter);
+		}
+
+		document.addEventListener('submit', function (event) {
+			const form = event.target;
+			if (form && form.id === 'filterForm' && backdrop) {
+				backdrop.style.display = 'none';
+			}
+		});
+	});
+</script>
